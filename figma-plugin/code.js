@@ -290,10 +290,10 @@ async function createComponentScaffolds() {
     parent.paddingLeft = 0; parent.paddingRight = 0;
 
     const bar = figma.createRectangle();
-    bar.resize(w || 5, 8); // height overridden by parent stretch
+    bar.resize(w || 5, 8);
     bar.fills = sf(col);
-    bar.layoutSizingVertical = "FILL";
     parent.appendChild(bar);
+    bar.layoutSizingVertical = "FILL"; // must be set after appending to auto-layout parent
 
     const inner = figma.createFrame();
     inner.layoutMode = "VERTICAL";
