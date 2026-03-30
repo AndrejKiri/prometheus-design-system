@@ -280,14 +280,28 @@ async function createComponentScaffolds() {
     node.strokeAlign = "INSIDE";
   }
 
-  // Left-border-only via individual stroke weights
-  function setLeftBorder(node, col, w) {
-    node.strokes = sf(col);
-    node.strokeAlign = "INSIDE";
-    node.strokeTopWeight    = 0;
-    node.strokeRightWeight  = 0;
-    node.strokeBottomWeight = 0;
-    node.strokeLeftWeight   = w || 5;
+  // Left-border accent: wraps content in a HORIZONTAL frame with a coloured bar on the left.
+  // Returns the inner content frame to append children to.
+  // Usage: const inner = wrapWithLeftBorder(comp, COL.green, 5);
+  function wrapWithLeftBorder(parent, col, w) {
+    parent.layoutMode = "HORIZONTAL";
+    parent.itemSpacing = 0;
+    parent.paddingTop = 0; parent.paddingBottom = 0;
+    parent.paddingLeft = 0; parent.paddingRight = 0;
+
+    const bar = figma.createRectangle();
+    bar.resize(w || 5, 8); // height overridden by parent stretch
+    bar.fills = sf(col);
+    bar.layoutSizingVertical = "FILL";
+    parent.appendChild(bar);
+
+    const inner = figma.createFrame();
+    inner.layoutMode = "VERTICAL";
+    inner.primaryAxisSizingMode = "AUTO";
+    inner.counterAxisSizingMode = "FILL";
+    noFill(inner);
+    parent.appendChild(inner);
+    return inner;
   }
 
   function autoFrame(dir) {
@@ -675,22 +689,23 @@ async function createComponentScaffolds() {
   {
     const comp = figma.createComponent();
     comp.name = "HealthPanel";
-    comp.layoutMode = "VERTICAL";
     comp.primaryAxisSizingMode = "AUTO";
     comp.counterAxisSizingMode = "AUTO";
-    comp.paddingTop = 12; comp.paddingBottom = 12;
-    comp.paddingLeft = 16; comp.paddingRight = 16;
-    comp.itemSpacing = 8;
     comp.cornerRadius = 8;
     setFill(comp, COL.white);
-    setLeftBorder(comp, COL.green, 5); // ok state
+    setStroke(comp, COL.border, 1);
+
+    const inner = wrapWithLeftBorder(comp, COL.green, 5);
+    inner.paddingTop = 12; inner.paddingBottom = 12;
+    inner.paddingLeft = 16; inner.paddingRight = 16;
+    inner.itemSpacing = 8;
 
     // Title row
     const titleRow = figma.createFrame();
     titleRow.layoutMode = "HORIZONTAL";
     titleRow.primaryAxisSizingMode = "FIXED";
     titleRow.counterAxisSizingMode = "AUTO";
-    titleRow.resize(340, 10);
+    titleRow.resize(330, 10);
     titleRow.primaryAxisAlignItems = "SPACE_BETWEEN";
     titleRow.counterAxisAlignItems = "CENTER";
     noFill(titleRow);
@@ -708,10 +723,10 @@ async function createComponentScaffolds() {
     upPill.appendChild(inter("UP", "SemiBold", 11, COL.greenFg,
       { letterSpacing: { value: 0.22, unit: "PIXELS" } }));
     titleRow.appendChild(upPill);
-    comp.appendChild(titleRow);
+    inner.appendChild(titleRow);
 
-    comp.appendChild(inter("Last scrape: 2.3s ago  •  731 samples", "Regular", 13, COL.textMuted));
-    comp.appendChild(mono("http://localhost:9090/metrics", 12, COL.blue,
+    inner.appendChild(inter("Last scrape: 2.3s ago  •  731 samples", "Regular", 13, COL.textMuted));
+    inner.appendChild(mono("http://localhost:9090/metrics", 12, COL.blue,
       { textDecoration: "UNDERLINE" }));
 
     place(comp);
@@ -778,21 +793,20 @@ async function createComponentScaffolds() {
 
     for (const pool of POOLS) {
       const item = figma.createFrame();
-      item.layoutMode = "VERTICAL";
       item.primaryAxisSizingMode = "AUTO";
-      item.counterAxisSizingMode = "FIXED";
-      item.resize(460, 10);
-      item.itemSpacing = 0;
+      item.counterAxisSizingMode = "AUTO";
       item.cornerRadius = 6;
       setFill(item, COL.white);
       setStroke(item, COL.border, 1);
-      setLeftBorder(item, pool.border, 5);
+
+      const itemInner = wrapWithLeftBorder(item, pool.border, 5);
+      itemInner.itemSpacing = 0;
 
       const hdr = figma.createFrame();
       hdr.layoutMode = "HORIZONTAL";
       hdr.primaryAxisSizingMode = "FIXED";
       hdr.counterAxisSizingMode = "AUTO";
-      hdr.resize(460, 10);
+      hdr.resize(455, 10);
       hdr.paddingTop = 10; hdr.paddingBottom = 10;
       hdr.paddingLeft = 16; hdr.paddingRight = 16;
       hdr.primaryAxisAlignItems = "SPACE_BETWEEN";
@@ -800,8 +814,8 @@ async function createComponentScaffolds() {
       noFill(hdr);
       hdr.appendChild(inter(pool.title, "SemiBold", 14, COL.textPrimary));
       hdr.appendChild(inter("▾", "Regular", 12, COL.textMuted));
-      item.appendChild(hdr);
-      item.appendChild(divRect(460, COL.border));
+      itemInner.appendChild(hdr);
+      itemInner.appendChild(divRect(455, COL.border));
 
       for (let ti = 0; ti < pool.targets.length; ti++) {
         const tRow = figma.createFrame();
@@ -827,8 +841,8 @@ async function createComponentScaffolds() {
         pill.appendChild(inter("UP", "SemiBold", 10, COL.greenFg));
         tRow.appendChild(pill);
 
-        item.appendChild(tRow);
-        if (ti < pool.targets.length - 1) item.appendChild(divRect(460, COL.border));
+        itemInner.appendChild(tRow);
+        if (ti < pool.targets.length - 1) itemInner.appendChild(divRect(455, COL.border));
       }
       comp.appendChild(item);
     }
@@ -1171,18 +1185,21 @@ async function createComponentScaffolds() {
     ];
     for (const p of PANELS) {
       const card = figma.createFrame();
-      card.layoutMode = "VERTICAL";
-      card.primaryAxisSizingMode = "FIXED"; card.counterAxisSizingMode = "AUTO";
+      card.primaryAxisSizingMode = "AUTO";
+      card.counterAxisSizingMode = "FIXED";
       card.resize(952, 10);
-      card.paddingTop = 12; card.paddingBottom = 12;
-      card.paddingLeft = 16; card.paddingRight = 16;
-      card.itemSpacing = 6;
       card.cornerRadius = 8;
       setFill(card, COL.white);
       setStroke(card, COL.border, 1);
-      setLeftBorder(card, p.border, 5);
-      card.appendChild(inter(p.title, "SemiBold", 14, COL.textPrimary));
-      card.appendChild(inter("3 targets  •  last scrape 2s ago", "Regular", 13, COL.textMuted));
+
+      const cardInner = wrapWithLeftBorder(card, p.border, 5);
+      cardInner.primaryAxisSizingMode = "AUTO";
+      cardInner.counterAxisSizingMode = "FILL";
+      cardInner.paddingTop = 12; cardInner.paddingBottom = 12;
+      cardInner.paddingLeft = 16; cardInner.paddingRight = 16;
+      cardInner.itemSpacing = 6;
+      cardInner.appendChild(inter(p.title, "SemiBold", 14, COL.textPrimary));
+      cardInner.appendChild(inter("3 targets  •  last scrape 2s ago", "Regular", 13, COL.textMuted));
       comp.appendChild(card);
     }
     place(comp);
@@ -1222,10 +1239,10 @@ async function createComponentScaffolds() {
 
     // 32px spacer between logo and nav links
     const spacer = figma.createFrame();
+    spacer.layoutMode = "HORIZONTAL";
     spacer.primaryAxisSizingMode = "FIXED"; spacer.counterAxisSizingMode = "FIXED";
     spacer.resize(32, 1);
     noFill(spacer);
-    spacer.layoutMode = "HORIZONTAL";
     header.appendChild(spacer);
 
     // Nav links (12px gap between items = itemSpacing on header)
@@ -1304,8 +1321,9 @@ async function main() {
 
     figma.notify("✅ Prometheus DS Bootstrap complete!", { timeout: 5000 });
   } catch (error) {
-    figma.notify("❌ Error: " + error.message, { error: true, timeout: 5000 });
-    console.error(error);
+    const msg = (error && error.message) ? error.message : String(error);
+    figma.notify("❌ " + msg, { error: true, timeout: 8000 });
+    console.error("Plugin error:", error);
   } finally {
     figma.closePlugin();
   }
