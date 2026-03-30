@@ -176,7 +176,7 @@ async function createTextStyles() {
   figma.notify("Creating text styles...");
 
   for (const def of TEXT_STYLES) {
-    const weightStyle = def.weight >= 700 ? "Bold" : def.weight >= 600 ? "SemiBold" : def.weight >= 500 ? "Medium" : "Regular";
+    const weightStyle = def.weight >= 700 ? "Bold" : def.weight >= 600 ? "Semi Bold" : def.weight >= 500 ? "Medium" : "Regular";
     let resolvedStyle = weightStyle;
 
     try {
@@ -220,7 +220,7 @@ async function createComponentScaffolds() {
 
   await figma.loadFontAsync({ family: "Inter",       style: "Regular"  });
   await figma.loadFontAsync({ family: "Inter",       style: "Medium"   });
-  await figma.loadFontAsync({ family: "Inter",       style: "SemiBold" });
+  await figma.loadFontAsync({ family: "Inter",       style: "Semi Bold" });
   await figma.loadFontAsync({ family: "Inter",       style: "Bold"     });
   await figma.loadFontAsync({ family: "Courier New", style: "Regular"  });
 
@@ -380,7 +380,7 @@ async function createComponentScaffolds() {
 
   // 1. StatusBadge
   // Pill (999px radius), light bg + dark fg for each health state
-  // 11px SemiBold, 0.02em letter-spacing, 10px h-pad, 3px v-pad
+  // 11px Semi Bold, 0.02em letter-spacing, 10px h-pad, 3px v-pad
   {
     const comp = figma.createComponent();
     comp.name = "StatusBadge";
@@ -410,7 +410,7 @@ async function createComponentScaffolds() {
       pill.counterAxisAlignItems = "CENTER";
       setFill(pill, s.bg);
 
-      pill.appendChild(inter(s.label, "SemiBold", 11, s.fg,
+      pill.appendChild(inter(s.label, "Semi Bold", 11, s.fg,
         { letterSpacing: { value: 0.22, unit: "PIXELS" } })); // ~0.02em
       comp.appendChild(pill);
     }
@@ -535,7 +535,7 @@ async function createComponentScaffolds() {
 
   // 7. ErrorAlert
   // 12px 16px padding, 6px radius, 1px border, max 500px
-  // Title 13px SemiBold, body 13px Regular, red severity
+  // Title 13px Semi Bold, body 13px Regular, red severity
   {
     const comp = figma.createComponent();
     comp.name = "ErrorAlert";
@@ -555,7 +555,7 @@ async function createComponentScaffolds() {
 
     const col = autoFrame("VERTICAL");
     col.itemSpacing = 2;
-    col.appendChild(inter("Error loading targets",              "SemiBold", 13, COL.redFg));
+    col.appendChild(inter("Error loading targets",              "Semi Bold", 13, COL.redFg));
     col.appendChild(inter("connection refused: localhost:9090", "Regular",  13, COL.textSecond));
     comp.appendChild(col);
     place(comp);
@@ -585,7 +585,7 @@ async function createComponentScaffolds() {
   }
 
   // 9. KeyValueTable
-  // 6px 12px cell padding, 13px, key col 40% width SemiBold, value Regular
+  // 6px 12px cell padding, 13px, key col 40% width Semi Bold, value Regular
   {
     const comp = figma.createComponent();
     comp.name = "KeyValueTable";
@@ -626,7 +626,7 @@ async function createComponentScaffolds() {
       kCell.paddingTop = 6; kCell.paddingBottom = 6;
       kCell.paddingLeft = 12; kCell.paddingRight = 12;
       noFill(kCell);
-      kCell.appendChild(inter(rows[i][0], "SemiBold", 13, COL.textPrimary));
+      kCell.appendChild(inter(rows[i][0], "Semi Bold", 13, COL.textPrimary));
 
       const vCell = figma.createFrame();
       vCell.layoutMode = "HORIZONTAL"; vCell.counterAxisAlignItems = "CENTER";
@@ -710,7 +710,7 @@ async function createComponentScaffolds() {
     titleRow.counterAxisAlignItems = "CENTER";
     noFill(titleRow);
 
-    titleRow.appendChild(inter("prometheus / localhost:9090", "SemiBold", 14, COL.textPrimary));
+    titleRow.appendChild(inter("prometheus / localhost:9090", "Semi Bold", 14, COL.textPrimary));
 
     const upPill = figma.createFrame();
     upPill.layoutMode = "HORIZONTAL";
@@ -720,7 +720,7 @@ async function createComponentScaffolds() {
     upPill.paddingLeft = 10; upPill.paddingRight = 10;
     upPill.cornerRadius = 999;
     setFill(upPill, COL.greenBg);
-    upPill.appendChild(inter("UP", "SemiBold", 11, COL.greenFg,
+    upPill.appendChild(inter("UP", "Semi Bold", 11, COL.greenFg,
       { letterSpacing: { value: 0.22, unit: "PIXELS" } }));
     titleRow.appendChild(upPill);
     inner.appendChild(titleRow);
@@ -734,7 +734,7 @@ async function createComponentScaffolds() {
 
   // 12. InfoCard
   // 16px padding, 8px radius, 1px border, xs shadow
-  // Header: 18px icon + 18px SemiBold title, then content rows
+  // Header: 18px icon + 18px Semi Bold title, then content rows
   {
     const comp = figma.createComponent();
     comp.name = "InfoCard";
@@ -754,7 +754,7 @@ async function createComponentScaffolds() {
     header.itemSpacing = 8;
     header.counterAxisAlignItems = "CENTER";
     header.appendChild(inter("◈", "Regular", 18, COL.blue));
-    header.appendChild(inter("Scrape Pool Summary", "SemiBold", 18, COL.textPrimary));
+    header.appendChild(inter("Scrape Pool Summary", "Semi Bold", 18, COL.textPrimary));
     comp.appendChild(header);
 
     comp.appendChild(divRect(288, COL.border));
@@ -766,7 +766,7 @@ async function createComponentScaffolds() {
       row.primaryAxisAlignItems = "SPACE_BETWEEN";
       row.counterAxisAlignItems = "CENTER";
       row.appendChild(inter(k, "Regular",  13, COL.textMuted));
-      row.appendChild(inter(v, "SemiBold", 13, COL.textPrimary));
+      row.appendChild(inter(v, "Semi Bold", 13, COL.textPrimary));
       comp.appendChild(row);
     }
     place(comp);
@@ -774,7 +774,7 @@ async function createComponentScaffolds() {
 
   // 13. PoolAccordion
   // Each item: 6px radius, 1px border, 8px margin-between items
-  // Header: 10px 16px pad, title 14px SemiBold, chevron
+  // Header: 10px 16px pad, title 14px Semi Bold, chevron
   // Open panel shows HealthPanel-style 5px left border + target rows
   {
     const comp = figma.createComponent();
@@ -812,7 +812,7 @@ async function createComponentScaffolds() {
       hdr.primaryAxisAlignItems = "SPACE_BETWEEN";
       hdr.counterAxisAlignItems = "CENTER";
       noFill(hdr);
-      hdr.appendChild(inter(pool.title, "SemiBold", 14, COL.textPrimary));
+      hdr.appendChild(inter(pool.title, "Semi Bold", 14, COL.textPrimary));
       hdr.appendChild(inter("▾", "Regular", 12, COL.textMuted));
       itemInner.appendChild(hdr);
       itemInner.appendChild(divRect(455, COL.border));
@@ -838,7 +838,7 @@ async function createComponentScaffolds() {
         pill.paddingLeft = 6; pill.paddingRight = 6;
         pill.cornerRadius = 999;
         setFill(pill, COL.greenBg);
-        pill.appendChild(inter("UP", "SemiBold", 10, COL.greenFg));
+        pill.appendChild(inter("UP", "Semi Bold", 10, COL.greenFg));
         tRow.appendChild(pill);
 
         itemInner.appendChild(tRow);
@@ -867,7 +867,7 @@ async function createComponentScaffolds() {
     setStroke(comp, COL.border, 1);
     comp.effects = shadowMD();
 
-    comp.appendChild(inter("DISPLAY", "SemiBold", 12, COL.textMuted));
+    comp.appendChild(inter("DISPLAY", "Semi Bold", 12, COL.textMuted));
 
     for (const [label, checked] of [
       ["Show scrape duration", true ],
@@ -889,7 +889,7 @@ async function createComponentScaffolds() {
     }
 
     comp.appendChild(divRect(288, COL.border));
-    comp.appendChild(inter("PAGINATION", "SemiBold", 12, COL.textMuted));
+    comp.appendChild(inter("PAGINATION", "Semi Bold", 12, COL.textMuted));
 
     const inputRow = autoFrame("HORIZONTAL");
     inputRow.itemSpacing = 8;
@@ -1015,7 +1015,7 @@ async function createComponentScaffolds() {
       pill.cornerRadius = 999;
       pill.counterAxisAlignItems = "CENTER";
       setFill(pill, opt.bg);
-      pill.appendChild(inter(opt.label, "SemiBold", 11, opt.fg));
+      pill.appendChild(inter(opt.label, "Semi Bold", 11, opt.fg));
       row.appendChild(pill);
       comp.appendChild(row);
     }
@@ -1026,7 +1026,7 @@ async function createComponentScaffolds() {
   nextRow();
 
   // 17. DataTable
-  // Header: 8px 12px pad, border-bottom 2px, 11px SemiBold uppercase
+  // Header: 8px 12px pad, border-bottom 2px, 11px Semi Bold uppercase
   // Cells: 6px 12px pad, border-bottom 1px, 12px Regular
   // State column: StatusBadge pill; endpoint column: monospace underlined link
   {
@@ -1060,7 +1060,7 @@ async function createComponentScaffolds() {
       cell.paddingLeft = 12; cell.paddingRight = 12;
       cell.counterAxisAlignItems = "CENTER";
       noFill(cell);
-      cell.appendChild(inter(h.toUpperCase(), "SemiBold", 11, COL.textMuted));
+      cell.appendChild(inter(h.toUpperCase(), "Semi Bold", 11, COL.textMuted));
       hdrRow.appendChild(cell);
     });
     comp.appendChild(hdrRow);
@@ -1113,7 +1113,7 @@ async function createComponentScaffolds() {
       stPill.paddingLeft = 6; stPill.paddingRight = 6;
       stPill.cornerRadius = 999;
       setFill(stPill, d.stateOk ? COL.greenBg : COL.redBg);
-      stPill.appendChild(inter(d.state, "SemiBold", 10, d.stateOk ? COL.greenFg : COL.redFg));
+      stPill.appendChild(inter(d.state, "Semi Bold", 10, d.stateOk ? COL.greenFg : COL.redFg));
       stCell.appendChild(stPill);
 
       // Labels cell
@@ -1198,7 +1198,7 @@ async function createComponentScaffolds() {
       cardInner.paddingTop = 12; cardInner.paddingBottom = 12;
       cardInner.paddingLeft = 16; cardInner.paddingRight = 16;
       cardInner.itemSpacing = 6;
-      cardInner.appendChild(inter(p.title, "SemiBold", 14, COL.textPrimary));
+      cardInner.appendChild(inter(p.title, "Semi Bold", 14, COL.textPrimary));
       cardInner.appendChild(inter("3 targets  •  last scrape 2s ago", "Regular", 13, COL.textMuted));
       comp.appendChild(card);
     }
