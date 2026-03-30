@@ -61,9 +61,9 @@ const TEXT_STYLES = [
   { name: "label/badge",     family: "Inter", size: 11, weight: 600, lineHeight: 1.25 },
   { name: "label/section",   family: "Inter", size: 11, weight: 700, lineHeight: 1.25 },
   { name: "label/nav",       family: "Inter", size: 13, weight: 500, lineHeight: 1.5 },
-  { name: "code/default",    family: "DejaVu Sans Mono", size: 13, weight: 400, lineHeight: 1.6 },
-  { name: "code/metric",     family: "DejaVu Sans Mono", size: 13, weight: 500, lineHeight: 1.5 },
-  { name: "code/label",      family: "DejaVu Sans Mono", size: 11, weight: 400, lineHeight: 1.5 },
+  { name: "code/default",    family: "Courier New", size: 13, weight: 400, lineHeight: 1.6 },
+  { name: "code/metric",     family: "Courier New", size: 13, weight: 400, lineHeight: 1.5 },
+  { name: "code/label",      family: "Courier New", size: 11, weight: 400, lineHeight: 1.5 },
   { name: "stats/badge",     family: "Inter", size: 11, weight: 600, lineHeight: 1.25 },
 ];
 
@@ -176,15 +176,25 @@ async function createTextStyles() {
   figma.notify("Creating text styles...");
 
   for (const def of TEXT_STYLES) {
+    const weightStyle = def.weight >= 700 ? "Bold" : def.weight >= 600 ? "SemiBold" : def.weight >= 500 ? "Medium" : "Regular";
+    let resolvedStyle = weightStyle;
+
+    try {
+      await figma.loadFontAsync({ family: def.family, style: weightStyle });
+    } catch {
+      // Fall back to Regular if the requested weight isn't available
+      try {
+        await figma.loadFontAsync({ family: def.family, style: "Regular" });
+        resolvedStyle = "Regular";
+      } catch (fallbackErr) {
+        console.error(`Skipping text style "${def.name}": font "${def.family}" unavailable.`, fallbackErr);
+        continue;
+      }
+    }
+
     const style = figma.createTextStyle();
     style.name = def.name;
-
-    await figma.loadFontAsync({ family: def.family, style: def.weight >= 700 ? "Bold" : def.weight >= 600 ? "SemiBold" : def.weight >= 500 ? "Medium" : "Regular" });
-
-    style.fontName = {
-      family: def.family,
-      style: def.weight >= 700 ? "Bold" : def.weight >= 600 ? "SemiBold" : def.weight >= 500 ? "Medium" : "Regular"
-    };
+    style.fontName = { family: def.family, style: resolvedStyle };
     style.fontSize = def.size;
     style.lineHeight = { value: def.lineHeight * 100, unit: "PERCENT" };
   }
