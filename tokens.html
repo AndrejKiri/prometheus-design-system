@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Tokens — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Tokens</span></div>
+    <h1>Design Tokens</h1>
+    <p class="doc-subtitle">Color, typography, spacing, motion, and elevation tokens derived from the Prometheus codebase.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#health-colors">Health Colors</a>
+  <a href="#brand-colors">Brand &amp; Surface Colors</a>
+  <a href="#promql-colors">PromQL Syntax Colors</a>
+  <a href="#typography">Typography</a>
+  <a href="#spacing">Spacing</a>
+  <a href="#radius">Border Radius</a>
+  <a href="#elevation">Elevation / Shadows</a>
+  <a href="#motion">Motion / Transitions</a>
+  <a href="#breakpoints">Breakpoints</a>
+  <a href="#css-vars">CSS Variable Reference</a>
+</div>
+
+<h2 id="health-colors">Health Status Colors</h2>
+
+<p>The five-state health color system. Each state has light and dark mode variants for both badge backgrounds/text and panel borders.</p>
+
+<h3>Badge Colors — Light Mode</h3>
+<div class="swatch-grid">
+  <div class="swatch">
+    <div class="swatch-color" style="background:#ebfbee"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">ok (bg)</span>
+      <span class="swatch-value">green-1 / #ebfbee</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#fff5f5"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">err (bg)</span>
+      <span class="swatch-value">red-1 / #fff5f5</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#fff9db"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">warn (bg)</span>
+      <span class="swatch-value">yellow-1 / #fff9db</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#e7f5ff"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">info (bg)</span>
+      <span class="swatch-value">blue-1 / #e7f5ff</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#f1f3f5"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">unknown (bg)</span>
+      <span class="swatch-value">gray-2 / #f1f3f5</span>
+    </div>
+  </div>
+</div>
+
+<h3>Badge Colors — Dark Mode</h3>
+<div class="swatch-grid">
+  <div class="swatch">
+    <div class="swatch-color" style="background:#2b8a3e"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">ok (bg)</span>
+      <span class="swatch-value">green-9 / #2b8a3e</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#742a2a"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">err (bg)</span>
+      <span class="swatch-value">red-9 75% + black</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#e67700"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">warn (bg)</span>
+      <span class="swatch-value">yellow-9 / #e67700</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#1864ab"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">info (bg)</span>
+      <span class="swatch-value">blue-9 / #1864ab</span>
+    </div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#495057"></div>
+    <div class="swatch-info">
+      <span class="swatch-name">unknown (bg)</span>
+      <span class="swatch-value">gray-7 / #495057</span>
+    </div>
+  </div>
+</div>
+
+<h3>Panel Border Colors (Light / Dark)</h3>
+<div class="swatch-grid">
+  <div class="swatch"><div class="swatch-dual"><div class="swatch-dual-half" style="background:#8ce99a"></div><div class="swatch-dual-half" style="background:#2f9e44"></div></div><div class="swatch-info"><span class="swatch-name">ok border</span><span class="swatch-value">green-3 / green-8</span></div></div>
+  <div class="swatch"><div class="swatch-dual"><div class="swatch-dual-half" style="background:#ffc9c9"></div><div class="swatch-dual-half" style="background:#c92a2a"></div></div><div class="swatch-info"><span class="swatch-name">err border</span><span class="swatch-value">red-3 / red-9</span></div></div>
+  <div class="swatch"><div class="swatch-dual"><div class="swatch-dual-half" style="background:#ffd8a8"></div><div class="swatch-dual-half" style="background:#e67700"></div></div><div class="swatch-info"><span class="swatch-name">warn border</span><span class="swatch-value">orange-3 / yellow-9</span></div></div>
+  <div class="swatch"><div class="swatch-dual"><div class="swatch-dual-half" style="background:#a5d8ff"></div><div class="swatch-dual-half" style="background:#1864ab"></div></div><div class="swatch-info"><span class="swatch-name">info border</span><span class="swatch-value">blue-3 / blue-8</span></div></div>
+  <div class="swatch"><div class="swatch-dual"><div class="swatch-dual-half" style="background:#dee2e6"></div><div class="swatch-dual-half" style="background:#868e96"></div></div><div class="swatch-info"><span class="swatch-name">unknown border</span><span class="swatch-value">gray-3 / gray-6</span></div></div>
+</div>
+
+<h3>Live Badge Examples</h3>
+<div class="example-box">
+  <div class="example-label">Health Badges</div>
+  <div class="flex-row gap-sm mb-sm">
+    <span class="mock-badge mock-badge-ok">up</span>
+    <span class="mock-badge mock-badge-ok">ok</span>
+    <span class="mock-badge mock-badge-ok">active</span>
+    <span class="mock-badge mock-badge-err">down</span>
+    <span class="mock-badge mock-badge-err">firing</span>
+    <span class="mock-badge mock-badge-warn">pending</span>
+    <span class="mock-badge mock-badge-info">info</span>
+    <span class="mock-badge mock-badge-unknown">unknown</span>
+    <span class="mock-badge mock-badge-unknown">inactive</span>
+    <span class="mock-badge mock-badge-unknown">dropped</span>
+  </div>
+  <div class="example-label">Stats Badges</div>
+  <div class="flex-row gap-sm">
+    <span class="mock-badge mock-badge-stats">3 / 3 active</span>
+    <span class="mock-badge mock-badge-stats">42 targets</span>
+  </div>
+</div>
+
+<h2 id="brand-colors">Brand &amp; Surface Colors</h2>
+
+<div class="swatch-grid">
+  <div class="swatch">
+    <div class="swatch-color" style="background:#e6522c"></div>
+    <div class="swatch-info"><span class="swatch-name">Brand Orange</span><span class="swatch-value">#e6522c</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:rgb(65,73,81)"></div>
+    <div class="swatch-info"><span class="swatch-name">Header BG</span><span class="swatch-value">rgb(65, 73, 81)</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#228be6"></div>
+    <div class="swatch-info"><span class="swatch-name">Primary Blue</span><span class="swatch-value">#228be6</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#ffffff; border: 1px solid #dee2e6"></div>
+    <div class="swatch-info"><span class="swatch-name">Card BG (light)</span><span class="swatch-value">#ffffff</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#25262b"></div>
+    <div class="swatch-info"><span class="swatch-name">Card BG (dark)</span><span class="swatch-value">dark-6 / #25262b</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#f1f3f5"></div>
+    <div class="swatch-info"><span class="swatch-name">Codebox BG (light)</span><span class="swatch-value">gray-1 / #f1f3f5</span></div>
+  </div>
+  <div class="swatch">
+    <div class="swatch-color" style="background:#212529"></div>
+    <div class="swatch-info"><span class="swatch-name">Codebox BG (dark)</span><span class="swatch-value">gray-9 / #212529</span></div>
+  </div>
+</div>
+
+<h3>Codebox Background Scale</h3>
+<p>A 10-step gray scale registered as a custom Mantine color:</p>
+<div style="display:flex; gap:2px; margin-bottom:1.5rem; border-radius:6px; overflow:hidden;">
+  <div style="flex:1; height:40px; background:#f5f5f5" title="0: #f5f5f5"></div>
+  <div style="flex:1; height:40px; background:#e7e7e7" title="1: #e7e7e7"></div>
+  <div style="flex:1; height:40px; background:#cdcdcd" title="2: #cdcdcd"></div>
+  <div style="flex:1; height:40px; background:#b2b2b2" title="3: #b2b2b2"></div>
+  <div style="flex:1; height:40px; background:#9a9a9a" title="4: #9a9a9a"></div>
+  <div style="flex:1; height:40px; background:#8b8b8b" title="5: #8b8b8b"></div>
+  <div style="flex:1; height:40px; background:#848484" title="6: #848484"></div>
+  <div style="flex:1; height:40px; background:#717171" title="7: #717171"></div>
+  <div style="flex:1; height:40px; background:#656565" title="8: #656565"></div>
+  <div style="flex:1; height:40px; background:#575757" title="9: #575757"></div>
+</div>
+
+<h2 id="promql-colors">PromQL Syntax Colors</h2>
+
+<table>
+  <thead><tr><th>Token</th><th>Light</th><th>Dark</th><th style="width:60px">Light</th><th style="width:60px">Dark</th></tr></thead>
+  <tbody>
+    <tr><td>keyword / function</td><td><code>#008080</code></td><td><code>#14bfad</code></td><td><div style="width:40px;height:20px;background:#008080;border-radius:3px"></div></td><td><div style="width:40px;height:20px;background:#14bfad;border-radius:3px"></div></td></tr>
+    <tr><td>labelName</td><td><code>#800000</code></td><td><code>#ff8585</code></td><td><div style="width:40px;height:20px;background:#800000;border-radius:3px"></div></td><td><div style="width:40px;height:20px;background:#ff8585;border-radius:3px"></div></td></tr>
+    <tr><td>string</td><td><code>#a31515</code></td><td><code>#fca5a5</code></td><td><div style="width:40px;height:20px;background:#a31515;border-radius:3px"></div></td><td><div style="width:40px;height:20px;background:#fca5a5;border-radius:3px"></div></td></tr>
+    <tr><td>number / duration</td><td><code>#09885a</code></td><td><code>#22c55e</code></td><td><div style="width:40px;height:20px;background:#09885a;border-radius:3px"></div></td><td><div style="width:40px;height:20px;background:#22c55e;border-radius:3px"></div></td></tr>
+  </tbody>
+</table>
+
+<h2 id="typography">Typography</h2>
+
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>fontFamilies.body</code></td><td>System UI stack</td><td>All body text, headings, UI elements</td></tr>
+    <tr><td><code>fontFamilies.mono</code></td><td>"DejaVu Sans Mono", monospace fallback</td><td>PromQL, code, metric values, config YAML</td></tr>
+    <tr><td><code>fontFamilies.completionTooltip</code></td><td>"Open Sans", "Lucida Sans Unicode"</td><td>CodeMirror autocomplete tooltip</td></tr>
+  </tbody>
+</table>
+
+<h3>Font Sizes (Mantine scale)</h3>
+<table>
+  <thead><tr><th>Token</th><th>CSS Variable</th><th>Default</th></tr></thead>
+  <tbody>
+    <tr><td><code>xs</code></td><td><code>--mantine-font-size-xs</code></td><td>12px</td></tr>
+    <tr><td><code>sm</code></td><td><code>--mantine-font-size-sm</code></td><td>14px</td></tr>
+    <tr><td><code>md</code></td><td><code>--mantine-font-size-md</code></td><td>16px</td></tr>
+    <tr><td><code>lg</code></td><td><code>--mantine-font-size-lg</code></td><td>18px</td></tr>
+    <tr><td><code>xl</code></td><td><code>--mantine-font-size-xl</code></td><td>20px</td></tr>
+  </tbody>
+</table>
+
+<h3>Font Weights</h3>
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>regular</code></td><td>400</td><td>Body text</td></tr>
+    <tr><td><code>medium</code></td><td>500</td><td>Emphasis, empty states</td></tr>
+    <tr><td><code>semibold</code></td><td>600</td><td>Card titles, table headers</td></tr>
+    <tr><td><code>bold</code></td><td>700</td><td>Page headings</td></tr>
+  </tbody>
+</table>
+
+<h3>Line Heights</h3>
+<table>
+  <thead><tr><th>Token</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td><code>tight</code></td><td>1.25</td></tr>
+    <tr><td><code>normal</code></td><td>1.5</td></tr>
+    <tr><td><code>relaxed</code></td><td>1.75</td></tr>
+  </tbody>
+</table>
+
+<h3>Text Styles</h3>
+<p>Register these as Figma text styles with the naming convention shown below.</p>
+
+<table>
+  <thead><tr><th>Figma Text Style Name</th><th>Font Family</th><th>Size</th><th>Weight</th><th>Line Height</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>heading/page</code></td><td>System UI</td><td>20px (xl)</td><td>700 (bold)</td><td>1.25</td><td>Page titles (h1)</td></tr>
+    <tr><td><code>heading/section</code></td><td>System UI</td><td>18px (lg)</td><td>600 (semibold)</td><td>1.25</td><td>Section headings (h2)</td></tr>
+    <tr><td><code>heading/card</code></td><td>System UI</td><td>16px (md)</td><td>600 (semibold)</td><td>1.25</td><td>Card titles, panel headers</td></tr>
+    <tr><td><code>body/default</code></td><td>System UI</td><td>14px (sm)</td><td>400 (regular)</td><td>1.5</td><td>Default body text</td></tr>
+    <tr><td><code>body/emphasis</code></td><td>System UI</td><td>14px (sm)</td><td>500 (medium)</td><td>1.5</td><td>Empty-state messages, emphasis text</td></tr>
+    <tr><td><code>body/small</code></td><td>System UI</td><td>12px (xs)</td><td>400 (regular)</td><td>1.5</td><td>Secondary text, table cells, descriptions</td></tr>
+    <tr><td><code>label/badge</code></td><td>System UI</td><td>11px</td><td>600 (semibold)</td><td>1.25</td><td>Status badges, label badges</td></tr>
+    <tr><td><code>label/section</code></td><td>System UI</td><td>11px</td><td>700 (bold)</td><td>1.25</td><td>Section labels (uppercase + letter-spacing 0.08em)</td></tr>
+    <tr><td><code>label/nav</code></td><td>System UI</td><td>13px</td><td>500 (medium)</td><td>1.5</td><td>Nav links, active state is 500 weight</td></tr>
+    <tr><td><code>code/default</code></td><td>DejaVu Sans Mono</td><td>13px</td><td>400 (regular)</td><td>1.6</td><td>Code blocks, inline code</td></tr>
+    <tr><td><code>code/metric</code></td><td>DejaVu Sans Mono</td><td>13px</td><td>500 (medium)</td><td>1.5</td><td>Metric names in SeriesName</td></tr>
+    <tr><td><code>code/label</code></td><td>DejaVu Sans Mono</td><td>11px</td><td>400 (regular)</td><td>1.5</td><td>Label badge text, key-value pairs</td></tr>
+    <tr><td><code>stats/badge</code></td><td>System UI</td><td>11px</td><td>600 (semibold)</td><td>1.25</td><td>Stats badges (e.g., "3 / 3 active")</td></tr>
+  </tbody>
+</table>
+
+<h2 id="spacing">Spacing</h2>
+
+<p>Uses Mantine's default spacing scale. No custom overrides.</p>
+
+<div style="margin-bottom:1.5rem">
+  <div class="spacing-row"><span class="spacing-label">xs</span><div class="spacing-bar" style="width:32px"></div><span class="spacing-value">8px</span></div>
+  <div class="spacing-row"><span class="spacing-label">sm</span><div class="spacing-bar" style="width:48px"></div><span class="spacing-value">12px</span></div>
+  <div class="spacing-row"><span class="spacing-label">md</span><div class="spacing-bar" style="width:64px"></div><span class="spacing-value">16px</span></div>
+  <div class="spacing-row"><span class="spacing-label">lg</span><div class="spacing-bar" style="width:80px"></div><span class="spacing-value">20px</span></div>
+  <div class="spacing-row"><span class="spacing-label">xl</span><div class="spacing-bar" style="width:128px"></div><span class="spacing-value">32px</span></div>
+</div>
+
+<h3>Semantic Spacing</h3>
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>headerLogoNavGap</code></td><td>xl (32px)</td><td>Gap between logo and navigation</td></tr>
+    <tr><td><code>headerNavLinksGap</code></td><td>sm (12px)</td><td>Gap between nav links</td></tr>
+    <tr><td><code>logoGroupGap</code></td><td>xs (8px)</td><td>Gap inside logo group</td></tr>
+    <tr><td><code>mainPadding</code></td><td>md (16px)</td><td>AppShell main area padding</td></tr>
+    <tr><td><code>cardPadding</code></td><td>md (16px)</td><td>Card / InfoCard padding</td></tr>
+    <tr><td><code>infoPageMaxWidth</code></td><td>1000px</td><td>Max width of info pages</td></tr>
+    <tr><td><code>pageSectionGap</code></td><td>lg (20px)</td><td>Gap between page sections</td></tr>
+    <tr><td><code>filterToolbarGap</code></td><td>sm (12px)</td><td>Gap in filter toolbar</td></tr>
+    <tr><td><code>healthPanelBorderWidth</code></td><td>5px</td><td>Health panel left border</td></tr>
+    <tr><td><code>actionIconSize</code></td><td>32px</td><td>Standard action icon size</td></tr>
+  </tbody>
+</table>
+
+<h2 id="radius">Border Radius</h2>
+
+<table>
+  <thead><tr><th>Token</th><th>CSS Variable</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>default</code></td><td><code>--mantine-radius-default</code> (4px)</td><td>Default component radius</td></tr>
+    <tr><td><code>sm</code></td><td><code>--mantine-radius-sm</code></td><td>Nav links, small elements</td></tr>
+    <tr><td><code>md</code></td><td><code>--mantine-radius-md</code></td><td>Medium elements</td></tr>
+    <tr><td><code>lg</code></td><td><code>--mantine-radius-lg</code></td><td>Large containers</td></tr>
+    <tr><td><code>xl</code></td><td><code>--mantine-radius-xl</code></td><td>Rounded containers</td></tr>
+    <tr><td><code>pill</code></td><td><code>calc(62.5rem * var(--mantine-scale))</code></td><td>Status badges, label badges</td></tr>
+  </tbody>
+</table>
+
+<h2 id="elevation">Elevation / Shadows</h2>
+
+<p>Mantine shadow scale with light and dark mode values. Shadows are softer in dark mode using higher opacity.</p>
+
+<table>
+  <thead><tr><th>Token</th><th>Light Value</th><th>Dark Value</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>none</code></td><td><code>none</code></td><td><code>none</code></td><td>Inline code blocks, rule definition cards</td></tr>
+    <tr><td><code>xs</code></td><td><code>0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)</code></td><td><code>0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.25)</code></td><td>InfoCard, AlertsPage card, RulesPage card</td></tr>
+    <tr><td><code>sm</code></td><td><code>0 1px 3px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.06)</code></td><td><code>0 1px 3px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.2)</code></td><td>Light elevated surfaces</td></tr>
+    <tr><td><code>md</code></td><td><code>0 2px 8px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.07)</code></td><td><code>0 2px 8px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.25)</code></td><td>Popovers, menus, notifications, SettingsPanel</td></tr>
+    <tr><td><code>lg</code></td><td><code>0 4px 16px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.08)</code></td><td><code>0 4px 16px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.3)</code></td><td>Modals, heavy overlays</td></tr>
+    <tr><td><code>xl</code></td><td><code>0 8px 32px rgba(0,0,0,0.12), 0 16px 48px rgba(0,0,0,0.1)</code></td><td><code>0 8px 32px rgba(0,0,0,0.5), 0 16px 48px rgba(0,0,0,0.35)</code></td><td>Maximum elevation</td></tr>
+  </tbody>
+</table>
+
+<h3>Border Tokens</h3>
+<table>
+  <thead><tr><th>Token</th><th>Light Value</th><th>Dark Value</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>border-default</code></td><td><code>1px solid #dee2e6</code></td><td><code>1px solid #373a40</code></td><td>Card borders, table borders, inputs</td></tr>
+    <tr><td><code>border-light</code></td><td><code>1px solid #e9ecef</code></td><td><code>1px solid #2c2e33</code></td><td>Subtle dividers, table cell borders</td></tr>
+    <tr><td><code>border-heavy</code></td><td><code>2px solid #dee2e6</code></td><td><code>2px solid #373a40</code></td><td>Table header bottom borders</td></tr>
+    <tr><td><code>health-panel-border</code></td><td colspan="2"><code>5px solid &lt;status-color&gt;</code></td><td>HealthPanel left accent border</td></tr>
+  </tbody>
+</table>
+
+<h3>Elevation Usage Map</h3>
+<table>
+  <thead><tr><th>Component</th><th>Elevation Token</th></tr></thead>
+  <tbody>
+    <tr><td>InfoCard</td><td><code>xs</code></td></tr>
+    <tr><td>HealthPanel</td><td><code>none</code> (border-only)</td></tr>
+    <tr><td>CodeBlock</td><td><code>none</code></td></tr>
+    <tr><td>SettingsPanel</td><td><code>md</code></td></tr>
+    <tr><td>Dropdown / Popover</td><td><code>md</code></td></tr>
+    <tr><td>Modal</td><td><code>lg</code></td></tr>
+    <tr><td>Notification</td><td><code>md</code></td></tr>
+  </tbody>
+</table>
+
+<h2 id="motion">Motion / Transitions</h2>
+
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>CSS Shorthand</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>hoverReveal</code></td><td>100ms ease-in-out</td><td><code>opacity 100ms ease-in-out</code></td><td>Inline control reveal on hover</td></tr>
+    <tr><td><code>accordionChevron</code></td><td>200ms ease</td><td><code>transform 200ms ease</code></td><td>Accordion chevron rotation</td></tr>
+    <tr><td><code>backgroundTransition</code></td><td>150ms ease</td><td><code>background-color 150ms ease</code></td><td>Accordion item bg change</td></tr>
+    <tr><td><code>interactiveHover</code></td><td>100ms ease</td><td><code>all 100ms ease</code></td><td>General hover state changes</td></tr>
+    <tr><td><code>dataTransition</code></td><td>200ms ease</td><td>—</td><td>Loading state changes</td></tr>
+  </tbody>
+</table>
+
+<h2 id="breakpoints">Breakpoints</h2>
+
+<table>
+  <thead><tr><th>Token</th><th>Value</th><th>Pixels</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>xs</code></td><td>36em</td><td>576px</td><td>Action icons visibility threshold</td></tr>
+    <tr><td><code>sm</code></td><td>48em</td><td>768px</td><td>Nav collapse, burger visibility</td></tr>
+    <tr><td><code>md</code></td><td>62em</td><td>992px</td><td>Logo text visibility</td></tr>
+    <tr><td><code>lg</code></td><td>75em</td><td>1200px</td><td>—</td></tr>
+    <tr><td><code>xl</code></td><td>88em</td><td>1408px</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h3>Responsive Patterns</h3>
+<table>
+  <thead><tr><th>Pattern</th><th>Breakpoint</th><th>Behavior</th></tr></thead>
+  <tbody>
+    <tr><td>Navbar collapse</td><td>sm (768px)</td><td>Below sm: drawer mode. Above sm: inline</td></tr>
+    <tr><td>Navbar width</td><td>—</td><td>300px (mobile drawer)</td></tr>
+    <tr><td>Logo text</td><td>md (992px)</td><td>Hidden below md</td></tr>
+    <tr><td>Action icons</td><td>xs (576px)</td><td>Hidden below xs</td></tr>
+    <tr><td>Burger menu</td><td>sm (768px)</td><td>Hidden above sm</td></tr>
+  </tbody>
+</table>
+
+<h2 id="css-vars">CSS Variable Reference</h2>
+
+<p>All <code>--prom-*</code> variables are defined in <code>@prometheus-io/design-system/styles.css</code>:</p>
+
+<table>
+  <thead><tr><th>Variable</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td><code>--prom-brand-orange</code></td><td>#e6522c</td></tr>
+    <tr><td><code>--prom-header-bg</code></td><td>rgb(65, 73, 81)</td></tr>
+    <tr><td><code>--prom-header-text</code></td><td>#ffffff</td></tr>
+    <tr><td><code>--prom-header-height</code></td><td>56px</td></tr>
+    <tr><td><code>--prom-nav-link-color</code></td><td>gray-0</td></tr>
+    <tr><td><code>--prom-nav-link-hover-bg</code></td><td>gray-6</td></tr>
+    <tr><td><code>--prom-nav-link-active-bg</code></td><td>primary-color-filled</td></tr>
+    <tr><td><code>--prom-nav-link-active-color</code></td><td>#ffffff</td></tr>
+    <tr><td><code>--prom-nav-link-radius</code></td><td>radius-sm</td></tr>
+    <tr><td><code>--prom-badge-ok-bg</code></td><td>light-dark(green-1, green-9)</td></tr>
+    <tr><td><code>--prom-badge-ok-color</code></td><td>light-dark(green-9, green-1)</td></tr>
+    <tr><td><code>--prom-badge-err-bg</code></td><td>light-dark(red-1, darken(red-9))</td></tr>
+    <tr><td><code>--prom-badge-err-color</code></td><td>light-dark(red-9, red-1)</td></tr>
+    <tr><td><code>--prom-badge-warn-bg</code></td><td>light-dark(yellow-1, yellow-9)</td></tr>
+    <tr><td><code>--prom-badge-warn-color</code></td><td>light-dark(yellow-9, yellow-1)</td></tr>
+    <tr><td><code>--prom-badge-info-bg</code></td><td>light-dark(blue-1, blue-9)</td></tr>
+    <tr><td><code>--prom-badge-info-color</code></td><td>light-dark(blue-9, blue-1)</td></tr>
+    <tr><td><code>--prom-badge-unknown-bg</code></td><td>light-dark(gray-2, gray-7)</td></tr>
+    <tr><td><code>--prom-badge-unknown-color</code></td><td>light-dark(gray-7, gray-4)</td></tr>
+    <tr><td><code>--prom-badge-stats-bg</code></td><td>light-dark(gray-1, gray-8)</td></tr>
+    <tr><td><code>--prom-badge-stats-color</code></td><td>light-dark(gray-7, gray-5)</td></tr>
+    <tr><td><code>--prom-label-badge-bg</code></td><td>light-dark(gray-1, gray-8)</td></tr>
+    <tr><td><code>--prom-panel-border-width</code></td><td>5px</td></tr>
+    <tr><td><code>--prom-panel-border-ok</code></td><td>light-dark(green-3, green-8)</td></tr>
+    <tr><td><code>--prom-panel-border-err</code></td><td>light-dark(red-3, red-9)</td></tr>
+    <tr><td><code>--prom-panel-border-warn</code></td><td>light-dark(orange-3, yellow-9)</td></tr>
+    <tr><td><code>--prom-panel-border-info</code></td><td>light-dark(blue-3, blue-8)</td></tr>
+    <tr><td><code>--prom-panel-border-unknown</code></td><td>light-dark(gray-3, gray-6)</td></tr>
+    <tr><td><code>--prom-font-mono</code></td><td>"DejaVu Sans Mono", monospace stack</td></tr>
+    <tr><td><code>--prom-logo-font-size</code></td><td>1.25rem</td></tr>
+    <tr><td><code>--prom-info-page-max-width</code></td><td>1000px</td></tr>
+    <tr><td><code>--prom-card-bg</code></td><td>light-dark(white, dark-6)</td></tr>
+    <tr><td><code>--prom-accordion-item-bg</code></td><td>light-dark(gray-0, dark-5)</td></tr>
+    <tr><td><code>--prom-codebox-bg</code></td><td>light-dark(gray-1, gray-9)</td></tr>
+    <tr><td><code>--prom-promql-keyword</code></td><td>light-dark(#008080, #14bfad)</td></tr>
+    <tr><td><code>--prom-promql-label-name</code></td><td>light-dark(#800000, #ff8585)</td></tr>
+    <tr><td><code>--prom-promql-string</code></td><td>light-dark(#a31515, #fca5a5)</td></tr>
+    <tr><td><code>--prom-promql-number</code></td><td>light-dark(#09885a, #22c55e)</td></tr>
+    <tr><td><code>--prom-transition-hover-reveal</code></td><td>opacity 100ms ease-in-out</td></tr>
+    <tr><td><code>--prom-transition-bg</code></td><td>background-color 150ms ease</td></tr>
+    <tr><td><code>--prom-transition-chevron</code></td><td>transform 200ms ease</td></tr>
+    <tr><td><code>--prom-transition-interactive</code></td><td>100ms ease</td></tr>
+  </tbody>
+</table>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

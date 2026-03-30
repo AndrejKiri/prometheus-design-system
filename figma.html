@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Figma Structure — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Figma</span></div>
+    <h1>Figma Structure</h1>
+    <p class="doc-subtitle">Setting up Figma variables and components to match the design system.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#setup-guide">Library Setup Guide</a>
+  <a href="#variables">Figma Variables</a>
+  <a href="#naming">Component Naming</a>
+  <a href="#text-styles">Text Styles</a>
+  <a href="#variants">Variant Structure</a>
+  <a href="#color-structure">Color Variable Structure</a>
+  <a href="#plugin">Bootstrap Plugin</a>
+</div>
+
+<h2 id="setup-guide">Figma Library Setup Guide</h2>
+
+<p>Follow these steps to create a Prometheus design library in Figma that mirrors the codebase. Estimated time: 30-45 minutes for initial setup.</p>
+
+<div class="callout callout-info">
+  <div class="callout-title">Prerequisites</div>
+  Figma Professional plan or higher (to publish team libraries). Familiarity with Figma variables and component variants.
+</div>
+
+<h3>Step 1: Create the Library File</h3>
+<p>Create a new Figma file named <strong>Prometheus Design System</strong>. Organize with these pages:</p>
+<ul>
+  <li><strong>Cover</strong> — title card with version number</li>
+  <li><strong>Variables</strong> — workspace for variable collections</li>
+  <li><strong>Text Styles</strong> — text style definitions</li>
+  <li><strong>Components</strong> — all component masters</li>
+  <li><strong>Icons</strong> — Tabler icon subset</li>
+</ul>
+
+<h3>Step 2: Create Variable Collections</h3>
+<p>Open the Variables panel (<kbd>⌘/Ctrl + Shift + V</kbd>) and create these collections:</p>
+<ol>
+  <li><strong>Brand</strong> — <code>brand/orange</code> (#e6522c), <code>brand/header-bg</code> (rgb(65,73,81)), <code>brand/primary</code> (#228be6)</li>
+  <li><strong>Health Status</strong> — add two modes (Light / Dark). Create variables for each status (ok, err, warn, info, unknown) with -bg, -text, -border suffixes. Reference the tier-1 primitive values from the Color Variable Structure section below.</li>
+  <li><strong>Surface</strong> — <code>surface/card-bg</code>, <code>surface/codebox-bg</code>, <code>surface/accordion-bg</code> (with Light/Dark modes)</li>
+  <li><strong>Spacing</strong> — <code>spacing/xs</code> (8), <code>spacing/sm</code> (12), <code>spacing/md</code> (16), <code>spacing/lg</code> (20), <code>spacing/xl</code> (32)</li>
+  <li><strong>Radius</strong> — <code>radius/default</code> (4), <code>radius/sm</code> (2), <code>radius/md</code> (8), <code>radius/lg</code> (16), <code>radius/pill</code> (9999)</li>
+</ol>
+
+<h3>Step 3: Create Text Styles</h3>
+<p>Create all text styles using the naming convention from the Typography section above. Set the font family to your system's default sans-serif for body styles and <code>DejaVu Sans Mono</code> for code styles.</p>
+
+<h3>Step 4: Build Primitive Components</h3>
+<p>Start with the smallest building blocks:</p>
+<ol>
+  <li><strong>StatusBadge</strong> — create a frame (auto-layout, horizontal, center-aligned). Add text layer using <code>label/badge</code> style. Set fill to <code>health/ok-bg</code> variable. Add variants for all status values and sizes.</li>
+  <li><strong>LabelBadge</strong> — similar pill shape, using <code>code/label</code> text style. Two variants: default and discovered.</li>
+</ol>
+
+<h3>Step 5: Build Panel Components</h3>
+<ol>
+  <li><strong>HealthPanel</strong> — auto-layout frame with 5px left border. Add nested StatusBadge. Create variants for each health status and collapsed/expanded states.</li>
+  <li><strong>ErrorAlert</strong> — auto-layout with icon + text. Variants for severity (error, warning, info) and has-title (true, false).</li>
+  <li><strong>EmptyState</strong> — centered vertical layout with icon, message, description, and optional action.</li>
+</ol>
+
+<h3>Step 6: Build Data Display Components</h3>
+<ol>
+  <li><strong>DataTable</strong> — use auto-layout rows. Create header row and data row sub-components. Variant for empty state.</li>
+  <li><strong>KeyValueTable</strong> — two-column layout with bold keys and regular values.</li>
+  <li><strong>CodeBlock</strong> — frame with monospace text, gray background. Variants for overflow mode.</li>
+  <li><strong>SeriesName</strong> — use monospace text styles with syntax coloring. Variants: plain and formatted.</li>
+</ol>
+
+<h3>Step 7: Build Navigation Components</h3>
+<ol>
+  <li><strong>NavButton</strong> — auto-layout with optional icon and label. Variants for active state.</li>
+  <li><strong>ThemeToggle</strong> — 32px square icon button. Two variants: light mode (moon icon) and dark mode (sun icon).</li>
+</ol>
+
+<h3>Step 8: Build Composite Components</h3>
+<ol>
+  <li><strong>InfoCard</strong> — card frame using <code>surface/card-bg</code>, border, <code>shadow/xs</code>. Nest icon + title header and content slot.</li>
+  <li><strong>FilterToolbar</strong> — horizontal auto-layout containing search input, state multi-select, and icon buttons. Use boolean variants for show/hide controls.</li>
+  <li><strong>PoolAccordion</strong> — nest HealthPanel items. Include stats badges in the header.</li>
+  <li><strong>SettingsPanel</strong> — card with grouped checkbox/number settings.</li>
+</ol>
+
+<h3>Step 9: Build the App Shell</h3>
+<p>Create the <strong>PrometheusAppShell</strong> as a top-level frame:</p>
+<ol>
+  <li>Header bar (56px height, rgb(65,73,81) background) with logo, NavButtons, and action icons</li>
+  <li>Content area slot below the header</li>
+  <li>Variants for navbar state (inline, drawer-open, drawer-closed) and theme (light, dark)</li>
+</ol>
+
+<h3>Step 10: Apply Variable Modes</h3>
+<p>For every component that changes between themes:</p>
+<ol>
+  <li>Select the component set</li>
+  <li>In the right panel, under "Variables", bind fill/stroke/text colors to the semantic variables</li>
+  <li>Figma will auto-swap values when you switch between Light and Dark modes on the parent frame</li>
+</ol>
+
+<h3>Step 11: Publish the Library</h3>
+<ol>
+  <li>Go to <strong>Assets</strong> panel → click the book icon → <strong>Publish</strong></li>
+  <li>Add a meaningful description and version note</li>
+  <li>Team members can now enable this library in their files via <strong>Assets → Team Library</strong></li>
+</ol>
+
+<h3>Step 12: Maintain Parity</h3>
+<p>After publishing, keep the library in sync with code changes:</p>
+<ul>
+  <li>When a new prop is added to a component, add a corresponding Figma variant property</li>
+  <li>When token values change, update the Figma variable values</li>
+  <li>Use the <a href="#plugin">Figma bootstrap plugin</a> to automate initial variable and color style creation</li>
+  <li>Version the library using Figma's built-in branching or a changelog on the Cover page</li>
+</ul>
+
+<h2 id="variables">Setting Up Figma Variables</h2>
+
+<p>Figma variables should map directly to the design tokens defined in the code. This ensures design-to-code fidelity.</p>
+
+<h3>Variable Collections</h3>
+<table>
+  <thead><tr><th>Collection</th><th>Variables</th></tr></thead>
+  <tbody>
+    <tr><td>Brand</td><td><code>brand/orange</code> → #e6522c<br><code>brand/header-bg</code> → rgb(65, 73, 81)<br><code>brand/primary</code> → #228be6</td></tr>
+    <tr><td>Health Status</td><td><code>health/ok</code>, <code>health/err</code>, <code>health/warn</code>, <code>health/info</code>, <code>health/unknown</code> — each with light/dark mode variants for bg, text, and border</td></tr>
+    <tr><td>Surface</td><td><code>surface/card-bg</code>, <code>surface/codebox-bg</code>, <code>surface/accordion-bg</code></td></tr>
+    <tr><td>Spacing</td><td><code>spacing/xs</code> → 8, <code>spacing/sm</code> → 12, <code>spacing/md</code> → 16, <code>spacing/lg</code> → 20, <code>spacing/xl</code> → 32</td></tr>
+    <tr><td>Radius</td><td><code>radius/sm</code>, <code>radius/md</code>, <code>radius/lg</code>, <code>radius/pill</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Mode Structure</h3>
+<p>Create two modes for each collection that needs theme support:</p>
+<ul>
+  <li><strong>Light</strong> — uses Mantine light mode color steps</li>
+  <li><strong>Dark</strong> — uses Mantine dark mode color steps</li>
+</ul>
+
+<h2 id="naming">Component Naming Conventions</h2>
+
+<p>Figma component names <strong>must match React component names</strong> exactly:</p>
+
+<table>
+  <thead><tr><th>React Component</th><th>Figma Component Name</th></tr></thead>
+  <tbody>
+    <tr><td><code>StatusBadge</code></td><td>StatusBadge</td></tr>
+    <tr><td><code>HealthPanel</code></td><td>HealthPanel</td></tr>
+    <tr><td><code>LabelBadge</code></td><td>LabelBadge</td></tr>
+    <tr><td><code>FilterToolbar</code></td><td>FilterToolbar</td></tr>
+    <tr><td><code>InfoCard</code></td><td>InfoCard</td></tr>
+    <tr><td><code>DataTable</code></td><td>DataTable</td></tr>
+    <tr><td><code>ErrorAlert</code></td><td>ErrorAlert</td></tr>
+    <tr><td><code>EmptyState</code></td><td>EmptyState</td></tr>
+    <tr><td><code>CodeBlock</code></td><td>CodeBlock</td></tr>
+    <tr><td><code>SeriesName</code></td><td>SeriesName</td></tr>
+    <tr><td><code>NavButton</code></td><td>NavButton</td></tr>
+    <tr><td><code>PrometheusAppShell</code></td><td>PrometheusAppShell</td></tr>
+  </tbody>
+</table>
+
+<h2 id="text-styles">Text Styles</h2>
+
+<p>Register these as named text styles in Figma. Use the slash-separated naming convention so Figma auto-groups them.</p>
+
+<table>
+  <thead><tr><th>Figma Text Style Name</th><th>Font Family</th><th>Size</th><th>Weight</th><th>Line Height</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>heading/page</code></td><td>System UI</td><td>20px (xl)</td><td>700 (bold)</td><td>1.25</td><td>Page titles (h1)</td></tr>
+    <tr><td><code>heading/section</code></td><td>System UI</td><td>18px (lg)</td><td>600 (semibold)</td><td>1.25</td><td>Section headings (h2)</td></tr>
+    <tr><td><code>heading/card</code></td><td>System UI</td><td>16px (md)</td><td>600 (semibold)</td><td>1.25</td><td>Card titles, panel headers</td></tr>
+    <tr><td><code>body/default</code></td><td>System UI</td><td>14px (sm)</td><td>400 (regular)</td><td>1.5</td><td>Default body text</td></tr>
+    <tr><td><code>body/emphasis</code></td><td>System UI</td><td>14px (sm)</td><td>500 (medium)</td><td>1.5</td><td>Empty-state messages, emphasis text</td></tr>
+    <tr><td><code>body/small</code></td><td>System UI</td><td>12px (xs)</td><td>400 (regular)</td><td>1.5</td><td>Secondary text, table cells, descriptions</td></tr>
+    <tr><td><code>label/badge</code></td><td>System UI</td><td>11px</td><td>600 (semibold)</td><td>1.25</td><td>Status badges, label badges</td></tr>
+    <tr><td><code>label/section</code></td><td>System UI</td><td>11px</td><td>700 (bold)</td><td>1.25</td><td>Section labels (uppercase + letter-spacing 0.08em)</td></tr>
+    <tr><td><code>label/nav</code></td><td>System UI</td><td>13px</td><td>500 (medium)</td><td>1.5</td><td>Nav links, active state is 500 weight</td></tr>
+    <tr><td><code>code/default</code></td><td>DejaVu Sans Mono</td><td>13px</td><td>400 (regular)</td><td>1.6</td><td>Code blocks, inline code</td></tr>
+    <tr><td><code>code/metric</code></td><td>DejaVu Sans Mono</td><td>13px</td><td>500 (medium)</td><td>1.5</td><td>Metric names in SeriesName</td></tr>
+    <tr><td><code>code/label</code></td><td>DejaVu Sans Mono</td><td>11px</td><td>400 (regular)</td><td>1.5</td><td>Label badge text, key-value pairs</td></tr>
+    <tr><td><code>stats/badge</code></td><td>System UI</td><td>11px</td><td>600 (semibold)</td><td>1.25</td><td>Stats badges (e.g., "3 / 3 active")</td></tr>
+  </tbody>
+</table>
+
+<h2 id="variants">Variant Structure</h2>
+
+<p>Figma variants must align with React component props:</p>
+
+<h3>StatusBadge</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Status</td><td><code>status</code></td><td>ok, err, warn, info, unknown, firing, pending, inactive, up, down, active, dropped</td></tr>
+    <tr><td>Size</td><td><code>size</code></td><td>sm, md, lg</td></tr>
+    <tr><td>Variant</td><td><code>variant</code></td><td>health, stats</td></tr>
+  </tbody>
+</table>
+
+<h3>HealthPanel</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Status</td><td><code>status</code></td><td>ok, err, warn, info, unknown</td></tr>
+    <tr><td>State</td><td>(accordion)</td><td>collapsed, expanded</td></tr>
+  </tbody>
+</table>
+
+<h3>ErrorAlert</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Severity</td><td><code>severity</code></td><td>error, warning, info</td></tr>
+    <tr><td>Has Title</td><td><code>title</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>LabelBadge</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Variant</td><td><code>variant</code></td><td>default, discovered</td></tr>
+  </tbody>
+</table>
+
+<h3>FilterToolbar</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Show Search</td><td><code>showSearch</code></td><td>true, false</td></tr>
+    <tr><td>Show State Filter</td><td><code>showStateFilter</code></td><td>true, false, auto</td></tr>
+    <tr><td>Show Collapse All</td><td><code>showCollapseAll</code></td><td>true, false</td></tr>
+    <tr><td>Gap</td><td><code>gap</code></td><td>xs, sm, md, lg, xl</td></tr>
+  </tbody>
+</table>
+
+<h3>InfoCard</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Has Title</td><td><code>title</code></td><td>true, false</td></tr>
+    <tr><td>Has Icon</td><td><code>icon</code></td><td>true, false</td></tr>
+    <tr><td>Padding</td><td><code>padding</code></td><td>xs, sm, md, lg, xl</td></tr>
+  </tbody>
+</table>
+
+<h3>InfoPageLayout</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Gap</td><td><code>gap</code></td><td>xs, sm, md, lg, xl</td></tr>
+  </tbody>
+</table>
+
+<h3>DataTable</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Font Size</td><td><code>fz</code></td><td>xs, sm, md</td></tr>
+    <tr><td>Scrollable</td><td><code>scrollable</code></td><td>true, false</td></tr>
+    <tr><td>Has Row Click</td><td><code>onRowClick</code></td><td>true, false</td></tr>
+    <tr><td>Sort Direction</td><td><code>sortDirection</code></td><td>asc, desc, none</td></tr>
+    <tr><td>State</td><td>(data)</td><td>populated, empty</td></tr>
+  </tbody>
+</table>
+
+<h3>KeyValueTable</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Data Source</td><td><code>object</code> / <code>data</code></td><td>object, array</td></tr>
+  </tbody>
+</table>
+
+<h3>CodeBlock</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Overflow</td><td><code>overflow</code></td><td>wrap, scroll</td></tr>
+    <tr><td>Padding</td><td><code>padding</code></td><td>xs, sm, md, lg, xl</td></tr>
+    <tr><td>Has Language</td><td><code>language</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>SeriesName</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Formatted</td><td><code>formatted</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>EndpointLink</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Has Global URL</td><td><code>globalUrl</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>EmptyState</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Has Icon</td><td><code>icon</code></td><td>true, false</td></tr>
+    <tr><td>Has Description</td><td><code>description</code></td><td>true, false</td></tr>
+    <tr><td>Has Action</td><td><code>action</code></td><td>true, false</td></tr>
+    <tr><td>Gap</td><td><code>gap</code></td><td>xs, sm, md, lg, xl</td></tr>
+  </tbody>
+</table>
+
+<h3>PoolAccordion</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Multiple</td><td><code>multiple</code></td><td>true, false</td></tr>
+    <tr><td>Item Status</td><td><code>items[].status</code></td><td>ok, err, warn, info, unknown</td></tr>
+    <tr><td>Item State</td><td>(accordion)</td><td>collapsed, expanded</td></tr>
+  </tbody>
+</table>
+
+<h3>NavButton</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Active</td><td><code>active</code></td><td>true, false</td></tr>
+    <tr><td>Has Icon</td><td><code>icon</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>StateMultiSelect</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>State</td><td>(interaction)</td><td>default, open, with-selections</td></tr>
+    <tr><td>Has Counts</td><td><code>optionCount</code></td><td>true, false</td></tr>
+  </tbody>
+</table>
+
+<h3>SettingsPanel</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>State</td><td>(interaction)</td><td>open, closed</td></tr>
+  </tbody>
+</table>
+
+<h3>ThemeToggle</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Theme</td><td>(colorScheme)</td><td>light, dark</td></tr>
+  </tbody>
+</table>
+
+<h3>PrometheusAppShell</h3>
+<table>
+  <thead><tr><th>Figma Property</th><th>React Prop</th><th>Values</th></tr></thead>
+  <tbody>
+    <tr><td>Navbar State</td><td>(responsive)</td><td>inline, drawer-open, drawer-closed</td></tr>
+    <tr><td>Theme</td><td>(colorScheme)</td><td>light, dark</td></tr>
+  </tbody>
+</table>
+
+<h2 id="elevation-figma">Elevation &amp; Border Tokens</h2>
+
+<p>Create these as Figma effect styles for consistent shadow and border usage.</p>
+
+<h3>Shadow Styles</h3>
+<table>
+  <thead><tr><th>Figma Style Name</th><th>Type</th><th>Value (Light)</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>elevation/none</code></td><td>—</td><td>No shadow</td><td>Flat surfaces (CodeBlock, rule cards)</td></tr>
+    <tr><td><code>elevation/xs</code></td><td>Drop Shadow</td><td>0 1px 3px rgba(0,0,0,0.05)</td><td>InfoCard, page-level cards</td></tr>
+    <tr><td><code>elevation/sm</code></td><td>Drop Shadow</td><td>0 1px 3px rgba(0,0,0,0.08)</td><td>Light elevated surfaces</td></tr>
+    <tr><td><code>elevation/md</code></td><td>Drop Shadow</td><td>0 2px 8px rgba(0,0,0,0.09)</td><td>Popovers, SettingsPanel, menus</td></tr>
+    <tr><td><code>elevation/lg</code></td><td>Drop Shadow</td><td>0 4px 16px rgba(0,0,0,0.1)</td><td>Modals, heavy overlays</td></tr>
+    <tr><td><code>elevation/xl</code></td><td>Drop Shadow</td><td>0 8px 32px rgba(0,0,0,0.12)</td><td>Maximum elevation</td></tr>
+  </tbody>
+</table>
+
+<h3>Border Variables</h3>
+<table>
+  <thead><tr><th>Figma Variable</th><th>Light</th><th>Dark</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr><td><code>border/default</code></td><td>#dee2e6</td><td>#373a40</td><td>Card borders, inputs</td></tr>
+    <tr><td><code>border/light</code></td><td>#e9ecef</td><td>#2c2e33</td><td>Subtle dividers, cell borders</td></tr>
+  </tbody>
+</table>
+
+<h2 id="color-structure">Color Variable Structure</h2>
+
+<p>Follow a three-tier color variable architecture:</p>
+
+<h3>Tier 1: Primitive Colors</h3>
+<p>Raw Mantine color scale values. These are the atomic building blocks.</p>
+<pre><code>primitive/green-1 → #ebfbee
+primitive/green-3 → #8ce99a
+primitive/green-8 → #2f9e44
+primitive/green-9 → #2b8a3e
+primitive/red-1   → #fff5f5
+...</code></pre>
+
+<h3>Tier 2: Semantic Colors</h3>
+<p>Named by meaning, referencing primitives. Mode-aware (light/dark values).</p>
+<pre><code>semantic/health-ok-bg       → primitive/green-1 (light) | primitive/green-9 (dark)
+semantic/health-ok-text     → primitive/green-9 (light) | primitive/green-1 (dark)
+semantic/health-ok-border   → primitive/green-3 (light) | primitive/green-8 (dark)
+semantic/health-err-bg      → primitive/red-1 (light)   | darken(primitive/red-9) (dark)
+...</code></pre>
+
+<h3>Tier 3: Component Colors</h3>
+<p>Component-specific aliases referencing semantic colors.</p>
+<pre><code>component/status-badge-ok-bg    → semantic/health-ok-bg
+component/health-panel-ok-border → semantic/health-ok-border
+component/label-badge-bg         → primitive/gray-1 (light) | primitive/gray-8 (dark)
+component/codebox-bg             → primitive/gray-1 (light) | primitive/gray-9 (dark)
+...</code></pre>
+
+<p>This three-tier system ensures that changing a semantic color automatically propagates to all components that reference it.</p>
+
+<h2 id="plugin">Bootstrap Plugin</h2>
+
+<p>The Prometheus DS Bootstrap Plugin automates the initial Figma library setup. It creates all variable collections, text styles, effect styles, and component scaffolds in one click.</p>
+
+<div class="callout callout-info">
+  <div class="callout-title">Plugin Files</div>
+  The plugin source is in <code>figma-plugin/manifest.json</code> and <code>figma-plugin/code.js</code>. Load it in Figma via Plugins → Development → Import plugin from manifest.
+</div>
+
+<h3>What the Plugin Creates</h3>
+
+<table>
+  <thead><tr><th>Category</th><th>Items Created</th></tr></thead>
+  <tbody>
+    <tr><td>Variable Collections</td><td>Brand (3 colors), Health Status (5 statuses × 3 roles × 2 modes), Surface (3 surfaces × 2 modes), Spacing (5 values), Radius (5 values)</td></tr>
+    <tr><td>Text Styles</td><td>13 text styles across heading, body, label, code, and stats categories</td></tr>
+    <tr><td>Effect Styles</td><td>6 elevation styles (none through xl)</td></tr>
+    <tr><td>Component Scaffolds</td><td>19 named component frames with auto-layout, matching the React component library</td></tr>
+  </tbody>
+</table>
+
+<h3>Installation</h3>
+<ol>
+  <li>Clone or download the <code>figma-plugin/</code> directory</li>
+  <li>In Figma, go to <strong>Plugins → Development → Import plugin from manifest</strong></li>
+  <li>Select the <code>manifest.json</code> file</li>
+  <li>Run the plugin from <strong>Plugins → Development → Prometheus DS Bootstrap</strong></li>
+</ol>
+
+<h3>Plugin API Methods Used</h3>
+<table>
+  <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td><code>figma.variables.createVariableCollection()</code></td><td>Create variable collections (Brand, Health, Surface, Spacing, Radius)</td></tr>
+    <tr><td><code>figma.variables.createVariable()</code></td><td>Create individual variables within collections</td></tr>
+    <tr><td><code>collection.addMode()</code></td><td>Add Light/Dark modes to themed collections</td></tr>
+    <tr><td><code>variable.setValueForMode()</code></td><td>Set per-mode values for themed variables</td></tr>
+    <tr><td><code>figma.createTextStyle()</code></td><td>Create named text styles</td></tr>
+    <tr><td><code>figma.createEffectStyle()</code></td><td>Create named effect (shadow) styles</td></tr>
+    <tr><td><code>figma.createComponent()</code></td><td>Create component scaffolds</td></tr>
+    <tr><td><code>figma.createPage()</code></td><td>Create organized pages</td></tr>
+    <tr><td><code>figma.loadFontAsync()</code></td><td>Load fonts before setting text</td></tr>
+    <tr><td><code>figma.notify()</code></td><td>Show progress notifications</td></tr>
+    <tr><td><code>figma.closePlugin()</code></td><td>Clean shutdown after completion</td></tr>
+  </tbody>
+</table>
+
+<h3>Post-Plugin Steps</h3>
+<p>After running the plugin, manually refine:</p>
+<ol>
+  <li>Replace <code>Inter</code> font with your system font stack if preferred (the plugin uses Inter as a Figma-compatible stand-in for the system UI font)</li>
+  <li>Add variants to each component scaffold following the variant tables above</li>
+  <li>Bind component fills/strokes to the created variables</li>
+  <li>Publish the library for team access</li>
+</ol>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

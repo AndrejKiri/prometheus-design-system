@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Patterns — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Patterns</span></div>
+    <h1>UI Patterns</h1>
+    <p class="doc-subtitle">Common UI composition patterns in the Prometheus UI codebase.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#info-page">Info Page Pattern</a>
+  <a href="#accordion-list">Accordion List Pattern</a>
+  <a href="#query-panel">Query Panel Pattern</a>
+  <a href="#filter-bar">Filter Bar Pattern</a>
+  <a href="#suspense">Suspense + ErrorBoundary</a>
+  <a href="#url-state">URL-Persistent State</a>
+</div>
+
+<h2 id="info-page">Info Page Pattern</h2>
+
+<p>Used by: <strong>StatusPage</strong>, <strong>TSDBStatusPage</strong>, <strong>AgentPage</strong>, <strong>FlagsPage</strong></p>
+
+<p>The info page pattern combines <code>InfoPageLayout</code> + multiple <code>InfoCard</code> components, each containing a <code>KeyValueTable</code> or <code>DataTable</code>.</p>
+
+<h3>Structure</h3>
+<pre><code>&lt;<span class="tag">InfoPageLayout</span>&gt;
+  &lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Runtime Information"</span> <span class="attr">icon</span>={IconServer}&gt;
+    &lt;<span class="tag">KeyValueTable</span> <span class="attr">object</span>={runtimeInfo} /&gt;
+  &lt;/<span class="tag">InfoCard</span>&gt;
+  &lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Build Information"</span> <span class="attr">icon</span>={IconInfoCircle}&gt;
+    &lt;<span class="tag">KeyValueTable</span> <span class="attr">object</span>={buildInfo} /&gt;
+  &lt;/<span class="tag">InfoCard</span>&gt;
+  &lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Command-Line Flags"</span> <span class="attr">icon</span>={IconFlag}&gt;
+    &lt;<span class="tag">DataTable</span> <span class="attr">columns</span>={flagColumns} <span class="attr">data</span>={flags} /&gt;
+  &lt;/<span class="tag">InfoCard</span>&gt;
+&lt;/<span class="tag">InfoPageLayout</span>&gt;</code></pre>
+
+<h3>Key Characteristics</h3>
+<ul>
+  <li>Max width of 1000px, centered</li>
+  <li>Cards use shadow "xs" with borders</li>
+  <li>Each card has an icon + title header</li>
+  <li>Data wrapped in Suspense for async loading</li>
+</ul>
+
+<h2 id="accordion-list">Accordion List Pattern</h2>
+
+<p>Used by: <strong>AlertsPage</strong>, <strong>RulesPage</strong>, <strong>TargetsPage</strong>, <strong>ServiceDiscoveryPage</strong></p>
+
+<p>The accordion list pattern combines <code>FilterToolbar</code> + <code>HealthPanel</code> items inside an <code>Accordion</code>. Each page filters groups by state and search text, then renders expandable panels with health-colored borders.</p>
+
+<h3>Structure</h3>
+<pre><code><span class="cmt">// Filter bar at top</span>
+&lt;<span class="tag">FilterToolbar</span>
+  <span class="attr">searchValue</span>={search}
+  <span class="attr">onSearchChange</span>={setSearch}
+  <span class="attr">stateOptions</span>={stateOptions}
+  <span class="attr">selectedStates</span>={states}
+  <span class="attr">onStatesChange</span>={setStates}
+  <span class="attr">showCollapseAll</span>={hasCollapseAll}
+  <span class="attr">allCollapsed</span>={collapsed}
+  <span class="attr">onCollapseAllChange</span>={setCollapsed}
+/&gt;
+
+<span class="cmt">// Accordion with health panels</span>
+&lt;<span class="tag">Accordion</span> <span class="attr">multiple</span> <span class="attr">variant</span>=<span class="str">"separated"</span>&gt;
+  {filteredGroups.map(group =&gt; (
+    &lt;<span class="tag">HealthPanel</span> <span class="attr">key</span>={group.name} <span class="attr">value</span>={group.name} <span class="attr">status</span>={group.health}&gt;
+      &lt;<span class="tag">Accordion.Control</span>&gt;
+        {group.name}
+        &lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>={group.health} /&gt;
+      &lt;/<span class="tag">Accordion.Control</span>&gt;
+      &lt;<span class="tag">Accordion.Panel</span>&gt;...&lt;/<span class="tag">Accordion.Panel</span>&gt;
+    &lt;/<span class="tag">HealthPanel</span>&gt;
+  ))}
+&lt;/<span class="tag">Accordion</span>&gt;</code></pre>
+
+<h3>Variations</h3>
+<table>
+  <thead><tr><th>Page</th><th>State Options</th><th>Collapse All</th><th>Pagination</th></tr></thead>
+  <tbody>
+    <tr><td>AlertsPage</td><td>firing, pending, inactive</td><td>No</td><td>Yes</td></tr>
+    <tr><td>RulesPage</td><td>ok, err, unknown</td><td>No</td><td>Yes</td></tr>
+    <tr><td>TargetsPage</td><td>up, down, unknown</td><td>Yes</td><td>Pool limit (20)</td></tr>
+    <tr><td>ServiceDiscoveryPage</td><td>active, dropped</td><td>Yes</td><td>Pool limit (20)</td></tr>
+  </tbody>
+</table>
+
+<h2 id="query-panel">Query Panel Pattern</h2>
+
+<p>The query page is the most complex pattern, combining CodeMirror, time controls, graph rendering, and result tables.</p>
+
+<h3>Key Elements</h3>
+<ul>
+  <li><strong>CodeMirror expression input</strong> embedded inside Mantine InputBase</li>
+  <li><strong>Enter</strong> executes query, <strong>Shift+Enter</strong> inserts newline, <strong>Escape</strong> blurs</li>
+  <li><strong>PromQL autocomplete</strong> with history overlay</li>
+  <li><strong>Time controls</strong>: range/end time, resolution, display mode</li>
+  <li><strong>Graph</strong>: uPlot for time series, with range selection</li>
+  <li><strong>Result table</strong>: SeriesName + DataTable combination</li>
+</ul>
+
+<h3>Data Flow</h3>
+<ol>
+  <li>User types PromQL expression</li>
+  <li>Pressing Enter triggers <code>/query_range</code> or <code>/query</code> API call</li>
+  <li>Old data stays visible during query (no flash-to-empty)</li>
+  <li>Results render in either graph or table view</li>
+  <li>Range selection on graph updates time range and re-queries</li>
+</ol>
+
+<h2 id="filter-bar">Filter Bar Pattern</h2>
+
+<p>All filter bars in Prometheus UI follow the same composition:</p>
+
+<pre><code>[StateMultiSelect] + [TextInput with search icon] + [optional collapse button]</code></pre>
+
+<p><code>FilterToolbar</code> encapsulates this entire pattern. The search input uses fuzzy matching via <code>@nexucis/kvsearch</code> on the page level. All filter values are persisted to URL query parameters.</p>
+
+<h3>URL Persistence</h3>
+<pre><code><span class="cmt">// Example URL with persisted filters:</span>
+/alerts?search=cpu&amp;state=firing&amp;state=pending&amp;page=2</code></pre>
+
+<h2 id="suspense">Suspense + ErrorBoundary Composition</h2>
+
+<p>Every async data page uses a consistent wrapping pattern:</p>
+
+<pre><code>&lt;<span class="tag">Suspense</span> <span class="attr">fallback</span>={&lt;<span class="tag">Skeleton</span> /&gt;}&gt;
+  &lt;<span class="tag">ErrorBoundary</span>
+    <span class="attr">key</span>={location.pathname}
+    <span class="attr">FallbackComponent</span>={ErrorFallback}
+  &gt;
+    &lt;<span class="tag">PageContent</span> /&gt;
+  &lt;/<span class="tag">ErrorBoundary</span>&gt;
+&lt;/<span class="tag">Suspense</span>&gt;</code></pre>
+
+<h3>Key Behaviors</h3>
+<ul>
+  <li><code>useSuspenseAPIQuery</code> throws a promise during loading (Suspense catches it)</li>
+  <li>ErrorBoundary catches API errors and renders ErrorAlert</li>
+  <li>ErrorBoundary resets on route change via <code>key={location.pathname}</code></li>
+  <li>Skeleton loading states are shown while data loads</li>
+</ul>
+
+<h2 id="url-state">URL-Persistent State</h2>
+
+<p>All major filter states are persisted in URL query parameters via <code>use-query-params</code>:</p>
+
+<table>
+  <thead><tr><th>State</th><th>URL Param</th><th>Type</th><th>Pages</th></tr></thead>
+  <tbody>
+    <tr><td>Search text</td><td><code>search</code></td><td>StringParam</td><td>All list pages</td></tr>
+    <tr><td>State filter</td><td><code>state</code></td><td>ArrayParam</td><td>Alerts, Rules, Targets, SD</td></tr>
+    <tr><td>Page number</td><td><code>page</code></td><td>NumberParam</td><td>Alerts, Rules</td></tr>
+    <tr><td>Active tab</td><td><code>tab</code></td><td>StringParam</td><td>Query (graph/table)</td></tr>
+    <tr><td>Expression</td><td><code>expr</code></td><td>StringParam</td><td>Query</td></tr>
+    <tr><td>Time range</td><td><code>range</code>, <code>end</code></td><td>NumberParam</td><td>Query</td></tr>
+  </tbody>
+</table>
+
+<p>This enables:</p>
+<ul>
+  <li>Bookmarkable filtered views</li>
+  <li>Shareable links that reproduce exact dashboard state</li>
+  <li>Browser back/forward navigation through filter history</li>
+</ul>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

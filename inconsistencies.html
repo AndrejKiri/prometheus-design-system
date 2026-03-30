@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inconsistency Resolution Log — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Inconsistencies</span></div>
+    <h1>Inconsistency Resolution Log</h1>
+    <p class="doc-subtitle">Every inconsistency found in the audit, what was chosen as canonical, and why.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#health-badges">Health Badge Fragmentation</a>
+  <a href="#panel-borders">Panel Border Inconsistency</a>
+  <a href="#filter-bars">Duplicate Filter Bars</a>
+  <a href="#localstorage">localStorage Key Collision</a>
+  <a href="#series-hover">SeriesName Hover Colors</a>
+  <a href="#logo-font">Logo Font Size</a>
+  <a href="#icon-styles">Icon Style Duplication</a>
+  <a href="#pool-limit">Pool Display Limit</a>
+  <a href="#navbar-text">Navbar Text Visibility Gap</a>
+</div>
+
+<div class="callout callout-info" style="margin-bottom:2rem">
+  <div class="callout-title">Upstream Status</div>
+  The inconsistencies documented here have corresponding work tracked in the design system repository.
+  As fixes are proposed as PRs to <code>prometheus/prometheus</code>, they will be linked here.<br><br>
+  <strong>Upstream PRs:</strong>
+  <a href="https://github.com/prometheus/prometheus/issues" target="_blank" rel="noopener">StatusBadge unification</a> (proposed) ·
+  <a href="https://github.com/prometheus/prometheus/issues" target="_blank" rel="noopener">Filter bar consolidation</a> (proposed) ·
+  <a href="https://github.com/prometheus/prometheus/issues" target="_blank" rel="noopener">localStorage key fix</a> (proposed)
+</div>
+
+<p>This page documents every inconsistency found during the codebase audit, the resolution chosen, and the reasoning behind each decision.</p>
+
+<h2 id="health-badges">1. Health Badge Fragmentation</h2>
+
+<h3>What was inconsistent</h3>
+<p>Three different approaches to health status badges across pages:</p>
+<ul>
+  <li><strong>AlertsPage:</strong> <code>Badge.module.css</code> classes (<code>badgeClasses.healthErr</code>)</li>
+  <li><strong>RulesPage:</strong> Mantine Badge with <code>color="red"</code> prop</li>
+  <li><strong>ScrapePoolsList:</strong> Conditional color prop (<code>color={health === "up" ? "green" : "red"}</code>)</li>
+</ul>
+
+<h3>Variants that existed</h3>
+<table>
+  <thead><tr><th>Page</th><th>Implementation</th><th>Color Steps</th></tr></thead>
+  <tbody>
+    <tr><td>AlertsPage</td><td>CSS module classes</td><td>green-1/green-9, red-1/red-9 (with <code>light-dark()</code>)</td></tr>
+    <tr><td>RulesPage</td><td>Mantine color prop</td><td>Mantine default shade (step-6 filled)</td></tr>
+    <tr><td>ScrapePoolsList</td><td>Conditional color prop</td><td>Mantine default "green"/"red"</td></tr>
+  </tbody>
+</table>
+
+<h3>Canonical choice</h3>
+<p>The <strong>AlertsPage approach</strong> (CSS module classes with explicit <code>light-dark()</code> step-1/step-9 colors) was chosen as canonical because it provides the most precise dark mode support.</p>
+
+<h3>Reasoning</h3>
+<ul>
+  <li>Step-1 bg / step-9 text provides maximum contrast in both modes</li>
+  <li>CSS module approach avoids Mantine Badge overhead for performance-critical label badges</li>
+  <li><code>light-dark()</code> is the modern standard for mode-aware colors</li>
+</ul>
+
+<h3>Migration</h3>
+<p>Replace all three patterns with <code>&lt;StatusBadge status="..." /&gt;</code>. The component internally normalizes all status vocabularies.</p>
+
+<h2 id="panel-borders">2. Panel Border Inconsistency</h2>
+
+<h3>What was inconsistent</h3>
+<p>AlertsPage and RulesPage both display accordion items with health-colored left borders, but used different color steps.</p>
+
+<h3>Variants that existed</h3>
+<table>
+  <thead><tr><th>Page</th><th>Implementation</th><th>Light Mode Steps</th></tr></thead>
+  <tbody>
+    <tr><td>AlertsPage</td><td>Panel.module.css classes</td><td>green-<strong>3</strong>, red-<strong>3</strong>, orange-<strong>3</strong>, gray-<strong>3</strong></td></tr>
+    <tr><td>RulesPage</td><td>Inline styles</td><td>green-<strong>4</strong>, red-<strong>4</strong>, gray-<strong>5</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>Canonical choice</h3>
+<p><strong>Step-3 (light) / Step-8 (dark)</strong> from the AlertsPage implementation.</p>
+
+<h3>Reasoning</h3>
+<ul>
+  <li>AlertsPage was the more established implementation (CSS modules, not inline styles)</li>
+  <li>Step-3 is lighter and more subtle than step-4, appropriate for a border accent</li>
+  <li>Dark mode step-8 provides good visibility without being overpowering</li>
+  <li>CSS module approach is more maintainable than inline styles</li>
+</ul>
+
+<h3>Migration</h3>
+<p>Replace both patterns with <code>&lt;HealthPanel status="..." /&gt;</code>.</p>
+
+<h2 id="filter-bars">3. Duplicate Filter Bars</h2>
+
+<h3>What was inconsistent</h3>
+<p>Four pages (AlertsPage, RulesPage, TargetsPage, ServiceDiscoveryPage) each had their own copy of the filter bar pattern: <code>Group + StateMultiSelect + TextInput + optional ActionIcon</code>.</p>
+
+<h3>Variants that existed</h3>
+<ul>
+  <li><strong>AlertsPage / RulesPage:</strong> StateMultiSelect + TextInput (2 controls)</li>
+  <li><strong>TargetsPage / ServiceDiscoveryPage:</strong> StateMultiSelect + TextInput + collapse ActionIcon (3 controls)</li>
+</ul>
+
+<h3>Canonical choice</h3>
+<p>A single <code>FilterToolbar</code> component with optional <code>showCollapseAll</code> prop.</p>
+
+<h3>Reasoning</h3>
+<p>The pattern is identical across all four pages. The only difference is whether a collapse/expand button is shown. A single component with a boolean flag is simpler than four separate implementations.</p>
+
+<h2 id="localstorage">4. localStorage Key Collision (Bug)</h2>
+
+<h3>What was inconsistent</h3>
+<p>Both AlertsPage and RulesPage used the key <code>"alertsPage.showEmptyGroups"</code>. Toggling "show empty groups" on one page affected the other.</p>
+
+<h3>Resolution</h3>
+<p>RulesPage key changed to <code>"rulesPage.showEmptyGroups"</code>.</p>
+
+<h3>Impact</h3>
+<p>Existing users lose their RulesPage toggle state on upgrade. The default value (<code>false</code>) is the correct initial state, so this is acceptable.</p>
+
+<h2 id="series-hover">5. SeriesName Hover Colors</h2>
+
+<h3>What was inconsistent</h3>
+<p>SeriesName label pair hover used hardcoded light-mode-only values:</p>
+<pre><code><span class="cmt">/* Before — light mode only */</span>
+.labelPair:hover {
+  background: #add6ffa0;  <span class="cmt">/* hardcoded light blue */</span>
+  color: #495057;          <span class="cmt">/* hardcoded dark gray */</span>
+}</code></pre>
+
+<h3>Resolution</h3>
+<pre><code><span class="cmt">/* After — dark mode support */</span>
+.labelPair:hover {
+  background-color: light-dark(rgba(173, 214, 255, 0.63), rgba(100, 149, 200, 0.3));
+  color: light-dark(#495057, var(--mantine-color-gray-3));
+}</code></pre>
+
+<h3>Reasoning</h3>
+<p>The light mode values were preserved exactly. Dark mode values were derived by reducing opacity and using an appropriate gray for text.</p>
+
+<h2 id="logo-font">6. Logo Font Size</h2>
+
+<h3>What was inconsistent</h3>
+<p>The logo text used <code>fz={20}</code> — a unitless number that doesn't scale with user font preferences.</p>
+
+<h3>Resolution</h3>
+<p>Changed to <code>var(--prom-logo-font-size): 1.25rem</code> (equivalent to 20px at default 16px root, but scales with user preferences).</p>
+
+<h2 id="icon-styles">7. Icon Style Duplication</h2>
+
+<h3>What was inconsistent</h3>
+<p>The same icon style <code>{ width: "0.9rem", height: "0.9rem" }</code> was defined locally in 3+ files. The source code even had a <code>TODO: This is duplicated everywhere, unify it.</code> comment.</p>
+
+<h3>Resolution</h3>
+<p>FilterToolbar and other components internally use the consistent icon size. For custom usage, the design system documents the standard sizes.</p>
+
+<h2 id="pool-limit">8. Pool Display Limit</h2>
+
+<h3>What was inconsistent</h3>
+<p><code>targetPoolDisplayLimit = 20</code> was defined independently in both TargetsPage.tsx and ServiceDiscoveryPage.tsx.</p>
+
+<h3>Resolution</h3>
+<p>Moved to PoolAccordion as a shared constant. Both pages reference the same value.</p>
+
+<h2 id="navbar-text">9. Navbar Text Visibility Gap</h2>
+
+<h3>What was inconsistent</h3>
+<p>Two separate Text elements controlled logo visibility:</p>
+<pre><code>&lt;Text hiddenFrom="sm"&gt;Prometheus&lt;/Text&gt;   <span class="cmt">// visible: xs only</span>
+&lt;Text visibleFrom="md"&gt;Prometheus&lt;/Text&gt;  <span class="cmt">// visible: md+</span></code></pre>
+<p>Between breakpoints sm and md, <em>neither</em> text was visible — the "Prometheus" label disappeared.</p>
+
+<h3>Resolution</h3>
+<p>PrometheusAppShell uses a single Text element with correct responsive visibility that avoids the gap.</p>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

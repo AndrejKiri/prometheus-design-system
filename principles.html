@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Principles — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Principles</span></div>
+    <h1>Design Principles</h1>
+    <p class="doc-subtitle">Visual, interaction, and UX principles derived from the Prometheus codebase.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#visual">Visual Principles</a>
+  <a href="#interaction">Interaction Principles</a>
+  <a href="#ux">UX Heuristics</a>
+  <a href="#tone">Product Tone</a>
+  <a href="#escape-hatches">Composition &amp; Escape Hatches</a>
+</div>
+
+<h2 id="visual">Visual Principles</h2>
+
+<h3>Data-first, minimal chrome</h3>
+<p>Every pixel of interface should serve the user's monitoring task. The Prometheus UI is a <em>developer tool</em> — decoration is noise. Borders, shadows, and colors exist only to delineate data and convey health state.</p>
+
+<h3>System fonts by design</h3>
+<p>The design system intentionally uses the system UI font stack. This is not laziness — it's a deliberate choice for a developer tool that should feel native to each platform. No font loading means faster renders for dashboards with thousands of elements.</p>
+<pre><code>-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif</code></pre>
+
+<h3>Monospace for metrics</h3>
+<p><code>DejaVu Sans Mono</code> is the Prometheus-specific monospace choice. It's used for PromQL expressions, metric names, label values, configuration YAML, and numeric data displays.</p>
+
+<h3>Health colors are semantic</h3>
+<p>The five-state health color system (ok/err/warn/info/unknown) maps to green/red/yellow/blue/gray. These are never used decoratively — they always convey system health or operational state.</p>
+
+<h3>The header is always dark</h3>
+<p>The <code>rgb(65, 73, 81)</code> header is intentionally mode-independent. It's part of Prometheus brand identity and anchors the interface. The header never adapts to light/dark mode switching.</p>
+
+<h2 id="interaction">Interaction Principles</h2>
+
+<h3>URL-persistent state</h3>
+<p>All major filter states — search text, health/state filters, pagination, active tab — are persisted in the URL via query parameters. This enables:</p>
+<ul>
+  <li>Bookmarkable views of filtered targets or alerts</li>
+  <li>Shareable links that reproduce the exact dashboard state</li>
+  <li>Browser back/forward navigation through filter history</li>
+</ul>
+
+<h3>Fuzzy search everywhere</h3>
+<p>All filter inputs use fuzzy matching (via <code>@nexucis/kvsearch</code>). Users don't need to remember exact metric or label names — partial matches surface results naturally.</p>
+
+<h3>Progressive disclosure</h3>
+<p>Information is layered: accordion panels show summary rows that expand into full detail. Target labels show active labels by default with a toggle to reveal pre-relabeling discovered labels. The PromQL tree view executes queries node-by-node, bottom-up.</p>
+
+<h3>Collapse all / expand all</h3>
+<p>Pages with many accordion panels (Targets, Service Discovery) provide a single button to collapse or expand all panels. This is critical when monitoring hundreds of scrape targets.</p>
+
+<h2 id="ux">UX Heuristics</h2>
+
+<h3>Performance-conscious rendering</h3>
+<ul>
+  <li><code>LabelBadge</code> uses plain <code>&lt;span&gt;</code> elements instead of Mantine Badge for high-throughput rendering (thousands of labels)</li>
+  <li><code>SeriesName</code> falls back to plain text mode when series count exceeds 1,000</li>
+  <li><code>CustomInfiniteScroll</code> limits rendered DOM nodes in long lists</li>
+  <li>Heavy filtering uses <code>useMemo</code> on rendered lists</li>
+</ul>
+
+<h3>Suspense-driven loading</h3>
+<p>All async data uses <code>useSuspenseAPIQuery</code> wrapped in coordinated <code>Suspense</code> + <code>ErrorBoundary</code> pairs. This ensures:</p>
+<ul>
+  <li>Consistent loading skeletons across all pages</li>
+  <li>Error boundaries that reset on route change</li>
+  <li>No manual loading state management</li>
+</ul>
+
+<h3>Old data stays visible</h3>
+<p>The graph component keeps previous data visible while a new query is in-flight. No flash-to-empty between time range changes.</p>
+
+<h2 id="tone">Product Tone</h2>
+
+<h3>Technical and precise</h3>
+<p>Labels say "err" not "Error occurred". Badges display the raw status string ("firing", "up", "down") without translation. The interface trusts that its users are infrastructure engineers who understand these terms.</p>
+
+<h3>Infrastructure-focused</h3>
+<p>The vocabulary is monitoring-native: "scrape targets", "rule groups", "label matchers", "PromQL expressions". The design system preserves this domain language rather than abstracting it away.</p>
+
+<h3>No marketing polish</h3>
+<p>There are no hero sections, no gradient backgrounds, no decorative illustrations. The Prometheus UI is a <em>tool</em>, not a product landing page. The design system enforces this restraint.</p>
+
+
+<h2 id="escape-hatches">Composition &amp; Escape Hatches</h2>
+
+<p>A design system is only useful if you can work around it when it doesn't fit. The Prometheus Design System is designed with explicit escape hatches at every level.</p>
+
+<h3><code>className</code> and <code>style</code> props</h3>
+<p>All components accept <code>className</code> and <code>style</code> props. You can always override or extend any component's appearance at the CSS level without forking the component.</p>
+<pre><code><span class="cmt">// Override StatusBadge styling for a specific context</span>
+&lt;<span class="tag">StatusBadge</span>
+  <span class="attr">status</span>=<span class="str">"up"</span>
+  <span class="attr">className</span>=<span class="str">"my-custom-badge"</span>
+  <span class="attr">style</span>={{ <span class="attr">fontSize</span>: <span class="str">'0.7rem'</span> }}
+/&gt;</code></pre>
+
+<h3>CSS variables work standalone</h3>
+<p>The <code>--prom-*</code> CSS custom properties can be consumed independently of the React components. If your page or component doesn't use React, you can still adopt the design tokens for consistent colors, spacing, and typography — just include the token stylesheet.</p>
+<pre><code><span class="cmt">/* Use tokens without importing any React component */</span>
+.my-element {
+  color: var(--prom-health-ok-text);
+  border-left: 3px solid var(--prom-health-ok-border);
+  padding: var(--prom-spacing-md);
+  font-family: var(--prom-font-mono);
+}</code></pre>
+
+<h3>What the design system doesn't cover</h3>
+<p>The design system intentionally excludes the <strong>PromQL editor</strong> and related <strong>CodeMirror-based</strong> components. These remain in application code because they are tightly coupled to the query engine and have specialized performance requirements (syntax highlighting, autocompletion, tree visualization) that don't generalize into a design system.</p>
+
+<h3>When a component doesn't fit</h3>
+<p>If a design system component doesn't meet your requirements after trying <code>className</code>/<code>style</code> overrides:</p>
+<ol>
+  <li><strong>Copy-paste the source</strong> — every component is a single file with no internal dependencies beyond Mantine and the token system. Fork it into your app code rather than adding workaround props.</li>
+  <li><strong>File an issue</strong> — if the limitation is likely to affect others, <a href="https://github.com/nicholasgasior/prometheus-design-system/issues/new" target="_blank" rel="noopener">open an issue</a> describing the use case. It may lead to a better component API.</li>
+  <li><strong>Propose a variant</strong> — follow the <a href="contributing.html">contributing process</a> to propose a new variant or component.</li>
+</ol>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

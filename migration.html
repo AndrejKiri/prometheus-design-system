@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Migration Guide — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Migration</span></div>
+    <h1>Migration Guide</h1>
+    <p class="doc-subtitle">How to adopt the Prometheus Design System incrementally.</p>
+    
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#overview">Overview</a>
+  <a href="#phase-1">Phase 1: Tokens</a>
+  <a href="#phase-2">Phase 2: Shared Components</a>
+  <a href="#phase-3">Phase 3: Domain Components</a>
+  <a href="#phase-4">Phase 4: Layout</a>
+  <a href="#component-mapping">Component Mapping</a>
+  <a href="#css-migration">CSS Variable Migration</a>
+</div>
+
+<h2 id="overview">Incremental Adoption</h2>
+
+<p>The design system can be adopted incrementally. You don't need to rewrite everything at once. Follow these phases in order, each building on the previous.</p>
+
+<div class="callout callout-info">
+  <div class="callout-title">Before you start</div>
+  Install the package and import both CSS files in your app entry point:
+  <pre style="margin-top:0.5rem;margin-bottom:0"><code><span class="kw">import</span> <span class="str">"@mantine/core/styles.css"</span>;
+<span class="kw">import</span> <span class="str">"@prometheus-io/design-system/styles.css"</span>;</code></pre>
+</div>
+
+<h2 id="phase-1">Phase 1: Design Tokens</h2>
+
+<p><strong>Effort: Low</strong> — Replace hardcoded values with CSS variables and TS constants.</p>
+
+<h3>Before / After: Header Colors</h3>
+<pre><code><span class="cmt">// Before — hardcoded</span>
+&lt;<span class="tag">AppShell.Header</span> <span class="attr">style</span>={{ background: <span class="str">"rgb(65, 73, 81)"</span> }}&gt;
+  &lt;<span class="tag">Text</span> <span class="attr">c</span>=<span class="str">"#fff"</span>&gt;Prometheus&lt;/<span class="tag">Text</span>&gt;
+
+<span class="cmt">// After — tokens</span>
+&lt;<span class="tag">AppShell.Header</span> <span class="attr">style</span>={{ background: <span class="str">"var(--prom-header-bg)"</span> }}&gt;
+  &lt;<span class="tag">Text</span> <span class="attr">c</span>=<span class="str">"var(--prom-header-text)"</span>&gt;Prometheus&lt;/<span class="tag">Text</span>&gt;</code></pre>
+
+<h3>Before / After: Font Sizes</h3>
+<pre><code><span class="cmt">// Before — unitless number</span>
+&lt;<span class="tag">Text</span> <span class="attr">fz</span>={<span class="num">20</span>}&gt;Prometheus&lt;/<span class="tag">Text</span>&gt;  <span class="cmt">// won't scale with user font prefs</span>
+
+<span class="cmt">// After — rem-scaled</span>
+&lt;<span class="tag">Text</span> <span class="attr">style</span>={{ fontSize: <span class="str">"var(--prom-logo-font-size)"</span> }}&gt;Prometheus&lt;/<span class="tag">Text</span>&gt;</code></pre>
+
+<h3>Before / After: Spacing</h3>
+<pre><code><span class="cmt">// Before — hardcoded numbers</span>
+&lt;<span class="tag">Group</span> <span class="attr">gap</span>={<span class="num">40</span>}&gt;  <span class="cmt">// hardcoded pixel value</span>
+&lt;<span class="tag">Group</span> <span class="attr">gap</span>={<span class="num">12</span>}&gt;  <span class="cmt">// hardcoded pixel value</span>
+
+<span class="cmt">// After — named tokens</span>
+&lt;<span class="tag">Group</span> <span class="attr">gap</span>=<span class="str">"xl"</span>&gt;   <span class="cmt">// 32px — semantic</span>
+&lt;<span class="tag">Group</span> <span class="attr">gap</span>=<span class="str">"sm"</span>&gt;   <span class="cmt">// 12px — semantic</span></code></pre>
+
+<h2 id="phase-2">Phase 2: Shared Components</h2>
+
+<p><strong>Effort: Medium</strong> — Replace the three highest-impact inconsistencies.</p>
+
+<h3>StatusBadge (replaces 3+ implementations)</h3>
+<pre><code><span class="cmt">// Before — AlertsPage.tsx</span>
+<span class="kw">import</span> badgeClasses <span class="kw">from</span> <span class="str">"../../Badge.module.css"</span>;
+&lt;<span class="tag">Badge</span> <span class="attr">className</span>={badgeClasses.healthErr}&gt;firing&lt;/<span class="tag">Badge</span>&gt;
+
+<span class="cmt">// Before — RulesPage.tsx (different approach!)</span>
+&lt;<span class="tag">Badge</span> <span class="attr">color</span>=<span class="str">"red"</span>&gt;err&lt;/<span class="tag">Badge</span>&gt;
+
+<span class="cmt">// Before — ScrapePoolsList.tsx (yet another approach!)</span>
+&lt;<span class="tag">Badge</span> <span class="attr">color</span>={target.health === <span class="str">"up"</span> ? <span class="str">"green"</span> : <span class="str">"red"</span>}&gt;
+  {target.health}
+&lt;/<span class="tag">Badge</span>&gt;
+
+<span class="cmt">// After — unified</span>
+<span class="kw">import</span> { StatusBadge } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"firing"</span> /&gt;
+&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"err"</span> /&gt;
+&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>={target.health} /&gt;</code></pre>
+
+<h3>HealthPanel (replaces 2 inconsistent implementations)</h3>
+<pre><code><span class="cmt">// Before — AlertsPage (CSS modules, step-3 colors)</span>
+&lt;<span class="tag">Accordion.Item</span> <span class="attr">className</span>={panelClasses[<span class="str">`panelHealth\${capitalize(health)}`</span>]}&gt;
+
+<span class="cmt">// Before — RulesPage (inline styles, step-4 colors — different!)</span>
+&lt;<span class="tag">Accordion.Item</span> <span class="attr">style</span>={{ borderLeft: <span class="str">`5px solid var(--mantine-color-red-4)`</span> }}&gt;
+
+<span class="cmt">// After — consistent step-3/step-8 colors</span>
+<span class="kw">import</span> { HealthPanel } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+&lt;<span class="tag">HealthPanel</span> <span class="attr">value</span>={name} <span class="attr">status</span>={health}&gt;...&lt;/<span class="tag">HealthPanel</span>&gt;</code></pre>
+
+<h3>FilterToolbar (replaces 4 separate implementations)</h3>
+<pre><code><span class="cmt">// Before — copy-pasted Group + StateMultiSelect + TextInput in 4 files</span>
+
+<span class="cmt">// After</span>
+<span class="kw">import</span> { FilterToolbar } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+&lt;<span class="tag">FilterToolbar</span>
+  <span class="attr">searchValue</span>={search}
+  <span class="attr">onSearchChange</span>={setSearch}
+  <span class="attr">stateOptions</span>={[<span class="str">"firing"</span>, <span class="str">"pending"</span>, <span class="str">"inactive"</span>]}
+  <span class="attr">selectedStates</span>={states}
+  <span class="attr">onStatesChange</span>={setStates}
+/&gt;</code></pre>
+
+<h2 id="phase-3">Phase 3: Domain Components</h2>
+
+<p><strong>Effort: Medium</strong> — Adopt remaining components.</p>
+
+<ul>
+  <li><code>ErrorAlert</code> — replace inline <code>&lt;Alert color="red"&gt;</code> calls</li>
+  <li><code>EmptyState</code> — standardize empty list display</li>
+  <li><code>SeriesName</code> — use the dark-mode-fixed version</li>
+  <li><code>DataTable</code> — replace custom table layouts</li>
+  <li><code>PoolAccordion</code> — replace TargetsPage/SD accordion logic</li>
+</ul>
+
+<h2 id="phase-4">Phase 4: Layout Standardization</h2>
+
+<p><strong>Effort: Low-Medium</strong> — Adopt layout components.</p>
+
+<ul>
+  <li><code>PrometheusAppShell</code> — replace the manual AppShell setup in App.tsx</li>
+  <li><code>InfoPageLayout</code> — replace InfoPageStack</li>
+  <li><code>InfoCard</code> — replace InfoPageCard</li>
+  <li><code>NavButton</code> — replace manual Button + NavLink composition</li>
+  <li><code>ThemeToggle</code> — replace ThemeSelector</li>
+  <li><code>SettingsPanel</code> — replace SettingsMenu</li>
+</ul>
+
+<h2 id="component-mapping">Component Mapping</h2>
+
+<table>
+  <thead><tr><th>Source Component</th><th>Design System Component</th></tr></thead>
+  <tbody>
+    <tr><td><code>InfoPageCard</code></td><td><code>InfoCard</code></td></tr>
+    <tr><td><code>InfoPageStack</code></td><td><code>InfoPageLayout</code></td></tr>
+    <tr><td><code>LabelBadges</code></td><td><code>LabelBadgeSet</code></td></tr>
+    <tr><td><code>ThemeSelector</code></td><td><code>ThemeToggle</code></td></tr>
+    <tr><td><code>SettingsMenu</code></td><td><code>SettingsPanel</code></td></tr>
+    <tr><td><code>ScrapePoolList</code> (accordion)</td><td><code>PoolAccordion</code></td></tr>
+    <tr><td><code>Panel.module.css</code> classes</td><td><code>HealthPanel</code></td></tr>
+    <tr><td><code>Badge.module.css</code> health classes</td><td><code>StatusBadge</code></td></tr>
+    <tr><td>Inline border styles (RulesPage)</td><td><code>HealthPanel</code></td></tr>
+  </tbody>
+</table>
+
+<h2 id="css-migration">CSS Variable Migration</h2>
+
+<table>
+  <thead><tr><th>Hardcoded Value</th><th>CSS Variable</th></tr></thead>
+  <tbody>
+    <tr><td><code>rgb(65, 73, 81)</code></td><td><code>var(--prom-header-bg)</code></td></tr>
+    <tr><td><code>#fff</code> (header text)</td><td><code>var(--prom-header-text)</code></td></tr>
+    <tr><td><code>"DejaVu Sans Mono"</code></td><td><code>var(--prom-font-mono)</code></td></tr>
+    <tr><td><code>1000px</code> (info page max)</td><td><code>var(--prom-info-page-max-width)</code></td></tr>
+    <tr><td><code>5px solid ...</code> (panel border)</td><td><code>var(--prom-panel-border-width) solid var(--prom-panel-border-ok)</code></td></tr>
+    <tr><td><code>fz={20}</code> (logo)</td><td><code>var(--prom-logo-font-size)</code></td></tr>
+  </tbody>
+</table>
+
+<h2>Bug Fix: localStorage Key Collision</h2>
+
+<div class="callout callout-warn">
+  <div class="callout-title">Breaking Change</div>
+  <p>Both AlertsPage and RulesPage used <code>"alertsPage.showEmptyGroups"</code> as the localStorage key. RulesPage now correctly uses <code>"rulesPage.showEmptyGroups"</code>.</p>
+  <p>Existing users will lose their RulesPage toggle state on upgrade, but the default value (<code>false</code>) is the correct initial state.</p>
+</div>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EndpointLink — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="../index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="../changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="../index.html">Introduction</a>
+    <a class="doc-nav-link" href="../principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="../tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="../accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="../architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="../components.html">Overview</a>
+    <a class="doc-nav-link sub" href="../components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="../components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="../components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="../components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="../components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="../components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="../components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="../components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="../components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="../components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="../components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="../components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="../components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="../components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="../components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="../components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="../components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="../components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="../components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="../patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="../figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="../icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="../changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="../next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="../contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="../inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="../audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>EndpointLink</span></div>
+    <h1>EndpointLink</h1>
+    <p class="doc-subtitle">Scrape endpoint URL display with query parameter badges.</p>
+    
+<h2 id="description">Description</h2>
+<p>Scrape endpoint URL display with query parameter badges. Parses the URL and renders query parameters as small gray pill badges alongside the clickable link.</p>
+
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
+    <img src="../screenshots/targets-page.jpg" alt="EndpointLink on the Targets page — clickable scrape endpoint URLs" loading="lazy">
+    <p>EndpointLink on the Targets page — clickable scrape endpoint URLs</p>
+  </div>
+</div>
+</details>
+
+<h2 id="examples">Visual Examples</h2>
+<div class="example-box">
+<div class="example-label">EndpointLink Example</div>
+  <div class="mock-endpoint mb-sm">
+    <a href="#">http://localhost:9090/metrics</a>
+  </div>
+  <div class="mock-endpoint">
+    <a href="#">http://localhost:9090/api/v1/query</a>
+    <span class="ep-badge">query=up</span>
+    <span class="ep-badge">time=1234567</span>
+  </div>
+</div>
+
+
+
+<h2 id="code">Code Example</h2>
+<pre><code><span class="kw">import</span> { EndpointLink } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+
+&lt;<span class="tag">EndpointLink</span> <span class="attr">endpoint</span>=<span class="str">"http://localhost:9090/metrics"</span> /&gt;
+&lt;<span class="tag">EndpointLink</span> <span class="attr">endpoint</span>=<span class="str">"http://localhost:9090/api/v1/query?query=up"</span> /&gt;</code></pre>
+
+<h2 id="layout">Layout Specs</h2>
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Font Size</td><td>13px</td></tr>
+    <tr><td>Gap</td><td>6px (0.375rem)</td></tr>
+    <tr><td>Badge Height</td><td>18px</td></tr>
+    <tr><td>Badge Padding</td><td>0 6px</td></tr>
+    <tr><td>Badge Border Radius</td><td>999px (pill)</td></tr>
+    <tr><td>Badge Font Size</td><td>10px</td></tr>
+  </tbody>
+</table>
+
+<h2 id="props">Props</h2>
+<table class="props-table">
+  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><code>endpoint</code></td><td><code>string</code></td><td>—</td><td>The endpoint URL to display <span class="doc-tag doc-tag-required">Required</span></td></tr>
+    <tr><td><code>globalUrl</code></td><td><code>string</code></td><td>undefined</td><td>Optional global URL prefix </td></tr>
+    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
+  </tbody>
+</table>
+
+<h2 id="accessibility">Accessibility</h2>
+<ul><li>Link is a standard <code>&lt;a&gt;</code> element</li><li>Query parameter badges are purely visual — not interactive</li></ul>
+
+
+
+<h2 id="guidelines">Do / Don&rsquo;t</h2>
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying scrape target endpoints</li><li>Any URL display that benefits from parsed query params</li><li>Use EndpointLink for all scrape target endpoint display.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Generic link display without query parameter parsing</li><li>Navigation links (use NavButton)</li><li>Don't manually parse URLs and render query params as badges.</li></ul>
+  </div>
+</div>
+</main>
+
+<script src="../main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

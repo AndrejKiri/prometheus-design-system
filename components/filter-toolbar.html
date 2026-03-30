@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FilterToolbar — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="../index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="../changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="../index.html">Introduction</a>
+    <a class="doc-nav-link" href="../principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="../tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="../accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="../architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="../components.html">Overview</a>
+    <a class="doc-nav-link sub" href="../components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="../components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="../components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="../components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="../components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="../components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="../components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="../components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="../components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="../components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="../components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="../components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="../components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="../components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="../components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="../components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="../components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="../components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="../components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="../patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="../figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="../icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="../changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="../next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="../contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="../inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="../audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>FilterToolbar</span></div>
+    <h1>FilterToolbar</h1>
+    <p class="doc-subtitle">Unifies the 4 different filter bars in the Prometheus codebase: AlertsPage, RulesPage, TargetsPage, and ServiceDiscoveryPage.</p>
+    
+<h2 id="description">Description</h2>
+<p>Unifies the 4 different filter bars in the Prometheus codebase: AlertsPage, RulesPage, TargetsPage, and ServiceDiscoveryPage. Provides search input, state multi-select, and optional collapse/expand button.</p>
+
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/alerts" target="_blank" rel="noopener">View in Prometheus UI →  /alerts</a>
+    <img src="../screenshots/alerts-page.jpg" alt="FilterToolbar on the Alerts page — state filter + search input" loading="lazy">
+    <p>FilterToolbar on the Alerts page — state filter + search input</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
+    <img src="../screenshots/targets-page.jpg" alt="FilterToolbar on the Targets page — with collapse all button" loading="lazy">
+    <p>FilterToolbar on the Targets page — with collapse all button</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/service-discovery" target="_blank" rel="noopener">View in Prometheus UI →  /service-discovery</a>
+    <img src="../screenshots/service-discovery-page.jpg" alt="FilterToolbar on the Service Discovery page" loading="lazy">
+    <p>FilterToolbar on the Service Discovery page</p>
+  </div>
+</div>
+</details>
+
+<h2 id="examples">Visual Examples</h2>
+<div class="example-box">
+<div class="example-label">AlertsPage / RulesPage Style</div>
+  <div class="mock-filter-bar mb-md">
+    <div class="mock-select">Filter by state</div>
+    <div class="mock-input">🔍 Filter by name or labels...</div>
+  </div>
+  <div class="example-label">TargetsPage Style (with collapse button)</div>
+  <div class="mock-filter-bar">
+    <div class="mock-select">Filter by state</div>
+    <div class="mock-input">🔍 Filter by name or labels...</div>
+    <div class="mock-icon-btn">↕</div>
+  </div>
+</div>
+
+
+
+<h2 id="code">Code Example</h2>
+<pre><code><span class="kw">import</span> { FilterToolbar } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+
+<span class="cmt">// AlertsPage / RulesPage style</span>
+&lt;<span class="tag">FilterToolbar</span>
+  <span class="attr">searchValue</span>={search}
+  <span class="attr">onSearchChange</span>={setSearch}
+  <span class="attr">searchPlaceholder</span>=<span class="str">"Filter by name or labels..."</span>
+  <span class="attr">stateOptions</span>={[<span class="str">"firing"</span>, <span class="str">"pending"</span>, <span class="str">"inactive"</span>]}
+  <span class="attr">selectedStates</span>={states}
+  <span class="attr">onStatesChange</span>={setStates}
+  <span class="attr">statePlaceholder</span>=<span class="str">"Filter by state"</span>
+/&gt;
+
+<span class="cmt">// TargetsPage style (with collapse all)</span>
+&lt;<span class="tag">FilterToolbar</span>
+  <span class="attr">searchValue</span>={search}
+  <span class="attr">onSearchChange</span>={setSearch}
+  <span class="attr">stateOptions</span>={[<span class="str">"up"</span>, <span class="str">"down"</span>, <span class="str">"unknown"</span>]}
+  <span class="attr">selectedStates</span>={states}
+  <span class="attr">onStatesChange</span>={setStates}
+  <span class="attr">showCollapseAll</span>
+  <span class="attr">allCollapsed</span>={collapsed}
+  <span class="attr">onCollapseAllChange</span>={setCollapsed}
+/&gt;</code></pre>
+
+<h2 id="layout">Layout Specs</h2>
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Gap</td><td>12px (sm) default</td></tr>
+    <tr><td>Search Input Height</td><td>32px</td></tr>
+    <tr><td>Select Height</td><td>32px</td></tr>
+    <tr><td>Icon Button Size</td><td>32px &times; 32px</td></tr>
+    <tr><td>Border Radius (inputs)</td><td>4px (default)</td></tr>
+    <tr><td>Border Width</td><td>1px</td></tr>
+    <tr><td>Min Width (select)</td><td>180px</td></tr>
+  </tbody>
+</table>
+
+<h2 id="props">Props</h2>
+<table class="props-table">
+  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><code>searchValue</code></td><td><code>string</code></td><td>""</td><td>Search input value </td></tr>
+    <tr><td><code>onSearchChange</code></td><td><code>(value: string) => void</code></td><td>undefined</td><td>Callback when search value changes </td></tr>
+    <tr><td><code>searchPlaceholder</code></td><td><code>string</code></td><td>"Filter..."</td><td>Search input placeholder </td></tr>
+    <tr><td><code>stateOptions</code></td><td><code>string[]</code></td><td>undefined</td><td>State filter options </td></tr>
+    <tr><td><code>selectedStates</code></td><td><code>string[]</code></td><td>[]</td><td>Currently selected state filters </td></tr>
+    <tr><td><code>onStatesChange</code></td><td><code>(values: string[]) => void</code></td><td>undefined</td><td>Callback when selected states change </td></tr>
+    <tr><td><code>statePlaceholder</code></td><td><code>string</code></td><td>"Filter by state"</td><td>State filter placeholder </td></tr>
+    <tr><td><code>getStateClass</code></td><td><code>(state: string) => string</code></td><td>undefined</td><td>CSS class for state option styling </td></tr>
+    <tr><td><code>getStateCount</code></td><td><code>(state: string) => number | undefined</code></td><td>undefined</td><td>Count for state option </td></tr>
+    <tr><td><code>showCollapseAll</code></td><td><code>boolean</code></td><td>false</td><td>Whether to show collapse/expand all button </td></tr>
+    <tr><td><code>allCollapsed</code></td><td><code>boolean</code></td><td>false</td><td>Whether all panels are currently collapsed </td></tr>
+    <tr><td><code>onCollapseAllChange</code></td><td><code>(collapsed: boolean) => void</code></td><td>undefined</td><td>Callback to toggle collapse all </td></tr>
+    <tr><td><code>showSearch</code></td><td><code>boolean</code></td><td>true</td><td>Whether to show the search field </td></tr>
+    <tr><td><code>showStateFilter</code></td><td><code>boolean</code></td><td>auto</td><td>Whether to show the state filter (auto: true if stateOptions provided) </td></tr>
+    <tr><td><code>gap</code></td><td><code>MantineSpacing</code></td><td>"sm"</td><td>Gap between toolbar elements </td></tr>
+  </tbody>
+</table>
+
+<h2 id="accessibility">Accessibility</h2>
+<ul><li>Search input has <code>aria-label="Search filter"</code></li><li>Collapse button has descriptive <code>aria-label</code> and <code>title</code></li><li>StateMultiSelect inherits Mantine Combobox accessibility</li></ul>
+
+
+
+<h2 id="guidelines">Do / Don&rsquo;t</h2>
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Any page with filterable list content</li><li>Pages that need state/health filtering (alerts, rules, targets)</li><li>Pages with collapsible accordion panels that need a collapse-all button</li><li>Use FilterToolbar for all page-level filter bars. It handles all four Prometheus filter patterns.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Simple text-only search (use a plain TextInput)</li><li>Complex filter UIs with multiple dimensions beyond state + text</li><li>Don't build custom filter bars with separate Group + StateMultiSelect + TextInput combinations.</li></ul>
+  </div>
+</div>
+</main>
+
+<script src="../main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

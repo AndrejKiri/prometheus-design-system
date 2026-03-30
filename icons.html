@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icon Inventory — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Icons</span></div>
+    <h1>Icon Inventory</h1>
+    <p class="doc-subtitle">All icons used in the Prometheus UI, sourced from the Tabler Icons library.</p>
+
+<div class="toc-inline">
+  <div class="toc-inline-title">On this page</div>
+  <a href="#overview">Overview</a>
+  <a href="#navigation">Navigation Icons</a>
+  <a href="#status">Status &amp; Health Icons</a>
+  <a href="#data">Data &amp; Content Icons</a>
+  <a href="#actions">Action Icons</a>
+  <a href="#guidelines">Usage Guidelines</a>
+</div>
+
+<h2 id="overview">Overview</h2>
+
+<p>Prometheus uses <a href="https://tabler.io/icons" target="_blank">Tabler Icons</a> exclusively via the <code>@tabler/icons-react</code> package. All icons use a consistent 18px display size with 2px stroke width, matching Mantine's default icon conventions.</p>
+
+<table>
+  <thead><tr><th>Property</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Icon Library</td><td>Tabler Icons (<code>@tabler/icons-react</code>)</td></tr>
+    <tr><td>Default Size</td><td>18px (1.125rem)</td></tr>
+    <tr><td>Stroke Width</td><td>2px</td></tr>
+    <tr><td>Color</td><td><code>currentColor</code> (inherits from parent)</td></tr>
+    <tr><td>Action Icon Container</td><td>32px &times; 32px</td></tr>
+  </tbody>
+</table>
+
+<h2 id="navigation">Navigation Icons</h2>
+
+<p>Icons used in the header, navbar, and navigation elements.</p>
+
+<table>
+  <thead><tr><th>Icon</th><th>Tabler Name</th><th>Import</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></td>
+      <td><code>menu-2</code></td><td><code>IconMenu2</code></td><td>Burger menu (mobile nav toggle)</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></td>
+      <td><code>arrow-right</code></td><td><code>IconArrowRight</code></td><td>Breadcrumb separator, link indicators</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></td>
+      <td><code>chevron-down</code></td><td><code>IconChevronDown</code></td><td>Accordion chevron, dropdown indicators</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 10l-6 6m0-6l6 6m4-10l6 6m0-6l-6 6"/></svg></td>
+      <td><code>arrows-minimize</code></td><td><code>IconArrowsMinimize</code></td><td>Collapse all / Expand all toggle</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="status">Status &amp; Health Icons</h2>
+
+<p>Icons communicating system state and health information.</p>
+
+<table>
+  <thead><tr><th>Icon</th><th>Tabler Name</th><th>Import</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg></td>
+      <td><code>circle-check</code></td><td><code>IconCircleCheck</code></td><td>Success / healthy status</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg></td>
+      <td><code>circle-x</code></td><td><code>IconCircleX</code></td><td>Error / unhealthy status</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01"/><path d="M10.363 3.591L2.257 17.125a1.914 1.914 0 001.636 2.871h16.214a1.914 1.914 0 001.636-2.87L13.637 3.59a1.914 1.914 0 00-3.274 0z"/></svg></td>
+      <td><code>alert-triangle</code></td><td><code>IconAlertTriangle</code></td><td>Warning alerts, ErrorAlert warning severity</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8h.01M11 12h1v4h1"/></svg></td>
+      <td><code>info-circle</code></td><td><code>IconInfoCircle</code></td><td>Info alerts, informational messages</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><circle cx="12" cy="12" r="10"/></svg></td>
+      <td><code>circle-minus</code></td><td><code>IconCircleMinus</code></td><td>Unknown / inactive status</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="data">Data &amp; Content Icons</h2>
+
+<p>Icons used in info cards, tables, and data display contexts.</p>
+
+<table>
+  <thead><tr><th>Icon</th><th>Tabler Name</th><th>Import</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg></td>
+      <td><code>file-description</code></td><td><code>IconFileDescription</code></td><td>InfoCard header (general info)</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="8" rx="2"/><rect x="3" y="12" width="18" height="8" rx="2"/><circle cx="7" cy="8" r="1"/><circle cx="7" cy="16" r="1"/></svg></td>
+      <td><code>server</code></td><td><code>IconServer</code></td><td>Runtime information card, server status</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.636 5.636l2.121 2.121m8.486 8.486l2.121 2.121M5.636 18.364l2.121-2.121m8.486-8.486l2.121-2.121"/></svg></td>
+      <td><code>settings</code></td><td><code>IconSettings</code></td><td>SettingsPanel trigger, configuration</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></td>
+      <td><code>activity</code></td><td><code>IconActivity</code></td><td>Health page, metrics activity</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></td>
+      <td><code>table</code></td><td><code>IconTable</code></td><td>TSDB status, data tables</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10v10H7z"/><path d="M12 3v4m0 10v4M3 12h4m10 0h4"/></svg></td>
+      <td><code>cpu</code></td><td><code>IconCpu</code></td><td>Runtime / agent info</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/><path d="M9 15l2 2 4-4"/></svg></td>
+      <td><code>file-check</code></td><td><code>IconFileCheck</code></td><td>Rules page, valid config</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></td>
+      <td><code>flag</code></td><td><code>IconFlag</code></td><td>Feature flags, command-line flags page</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="actions">Action Icons</h2>
+
+<p>Icons for interactive controls and user actions.</p>
+
+<table>
+  <thead><tr><th>Icon</th><th>Tabler Name</th><th>Import</th><th>Usage</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M21 21l-6-6"/></svg></td>
+      <td><code>search</code></td><td><code>IconSearch</code></td><td>Search input prefix icon</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg></td>
+      <td><code>clipboard</code></td><td><code>IconClipboard</code></td><td>Copy to clipboard action</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 016 6 6 6 0 01-6 6 6 6 0 01-6-6 6 6 0 016-6M21 21l-6-6"/></svg></td>
+      <td><code>sun</code></td><td><code>IconSun</code></td><td>ThemeToggle — switch to light mode</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 007.92 12.446A9 9 0 1112 2.992z"/></svg></td>
+      <td><code>moon</code></td><td><code>IconMoon</code></td><td>ThemeToggle — switch to dark mode</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 14l11-11M21 3l-6.5 18a.55.55 0 01-1 0L10 14l-7-3.5a.55.55 0 010-1L21 3"/></svg></td>
+      <td><code>send</code></td><td><code>IconSend</code></td><td>Submit / Execute PromQL query</td>
+    </tr>
+    <tr>
+      <td><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 5a2 2 0 014 0 7 7 0 014 6v3a4 4 0 002 3H4a4 4 0 002-3v-3a7 7 0 014-6M9 17v1a3 3 0 006 0v-1"/></svg></td>
+      <td><code>bell</code></td><td><code>IconBell</code></td><td>Alerts page navigation icon</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="guidelines">Usage Guidelines</h2>
+
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul style="margin:0; font-size:0.8125rem">
+      <li>Use Tabler Icons exclusively — never mix icon libraries</li>
+      <li>Use 18px size and 2px stroke for consistency</li>
+      <li>Set <code>color="currentColor"</code> to inherit text color</li>
+      <li>Pair icons with text labels for accessibility</li>
+      <li>Use <code>aria-label</code> on icon-only buttons</li>
+    </ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don't</div>
+    <ul style="margin:0; font-size:0.8125rem">
+      <li>Don't use emoji as icon substitutes in production</li>
+      <li>Don't mix Tabler with Heroicons, Lucide, or FontAwesome</li>
+      <li>Don't change stroke width per-icon</li>
+      <li>Don't hardcode icon colors — always use currentColor</li>
+      <li>Don't use icons without accessible text alternative</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Figma Implementation</h3>
+<p>For the Figma library, import the <a href="https://www.figma.com/community/plugin/1169807996149376642/tabler-icons" target="_blank">Tabler Icons Figma plugin</a> to insert icons. Alternatively, download the subset listed above as SVGs and create Figma components named <code>Icons/{icon-name}</code>.</p>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

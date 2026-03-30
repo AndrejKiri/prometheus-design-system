@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><span>Docs</span></div>
+    <h1>Getting Started</h1>
+    <p class="doc-subtitle">A design system proposal for the Prometheus monitoring UI.</p>
+    
+<div class="callout callout-info" style="margin-bottom:2rem">
+  <div class="callout-title">RFC / Proposal — Seeking Feedback</div>
+  This design system is a proposal for standardizing the Prometheus UI component library.
+  Built on Mantine 8 + React 19 + TypeScript — the same stack already used in the Prometheus web UI.
+  The package is not yet published to npm. This documentation describes what a Prometheus design system
+  <em>should</em> look like, derived from the actual codebase, and is seeking review from maintainers.
+</div>
+
+<div class="callout callout-warn" style="margin-bottom:2rem">
+  <div class="callout-title">Roadmap to v1.0</div>
+  <ul style="margin:0.5rem 0 0 0; padding-left:1.25rem">
+    <li><strong>v0.1.0</strong> (current) — 19 components extracted, 9 inconsistencies resolved, documentation site</li>
+    <li><strong>v0.2.0</strong> — Prometheus 3.x components (native histograms, UTF-8 label display), npm publish</li>
+    <li><strong>v0.3.0</strong> — Upstream PRs merged, Storybook integration, Figma component library</li>
+    <li><strong>v1.0.0</strong> — Stable API, full test coverage, adopted in <code>prometheus/prometheus</code></li>
+  </ul>
+</div>
+
+<div class="flex-row gap-sm mb-lg">
+  <span class="version-badge">Mantine 8</span>
+  <span class="version-badge">React 19</span>
+  <span class="version-badge">TypeScript</span>
+</div>
+
+<h2 id="what">What is the Prometheus Design System?</h2>
+
+<p>The Prometheus Design System (<code>@prometheus-io/design-system</code>) is an extraction and normalization of the UI patterns, tokens, and components found in the Prometheus monitoring tool's web interface.</p>
+
+<p>It solves concrete problems found during a <a href="inconsistencies.html">deep codebase audit</a>:</p>
+<ul>
+  <li><strong>Fragmented health badge system</strong> → unified <a href="components/status-badge.html">StatusBadge</a> component</li>
+  <li><strong>Dual border inconsistency</strong> (AlertsPage vs RulesPage) → <a href="components/health-panel.html">HealthPanel</a></li>
+  <li><strong>4 different filter bars</strong> → <a href="components/filter-toolbar.html">FilterToolbar</a></li>
+  <li><strong>Hardcoded light-mode-only colors</strong> → <code>light-dark()</code> CSS throughout</li>
+  <li><strong>Missing dark mode on SeriesName hover</strong> → fixed</li>
+  <li><strong>Hardcoded spacing values</strong> → named tokens</li>
+</ul>
+
+<h2 id="philosophy">Design Philosophy</h2>
+
+<h3>"Derive, not invent"</h3>
+<p>Every token, component, and pattern in this design system was <em>derived</em> from the actual Prometheus codebase — not invented from scratch. The system documents what already exists and resolves inconsistencies where the same pattern was implemented differently across pages.</p>
+
+<p>This means:</p>
+<ul>
+  <li>System UI fonts, not custom web fonts (this is a developer tool)</li>
+  <li><code>DejaVu Sans Mono</code> for code (the Prometheus-specific choice)</li>
+  <li>Mantine's default spacing and radius scales (intentionally not customized)</li>
+  <li>The header is <em>always dark</em> — this is Prometheus brand identity, not a bug</li>
+</ul>
+
+<h2 id="governance">About This Project</h2>
+
+<p>This design system is an <strong>independent proposal</strong> — it is not currently an official Prometheus project or a Grafana Labs initiative. It was created by extracting and normalizing patterns from the <code>prometheus/prometheus</code> web UI codebase.</p>
+
+<p>The goal is to propose this work to the Prometheus maintainer community for adoption. The path forward:</p>
+<ol>
+  <li>Gather feedback from Prometheus maintainers on this documentation and component library</li>
+  <li>Open upstream PRs to <code>prometheus/prometheus</code> for the inconsistency fixes documented here</li>
+  <li>Propose the design system as an official sub-project through the CNCF governance process</li>
+  <li>Transfer ownership to the <code>prometheus</code> GitHub organization if accepted</li>
+</ol>
+
+<p><strong>Decision-making:</strong> All design decisions are documented in <a href="architecture-decisions.html">Architecture Decisions</a>. Proposed changes follow the process described in <a href="contributing.html">Contributing</a>.</p>
+
+<h2 id="install">Installation</h2>
+
+<pre><code><span class="cmt"># Install the design system</span>
+npm install @prometheus-io/design-system
+
+<span class="cmt"># Peer dependencies (install alongside)</span>
+npm install @mantine/core @mantine/hooks @tabler/icons-react react react-dom</code></pre>
+
+<h2 id="quickstart">Quick Start</h2>
+
+<pre><code><span class="cmt">// In your app entry point (e.g., main.tsx):</span>
+<span class="kw">import</span> <span class="str">"@mantine/core/styles.css"</span>;
+<span class="kw">import</span> <span class="str">"@prometheus-io/design-system/styles.css"</span>;
+
+<span class="kw">import</span> { PrometheusThemeProvider } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+
+<span class="kw">function</span> <span class="fn">App</span>() {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">PrometheusThemeProvider</span> <span class="attr">defaultColorScheme</span>=<span class="str">"auto"</span>&gt;
+      &lt;<span class="tag">YourApp</span> /&gt;
+    &lt;/<span class="tag">PrometheusThemeProvider</span>&gt;
+  );
+}</code></pre>
+
+<h2 id="components-overview">Component Library</h2>
+
+<p>The library exports <strong>19 components</strong> organized into categories:</p>
+
+<div class="doc-card-grid">
+  <a class="component-card" href="components/status-badge.html">
+    <h3>StatusBadge</h3>
+    <p>Unified health/state badge for all status vocabularies</p>
+    <span class="card-tag">Status &amp; Health</span>
+  </a>
+  <a class="component-card" href="components/health-panel.html">
+    <h3>HealthPanel</h3>
+    <p>Accordion item with health-state colored left border</p>
+    <span class="card-tag">Status &amp; Health</span>
+  </a>
+  <a class="component-card" href="components/filter-toolbar.html">
+    <h3>FilterToolbar</h3>
+    <p>Unified filter bar with search, state filter, and collapse</p>
+    <span class="card-tag">Filters</span>
+  </a>
+  <a class="component-card" href="components/data-table.html">
+    <h3>DataTable</h3>
+    <p>Generic sortable data table with custom cell renderers</p>
+    <span class="card-tag">Data Display</span>
+  </a>
+</div>
+
+<p><a href="components.html">View all 19 components →</a></p>
+
+<h2 id="tokens-overview">Design Tokens</h2>
+
+<p>All tokens are exported as TypeScript constants and CSS custom properties (<code>--prom-*</code>).</p>
+
+<pre><code><span class="kw">import</span> {
+  BRAND_ORANGE,     <span class="cmt">// "#e6522c"</span>
+  HEADER_BG,        <span class="cmt">// "rgb(65, 73, 81)"</span>
+  healthColors,     <span class="cmt">// { ok: { badgeBgLight, ... }, err: {...}, ... }</span>
+  fontFamilies,     <span class="cmt">// { body, mono, completionTooltip }</span>
+  spacing,          <span class="cmt">// { xs, sm, md, lg, xl } → CSS var references</span>
+  motion,           <span class="cmt">// { hoverReveal, accordionChevron, ... }</span>
+} <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;</code></pre>
+
+<p><a href="tokens.html">Explore all design tokens →</a></p>
+
+<h2 id="prometheus-3x">Prometheus 3.x Compatibility</h2>
+
+<p>This design system is derived from the current Prometheus web UI codebase. Active work is planned to track Prometheus 3.x features:</p>
+
+<table>
+  <thead><tr><th>3.x Feature</th><th>Design System Status</th><th>Target</th></tr></thead>
+  <tbody>
+    <tr><td>Native histogram display</td><td>Planned — new <code>HistogramChart</code> component</td><td>v0.2.0</td></tr>
+    <tr><td>UTF-8 metric/label names</td><td>Planned — update <code>LabelBadge</code>, <code>SeriesName</code> rendering</td><td>v0.2.0</td></tr>
+    <tr><td>New UI overhaul (React 19)</td><td>Already aligned — built on React 19 + Mantine 8</td><td>v0.1.0 ✓</td></tr>
+    <tr><td>OTLP ingestion UI</td><td>Tracking — components TBD pending upstream UI work</td><td>v0.3.0</td></tr>
+  </tbody>
+</table>
+
+<p>The design system aims to be an <strong>active partner</strong> in the Prometheus 3.x UI work, not a retrospective cleanup exercise. Component proposals for new 3.x features will be tracked in the <a href="https://github.com/nicholasgasior/prometheus-design-system/issues">GitHub issue tracker</a>.</p>
+
+<h2 id="peer-deps">Peer Dependencies</h2>
+
+<table>
+  <thead><tr><th>Package</th><th>Version</th></tr></thead>
+  <tbody>
+    <tr><td><code>@mantine/core</code></td><td><code>^8.0.0</code></td></tr>
+    <tr><td><code>@mantine/hooks</code></td><td><code>^8.0.0</code></td></tr>
+    <tr><td><code>@mantine/code-highlight</code></td><td><code>^8.0.0</code></td></tr>
+    <tr><td><code>@tabler/icons-react</code></td><td><code>^3.0.0</code></td></tr>
+    <tr><td><code>react</code></td><td><code>^18.0.0 || ^19.0.0</code></td></tr>
+    <tr><td><code>react-dom</code></td><td><code>^18.0.0 || ^19.0.0</code></td></tr>
+  </tbody>
+</table>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>

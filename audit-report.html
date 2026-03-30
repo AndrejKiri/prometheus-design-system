@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codebase Audit Report — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="doc-header">
+  <button class="doc-burger" id="sidebar-burger" aria-label="Toggle navigation">☰</button>
+  <a href="index.html" class="doc-header-brand">
+    <svg class="doc-header-logo" viewBox="0 0 100 100" aria-label="Prometheus logo">
+  <circle cx="50" cy="50" r="45" fill="none" stroke="#e6522c" stroke-width="7"/>
+  <circle cx="50" cy="50" r="20" fill="#e6522c"/>
+  <line x1="50" y1="5" x2="50" y2="25" stroke="#e6522c" stroke-width="7"/>
+  <line x1="50" y1="75" x2="50" y2="95" stroke="#e6522c" stroke-width="7"/>
+  <line x1="5" y1="50" x2="25" y2="50" stroke="#e6522c" stroke-width="7"/>
+  <line x1="75" y1="50" x2="95" y2="50" stroke="#e6522c" stroke-width="7"/>
+</svg>
+    <span class="doc-header-title">Prometheus Design System</span>
+  </a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <div class="doc-header-spacer"></div>
+  <div class="doc-header-actions">
+    <a href="https://github.com/nicholasgasior/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+    <button class="doc-theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<aside class="doc-sidebar" id="sidebar">
+  <nav>
+    <div class="doc-nav-section">Getting Started</div>
+    <a class="doc-nav-link" href="index.html">Introduction</a>
+    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+
+    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
+    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
+    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+
+    <div class="doc-nav-section">Components</div>
+    <a class="doc-nav-link" href="components.html">Overview</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
+
+    <div class="doc-nav-section">Patterns</div>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
+
+    <div class="doc-nav-section">For Designers</div>
+    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
+
+    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
+    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+
+    <div class="doc-nav-section">Reference</div>
+    <a class="doc-nav-link" href="contributing.html">Contributing</a>
+    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
+    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
+  </nav>
+</aside>
+<div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
+
+<main class="doc-main">
+  <div class="doc-content">
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Audit Report</span></div>
+    <h1>Codebase Audit Report</h1>
+    <p class="doc-subtitle">Exhaustive analysis of the Prometheus Mantine UI codebase — every component, token, pattern, and inconsistency.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-title">Audit Scope</div>
+      <p>Audited path: <code>prometheus-source/web/ui/mantine-ui/src/</code> &nbsp;·&nbsp; Package version: <code>0.310.0</code> &nbsp;·&nbsp; Audit date: 2026-03-30</p>
+    </div>
+
+    <div class="toc-inline">
+      <div class="toc-inline-title">On this page</div>
+      <a href="#tech-stack">1. Tech Stack &amp; Dependencies</a>
+      <a href="#design-tokens">2. Design Tokens Currently in Use</a>
+      <a href="#color-values">2.1 Color Values</a>
+      <a href="#font-families">2.2 Font Families</a>
+      <a href="#font-sizes">2.3 Font Sizes</a>
+      <a href="#font-weights">2.4 Font Weights</a>
+      <a href="#spacing">2.5 Spacing Values</a>
+      <a href="#border-radii">2.6 Border Radii</a>
+      <a href="#shadows">2.7 Shadows / Elevations</a>
+      <a href="#transitions">2.8 Transition / Animation Values</a>
+      <a href="#breakpoints">2.9 Breakpoints</a>
+      <a href="#component-inventory">3. Component Inventory</a>
+      <a href="#custom-components">3.1 Custom Components</a>
+      <a href="#mantine-components">3.2 Mantine Components Used</a>
+      <a href="#mantine-hooks">3.3 Mantine Hooks Used</a>
+      <a href="#tabler-icons">3.4 Tabler Icons Used</a>
+      <a href="#layout-patterns">4. Layout Patterns</a>
+      <a href="#app-shell">4.1 App Shell Structure</a>
+      <a href="#info-page">4.2 Status/Info Page Pattern</a>
+      <a href="#accordion-list">4.3 Accordion-Based List Pattern</a>
+      <a href="#query-panel">4.4 Query Page Panel Pattern</a>
+      <a href="#common-compositions">4.5 Common Layout Compositions</a>
+      <a href="#responsive">4.6 Responsive Behavior</a>
+      <a href="#interaction-patterns">5. Interaction Patterns</a>
+      <a href="#form-controls">5.1 Form Controls</a>
+      <a href="#promql-input">5.2 PromQL Expression Input</a>
+      <a href="#filtering">5.3 Filtering / Search</a>
+      <a href="#navigation">5.4 Navigation</a>
+      <a href="#data-loading">5.5 Data Loading</a>
+      <a href="#infinite-scroll">5.6 Infinite Scroll</a>
+      <a href="#inconsistencies">6. Inconsistencies &amp; Issues</a>
+      <a href="#hardcoded-colors">6.1 Hardcoded Color Values Bypassing Theme</a>
+      <a href="#health-borders">6.2 Inconsistent Health Status Borders</a>
+      <a href="#localstorage-collision">6.3 Duplicate localStorage Key</a>
+      <a href="#duplicate-structure">6.4 Duplicate Page Structure Code</a>
+      <a href="#a11y">6.5 Missing Accessibility Attributes</a>
+      <a href="#icon-inconsistencies">6.6 Icon Style Inconsistencies</a>
+      <a href="#mantine-overrides">6.7 Mantine-Overrides.css Scope</a>
+      <a href="#styling-approach">6.8 CSS Module vs Inline Style vs Mantine Props</a>
+      <a href="#datatable-flex">6.9 DataTable.tsx Inline Flexbox Styles</a>
+      <a href="#navbar-text">6.10 Navbar Duplicate Text Visibility</a>
+      <a href="#commented-code">6.11 Commented-Out Code</a>
+      <a href="#missing-keys">6.12 Missing key Props and TODO Comments</a>
+      <a href="#domain-patterns">7. Domain-Specific Patterns</a>
+      <a href="#promql-arch">7.1 PromQL Expression Input Architecture</a>
+      <a href="#graph-rendering">7.2 Time Series Graph Rendering</a>
+      <a href="#metric-display">7.3 Metric Display Formatting</a>
+      <a href="#label-display">7.4 Label/Badge Display</a>
+      <a href="#ast-tree">7.5 PromQL AST Tree View</a>
+      <a href="#health-state">7.6 Health State System</a>
+      <a href="#summary">8. Summary of Key Findings</a>
+    </div>
+
+    <!-- ─── Section 1 ─────────────────────────────────────────────────────── -->
+    <h2 id="tech-stack">1. Tech Stack &amp; Dependencies</h2>
+
+    <h3>Core Framework</h3>
+    <ul>
+      <li><strong>React</strong> <code>^19.2.4</code> with <strong>TypeScript</strong></li>
+      <li><strong>Vite</strong> <code>^6.4.1</code> (build tool)</li>
+      <li><strong>PostCSS</strong> with <code>postcss-preset-mantine ^1.18.0</code> and <code>postcss-simple-vars ^7.0.1</code></li>
+    </ul>
+
+    <h3>UI Layer</h3>
+    <ul>
+      <li><strong>@mantine/core</strong> <code>^8.3.18</code> — primary component library</li>
+      <li><strong>@mantine/hooks</strong> <code>^8.3.18</code></li>
+      <li><strong>@mantine/notifications</strong> <code>^8.3.18</code></li>
+      <li><strong>@mantine/dates</strong> <code>^8.3.18</code></li>
+      <li><strong>@mantine/code-highlight</strong> <code>^8.3.18</code></li>
+      <li><strong>@tabler/icons-react</strong> <code>^3.40.0</code> — icon set</li>
+    </ul>
+
+    <h3>State Management</h3>
+    <ul>
+      <li><strong>@reduxjs/toolkit</strong> <code>^2.11.2</code></li>
+      <li><strong>react-redux</strong> <code>^9.2.0</code></li>
+      <li>Redux slices: <code>settings</code>, <code>queryPage</code>, <code>targetsPage</code>, <code>serviceDiscoveryPage</code></li>
+      <li>Settings persisted to <code>localStorage</code> via custom middleware</li>
+    </ul>
+
+    <h3>Data Fetching</h3>
+    <ul>
+      <li><strong>@tanstack/react-query</strong> <code>^5.95.2</code></li>
+      <li>Custom <code>useAPIQuery</code> and <code>useSuspenseAPIQuery</code> wrappers</li>
+      <li><strong>@microsoft/fetch-event-source</strong> <code>^2.0.1</code> — for SSE notifications</li>
+    </ul>
+
+    <h3>Routing &amp; URL State</h3>
+    <ul>
+      <li><strong>react-router-dom</strong> <code>^7.13.2</code></li>
+      <li><strong>use-query-params</strong> <code>^2.2.2</code> (URL params for filters, pagination, etc.)</li>
+    </ul>
+
+    <h3>Code Editor</h3>
+    <ul>
+      <li><strong>@uiw/react-codemirror</strong> <code>^4.25.9</code></li>
+      <li><strong>@codemirror/autocomplete</strong>, <strong>@codemirror/language</strong>, <strong>@codemirror/lint</strong>, <strong>@codemirror/view</strong>, <strong>@codemirror/state</strong></li>
+      <li><strong>@prometheus-io/codemirror-promql</strong> <code>0.310.0</code> — PromQL language support</li>
+      <li><strong>@lezer/highlight</strong> <code>^1.2.3</code></li>
+    </ul>
+
+    <h3>Charting</h3>
+    <ul>
+      <li><strong>uplot</strong> <code>^1.6.32</code> — time series chart library</li>
+      <li><strong>uplot-react</strong> <code>^1.2.4</code></li>
+    </ul>
+
+    <h3>Search/Filtering</h3>
+    <ul>
+      <li><strong>@nexucis/kvsearch</strong> <code>^0.9.1</code> — fuzzy key-value search for targets, alerts, rules</li>
+      <li><strong>@nexucis/fuzzy</strong> <code>^0.5.1</code></li>
+    </ul>
+
+    <h3>Utilities</h3>
+    <ul>
+      <li><strong>dayjs</strong> <code>^1.11.20</code> — date formatting</li>
+      <li><strong>lodash</strong> <code>^4.17.23</code></li>
+      <li><strong>sanitize-html</strong> <code>^2.17.2</code></li>
+      <li><strong>clsx</strong> <code>^2.1.1</code></li>
+      <li><strong>highlight.js</strong> <code>^11.11.1</code> — YAML syntax highlighting in ConfigPage</li>
+    </ul>
+
+    <!-- ─── Section 2 ─────────────────────────────────────────────────────── -->
+    <h2 id="design-tokens">2. Design Tokens Currently in Use</h2>
+
+    <h3 id="color-values">2.1 Color Values</h3>
+
+    <h4>Navigation Header — Hardcoded RGB</h4>
+    <pre><code><span class="num">rgb(65, 73, 81)</span>   <span class="cmt">— AppShell.Header bg and AppShell.Navbar bg (App.tsx)</span>
+<span class="str">#fff</span>              <span class="cmt">— Header text color (c="#fff")</span>
+<span class="str">white</span>             <span class="cmt">— Logo link text color (style={{ color: "white" }})</span></code></pre>
+    <div class="callout callout-warn">
+      <div class="callout-title">Theme-Blind Colors</div>
+      These are hardcoded raw RGB/hex values, not Mantine tokens. They do <strong>not</strong> respond to dark/light mode switching.
+    </div>
+
+    <h4>Custom Mantine Color Palette (<code>App.tsx</code>, <code>createTheme</code>)</h4>
+    <pre><code><span class="str">"codebox-bg"</span>: [
+  <span class="str">"#f5f5f5"</span>, <span class="str">"#e7e7e7"</span>, <span class="str">"#cdcdcd"</span>, <span class="str">"#b2b2b2"</span>, <span class="str">"#9a9a9a"</span>,
+  <span class="str">"#8b8b8b"</span>, <span class="str">"#848484"</span>, <span class="str">"#717171"</span>, <span class="str">"#656565"</span>, <span class="str">"#575757"</span>
+]</code></pre>
+    <p>This 10-step gray scale is registered but only referenced for codebox backgrounds.</p>
+
+    <h4>Badge Health Colors (<code>Badge.module.css</code>) — <code>light-dark()</code> aware</h4>
+    <table>
+      <thead><tr><th>Class</th><th>Light bg</th><th>Light text</th><th>Dark bg</th><th>Dark text</th></tr></thead>
+      <tbody>
+        <tr><td><code>.statsBadge</code></td><td>gray-1</td><td>gray-7</td><td>gray-8</td><td>gray-5</td></tr>
+        <tr><td><code>.labelBadge</code></td><td>gray-1</td><td>gray-7</td><td>gray-8</td><td>gray-5</td></tr>
+        <tr><td><code>.healthOk</code></td><td>green-1</td><td>green-9</td><td>green-9</td><td>green-1</td></tr>
+        <tr><td><code>.healthErr</code></td><td>red-1</td><td>red-9</td><td>darken(red-9, 0.25)</td><td>red-1</td></tr>
+        <tr><td><code>.healthWarn</code></td><td>yellow-1</td><td>yellow-9</td><td>yellow-9</td><td>yellow-1</td></tr>
+        <tr><td><code>.healthInfo</code></td><td>blue-1</td><td>blue-9</td><td>blue-9</td><td>blue-1</td></tr>
+        <tr><td><code>.healthUnknown</code></td><td>gray-2</td><td>gray-7</td><td>gray-7</td><td>gray-4</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Panel Health Border Colors (<code>Panel.module.css</code>) — <code>light-dark()</code> aware</h4>
+    <table>
+      <thead><tr><th>Class</th><th>Light</th><th>Dark</th></tr></thead>
+      <tbody>
+        <tr><td><code>.panelHealthOk</code></td><td>green-3</td><td>green-8</td></tr>
+        <tr><td><code>.panelHealthErr</code></td><td>red-3</td><td>red-9</td></tr>
+        <tr><td><code>.panelHealthWarn</code></td><td>orange-3</td><td>yellow-9</td></tr>
+        <tr><td><code>.panelHealthUnknown</code></td><td>gray-3</td><td>gray-6</td></tr>
+      </tbody>
+    </table>
+    <p>All borders are <code>5px solid</code>, applied with <code>!important</code>.</p>
+
+    <h4>RulesPage — Hardcoded Inline Border Colors</h4>
+    <pre><code><span class="cmt">// RulesPage.tsx (hardcoded, not using Panel.module.css)</span>
+<span class="attr">err</span>:     <span class="str">"5px solid var(--mantine-color-red-4)"</span>
+<span class="attr">unknown</span>: <span class="str">"5px solid var(--mantine-color-gray-5)"</span>
+<span class="attr">ok</span>:      <span class="str">"5px solid var(--mantine-color-green-4)"</span></code></pre>
+    <p>These use CSS variables but are inline styles — inconsistent with the <code>Panel.module.css</code> approach used by AlertsPage.</p>
+
+    <h4>CodeMirror Editor Theme Colors (<code>codemirror/theme.ts</code>)</h4>
+    <p><strong>Base theme (mode-independent):</strong></p>
+    <pre><code><span class="attr">.cm-completionDetail</span>: <span class="str">#999</span>
+<span class="attr">.cm-selectionMatch</span> background: <span class="str">#e6f3ff</span>
+<span class="attr">.cm-diagnostic-error</span> border: <span class="str">#e65013</span>
+<span class="attr">.cm-completionIcon-text</span>: <span class="str">#ee9d28</span></code></pre>
+    <p><strong>Light theme:</strong></p>
+    <pre><code><span class="attr">.cm-tooltip</span> bg: <span class="str">#f8f8f8</span>
+<span class="attr">.cm-tooltip</span> border: <span class="str">rgba(52, 79, 113, 0.2)</span>
+autocomplete hover: <span class="str">#ddd</span>
+selected item: <span class="str">#d6ebff</span>
+completionInfo bg: <span class="str">#d6ebff</span>
+selection bg: <span class="str">#add6ff</span>
+matchingBracket: color <span class="str">#000</span>, bg <span class="str">#dedede</span>
+matched text: <span class="str">#0066bf</span>
+completionIcon: <span class="str">#007acc</span>
+completionIcon-constant: <span class="str">#007acc</span>
+completionIcon-function/method: <span class="str">#652d90</span>
+completionIcon-keyword: <span class="str">#616161</span></code></pre>
+    <p><strong>Dark theme:</strong></p>
+    <pre><code>caret: <span class="str">#fff</span>
+completionInfo bg: <span class="str">#333338</span>
+selection bg: <span class="str">#767676</span>
+matchingBracket bg: <span class="str">#616161</span>
+matched text: <span class="str">#7dd3fc</span>
+completionIcon/constant: <span class="str">#7dd3fc</span>
+completionIcon-function/method: <span class="str">#d8b4fe</span>
+completionIcon-keyword: <span class="str">#cbd5e1</span></code></pre>
+
+    <h4>PromQL Syntax Highlighting Colors (<code>codemirror/theme.ts</code>)</h4>
+    <p><strong>Light mode (<code>promqlHighlighter</code>):</strong></p>
+    <pre><code>number:           <span class="num">#09885a</span>
+string:           <span class="str">#a31515</span>
+keyword:          <span class="kw">#008080</span>
+function/var:     <span class="kw">#008080</span>
+labelName:        <span class="str">#800000</span>
+modifier:         <span class="kw">#008080</span>
+invalid:          red
+comment:          <span class="cmt">#888 (italic)</span></code></pre>
+    <p><strong>Dark mode (<code>darkPromqlHighlighter</code>):</strong></p>
+    <pre><code>number:           <span class="num">#22c55e</span>
+string:           <span class="str">#fca5a5</span>
+keyword:          <span class="kw">#14bfad</span>
+function/var:     <span class="kw">#14bfad</span>
+labelName:        <span class="str">#ff8585</span>
+modifier:         <span class="kw">#14bfad</span>
+invalid:          <span class="str">#ff3d3d</span>
+comment:          <span class="cmt">#9ca3af (italic)</span></code></pre>
+
+    <h4>PromQL CSS Classes (<code>promql.css</code>)</h4>
+    <pre><code><span class="attr">.promql-code</span> font-family: <span class="str">"DejaVu Sans Mono"</span>, monospace
+<span class="attr">.promql-keyword</span>:    light-dark(<span class="kw">#008080</span>, <span class="kw">#14bfad</span>)
+<span class="attr">.promql-label-name</span>: light-dark(<span class="str">#800000</span>, <span class="str">#ff8585</span>)
+<span class="attr">.promql-string</span>:     light-dark(<span class="str">#a31515</span>, <span class="str">#fca5a5</span>)
+<span class="attr">.promql-ellipsis</span>:   light-dark(rgb(170,170,170), rgb(170,170,170))
+<span class="attr">.promql-duration</span>:   light-dark(<span class="num">#09885a</span>, <span class="num">#22c55e</span>)
+<span class="attr">.promql-number</span>:     light-dark(<span class="num">#09885a</span>, <span class="num">#22c55e</span>)</code></pre>
+
+    <h4>Chart Series Color Pool (<code>colorPool.ts</code>)</h4>
+    <ul>
+      <li><strong>Size:</strong> 942 entries (hex, 6-digit, no alpha)</li>
+      <li><strong>Palette strategy:</strong> Algorithmically generated grid of RGB values using multiples of <code>0x20</code> (32) in each channel — covering the full visible spectrum at medium–high saturation.</li>
+      <li><strong>First 8 entries:</strong> <code>#008000</code>, <code>#008080</code>, <code>#800000</code>, <code>#800080</code>, <code>#808000</code>, <code>#808080</code>, <code>#0000c0</code>, <code>#008040</code></li>
+      <li><strong>Dark mode adaptation:</strong> <code>lighten(color, 0.4)</code> via Mantine's <code>lighten()</code> utility (<code>colorPool.ts</code>, <code>getSeriesColor</code>)</li>
+      <li><strong>No warm palette start</strong> — starts with green/teal/maroon, no orange/red gradient entry early.</li>
+    </ul>
+
+    <h4>uPlot Chart CSS Colors (<code>uplot.css</code>)</h4>
+    <pre><code><span class="attr">.u-under</span> background (dark): <span class="str">#1f1f1f</span>
+<span class="attr">.u-over</span> box-shadow: 0px 0px 0px 0.5px <span class="str">#ccc</span>
+<span class="attr">.u-select</span> background: <span class="str">rgba(255, 200, 150, 0.2)</span>
+cursor lines: light-dark(<span class="str">#607d8b</span>, <span class="str">#90adbc</span>) — dashed border
+<span class="attr">.u-tooltip</span> bg: light-dark(rgba(255,255,255,0.95), rgba(25,25,25,0.95))
+<span class="attr">.u-tooltip</span> color: light-dark(gray-9, gray-5)
+<span class="attr">.u-tooltip</span> border: 2px solid light-dark(gray-6, gray-6)
+<span class="attr">.u-tooltip</span> border-radius: 4px</code></pre>
+
+    <h4>SeriesName Hover (<code>SeriesName.module.css</code>)</h4>
+    <pre><code><span class="attr">.labelPair:hover</span> background: <span class="str">#add6ffa0</span>
+<span class="attr">.labelPair:hover</span> color: <span class="str">#495057</span>
+<span class="attr">.labelPair:hover</span> border-radius: 3px</code></pre>
+
+    <h4>TreeNode State Colors (<code>TreeNode.module.css</code> — <code>light-dark()</code> aware)</h4>
+    <pre><code><span class="attr">.nodeText</span> bg: light-dark(gray-1, dark-5)
+<span class="attr">.nodeTextSelected</span> bg: light-dark(gray-4, gray-7)
+<span class="attr">.nodeTextSelected</span> border: light-dark(gray-5, dark-2)
+<span class="attr">.nodeText:hover</span> bg: light-dark(gray-2, dark-4)
+<span class="attr">.nodeTextError</span> bg: light-dark(red-1, darken(red-5, 70%))
+<span class="attr">.errorText</span> color: light-dark(red-9, red-3)</code></pre>
+
+    <h4>Highlight.js Theme (<code>highlightjs.css</code>)</h4>
+    <p><strong>Light:</strong> text: gray-7, bg: gray-0, comment: gray-6, keyword: violet-8, tag: red-9, literal: blue-6, string: blue-9, variable: lime-9, class: orange-9</p>
+    <p><strong>Dark:</strong> text: dark-1, bg: dark-8, comment: dark-3, keyword: violet-3, tag: yellow-4, literal: blue-4, string: green-6, variable: blue-2, class: orange-5</p>
+
+    <h4>App.module.css Nav Link</h4>
+    <pre><code><span class="attr">.link</span> color: gray-0
+<span class="attr">.link:hover</span> bg: gray-6
+<span class="attr">.link[aria-current="page"]</span> bg: blue-filled, color: white
+<span class="attr">.link</span> border-radius: radius-sm
+<span class="attr">.link</span> padding: rem(8px) rem(12px)</code></pre>
+
+    <h3 id="font-families">2.2 Font Families</h3>
+    <table>
+      <thead><tr><th>Context</th><th>Font</th></tr></thead>
+      <tbody>
+        <tr><td>App body (Mantine default)</td><td>System UI stack (<code>-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ...</code>)</td></tr>
+        <tr><td>CodeMirror scroller / autocomplete</td><td><code>"DejaVu Sans Mono", monospace</code></td></tr>
+        <tr><td>CodeMirror placeholder</td><td><code>-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ...</code></td></tr>
+        <tr><td>CodeMirror completionInfo tooltip</td><td><code>'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif</code></td></tr>
+        <tr><td>PromQL code display</td><td><code>"DejaVu Sans Mono", monospace</code> (via <code>.promql-code</code>)</td></tr>
+        <tr><td>Codicon icon font</td><td><code>"codicon"</code> from <code>./fonts/codicon.ttf</code></td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-info">
+      No custom heading font is defined anywhere. Body and UI text use Mantine's system-default stack throughout.
+    </div>
+
+    <h3 id="font-sizes">2.3 Font Sizes</h3>
+    <table>
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>fz="xl"</code></td><td>Mantine <code>xl</code></td><td>Group name headings (AlertsPage, RulesPage), InfoPageCard titles</td></tr>
+        <tr><td><code>fz="sm"</code></td><td>Mantine <code>sm</code></td><td>File path labels, Anchor links</td></tr>
+        <tr><td><code>fz="xs"</code></td><td>Mantine <code>xs</code></td><td>DataTable, graph legend (<code>--mantine-font-size-xs</code>), notification timestamps</td></tr>
+        <tr><td><code>fz={20}</code></td><td>20px (unitless)</td><td>Prometheus logo text (App.tsx, hardcoded number)</td></tr>
+        <tr><td><code>fz="1em"</code></td><td>relative</td><td>Alert action anchors</td></tr>
+        <tr><td><code>size="1em"</code></td><td>relative</td><td>DataTable timestamp Text</td></tr>
+        <tr><td><code>0.8em</code></td><td>relative</td><td>uPlot tooltip, legend</td></tr>
+        <tr><td><code>0.9em</code></td><td>relative</td><td>uPlot labels</td></tr>
+        <tr><td><code>12px</code></td><td>absolute</td><td>uPlot <code>.u-label</code></td></tr>
+        <tr><td><code>0.9rem</code></td><td>—</td><td>RangeInput, TimeInput, QueryPanel icon sizes</td></tr>
+        <tr><td><code>font-size: 16px</code></td><td>absolute</td><td>CodeMirror <code>.cm-completionIcon</code></td></tr>
+        <tr><td><code>0.6875rem * var(--mantine-scale)</code></td><td>token</td><td>Manual labelBadge font size</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="font-weights">2.4 Font Weights</h3>
+    <table>
+      <thead><tr><th>Weight</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>400</td><td>Accordion label default</td></tr>
+        <tr><td>500</td><td>Nav link (<code>.link</code>), Table icon header text, notifications text</td></tr>
+        <tr><td>600</td><td>InfoPageCard title (<code>fw={600}</code>), group name (<code>fw={600}</code>), label badge (<code>font-weight: 700</code>)</td></tr>
+        <tr><td>700</td><td>Notifications header text (<code>fw={700}</code>), <code>.hljs-strong</code>, histogram table headers</td></tr>
+        <tr><td>bold</td><td>uPlot legend <code>.series-label</code>, uPlot tooltip headers</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="spacing">2.5 Spacing Values</h3>
+    <p>All spacing uses Mantine's token system (<code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>) except where noted.</p>
+    <p><strong>Hardcoded numeric values found:</strong></p>
+    <ul>
+      <li><code>gap={40}</code> — logo-to-nav gap in header (App.tsx)</li>
+      <li><code>gap={12}</code> — nav links gap in header (App.tsx)</li>
+      <li><code>gap={10}</code> — logo group gap (App.tsx)</li>
+      <li><code>height={40}</code>, <code>mb={15}</code>, <code>width={1000}</code> — Skeleton fallback dimensions (App.tsx, TargetsPage.tsx)</li>
+      <li><code>height={30}</code>, <code>mb={15}</code> — QueryPanel/Graph Skeleton sizes</li>
+      <li><code>p={10}</code> — histogram chart Group padding (DataTable.tsx)</li>
+      <li><code>gap="1rem"</code> — histogram detail Group (DataTable.tsx)</li>
+      <li><code>gap={5}</code> — RangeInput/TimeInput Group gap</li>
+      <li><code>px={10}</code>, <code>py={4}</code> — TreeNode inner node box</li>
+      <li><code>maw={500}</code> — Alert max-width in ErrorBoundary, ReadinessWrapper</li>
+      <li><code>maw={250}</code> — NotificationsIcon card max-width</li>
+      <li><code>maw={1000}</code> — InfoPageStack (<code>mx="auto"</code>)</li>
+      <li><code>h={570}</code> — LoadingOverlay height on graph (Graph.tsx, hardcoded)</li>
+      <li><code>size={rem(32)}</code> — Documentation ActionIcon size (App.tsx)</li>
+      <li><code>size={32}</code> — Most other ActionIcon sizes</li>
+      <li><code>top={7}</code>, <code>right={7}</code> — RuleDefinition query button position</li>
+      <li><code>nodeIndent = 20</code> — TreeNode indent per level</li>
+    </ul>
+    <p><strong>Mantine spacing tokens used:</strong> <code>p="md"</code>, <code>p="xs"</code>, <code>px="md"</code>, <code>padding="md"</code>, <code>py="md"</code>, <code>mt="xs"</code>, <code>mt="lg"</code>, <code>mt="xl"</code>, <code>mb="sm"</code>, <code>mb="md"</code>, <code>mb="xl"</code>, <code>gap="xs"</code>, <code>gap="sm"</code>, <code>gap="lg"</code>, <code>gap="xl"</code>, <code>ml="xs"</code>, <code>ml="md"</code></p>
+
+    <h3 id="border-radii">2.6 Border Radii</h3>
+    <table>
+      <thead><tr><th>Context</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Nav link</td><td><code>var(--mantine-radius-sm)</code></td></tr>
+        <tr><td>AppShell content</td><td><code>var(--mantine-radius-default)</code></td></tr>
+        <tr><td>Accordion root</td><td><code>var(--mantine-radius-default)</code></td></tr>
+        <tr><td>Badge label</td><td><code>calc(62.5rem * var(--mantine-scale))</code> — pill shape</td></tr>
+        <tr><td>uPlot tooltip</td><td><code>4px</code> (hardcoded)</td></tr>
+        <tr><td>TreeNode box</td><td><code>4</code> (unitless, hardcoded — likely pixels)</td></tr>
+        <tr><td>SeriesName hover</td><td><code>3px</code> (hardcoded)</td></tr>
+        <tr><td>LoadingOverlay</td><td><code>"sm"</code> (via <code>overlayProps</code>)</td></tr>
+        <tr><td>FlagsPage sort icon</td><td><code>rem(21px)</code></td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="shadows">2.7 Shadows / Elevations</h3>
+    <table>
+      <thead><tr><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>shadow="xs"</code></td><td>InfoPageCard, AlertsPage card, RulesPage card</td></tr>
+        <tr><td><code>shadow="md"</code></td><td>Status menu, settings popover, notifications popover</td></tr>
+        <tr><td><code>shadow="none"</code></td><td>RuleDefinition code card</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="transitions">2.8 Transition / Animation Values</h3>
+    <table>
+      <thead><tr><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>opacity 0.1s ease-in-out</code></td><td>RuleDefinition query button hover reveal</td></tr>
+        <tr><td><code>transition: transform var(--accordion-transition-duration, 200ms) ease</code></td><td>Accordion chevron rotation</td></tr>
+        <tr><td><code>background-color 150ms ease</code></td><td>Accordion item contained/separated variants</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="breakpoints">2.9 Breakpoints</h3>
+    <p>Mantine defaults are used exclusively (no custom breakpoints defined):</p>
+    <ul>
+      <li><code>hiddenFrom="sm"</code> — hides logo text on small+</li>
+      <li><code>visibleFrom="md"</code> — shows logo text on medium+</li>
+      <li><code>visibleFrom="xs"</code> — shows action icons on xs+</li>
+      <li><code>hiddenFrom="sm"</code> — hides burger on sm+</li>
+      <li><code>breakpoint: "sm"</code> — AppShell navbar collapse breakpoint</li>
+      <li><code>navbar.width: 300</code> — mobile navbar width</li>
+    </ul>
+    <p>No custom breakpoints are defined in <code>createTheme()</code>.</p>
+
+    <!-- ─── Section 3 ─────────────────────────────────────────────────────── -->
+    <h2 id="component-inventory">3. Component Inventory</h2>
+
+    <h3 id="custom-components">3.1 Custom Components</h3>
+    <table>
+      <thead><tr><th>Component</th><th>File</th><th>Props</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>InfoPageCard</code></td><td><code>components/InfoPageCard.tsx</code></td><td><code>children</code>, <code>title?</code>, <code>icon?</code></td><td>Wrapper Card with icon+title header for status pages</td></tr>
+        <tr><td><code>InfoPageStack</code></td><td><code>components/InfoPageStack.tsx</code></td><td><code>children</code></td><td>Centered max-1000px Stack for info pages</td></tr>
+        <tr><td><code>LabelBadges</code></td><td><code>components/LabelBadges.tsx</code></td><td><code>labels</code>, <code>wrapper?</code>, <code>style?</code></td><td>Performance-optimized label pill display (single DOM span, not Mantine Badge)</td></tr>
+        <tr><td><code>EndpointLink</code></td><td><code>components/EndpointLink.tsx</code></td><td><code>endpoint</code>, <code>globalUrl</code></td><td>Parses and renders scrape endpoint URL with query params as badges</td></tr>
+        <tr><td><code>ErrorBoundary</code></td><td><code>components/ErrorBoundary.tsx</code></td><td><code>children</code>, <code>title?</code></td><td>Class-based error boundary, resets on route change</td></tr>
+        <tr><td><code>SettingsMenu</code></td><td><code>components/SettingsMenu.tsx</code></td><td>—</td><td>Popover with all user-configurable settings</td></tr>
+        <tr><td><code>ThemeSelector</code></td><td><code>components/ThemeSelector.tsx</code></td><td>—</td><td>ActionIcon cycling between light/dark/auto color schemes</td></tr>
+        <tr><td><code>StateMultiSelect</code></td><td><code>components/StateMultiSelect.tsx</code></td><td><code>options</code>, <code>optionClass</code>, <code>optionCount?</code>, <code>placeholder</code>, <code>values</code>, <code>onChange</code></td><td>Custom multi-select using Mantine Combobox primitives with colored Pill display</td></tr>
+        <tr><td><code>StatePill</code></td><td><code>components/StateMultiSelect.tsx</code></td><td><code>value</code>, <code>onRemove?</code></td><td>Uppercase bold Pill for state display</td></tr>
+        <tr><td><code>NotificationsIcon</code></td><td><code>components/NotificationsIcon.tsx</code></td><td>—</td><td>Indicator+ActionIcon+Popover for live notifications</td></tr>
+        <tr><td><code>NotificationsProvider</code></td><td><code>components/NotificationsProvider.tsx</code></td><td><code>children</code></td><td>SSE-based notification context provider</td></tr>
+        <tr><td><code>ReadinessWrapper</code></td><td><code>components/ReadinessWrapper.tsx</code></td><td><code>children</code></td><td>Guards pages behind Prometheus readiness check; shows WAL replay progress</td></tr>
+        <tr><td><code>RuleDefinition</code></td><td><code>components/RuleDefinition.tsx</code></td><td><code>rule: Rule</code></td><td>CodeMirror read-only PromQL display + badges for duration/labels/annotations</td></tr>
+        <tr><td><code>Accordion</code></td><td><code>components/Accordion/Accordion.tsx</code></td><td>Full Mantine-compatible Accordion API</td><td>Fork of Mantine Accordion with <code>overflow-wrap: break-word</code> on panel</td></tr>
+        <tr><td><code>SeriesName</code></td><td><code>pages/query/SeriesName.tsx</code></td><td><code>labels</code>, <code>format</code></td><td>Renders metric label set; formatted mode adds clickable label pairs that copy matchers</td></tr>
+        <tr><td><code>TreeNode</code></td><td><code>pages/query/TreeNode.tsx</code></td><td><code>node</code>, <code>selectedNode</code>, <code>setSelectedNode</code>, <code>parentEl?</code>, <code>reportNodeState?</code>, <code>reverse</code>, <code>childIdx</code></td><td>Recursive PromQL AST tree node with live query execution and connector lines</td></tr>
+        <tr><td><code>ExpressionInput</code></td><td><code>pages/query/ExpressionInput.tsx</code></td><td><code>initialExpr</code>, <code>metricNames</code>, <code>executeQuery</code>, <code>treeShown</code>, <code>setShowTree</code>, <code>duplicatePanel</code>, <code>removePanel</code></td><td>CodeMirror-based PromQL input with full extensions, metrics explorer modal</td></tr>
+        <tr><td><code>Graph</code></td><td><code>pages/query/Graph.tsx</code></td><td><code>expr</code>, <code>node</code>, <code>endTime</code>, <code>range</code>, <code>resolution</code>, <code>showExemplars</code>, <code>displayMode</code>, <code>yAxisMin</code>, <code>retriggerIdx</code>, <code>onSelectRange</code></td><td>Range query executor + LoadingOverlay + UPlotChart wrapper</td></tr>
+        <tr><td><code>UPlotChart</code></td><td><code>pages/query/UPlotChart.tsx</code></td><td><code>data</code>, <code>range</code>, <code>width</code>, <code>showExemplars</code>, <code>displayMode</code>, <code>yAxisMin</code>, <code>onSelectRange</code></td><td>uPlot chart wrapper translating Prometheus data to uPlot format</td></tr>
+        <tr><td><code>DataTable</code></td><td><code>pages/query/DataTable.tsx</code></td><td><code>data</code>, <code>limitResults</code>, <code>setLimitResults</code></td><td>Table display for instant query results</td></tr>
+        <tr><td><code>RangeInput</code></td><td><code>pages/query/RangeInput.tsx</code></td><td><code>range</code>, <code>onChangeRange</code></td><td>TextInput with +/- ActionIcons and stepped range values</td></tr>
+        <tr><td><code>TimeInput</code></td><td><code>pages/query/TimeInput.tsx</code></td><td><code>time</code>, <code>range</code>, <code>description</code>, <code>onChangeTime</code></td><td>DateTimePicker with prev/next ActionIcons</td></tr>
+        <tr><td><code>ResolutionInput</code></td><td><code>pages/query/ResolutionInput.tsx</code></td><td><code>resolution</code>, <code>range</code>, <code>onChangeResolution</code></td><td>Select for auto/fixed/custom resolution + conditional TextInput</td></tr>
+        <tr><td><code>TargetLabels</code></td><td><code>pages/targets/TargetLabels.tsx</code></td><td><code>labels</code>, <code>discoveredLabels</code></td><td>Collapsible label display with ActionIcon toggle for discovered labels</td></tr>
+        <tr><td><code>AlertsPage</code></td><td><code>pages/AlertsPage.tsx</code></td><td>—</td><td>Paged, filtered alert rules grouped by rule group</td></tr>
+        <tr><td><code>RulesPage</code></td><td><code>pages/RulesPage.tsx</code></td><td>—</td><td>Paged, filtered recording+alerting rules</td></tr>
+        <tr><td><code>TargetsPage</code></td><td><code>pages/targets/TargetsPage.tsx</code></td><td>—</td><td>Scrape pool selector + filter bar + ScrapePoolList</td></tr>
+        <tr><td><code>FlagsPage</code></td><td><code>pages/FlagsPage.tsx</code></td><td>—</td><td>Sortable flags table with search</td></tr>
+        <tr><td><code>StatusPage</code></td><td><code>pages/StatusPage.tsx</code></td><td>—</td><td>Build + runtime info tables</td></tr>
+        <tr><td><code>ConfigPage</code></td><td><code>pages/ConfigPage.tsx</code></td><td>—</td><td>YAML config via CodeHighlight</td></tr>
+        <tr><td><code>TSDBStatusPage</code></td><td><code>pages/TSDBStatusPage.tsx</code></td><td>—</td><td>TSDB head stats tables</td></tr>
+        <tr><td><code>AgentPage</code></td><td><code>pages/AgentPage.tsx</code></td><td>—</td><td>Static informational page for agent mode</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="mantine-components">3.2 Mantine Components Used — Full Inventory with Frequency</h3>
+    <table>
+      <thead><tr><th>Mantine Component</th><th>Files Used In</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><code>ActionIcon</code></td><td>App.tsx, ThemeSelector, NotificationsIcon, SettingsMenu, RuleDefinition, ExpressionInput, QueryPanel, RangeInput, TimeInput, TargetsPage, TargetLabels, SD pages</td><td>Most common interactive element</td></tr>
+        <tr><td><code>Alert</code></td><td>ErrorBoundary, ReadinessWrapper, QueryPage, Graph, DataTable, AlertsPage, RulesPage, ScrapePoolsList, SD lists, QueryPanel</td><td>Used for all error, warning, info states</td></tr>
+        <tr><td><code>Anchor</code></td><td>DataTable, EndpointLink, AlertsPage, RulesPage, ScrapePoolsList, SD pages</td><td>Links within content</td></tr>
+        <tr><td><code>AppShell</code> + subcomponents</td><td>App.tsx</td><td>Core layout</td></tr>
+        <tr><td><code>Badge</code></td><td>EndpointLink, RuleDefinition, AlertsPage, RulesPage, ScrapePoolsList</td><td>Health and state indicators</td></tr>
+        <tr><td><code>Box</code></td><td>App.tsx, NotificationsIcon, TreeNode, Graph, RuleDefinition, QueryPanel, DataTable</td><td>Generic container/layout</td></tr>
+        <tr><td><code>Burger</code></td><td>App.tsx</td><td>Mobile menu toggle</td></tr>
+        <tr><td><code>Button</code></td><td>App.tsx (nav links), QueryPage, ExpressionInput</td><td>CTA and nav</td></tr>
+        <tr><td><code>Card</code></td><td>NotificationsIcon, AlertsPage, RulesPage, RuleDefinition</td><td>Content containers</td></tr>
+        <tr><td><code>Center</code></td><td>FlagsPage, QueryPanel</td><td>Centering wrapper</td></tr>
+        <tr><td><code>Checkbox</code></td><td>SettingsMenu, QueryPanel</td><td>Settings toggles</td></tr>
+        <tr><td><code>Code</code></td><td>TreeNode</td><td>Inline code display</td></tr>
+        <tr><td><code>CodeHighlight</code></td><td>ConfigPage</td><td>YAML display</td></tr>
+        <tr><td><code>Collapse</code></td><td>TargetLabels</td><td>Expandable discovered labels</td></tr>
+        <tr><td><code>Combobox</code> (+ subcomponents)</td><td>StateMultiSelect</td><td>Custom multi-select</td></tr>
+        <tr><td><code>DateTimePicker</code></td><td>TimeInput</td><td>Graph end time picker</td></tr>
+        <tr><td><code>Divider</code></td><td>AlertsPage</td><td>Section separator</td></tr>
+        <tr><td><code>Fieldset</code></td><td>SettingsMenu</td><td>Settings grouping</td></tr>
+        <tr><td><code>Group</code></td><td>Nearly all files</td><td>Most common layout primitive</td></tr>
+        <tr><td><code>Indicator</code></td><td>NotificationsIcon</td><td>Notification count badge</td></tr>
+        <tr><td><code>InputBase</code></td><td>ExpressionInput</td><td>CodeMirror host element</td></tr>
+        <tr><td><code>List</code> / <code>List.Item</code></td><td>TreeNode</td><td>Label example lists in tooltips</td></tr>
+        <tr><td><code>Loader</code></td><td>ExpressionInput, TreeNode</td><td>Inline loading indicators</td></tr>
+        <tr><td><code>LoadingOverlay</code></td><td>Graph.tsx</td><td>Graph refetch overlay</td></tr>
+        <tr><td><code>Menu</code> + subcomponents</td><td>App.tsx (status nav), ExpressionInput</td><td>Dropdowns</td></tr>
+        <tr><td><code>Modal</code></td><td>ExpressionInput (metrics explorer), SD lists (relabeling)</td><td>Full-screen modals</td></tr>
+        <tr><td><code>Notifications</code></td><td>App.tsx (provider), ExpressionInput (show), SeriesName (show)</td><td>Toast notifications</td></tr>
+        <tr><td><code>NumberInput</code></td><td>SettingsMenu</td><td>Pagination settings</td></tr>
+        <tr><td><code>Pagination</code></td><td>AlertsPage, RulesPage</td><td>Group pagination</td></tr>
+        <tr><td><code>Pill</code> / <code>PillsInput</code></td><td>StateMultiSelect</td><td>Multi-select pills</td></tr>
+        <tr><td><code>Popover</code> + subcomponents</td><td>SettingsMenu, QueryPanel, NotificationsIcon</td><td>Overlay panels</td></tr>
+        <tr><td><code>Progress</code></td><td>ReadinessWrapper</td><td>WAL replay progress</td></tr>
+        <tr><td><code>RingProgress</code></td><td>ScrapePoolsList, SD lists</td><td>Pool health ring</td></tr>
+        <tr><td><code>ScrollArea</code></td><td>NotificationsIcon, DataTable</td><td>Scrollable regions</td></tr>
+        <tr><td><code>SegmentedControl</code></td><td>QueryPanel (graph mode), DataTable (histogram scale)</td><td>Segmented toggles</td></tr>
+        <tr><td><code>Select</code></td><td>TargetsPage, SD page, ResolutionInput</td><td>Dropdown selects</td></tr>
+        <tr><td><code>Skeleton</code></td><td>App.tsx (Suspense fallback), QueryPanel, Graph, TargetsPage, SD page</td><td>Loading skeletons</td></tr>
+        <tr><td><code>Space</code></td><td>QueryPanel</td><td>Explicit spacing</td></tr>
+        <tr><td><code>Stack</code></td><td>Many files</td><td>Vertical layout</td></tr>
+        <tr><td><code>Table</code> + subcomponents</td><td>DataTable, FlagsPage, StatusPage, TSDBStatusPage, AlertsPage, RulesPage, ScrapePoolsList, RuleDefinition</td><td>Data display</td></tr>
+        <tr><td><code>Tabs</code> + subcomponents</td><td>QueryPanel</td><td>Table/Graph/Explain tabs</td></tr>
+        <tr><td><code>Text</code></td><td>Nearly all files</td><td>Typography</td></tr>
+        <tr><td><code>TextInput</code></td><td>AlertsPage, RulesPage, TargetsPage, SD page, FlagsPage, RangeInput, ResolutionInput</td><td>Search/filter inputs</td></tr>
+        <tr><td><code>Tooltip</code></td><td>AlertsPage, RulesPage, RuleDefinition, TreeNode, ScrapePoolsList</td><td>Hover info</td></tr>
+        <tr><td><code>UnstyledButton</code></td><td>FlagsPage</td><td>Sortable column header</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="mantine-hooks">3.3 Mantine Hooks Used</h3>
+    <table>
+      <thead><tr><th>Hook</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>useDisclosure</code></td><td>App.tsx (mobile nav), TargetLabels (label toggle)</td></tr>
+        <tr><td><code>useCombobox</code></td><td>StateMultiSelect</td></tr>
+        <tr><td><code>useMantineColorScheme</code></td><td>ThemeSelector</td></tr>
+        <tr><td><code>useComputedColorScheme</code></td><td>ExpressionInput, UPlotChart, RuleDefinition</td></tr>
+        <tr><td><code>useElementSize</code></td><td>Graph.tsx (width for uPlot)</td></tr>
+        <tr><td><code>useDebouncedValue</code></td><td>AlertsPage, RulesPage, TargetsPage (search debounce 250ms)</td></tr>
+        <tr><td><code>useLocalStorage</code></td><td>AlertsPage, RulesPage, ScrapePoolsList, SD lists</td></tr>
+        <tr><td><code>useId</code></td><td>TreeNode, Accordion</td></tr>
+        <tr><td><code>useUncontrolled</code></td><td>Accordion</td></tr>
+      </tbody>
+    </table>
+
+    <h3 id="tabler-icons">3.4 Tabler Icons Used</h3>
+    <p><strong>Navigation:</strong> <code>IconSearch</code>, <code>IconBellFilled</code>, <code>IconBell</code>, <code>IconBook</code>, <code>IconChevronDown</code>, <code>IconChevronRight</code>, <code>IconCloudDataConnection</code>, <code>IconDatabase</code>, <code>IconDeviceDesktopAnalytics</code>, <code>IconFlag</code>, <code>IconHeartRateMonitor</code>, <code>IconInfoCircle</code>, <code>IconServer</code>, <code>IconServerCog</code>, <code>IconTable</code></p>
+    <p><strong>Actions:</strong> <code>IconSettings</code>, <code>IconMoonFilled</code>, <code>IconSunFilled</code>, <code>IconBrightnessFilled</code>, <code>IconDotsVertical</code>, <code>IconPlus</code>, <code>IconMinus</code>, <code>IconTrash</code>, <code>IconCopy</code>, <code>IconAlignJustified</code>, <code>IconBinaryTree</code>, <code>IconTerminal</code>, <code>IconAdjustmentsHorizontal</code>, <code>IconLayoutNavbarCollapse</code>, <code>IconLayoutNavbarExpand</code>, <code>IconChevronLeft</code>, <code>IconChevronRight</code>, <code>IconChevronUp</code>, <code>IconSelector</code></p>
+    <p><strong>Status:</strong> <code>IconAlertTriangle</code>, <code>IconAlertCircle</code>, <code>IconNetworkOff</code>, <code>IconMessageExclamation</code>, <code>IconPointFilled</code></p>
+    <p><strong>Domain:</strong> <code>IconClockPause</code>, <code>IconClockPlay</code>, <code>IconRefresh</code>, <code>IconHourglass</code>, <code>IconRepeat</code>, <code>IconTimeline</code>, <code>IconBell</code> (rules), <code>IconSpy</code>, <code>IconRun</code>, <code>IconWall</code>, <code>IconChartLine</code>, <code>IconChartAreaFilled</code>, <code>IconGraph</code></p>
+
+    <!-- ─── Section 4 ─────────────────────────────────────────────────────── -->
+    <h2 id="layout-patterns">4. Layout Patterns</h2>
+
+    <h3 id="app-shell">4.1 App Shell Structure</h3>
+    <pre><code>BrowserRouter &gt; QueryParamProvider &gt; MantineProvider &gt; CodeHighlightAdapterProvider
+  └─ QueryClientProvider
+      └─ AppShell (header height=56, navbar width=300, breakpoint=sm, padding=md)
+          ├─ AppShell.Header (bg=rgb(65,73,81), c=#fff)
+          │   └─ Group h="100%" px="md" wrap="nowrap"
+          │       ├─ Group style={{flex:1}} justify="space-between"
+          │       │   ├─ Group gap={40} (logo + nav links)  [desktop]
+          │       │   └─ Group visibleFrom="xs" (action icons) [desktop]
+          │       └─ Burger hiddenFrom="sm"  [mobile]
+          ├─ AppShell.Navbar py="md" px={4} bg=... c=... [mobile only]
+          │   └─ navLinks + Group hiddenFrom="xs" (action icons)
+          └─ AppShell.Main
+              └─ ErrorBoundary &gt; Suspense &gt; Routes</code></pre>
+
+    <h3 id="info-page">4.2 Status/Info Page Pattern</h3>
+    <p>Used by: StatusPage, TSDBStatusPage, AgentPage, FlagsPage</p>
+    <pre><code>InfoPageStack (Stack gap="lg" maw={1000} mx="auto" mt="xs")
+  └─ InfoPageCard (Card shadow="xs" withBorder p="md")
+      ├─ Group (icon + title) [optional]
+      └─ {children} (usually Table)</code></pre>
+
+    <h3 id="accordion-list">4.3 Accordion-Based List Pattern</h3>
+    <p>Used by: AlertsPage, RulesPage, TargetsPage, ServiceDiscoveryPage</p>
+    <pre><code>Stack mt="xs"
+  ├─ Group (filters: StateMultiSelect + TextInput)
+  ├─ Pagination (hideWithOnePage)
+  └─ [Card (group header)]
+      └─ Accordion multiple variant="separated"
+          └─ Accordion.Item (health border class)
+              ├─ Accordion.Control
+              │   └─ Group justify="space-between" (name + badges)
+              └─ Accordion.Panel
+                  └─ CustomInfiniteScroll &gt; Table/RuleDefinition</code></pre>
+
+    <h3 id="query-panel">4.4 Query Page Panel Pattern</h3>
+    <pre><code>Stack gap="xl" (outer, for multiple panels)
+  └─ Stack gap="lg" (per QueryPanel)
+      ├─ ExpressionInput (Group align="flex-start" wrap="nowrap" gap="xs")
+      │   ├─ InputBase (CodeMirror host, flex=auto)
+      │   └─ Button "Execute"
+      ├─ [TreeView — conditional Suspense]
+      └─ Tabs (Table | Graph | Explain)
+          ├─ Tabs.Panel "table"
+          │   └─ TableTab &gt; DataTable &gt; Table
+          ├─ Tabs.Panel "graph"
+          │   ├─ Group (RangeInput + TimeInput + ResolutionInput + controls)
+          │   └─ Graph (Box &gt; LoadingOverlay + UPlotChart)
+          └─ Tabs.Panel "explain"
+              └─ ExplainView</code></pre>
+
+    <h3 id="common-compositions">4.5 Common Layout Compositions</h3>
+    <p><strong>Filter bar (reused across AlertsPage, RulesPage, TargetsPage, SD page):</strong></p>
+    <pre><code><span class="tag">&lt;Group&gt;</span>
+  <span class="tag">&lt;StateMultiSelect</span> <span class="attr">...</span> <span class="tag">/&gt;</span>
+  <span class="tag">&lt;TextInput</span> <span class="attr">flex={1} leftSection={&lt;IconSearch /&gt;}</span> <span class="attr">...</span> <span class="tag">/&gt;</span>
+  [<span class="tag">&lt;ActionIcon /&gt;</span> <span class="cmt">// TargetsPage only — collapse/expand</span>]
+<span class="tag">&lt;/Group&gt;</span></code></pre>
+    <p><strong>Card group header (AlertsPage, RulesPage):</strong></p>
+    <pre><code><span class="tag">&lt;Group</span> <span class="attr">mb="sm" justify="space-between"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;Group</span> <span class="attr">align="baseline"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;Text</span> <span class="attr">fz="xl" fw={600} c="var(--mantine-primary-color-filled)"</span><span class="tag">&gt;</span>{name}<span class="tag">&lt;/Text&gt;</span>
+    <span class="tag">&lt;Text</span> <span class="attr">fz="sm" c="gray.6"</span><span class="tag">&gt;</span>{file}<span class="tag">&lt;/Text&gt;</span>
+  <span class="tag">&lt;/Group&gt;</span>
+  <span class="tag">&lt;Group&gt;</span>{badges}<span class="tag">&lt;/Group&gt;</span>
+<span class="tag">&lt;/Group&gt;</span></code></pre>
+
+    <h3 id="responsive">4.6 Responsive Behavior</h3>
+    <ul>
+      <li><strong>Breakpoint <code>sm</code>:</strong> Nav collapses from horizontal buttons to mobile drawer</li>
+      <li><strong>Breakpoint <code>xs</code>:</strong> Action icons (theme/notifications/settings) move from header to drawer</li>
+      <li><strong>Breakpoint <code>md</code>:</strong> "Prometheus" logo text switches — there is a gap window where the text is invisible between <code>sm</code> and <code>md</code></li>
+      <li>Tables do not have explicit responsive handling — horizontal scrolling on narrow viewports is implicit</li>
+      <li>Graph width uses <code>useElementSize</code> hook to measure the actual container and pass pixel width to uPlot</li>
+    </ul>
+
+    <!-- ─── Section 5 ─────────────────────────────────────────────────────── -->
+    <h2 id="interaction-patterns">5. Interaction Patterns</h2>
+
+    <h3 id="form-controls">5.1 Form Controls</h3>
+    <p><strong>Text search:</strong> <code>TextInput</code> with <code>IconSearch</code> left section. Debounced at 250ms via <code>useDebouncedValue</code>. Search state persisted to URL via <code>use-query-params</code>.</p>
+    <p><strong>State/health filter:</strong> <code>StateMultiSelect</code> (custom Combobox) with colored pills. Persisted to URL.</p>
+    <p><strong>Pagination:</strong> Mantine <code>Pagination</code> with <code>hideWithOnePage</code>. Page number in URL (<code>?page=N</code>). Active page clamped to valid range on filter changes.</p>
+    <p><strong>Settings:</strong> Mantine <code>Checkbox</code> and <code>NumberInput</code> inside <code>Fieldset</code> groups in a <code>Popover</code>. Settings written to <code>localStorage</code> via Redux middleware.</p>
+    <p><strong>Graph time range:</strong> <code>RangeInput</code> (TextInput + +/- ActionIcons with stepped values), <code>TimeInput</code> (DateTimePicker + prev/next ActionIcons), <code>ResolutionInput</code> (Select + optional TextInput for custom).</p>
+    <p><strong>Sorting (FlagsPage only):</strong> Client-side sort via <code>UnstyledButton</code> column headers with icon state. Does not persist to URL.</p>
+
+    <h3 id="promql-input">5.2 PromQL Expression Input</h3>
+    <ul>
+      <li><strong>Editor:</strong> CodeMirror 6 via <code>@uiw/react-codemirror</code>, embedded as <code>InputBase</code> component</li>
+      <li><strong>Extensions:</strong> history, indentOnInput, bracketMatching, closeBrackets, autocompletion, highlightSelectionMatches, lineWrapping, lintKeymap</li>
+      <li><strong>Autocomplete:</strong> PromQL-aware via <code>@prometheus-io/codemirror-promql</code> with remote metric names and optional query history overlay</li>
+      <li><strong>Execution:</strong> <code>Enter</code> runs query; <code>Shift+Enter</code> inserts newline; <code>Escape</code> blurs editor</li>
+      <li><strong>Right section:</strong> <code>Menu</code> (dots icon) with options: Explore metrics, Format expression, Show/Hide tree, Duplicate, Remove</li>
+      <li><strong>Format expression:</strong> calls <code>/format_query</code> API; shows Mantine toast notifications for success/error</li>
+      <li><strong>Metrics Explorer:</strong> <code>Modal size="95%"</code> with <code>MetricsExplorer</code> component (Suspense-wrapped)</li>
+      <li><strong>Syntax highlighting:</strong> Toggled per user setting; dual theme via <code>promqlHighlighter</code>/<code>darkPromqlHighlighter</code></li>
+      <li><strong>Linting:</strong> Toggled per user setting via <code>promqlExtension.activateLinter()</code></li>
+    </ul>
+    <p><strong>Read-only mode</strong> (RuleDefinition): Uses <code>CodeMirror</code> directly with <code>editable={false}</code>, only <code>baseTheme + lightTheme + syntaxHighlighting + promqlExtension + lineWrapping</code> — no autocomplete, no history.</p>
+
+    <h3 id="filtering">5.3 Filtering / Search</h3>
+    <p><strong>Client-side fuzzy search:</strong> <code>KVSearch</code> from <code>@nexucis/kvsearch</code> used in:</p>
+    <ul>
+      <li>AlertsPage — indexes <code>["name", "labels", ["labels", /.*/]]</code></li>
+      <li>RulesPage — same indexes</li>
+      <li>TargetsPage — indexes <code>["labels", "scrapePool", ["labels", /.*/]]</code></li>
+      <li>ServiceDiscoveryPage — separate searches for active and dropped targets</li>
+    </ul>
+    <p>All searches are debounced at 250ms; results are <code>useMemo</code>-ized.</p>
+
+    <h3 id="navigation">5.4 Navigation</h3>
+    <ul>
+      <li><strong>Primary nav:</strong> <code>Button component={NavLink}</code> — NavLink handles active state via <code>aria-current="page"</code></li>
+      <li><strong>Status dropdown:</strong> <code>Menu</code> component with <code>Routes</code>-based active target detection</li>
+      <li><strong>Routing:</strong> <code>BrowserRouter</code> with <code>basename={pathPrefix}</code> for reverse-proxy support</li>
+      <li><strong>Agent mode:</strong> Conditionally filters nav pages; redirects root to <code>/agent</code> vs <code>/query</code></li>
+      <li><strong>URL state:</strong> Query params via <code>use-query-params</code> adapter for React Router 6</li>
+    </ul>
+
+    <h3 id="data-loading">5.5 Data Loading</h3>
+    <p><strong>Pattern:</strong> <code>useSuspenseAPIQuery</code> for page-level data (surfaces errors/loading to Suspense/ErrorBoundary above). <code>useAPIQuery</code> for non-blocking fetches (graph data, format query, metric names).</p>
+    <p><strong>Suspense fallbacks:</strong> <code>Skeleton</code> arrays — typically <code>Array.from(Array(10/20), ...)</code> generating stacked Skeleton components with fixed heights (40px for pools, 30px for content).</p>
+    <p><strong>Loading states:</strong></p>
+    <ul>
+      <li>Initial load → Skeleton fallback via Suspense</li>
+      <li>Subsequent fetches → <code>LoadingOverlay</code> (graph), <code>Loader size="xs"</code> (format button)</li>
+      <li>Tree view nodes → <code>Loader size={14}</code> inline</li>
+    </ul>
+    <p><strong>Notifications:</strong> <code>useSuspenseQuery</code> re-polls readiness every 1 second for WAL replay. Notifications use SSE (<code>fetchEventSource</code>) with fallback to 10-second polling if SSE returns 204.</p>
+    <p><strong>Error handling:</strong> <code>ErrorBoundary</code> class component wrapping routes and Suspense blocks. Displays <code>Alert color="red"</code> with error message. Resets on route change.</p>
+
+    <h3 id="infinite-scroll">5.6 Infinite Scroll</h3>
+    <p><code>CustomInfiniteScroll</code> component (using <code>react-infinite-scroll-component</code>) wraps target/alert/rule lists within Accordion panels to prevent rendering all items at once. Used in AlertsPage, RulesPage, ScrapePoolsList, SD lists.</p>
+
+    <!-- ─── Section 6 ─────────────────────────────────────────────────────── -->
+    <h2 id="inconsistencies">6. Inconsistencies &amp; Issues</h2>
+
+    <h3 id="hardcoded-colors">6.1 Hardcoded Color Values Bypassing Theme</h3>
+    <p><strong>High severity:</strong></p>
+    <ol>
+      <li><strong>Navigation header background</strong> is hardcoded as <code>rgb(65, 73, 81)</code> in both <code>AppShell.Header</code> and <code>AppShell.Navbar</code>. This color does not adapt to light/dark mode — the header always appears dark regardless of user theme preference.</li>
+      <li><strong>Navigation header text</strong> is hardcoded as <code>c="#fff"</code> and <code>style={{ color: "white" }}</code> for the logo link. Always white, won't adapt.</li>
+      <li><strong>Logo text <code>fz={20}</code></strong> uses a bare number. Mantine interprets bare numbers as pixel values, so this may not scale with user font preferences.</li>
+      <li><strong>SeriesName hover</strong> uses <code>#add6ffa0</code> (hardcoded RGBA hex) and <code>#495057</code> — light-mode specific values that will look wrong in dark mode.</li>
+      <li><strong>RulesPage accordion borders</strong> use inline <code>style</code> with <code>var(--mantine-color-red-4/gray-5/green-4)</code> — slightly different shades than <code>Panel.module.css</code> (<code>red-3</code>, <code>gray-3</code>, <code>green-3</code> in light).</li>
+      <li><strong>uPlot chart elements</strong> (<code>.u-over</code>, <code>.u-select</code>, <code>.u-tooltip</code> border) have hardcoded <code>#ccc</code> and <code>rgba(255, 200, 150, 0.2)</code> that only work well in light mode.</li>
+      <li><strong>CodeMirror <code>baseTheme</code></strong> contains <code>color: "#999"</code> for completion detail and <code>#e6f3ff</code> for selection match — light-mode-only hardcoded values in a supposedly mode-agnostic block.</li>
+      <li><strong>TreeNode connector line</strong> uses an inline style string with <code>light-dark()</code> applied via JavaScript style object rather than CSS — may not be processed correctly by all browsers.</li>
+    </ol>
+
+    <h3 id="health-borders">6.2 Inconsistent Health Status Borders</h3>
+    <p>AlertsPage uses <code>panelClasses.panelHealthErr/Warn/Ok/Unknown</code> (from <code>Panel.module.css</code>), which applies <code>5px solid</code> borders with green-3/red-3/orange-3/gray-3 shades.</p>
+    <p>RulesPage uses <strong>inline styles</strong> with <code>var(--mantine-color-red-4)</code>, <code>var(--mantine-color-gray-5)</code>, <code>var(--mantine-color-green-4)</code> — different shade numbers (<code>-4</code> vs <code>-3</code>). Same visual pattern, different implementations.</p>
+
+    <h3 id="localstorage-collision">6.3 Duplicate <code>localStorageKey</code> Between AlertsPage and RulesPage</h3>
+    <p>Both AlertsPage and RulesPage use:</p>
+    <pre><code><span class="kw">useLocalStorage</span>({ <span class="attr">key</span>: <span class="str">"alertsPage.showEmptyGroups"</span>, <span class="attr">defaultValue</span>: <span class="kw">false</span> })</code></pre>
+    <div class="callout callout-warn">
+      <div class="callout-title">Bug</div>
+      The RulesPage incorrectly uses the <code>alertsPage.showEmptyGroups</code> key — the two pages share the same toggle state.
+    </div>
+
+    <h3 id="duplicate-structure">6.4 Duplicate Page Structure Code (AlertsPage / RulesPage)</h3>
+    <p>AlertsPage and RulesPage share nearly identical structure:</p>
+    <ul>
+      <li>Same filter bar (StateMultiSelect + TextInput)</li>
+      <li>Same pagination pattern</li>
+      <li>Same group Card header structure</li>
+      <li>Same Accordion.Item with CustomInfiniteScroll</li>
+    </ul>
+    <p>Similarly, TargetsPage and ServiceDiscoveryPage share almost identical filter bar/collapse button structure and pool-selection-with-limit logic. <code>targetPoolDisplayLimit = 20</code> is defined in <strong>both</strong> pages independently.</p>
+
+    <h3 id="a11y">6.5 Missing Accessibility Attributes</h3>
+    <ol>
+      <li><strong>Nav links</strong> use <code>Button component={NavLink}</code> — the parent <code>className</code> doesn't semantically communicate the nav role.</li>
+      <li><strong>StateMultiSelect</strong> uses <code>Combobox.DropdownTarget</code> without <code>role</code> or <code>aria-*</code> attributes on the trigger.</li>
+      <li><strong>Burger</strong> has no accessible label (<code>aria-label</code> not set).</li>
+      <li><strong>TreeNode</strong> clickable boxes have <code>onClick</code> but no <code>role="button"</code> or <code>tabIndex</code>, making them keyboard-inaccessible.</li>
+      <li><strong>SeriesName</strong> <code>labelPair</code> span has <code>onDoubleClick</code> for copy but no keyboard alternative.</li>
+      <li><strong>uPlot chart</strong> has no <code>aria-label</code> or accessible description.</li>
+      <li><strong>LoadingOverlay</strong> has <code>zIndex={1000}</code> and <code>h={570}</code> (hardcoded pixel height).</li>
+    </ol>
+
+    <h3 id="icon-inconsistencies">6.6 Icon Style Inconsistencies</h3>
+    <p>Three separate local icon style objects are defined in different files for the same size:</p>
+    <pre><code><span class="cmt">// QueryPanel.tsx</span>
+<span class="kw">const</span> <span class="attr">iconStyle</span> = { <span class="attr">width</span>: <span class="str">"0.9rem"</span>, <span class="attr">height</span>: <span class="str">"0.9rem"</span> };
+
+<span class="cmt">// RangeInput.tsx</span>
+<span class="kw">const</span> <span class="attr">iconStyle</span> = { <span class="attr">width</span>: <span class="str">"0.9rem"</span>, <span class="attr">height</span>: <span class="str">"0.9rem"</span> };
+
+<span class="cmt">// TimeInput.tsx</span>
+<span class="kw">const</span> <span class="attr">iconStyle</span> = { <span class="attr">width</span>: <span class="str">"0.9rem"</span>, <span class="attr">height</span>: <span class="str">"0.9rem"</span> };</code></pre>
+    <div class="callout callout-info">
+      The comment in QueryPanel even says <code>// TODO: This is duplicated everywhere, unify it.</code>
+    </div>
+    <p>Meanwhile <code>styles.ts</code> exports many similar constants: <code>navIconStyle</code> (<code>rem(16) × rem(16)</code>), <code>menuIconStyle</code> (<code>rem(14) × rem(14)</code>), <code>badgeIconStyle</code> (<code>em(17) × em(17)</code>), <code>actionIconStyle</code> (<code>70% × 70%</code>), <code>inputIconStyle</code> (<code>em(16) × em(16)</code>), <code>buttonIconStyle</code> (<code>em(20) × em(20)</code>), <code>infoPageCardTitleIconStyle</code> (<code>em(17.5) × em(17.5)</code>), <code>expandIconStyle</code> (<code>em(16) × em(16)</code>), <code>themeSwitcherIconStyle</code> (<code>rem(20) × rem(20)</code>). Mixed use of <code>rem()</code>, <code>em()</code>, <code>%</code>, and string literals.</p>
+
+    <h3 id="mantine-overrides">6.7 Mantine-Overrides.css Scope</h3>
+    <p><code>mantine-overrides.css</code> contains a single global override:</p>
+    <pre><code><span class="attr">.mantine-Badge-label</span> {
+  overflow: unset;
+  text-overflow: unset;
+}</code></pre>
+    <p>This affects <strong>all</strong> Badge components throughout the app. The <code>LabelBadges</code> component avoids Mantine's Badge entirely and uses plain spans — so this override may be for other Badge usages that need to overflow.</p>
+
+    <h3 id="styling-approach">6.8 CSS Module vs Inline Style vs Mantine Props — Inconsistent Patterns</h3>
+    <table>
+      <thead><tr><th>Approach</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>CSS module classes</td><td><code>Panel.module.css</code>, <code>Badge.module.css</code>, <code>TreeNode.module.css</code></td></tr>
+        <tr><td>Mantine <code>c=</code> / <code>bg=</code> props</td><td><code>c="gray.6"</code>, <code>c="dimmed"</code>, <code>c="var(--mantine-primary-color-filled)"</code></td></tr>
+        <tr><td><code>style={}</code> inline</td><td><code>style={{ whiteSpace: "nowrap" }}</code>, connector line, TreeNode box border</td></tr>
+        <tr><td><code>styles={}</code> prop</td><td>Accordion.Control label padding, Badge label textTransform</td></tr>
+        <tr><td>CSS variables in props</td><td><code>c="light-dark(var(...), var(...))"</code> in Table.Th</td></tr>
+      </tbody>
+    </table>
+    <p>The pattern of passing raw CSS <code>light-dark()</code> strings into Mantine's <code>c</code> prop is particularly unconventional and may break in future Mantine versions.</p>
+
+    <h3 id="datatable-flex">6.9 DataTable.tsx Inline Flexbox Styles</h3>
+    <p>The histogram table uses inline <code>style</code> objects for flexbox layout:</p>
+    <pre><code><span class="tag">&lt;Table.Tbody</span> <span class="attr">style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}</span><span class="tag">&gt;</span>
+<span class="tag">&lt;Table.Tr</span> <span class="attr">style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}</span><span class="tag">&gt;</span></code></pre>
+    <p>This overrides the default table display model globally. It works but is semantically unusual (flex on <code>&lt;tbody&gt;</code> and <code>&lt;tr&gt;</code>).</p>
+
+    <h3 id="navbar-text">6.10 Navbar Duplicate Text Visibility</h3>
+    <p>In <code>App.tsx</code>:</p>
+    <pre><code><span class="tag">&lt;Text</span> <span class="attr">hiddenFrom="sm"</span> <span class="attr">fz={20}</span><span class="tag">&gt;</span>Prometheus<span class="tag">&lt;/Text&gt;</span>  <span class="cmt">// visible: xs, hidden: sm+</span>
+<span class="tag">&lt;Text</span> <span class="attr">visibleFrom="md"</span> <span class="attr">fz={20}</span><span class="tag">&gt;</span>Prometheus<span class="tag">&lt;/Text&gt;</span>  <span class="cmt">// visible: md+</span></code></pre>
+    <p>Between breakpoints <code>sm</code> and <code>md</code>, <em>neither</em> text is visible — the "Prometheus" label disappears on medium-small windows.</p>
+
+    <h3 id="commented-code">6.11 Commented-Out Code</h3>
+    <p>Several significant pieces of commented-out code exist:</p>
+    <ul>
+      <li><strong>Exemplars button</strong> in <code>QueryPanel.tsx</code> (Show/Hide exemplars toggle — entire Button block commented)</li>
+      <li><strong>Heatmap mode</strong> in <code>QueryPanel.tsx</code> (SegmentedControl option commented)</li>
+      <li><code>ReactQueryDevtools</code> in <code>App.tsx</code></li>
+      <li>Several CSS properties in <code>ExpressionInput.module.css</code> (border, padding, font)</li>
+      <li>uPlot tooltip background alternatives in <code>uplot.css</code></li>
+      <li><code>LoadingOverlay</code> alternative loader styles in <code>Graph.tsx</code></li>
+    </ul>
+
+    <h3 id="missing-keys">6.12 Missing <code>key</code> Props and TODO Comments</h3>
+    <p>The codebase contains multiple <code>// TODO: Find a stable and definitely unique key.</code> comments in <code>ScrapePoolsList</code> and <code>ServiceDiscoveryPoolsList</code> where list items use array index (<code>key={i}</code>) — acknowledged as a potential reconciliation issue.</p>
+
+    <!-- ─── Section 7 ─────────────────────────────────────────────────────── -->
+    <h2 id="domain-patterns">7. Domain-Specific Patterns</h2>
+
+    <h3 id="promql-arch">7.1 PromQL Expression Input Architecture</h3>
+    <p>The expression input uses <strong>CodeMirror 6</strong> embedded inside a Mantine <code>InputBase</code> component:</p>
+    <pre><code><span class="tag">&lt;InputBase</span>
+  <span class="attr">component={CodeMirror}</span>
+  <span class="attr">className={classes.input}</span>
+  <span class="attr">basicSetup={false}</span>
+  <span class="attr">value={expr}</span>
+  <span class="attr">onChange={setExpr}</span>
+  <span class="attr">extensions={[</span>
+    baseTheme,
+    highlightSpecialChars(),
+    history(),
+    EditorState.allowMultipleSelections.of(true),
+    indentOnInput(),
+    bracketMatching(),
+    closeBrackets(),
+    autocompletion(),
+    highlightSelectionMatches(),
+    EditorView.lineWrapping,
+    keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...historyKeymap, ...completionKeymap, ...lintKeymap]),
+    placeholder("Enter expression (press Shift+Enter for newlines)"),
+    enableSyntaxHighlighting ? syntaxHighlighting(theme === "light" ? promqlHighlighter : darkPromqlHighlighter) : [],
+    promqlExtension.asExtension(),
+    theme === "light" ? lightTheme : darkTheme,
+  ]}
+  <span class="attr">multiline</span>
+<span class="tag">/&gt;</span></code></pre>
+    <p><strong>Key behaviors:</strong> <code>Enter</code> → execute query; <code>Shift+Enter</code> → insert newline; <code>Escape</code> → blur editor. Query history overlay via <code>HistoryCompleteStrategy</code>. Autocomplete and linting are each independently togglable.</p>
+
+    <h3 id="graph-rendering">7.2 Time Series Graph Rendering</h3>
+    <p>The graph pipeline:</p>
+    <ol>
+      <li><code>Graph.tsx</code>: Executes <code>/query_range</code> API with effective resolution and time range</li>
+      <li>Data is held in <code>dataAndRange</code> state — old data kept displayed while new query is in-flight (no flash-to-empty)</li>
+      <li><code>UPlotChart.tsx</code>: Translates <code>RangeSamples[]</code> to <code>uPlot.AlignedData</code> via <code>getUPlotData()</code>. Calls <code>getUPlotOptions()</code> for theme-aware options.</li>
+      <li>Width is measured via <code>useElementSize()</code> hook (requires two renders to get valid width)</li>
+      <li>Colors sourced from <code>colorPool.ts</code> via <code>getSeriesColor(idx, isLight)</code></li>
+      <li>Graph height: 570px hardcoded via <code>LoadingOverlay h={570}</code></li>
+      <li>Chart wrapper: 1px solid border using theme-aware CSS variable in <code>Graph.module.css</code></li>
+    </ol>
+    <p><strong>uPlot legend</strong> is displayed below the chart with left-aligned text. Custom CSS overrides <code>u-legend</code> to remove default centering.</p>
+    <p><strong>Range selection:</strong> uPlot's built-in select fires <code>onSelectRange(start, end)</code> callback which updates the visualizer state and re-executes the query.</p>
+    <p><strong>Display modes:</strong> <code>GraphDisplayMode.Lines</code> (unstacked) and <code>GraphDisplayMode.Stacked</code>. Heatmap is commented out.</p>
+
+    <h3 id="metric-display">7.3 Metric Display Formatting</h3>
+    <p><strong>SeriesName component</strong> renders label sets as <code>metricName{label="value", ...}</code>:</p>
+    <ul>
+      <li><strong>Formatted mode</strong> (<code>format=true</code>): Renders individual <code>&lt;span&gt;</code> elements per label with CSS classes. Double-click on any label pair copies the matcher to clipboard via Mantine notification.</li>
+      <li><strong>Unformatted mode</strong> (<code>format=false</code>): Renders a single text string via <code>formatSeries()</code> — used when <code>result.length &gt; 1000</code> to improve scrolling performance.</li>
+      <li><strong>Extended charset handling:</strong> If metric name requires quoting (new UTF-8 charset), it's placed inside the braces as <code>"escaped_name"</code>.</li>
+    </ul>
+    <p><strong>Number display in DataTable:</strong> Raw string values from API, no formatting applied.</p>
+    <p><strong>Duration formatting:</strong> Uses custom <code>formatPrometheusDuration()</code> (e.g., <code>"1h30m"</code>) throughout RangeInput, RuleDefinition badges.</p>
+    <p><strong>Timestamp formatting:</strong> <code>formatTimestamp(unix, useLocalTime)</code> used in DataTable, StatusPage, TSDBStatusPage, NotificationsIcon. Respects the <code>useLocalTime</code> user setting.</p>
+
+    <h3 id="label-display">7.4 Label/Badge Display</h3>
+    <p><strong>LabelBadges component</strong> is a performance-critical custom implementation. Comment in code explains: <em>"We build our own Mantine-style badges here for performance reasons. We have pages with thousands of labels and care about their performance more than other badges."</em></p>
+    <p>Implementation: Plain <code>&lt;span&gt;</code> elements with CSS class <code>.labelBadge</code> that manually replicates Mantine Badge dimensions using <code>var(--mantine-scale)</code> for scaling. Single DOM node vs Mantine's two-node structure.</p>
+    <p><strong>EndpointLink component</strong> parses URL query parameters and renders them as Mantine <code>Badge size="sm" variant="light" color="gray"</code> pills. IPv6 with Zone ID causes URL parse failure — handled with synthetic URL construction.</p>
+    <p><strong>TargetLabels component</strong> shows active labels by default, with a collapse toggle to reveal discovered (pre-relabeling) labels in blue styling.</p>
+
+    <h3 id="ast-tree">7.5 PromQL AST Tree View</h3>
+    <p>TreeNode is a recursive component that:</p>
+    <ol>
+      <li>Traverses the PromQL AST (from <code>@prometheus-io/codemirror-promql</code>'s AST types)</li>
+      <li>For each node, executes an instant query to get result stats (series count, label cardinalities, examples)</li>
+      <li>Uses a bottom-up execution order: child nodes report their state to parents; a node only queries when all children report <code>success</code></li>
+      <li>Matrix selectors are wrapped in <code>last_over_time()</code> to get cheaper stats</li>
+      <li>Connector lines between nodes are positioned absolutely using <code>getBoundingClientRect()</code> comparisons in <code>useLayoutEffect</code></li>
+      <li>Binary expression nodes render children above and below; other nodes render children below</li>
+    </ol>
+
+    <h3 id="health-state">7.6 Health State System</h3>
+    <p>Three overlapping health state vocabularies are used:</p>
+    <table>
+      <thead><tr><th>Context</th><th>States</th></tr></thead>
+      <tbody>
+        <tr><td>Alert rules</td><td><code>inactive</code>, <code>pending</code>, <code>firing</code>, <code>unknown</code></td></tr>
+        <tr><td>Rule health</td><td><code>ok</code>, <code>err</code>, <code>unknown</code></td></tr>
+        <tr><td>Target health</td><td><code>up</code>, <code>down</code>, <code>unknown</code></td></tr>
+        <tr><td>Service discovery</td><td><code>active</code>, <code>dropped</code></td></tr>
+      </tbody>
+    </table>
+    <p>Each uses the same badge CSS classes but the mapping function is repeated in every page file rather than centralized:</p>
+    <pre><code><span class="cmt">// AlertsPage.tsx</span>
+<span class="kw">const</span> alertStateToClass = (state) =&gt;
+  state === <span class="str">"inactive"</span> ? healthOk : state === <span class="str">"pending"</span> ? healthWarn : ...
+
+<span class="cmt">// RulesPage.tsx</span>
+<span class="kw">const</span> healthBadgeClass = (state) =&gt;
+  state === <span class="str">"ok"</span> ? healthOk : state === <span class="str">"err"</span> ? healthErr : ...
+
+<span class="cmt">// ScrapePoolsList.tsx</span>
+<span class="kw">const</span> healthBadgeClass = (state) =&gt;
+  state.toLowerCase() === <span class="str">"up"</span> ? healthOk : state.toLowerCase() === <span class="str">"down"</span> ? healthErr : ...</code></pre>
+    <p>No shared <code>stateToClass(state: string, vocabulary: 'alert'|'rule'|'target')</code> function exists.</p>
+
+    <!-- ─── Section 8 ─────────────────────────────────────────────────────── -->
+    <h2 id="summary">8. Summary of Key Findings</h2>
+
+    <h3>Critical Issues</h3>
+    <ol>
+      <li><strong>Header is permanently dark</strong> — <code>rgb(65, 73, 81)</code> hardcoded, ignores user's light/dark theme preference. The Prometheus logo area never adapts. This is the most visually jarring inconsistency.</li>
+      <li><strong>localStorage key collision</strong> — AlertsPage and RulesPage share <code>"alertsPage.showEmptyGroups"</code>. This is a functional bug where showing/hiding empty groups in one page affects the other.</li>
+      <li><strong>TreeNode accessibility</strong> — Clickable boxes with no keyboard support (<code>onClick</code> only, no <code>role</code>/<code>tabIndex</code>/<code>onKeyDown</code>).</li>
+    </ol>
+
+    <h3>High-Priority Inconsistencies</h3>
+    <ol start="4">
+      <li><strong>Dual health-border implementation</strong> — AlertsPage uses CSS module classes; RulesPage uses inline styles with different color scale steps.</li>
+      <li><strong>Icon size constants duplicated</strong> — <code>{ width: "0.9rem", height: "0.9rem" }</code> defined locally in 3 files despite acknowledged <code>TODO: duplicated everywhere</code>.</li>
+      <li><strong><code>targetPoolDisplayLimit = 20</code> defined in two files</strong> — TargetsPage.tsx and ServiceDiscoveryPage.tsx independently.</li>
+      <li><strong>Duplicate page structure</strong> — AlertsPage/RulesPage and TargetsPage/ServiceDiscoveryPage share near-identical structure without abstraction.</li>
+    </ol>
+
+    <h3>Design Token Observations</h3>
+    <ol start="8">
+      <li><strong>No custom typography</strong> — No font family, font scale, or heading style is configured in <code>createTheme()</code>. The app fully relies on Mantine defaults.</li>
+      <li><strong>No custom spacing scale</strong> — All spacing uses Mantine defaults plus scattered numeric literals.</li>
+      <li><strong>The color pool is vast but blunt</strong> — 942 algorithmically-generated colors with no perceptual ordering. First entries are mid-saturation greens/teals which may not be visually distinctive at small chart sizes.</li>
+      <li><strong><code>codebox-bg</code> custom color registered but barely used</strong> — Defined in <code>createTheme()</code> but not referenced in component code.</li>
+    </ol>
+
+    <h3>Positive Patterns</h3>
+    <ol start="12">
+      <li><strong>Consistent <code>light-dark()</code> usage</strong> in CSS modules — badge, panel, accordion, and chart styles all properly handle both modes via <code>light-dark()</code>.</li>
+      <li><strong>Performance-conscious design</strong> — <code>LabelBadges</code> avoids Mantine Badge overhead, <code>SeriesName</code> falls back to plain text for &gt;1000 series, <code>CustomInfiniteScroll</code> limits DOM nodes, <code>useMemo</code> on filtered/rendered lists.</li>
+      <li><strong>URL-persistent filter state</strong> — All major filters (search, state/health filter, pagination, active tab) are persisted in URL via <code>use-query-params</code>, enabling bookmarkable and shareable views.</li>
+      <li><strong>Suspense + ErrorBoundary composition</strong> is consistent throughout — all async page data uses <code>useSuspenseAPIQuery</code> and is wrapped in coordinated Suspense/ErrorBoundary pairs that reset on route change.</li>
+      <li><strong>Settings architecture</strong> — Redux + localStorage middleware cleanly separates UI settings with good TypeScript typing. Per-setting localStorage keys are exported as named constants.</li>
+    </ol>
+
+  </div>
+</main>
+
+<script src="main.js"></script>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>
