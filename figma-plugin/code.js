@@ -300,7 +300,7 @@ async function createComponentScaffolds() {
     inner.primaryAxisSizingMode = "AUTO";
     noFill(inner);
     parent.appendChild(inner);
-    inner.counterAxisSizingMode = "FILL"; // must be set after appending to auto-layout parent
+    inner.layoutSizingVertical = "FILL"; // must be set after appending to auto-layout parent
     return inner;
   }
 
@@ -1195,7 +1195,7 @@ async function createComponentScaffolds() {
 
       const cardInner = wrapWithLeftBorder(card, p.border, 5);
       cardInner.primaryAxisSizingMode = "AUTO";
-      cardInner.counterAxisSizingMode = "FILL";
+      // layoutSizingVertical = "FILL" already set by wrapWithLeftBorder
       cardInner.paddingTop = 12; cardInner.paddingBottom = 12;
       cardInner.paddingLeft = 16; cardInner.paddingRight = 16;
       cardInner.itemSpacing = 6;
