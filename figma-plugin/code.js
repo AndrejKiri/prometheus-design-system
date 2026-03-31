@@ -226,6 +226,8 @@ async function createComponentScaffolds() {
 
   const page = figma.createPage();
   page.name = "Components";
+  // Set canvas to white so light fills (pageBg, surface, grayBg) are visible
+  page.backgrounds = [{ type: "SOLID", color: { r: 1, g: 1, b: 1 } }];
 
   // ── Color palette (exact values from tokens.html) ──────────────────────
   const COL = {
@@ -300,7 +302,12 @@ async function createComponentScaffolds() {
     inner.primaryAxisSizingMode = "AUTO";
     noFill(inner);
     parent.appendChild(inner);
-    inner.layoutSizingVertical = "FILL"; // must be set after appending to auto-layout parent
+    // Do NOT set layoutSizingVertical = "FILL" on inner.
+    // If both bar and inner are FILL-height in an AUTO-height parent, Figma cannot
+    // resolve the height (circular dependency) and collapses the parent to ~0px.
+    // bar.layoutSizingVertical = "FILL" (set above) is enough — it stretches the
+    // coloured bar to match the parent's height, which is driven by inner's own content.
+    inner.layoutSizingHorizontal = "FILL"; // fill remaining width in the HORIZONTAL parent
     return inner;
   }
 
@@ -357,12 +364,13 @@ async function createComponentScaffolds() {
 
   // Layout cursor
   let cx = 0, cy = 0;
-  const GAP = 40;
+  const GAP  = 60;  // horizontal gap between components
+  const VGAP = 100; // vertical gap between rows
 
   function nextRow() {
     let bottom = 0;
     for (const n of page.children) {
-      const b = n.y + n.height + GAP;
+      const b = n.y + n.height + VGAP;
       if (b > bottom) bottom = b;
     }
     cy = bottom;
@@ -471,7 +479,7 @@ async function createComponentScaffolds() {
     comp.cornerRadius = 4;
     comp.primaryAxisAlignItems = "CENTER";
     comp.counterAxisAlignItems = "CENTER";
-    comp.fills = [{ type: "SOLID", color: COL.white, opacity: 0.1 }];
+    setFill(comp, COL.headerBg);     // dark background so white "D" is visible on canvas
     setStroke(comp, COL.borderMid, 1);
 
     comp.appendChild(inter("D", "Bold", 13, COL.white)); // moon = light-mode icon
@@ -541,8 +549,8 @@ async function createComponentScaffolds() {
     comp.name = "ErrorAlert";
     comp.layoutMode = "HORIZONTAL";
     comp.primaryAxisSizingMode = "FIXED";
-    comp.counterAxisSizingMode = "AUTO";
     comp.resize(500, 10);
+    comp.counterAxisSizingMode = "AUTO"; // AFTER resize — resize() locks height at FIXED; this re-enables AUTO
     comp.paddingTop = 12; comp.paddingBottom = 12;
     comp.paddingLeft = 16; comp.paddingRight = 16;
     comp.itemSpacing = 10;
@@ -567,9 +575,9 @@ async function createComponentScaffolds() {
     const comp = figma.createComponent();
     comp.name = "CodeBlock";
     comp.layoutMode = "VERTICAL";
-    comp.primaryAxisSizingMode = "AUTO";
-    comp.counterAxisSizingMode = "FIXED";
+    comp.counterAxisSizingMode = "FIXED"; // width is fixed
     comp.resize(540, 10);
+    comp.primaryAxisSizingMode = "AUTO";  // AFTER resize — height grows with content
     comp.paddingTop = 16; comp.paddingBottom = 16;
     comp.paddingLeft = 16; comp.paddingRight = 16;
     comp.itemSpacing = 0;
@@ -621,8 +629,9 @@ async function createComponentScaffolds() {
 
       const kCell = figma.createFrame();
       kCell.layoutMode = "HORIZONTAL"; kCell.counterAxisAlignItems = "CENTER";
-      kCell.primaryAxisSizingMode = "FIXED"; kCell.counterAxisSizingMode = "AUTO";
+      kCell.primaryAxisSizingMode = "FIXED";
       kCell.resize(KEY_W, 10);
+      kCell.counterAxisSizingMode = "AUTO";
       kCell.paddingTop = 6; kCell.paddingBottom = 6;
       kCell.paddingLeft = 12; kCell.paddingRight = 12;
       noFill(kCell);
@@ -630,8 +639,9 @@ async function createComponentScaffolds() {
 
       const vCell = figma.createFrame();
       vCell.layoutMode = "HORIZONTAL"; vCell.counterAxisAlignItems = "CENTER";
-      vCell.primaryAxisSizingMode = "FIXED"; vCell.counterAxisSizingMode = "AUTO";
+      vCell.primaryAxisSizingMode = "FIXED";
       vCell.resize(VAL_W, 10);
+      vCell.counterAxisSizingMode = "AUTO";
       vCell.paddingTop = 6; vCell.paddingBottom = 6;
       vCell.paddingLeft = 12; vCell.paddingRight = 12;
       noFill(vCell);
@@ -690,23 +700,25 @@ async function createComponentScaffolds() {
   {
     const comp = figma.createComponent();
     comp.name = "HealthPanel";
-    comp.primaryAxisSizingMode = "AUTO";
-    comp.counterAxisSizingMode = "AUTO";
     comp.cornerRadius = 8;
     setFill(comp, COL.white);
     setStroke(comp, COL.border, 1);
 
+    // wrapWithLeftBorder sets layoutMode = "HORIZONTAL"; resize AFTER locking FIXED
     const inner = wrapWithLeftBorder(comp, COL.green, 5);
+    comp.primaryAxisSizingMode = "FIXED";
+    comp.resize(350, 10);
+    comp.counterAxisSizingMode = "AUTO"; // AFTER resize — re-enables auto height
+
     inner.paddingTop = 12; inner.paddingBottom = 12;
     inner.paddingLeft = 16; inner.paddingRight = 16;
     inner.itemSpacing = 8;
 
-    // Title row
+    // Title row — FILL width so it stretches to full inner width (345px)
     const titleRow = figma.createFrame();
     titleRow.layoutMode = "HORIZONTAL";
-    titleRow.primaryAxisSizingMode = "FIXED";
+    titleRow.primaryAxisSizingMode = "AUTO";
     titleRow.counterAxisSizingMode = "AUTO";
-    titleRow.resize(330, 10);
     titleRow.primaryAxisAlignItems = "SPACE_BETWEEN";
     titleRow.counterAxisAlignItems = "CENTER";
     noFill(titleRow);
@@ -725,6 +737,7 @@ async function createComponentScaffolds() {
       { letterSpacing: { value: 0.22, unit: "PIXELS" } }));
     titleRow.appendChild(upPill);
     inner.appendChild(titleRow);
+    titleRow.layoutSizingHorizontal = "FILL"; // fill the full inner width after append
 
     inner.appendChild(inter("Last scrape: 2.3s ago  •  731 samples", "Regular", 13, COL.textMuted));
     inner.appendChild(mono("http://localhost:9090/metrics", 12, COL.blue,
@@ -801,13 +814,16 @@ async function createComponentScaffolds() {
       setStroke(item, COL.border, 1);
 
       const itemInner = wrapWithLeftBorder(item, pool.border, 5);
+      item.primaryAxisSizingMode = "FIXED";
+      item.resize(460, 10);
+      item.counterAxisSizingMode = "AUTO"; // AFTER resize — re-enables auto height
       itemInner.itemSpacing = 0;
 
       const hdr = figma.createFrame();
       hdr.layoutMode = "HORIZONTAL";
       hdr.primaryAxisSizingMode = "FIXED";
-      hdr.counterAxisSizingMode = "AUTO";
       hdr.resize(455, 10);
+      hdr.counterAxisSizingMode = "AUTO";
       hdr.paddingTop = 10; hdr.paddingBottom = 10;
       hdr.paddingLeft = 16; hdr.paddingRight = 16;
       hdr.primaryAxisAlignItems = "SPACE_BETWEEN";
@@ -822,8 +838,8 @@ async function createComponentScaffolds() {
         const tRow = figma.createFrame();
         tRow.layoutMode = "HORIZONTAL";
         tRow.primaryAxisSizingMode = "FIXED";
+        tRow.resize(455, 10);
         tRow.counterAxisSizingMode = "AUTO";
-        tRow.resize(460, 10);
         tRow.paddingTop = 8; tRow.paddingBottom = 8;
         tRow.paddingLeft = 16; tRow.paddingRight = 16;
         tRow.itemSpacing = 12;
@@ -857,9 +873,9 @@ async function createComponentScaffolds() {
     const comp = figma.createComponent();
     comp.name = "SettingsPanel";
     comp.layoutMode = "VERTICAL";
-    comp.primaryAxisSizingMode = "FIXED";
-    comp.counterAxisSizingMode = "AUTO";
+    comp.counterAxisSizingMode = "FIXED"; // width is fixed at 320
     comp.resize(320, 10);
+    comp.primaryAxisSizingMode = "AUTO";  // AFTER resize — height grows with content
     comp.paddingTop = 16; comp.paddingBottom = 16;
     comp.paddingLeft = 16; comp.paddingRight = 16;
     comp.itemSpacing = 12;
@@ -899,8 +915,9 @@ async function createComponentScaffolds() {
 
     const numInput = figma.createFrame();
     numInput.layoutMode = "HORIZONTAL";
-    numInput.primaryAxisSizingMode = "FIXED"; numInput.counterAxisSizingMode = "AUTO";
+    numInput.primaryAxisSizingMode = "FIXED";
     numInput.resize(60, 10);
+    numInput.counterAxisSizingMode = "AUTO"; // AFTER resize
     numInput.paddingTop = 5; numInput.paddingBottom = 5;
     numInput.paddingLeft = 8; numInput.paddingRight = 8;
     numInput.counterAxisAlignItems = "CENTER";
@@ -1055,8 +1072,9 @@ async function createComponentScaffolds() {
     HEADS.forEach((h, i) => {
       const cell = figma.createFrame();
       cell.layoutMode = "HORIZONTAL";
-      cell.primaryAxisSizingMode = "FIXED"; cell.counterAxisSizingMode = "AUTO";
+      cell.primaryAxisSizingMode = "FIXED";
       cell.resize(COL_W[i], 10);
+      cell.counterAxisSizingMode = "AUTO";
       cell.paddingTop = 8; cell.paddingBottom = 8;
       cell.paddingLeft = 12; cell.paddingRight = 12;
       cell.counterAxisAlignItems = "CENTER";
@@ -1090,8 +1108,9 @@ async function createComponentScaffolds() {
       // Endpoint cell
       const epCell = figma.createFrame();
       epCell.layoutMode = "HORIZONTAL";
-      epCell.primaryAxisSizingMode = "FIXED"; epCell.counterAxisSizingMode = "AUTO";
+      epCell.primaryAxisSizingMode = "FIXED";
       epCell.resize(COL_W[0], 10);
+      epCell.counterAxisSizingMode = "AUTO";
       epCell.paddingTop = 6; epCell.paddingBottom = 6;
       epCell.paddingLeft = 12; epCell.paddingRight = 12;
       epCell.counterAxisAlignItems = "CENTER";
@@ -1101,8 +1120,9 @@ async function createComponentScaffolds() {
       // State cell (pill badge)
       const stCell = figma.createFrame();
       stCell.layoutMode = "HORIZONTAL";
-      stCell.primaryAxisSizingMode = "FIXED"; stCell.counterAxisSizingMode = "AUTO";
+      stCell.primaryAxisSizingMode = "FIXED";
       stCell.resize(COL_W[1], 10);
+      stCell.counterAxisSizingMode = "AUTO";
       stCell.paddingTop = 6; stCell.paddingBottom = 6;
       stCell.paddingLeft = 12; stCell.paddingRight = 12;
       stCell.counterAxisAlignItems = "CENTER";
@@ -1120,8 +1140,9 @@ async function createComponentScaffolds() {
       // Labels cell
       const lblCell = figma.createFrame();
       lblCell.layoutMode = "HORIZONTAL";
-      lblCell.primaryAxisSizingMode = "FIXED"; lblCell.counterAxisSizingMode = "AUTO";
+      lblCell.primaryAxisSizingMode = "FIXED";
       lblCell.resize(COL_W[2], 10);
+      lblCell.counterAxisSizingMode = "AUTO";
       lblCell.paddingTop = 6; lblCell.paddingBottom = 6;
       lblCell.paddingLeft = 12; lblCell.paddingRight = 12;
       lblCell.counterAxisAlignItems = "CENTER";
@@ -1131,8 +1152,9 @@ async function createComponentScaffolds() {
       // Scrape cell
       const scrCell = figma.createFrame();
       scrCell.layoutMode = "HORIZONTAL";
-      scrCell.primaryAxisSizingMode = "FIXED"; scrCell.counterAxisSizingMode = "AUTO";
+      scrCell.primaryAxisSizingMode = "FIXED";
       scrCell.resize(COL_W[3], 10);
+      scrCell.counterAxisSizingMode = "AUTO";
       scrCell.paddingTop = 6; scrCell.paddingBottom = 6;
       scrCell.paddingLeft = 12; scrCell.paddingRight = 12;
       scrCell.counterAxisAlignItems = "CENTER";
@@ -1148,6 +1170,9 @@ async function createComponentScaffolds() {
     }
     place(comp);
   }
+
+  // ── Row 6 ────────────────────────────────────────────────────────────────
+  nextRow();
 
   // 18. InfoPageLayout
   // Max-width 1000px, gap 20px, mt 8px — centered stack of HealthPanel cards
@@ -1186,16 +1211,17 @@ async function createComponentScaffolds() {
     ];
     for (const p of PANELS) {
       const card = figma.createFrame();
-      card.primaryAxisSizingMode = "AUTO";
-      card.counterAxisSizingMode = "FIXED";
-      card.resize(952, 10);
       card.cornerRadius = 8;
       setFill(card, COL.white);
       setStroke(card, COL.border, 1);
 
+      // wrapWithLeftBorder sets layoutMode = "HORIZONTAL"; resize AFTER locking FIXED
       const cardInner = wrapWithLeftBorder(card, p.border, 5);
+      card.primaryAxisSizingMode = "FIXED";
+      card.resize(952, 10);
+      card.counterAxisSizingMode = "AUTO"; // AFTER resize — re-enables auto height
       cardInner.primaryAxisSizingMode = "AUTO";
-      // layoutSizingVertical = "FILL" already set by wrapWithLeftBorder
+      // layoutSizingVertical + layoutSizingHorizontal = "FILL" set by wrapWithLeftBorder
       cardInner.paddingTop = 12; cardInner.paddingBottom = 12;
       cardInner.paddingLeft = 16; cardInner.paddingRight = 16;
       cardInner.itemSpacing = 6;
@@ -1205,6 +1231,9 @@ async function createComponentScaffolds() {
     }
     place(comp);
   }
+
+  // ── Row 7 ────────────────────────────────────────────────────────────────
+  nextRow();
 
   // 19. PrometheusAppShell
   // Header: 56px, always-dark rgb(65,73,81), 0 20px h-pad
