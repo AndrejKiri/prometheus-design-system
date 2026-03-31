@@ -298,9 +298,9 @@ async function createComponentScaffolds() {
     const inner = figma.createFrame();
     inner.layoutMode = "VERTICAL";
     inner.primaryAxisSizingMode = "AUTO";
-    inner.counterAxisSizingMode = "FILL";
     noFill(inner);
     parent.appendChild(inner);
+    inner.counterAxisSizingMode = "FILL"; // must be set after appending to auto-layout parent
     return inner;
   }
 
@@ -474,7 +474,7 @@ async function createComponentScaffolds() {
     comp.fills = [{ type: "SOLID", color: COL.white, opacity: 0.1 }];
     setStroke(comp, COL.borderMid, 1);
 
-    comp.appendChild(inter("☽", "Regular", 16, COL.white)); // moon = light-mode icon
+    comp.appendChild(inter("D", "Bold", 13, COL.white)); // moon = light-mode icon
     place(comp);
   }
 
@@ -659,7 +659,8 @@ async function createComponentScaffolds() {
     comp.itemSpacing = 12;
     comp.primaryAxisAlignItems = "CENTER";
     comp.counterAxisAlignItems = "CENTER";
-    noFill(comp);
+    setFill(comp, COL.surface);
+    setStroke(comp, COL.border, 1);
 
     // Icon wrapper at 0.3 opacity
     const iconWrap = figma.createFrame();
@@ -671,7 +672,7 @@ async function createComponentScaffolds() {
     iconWrap.counterAxisAlignItems = "CENTER";
     iconWrap.opacity = 0.3;
     noFill(iconWrap);
-    iconWrap.appendChild(inter("⊙", "Regular", 32, COL.textMuted));
+    iconWrap.appendChild(inter("o", "Regular", 32, COL.textMuted));
     comp.appendChild(iconWrap);
 
     comp.appendChild(inter("No targets found",                    "Medium",  14, COL.textSecond));
@@ -753,7 +754,7 @@ async function createComponentScaffolds() {
     const header = autoFrame("HORIZONTAL");
     header.itemSpacing = 8;
     header.counterAxisAlignItems = "CENTER";
-    header.appendChild(inter("◈", "Regular", 18, COL.blue));
+    header.appendChild(inter("#", "Bold", 18, COL.blue));
     header.appendChild(inter("Scrape Pool Summary", "Semi Bold", 18, COL.textPrimary));
     comp.appendChild(header);
 
@@ -939,8 +940,8 @@ async function createComponentScaffolds() {
     search.cornerRadius = 4;
     setFill(search, COL.white);
     setStroke(search, COL.borderMid, 1);
-    search.appendChild(inter("⌕",               "Regular", 14, COL.textSubtle));
-    search.appendChild(inter("Filter by label…", "Regular", 13, COL.textSubtle));
+    search.appendChild(inter("S",               "Regular", 14, COL.textSubtle));
+    search.appendChild(inter("Filter by label...", "Regular", 13, COL.textSubtle));
     comp.appendChild(search);
 
     // State select (180px min-width)
@@ -968,7 +969,7 @@ async function createComponentScaffolds() {
     colBtn.counterAxisAlignItems = "CENTER";
     setFill(colBtn, COL.white);
     setStroke(colBtn, COL.borderMid, 1);
-    colBtn.appendChild(inter("⊟", "Regular", 14, COL.textSecond));
+    colBtn.appendChild(inter("-", "Bold", 14, COL.textSecond));
     comp.appendChild(colBtn);
 
     place(comp);
@@ -1175,7 +1176,7 @@ async function createComponentScaffolds() {
     tb.cornerRadius = 4;
     setFill(tb, COL.white);
     setStroke(tb, COL.border, 1);
-    tb.appendChild(inter("⌕  Filter by label…", "Regular", 13, COL.textSubtle));
+    tb.appendChild(inter("Filter by label...", "Regular", 13, COL.textSubtle));
     comp.appendChild(tb);
 
     // Two HealthPanel-style accordion items
@@ -1233,7 +1234,7 @@ async function createComponentScaffolds() {
     const logoGrp = autoFrame("HORIZONTAL");
     logoGrp.itemSpacing = 8;
     logoGrp.counterAxisAlignItems = "CENTER";
-    logoGrp.appendChild(inter("⬡", "Bold", 18, COL.orange));
+    logoGrp.appendChild(inter("P", "Bold", 18, COL.orange));
     logoGrp.appendChild(inter("Prometheus", "Bold", 15, COL.white));
     header.appendChild(logoGrp);
 
@@ -1272,7 +1273,7 @@ async function createComponentScaffolds() {
     themeBtn.primaryAxisAlignItems = "CENTER";
     themeBtn.counterAxisAlignItems = "CENTER";
     themeBtn.fills = [{ type: "SOLID", color: COL.white, opacity: 0.1 }];
-    themeBtn.appendChild(inter("☽", "Regular", 16, COL.white));
+    themeBtn.appendChild(inter("D", "Bold", 13, COL.white));
     header.appendChild(themeBtn);
 
     comp.appendChild(header);
