@@ -31,86 +31,90 @@
 
 <aside class="doc-sidebar" id="sidebar">
   <nav>
-    <div class="doc-nav-section">Getting Started</div>
-    <a class="doc-nav-link" href="index.html">Introduction</a>
-    <a class="doc-nav-link" href="principles.html">Design Principles</a>
+    <div class="doc-nav-section">Prometheus Design System</div>
+    <a class="doc-nav-link" href="index.html">Home</a>
 
     <div class="doc-nav-section">Foundations</div>
     <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
-    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
-    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
+    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
 
     <div class="doc-nav-section">Components</div>
     <a class="doc-nav-link" href="components.html">Overview</a>
-    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
-    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
-    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+    <a class="doc-nav-link sub" href="components/app-shell.html">AppShell</a>
+    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
     <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
     <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
     <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
-    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
     <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
-    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
-    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
-    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
-    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
-    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
-    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
     <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
-    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
     <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
     <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
-    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
 
-    <div class="doc-nav-section">Patterns</div>
+    <div class="doc-nav-section">Patterns &amp; Roadmap</div>
     <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
-
-    <div class="doc-nav-section">For Designers</div>
-    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
-    <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
-
-    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
-    <a class="doc-nav-link" href="changelog.html">Changelog</a>
     <a class="doc-nav-link" href="action-items.html">Action Items</a>
-
-    <div class="doc-nav-section">Reference</div>
-    <a class="doc-nav-link" href="contributing.html">Contributing</a>
-    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
-    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
   </nav>
 </aside>
 <div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Components</span></div>
-    <h1>Component Overview</h1>
-    <p class="doc-subtitle">All 19 components in the Prometheus Design System.</p>
-    
-<p>The design system exports <strong>19 components</strong> covering layout, status display, data presentation, filtering, and utility patterns found in the Prometheus UI.</p>
+    <div class="doc-breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Components</span></div>
+    <h1>Components</h1>
+    <p class="doc-subtitle">19 components extracted from the Prometheus UI codebase.</p>
 
-<h2 id="all-components">All Components</h2>
+<div class="callout callout-info" style="margin-bottom:2rem">
+  <div class="callout-title">Figma Plugin</div>
+  A bootstrap plugin generates all variables, text styles, and component scaffolds in Figma.
+  <a href="figma-plugin.zip" download>Download figma-plugin.zip (11 KB)</a> — unzip, import via
+  <strong>Plugins → Development → Import plugin from manifest</strong>, and run.
+</div>
 
 <div class="doc-card-grid">
-  <a class="component-card" href="components/status-badge.html">
-    <h3>StatusBadge</h3>
-    <p>Unified health/state badge. Accepts any status vocabulary (firing, up, ok, etc.).</p>
-    <span class="card-tag">Status & Health</span>
+  <a class="component-card" href="components/code-block.html">
+    <h3>CodeBlock</h3>
+    <p>Syntax-highlighted code display container with codebox background.</p>
+    <span class="card-tag">Data Display</span>
   </a>
-  <a class="component-card" href="components/health-panel.html">
-    <h3>HealthPanel</h3>
-    <p>Accordion item with health-state colored left border. Resolves AlertsPage/RulesPage inconsistency.</p>
-    <span class="card-tag">Status & Health</span>
+  <a class="component-card" href="components/data-table.html">
+    <h3>DataTable</h3>
+    <p>Generic sortable data table with custom cell renderers.</p>
+    <span class="card-tag">Data Display</span>
   </a>
-  <a class="component-card" href="components/label-badge.html">
-    <h3>LabelBadge</h3>
-    <p>Performance-optimized metric label pills using plain spans.</p>
-    <span class="card-tag">Labels</span>
+  <a class="component-card" href="components/empty-state.html">
+    <h3>EmptyState</h3>
+    <p>Centered empty state with icon, message, and optional action.</p>
+    <span class="card-tag">Utility</span>
+  </a>
+  <a class="component-card" href="components/endpoint-link.html">
+    <h3>EndpointLink</h3>
+    <p>Scrape endpoint URL display with query parameter badges.</p>
+    <span class="card-tag">Data Display</span>
+  </a>
+  <a class="component-card" href="components/error-alert.html">
+    <h3>ErrorAlert</h3>
+    <p>Standardized alert for error, warning, and info messages.</p>
+    <span class="card-tag">Utility</span>
   </a>
   <a class="component-card" href="components/filter-toolbar.html">
     <h3>FilterToolbar</h3>
     <p>Unified filter bar with search, state filter, and optional collapse button.</p>
     <span class="card-tag">Filters</span>
+  </a>
+  <a class="component-card" href="components/health-panel.html">
+    <h3>HealthPanel</h3>
+    <p>Accordion item with health-state colored left border. Resolves AlertsPage/RulesPage inconsistency.</p>
+    <span class="card-tag">Status & Health</span>
   </a>
   <a class="component-card" href="components/info-card.html">
     <h3>InfoCard</h3>
@@ -122,122 +126,58 @@
     <p>Centered, max-width page layout wrapper for info pages.</p>
     <span class="card-tag">Layout</span>
   </a>
-  <a class="component-card" href="components/data-table.html">
-    <h3>DataTable</h3>
-    <p>Generic sortable data table with custom cell renderers.</p>
-    <span class="card-tag">Data Display</span>
-  </a>
   <a class="component-card" href="components/key-value-table.html">
     <h3>KeyValueTable</h3>
     <p>Two-column key-value display for build info, runtime info, flags.</p>
     <span class="card-tag">Data Display</span>
   </a>
-  <a class="component-card" href="components/code-block.html">
-    <h3>CodeBlock</h3>
-    <p>Syntax-highlighted code display container with codebox background.</p>
-    <span class="card-tag">Data Display</span>
-  </a>
-  <a class="component-card" href="components/series-name.html">
-    <h3>SeriesName</h3>
-    <p>Metric label set display with optional clickable copy-to-clipboard.</p>
-    <span class="card-tag">Data Display</span>
-  </a>
-  <a class="component-card" href="components/endpoint-link.html">
-    <h3>EndpointLink</h3>
-    <p>Scrape endpoint URL display with query parameter badges.</p>
-    <span class="card-tag">Data Display</span>
-  </a>
-  <a class="component-card" href="components/empty-state.html">
-    <h3>EmptyState</h3>
-    <p>Centered empty state with icon, message, and optional action.</p>
-    <span class="card-tag">Utility</span>
-  </a>
-  <a class="component-card" href="components/error-alert.html">
-    <h3>ErrorAlert</h3>
-    <p>Standardized alert for error, warning, and info messages.</p>
-    <span class="card-tag">Utility</span>
-  </a>
-  <a class="component-card" href="components/pool-accordion.html">
-    <h3>PoolAccordion</h3>
-    <p>Accordion for scrape pool / target group display.</p>
-    <span class="card-tag">Domain</span>
+  <a class="component-card" href="components/label-badge.html">
+    <h3>LabelBadge</h3>
+    <p>Performance-optimized metric label pills using plain spans.</p>
+    <span class="card-tag">Labels</span>
   </a>
   <a class="component-card" href="components/nav-button.html">
     <h3>NavButton</h3>
     <p>Header navigation link with active state.</p>
     <span class="card-tag">Navigation</span>
   </a>
-  <a class="component-card" href="components/state-multi-select.html">
-    <h3>StateMultiSelect</h3>
-    <p>Colored pill multi-select for state/health filtering.</p>
-    <span class="card-tag">Filters</span>
-  </a>
-  <a class="component-card" href="components/settings-panel.html">
-    <h3>SettingsPanel</h3>
-    <p>Popover panel for user settings (checkboxes, numbers).</p>
-    <span class="card-tag">Utility</span>
-  </a>
-  <a class="component-card" href="components/theme-toggle.html">
-    <h3>ThemeToggle</h3>
-    <p>Cycles light → dark → auto color scheme.</p>
-    <span class="card-tag">Utility</span>
+  <a class="component-card" href="components/pool-accordion.html">
+    <h3>PoolAccordion</h3>
+    <p>Accordion for scrape pool / target group display.</p>
+    <span class="card-tag">Domain</span>
   </a>
   <a class="component-card" href="components/app-shell.html">
     <h3>PrometheusAppShell</h3>
     <p>Application layout shell with always-dark header.</p>
     <span class="card-tag">Layout</span>
   </a>
-
+  <a class="component-card" href="components/series-name.html">
+    <h3>SeriesName</h3>
+    <p>Metric label set display with optional clickable copy-to-clipboard.</p>
+    <span class="card-tag">Data Display</span>
+  </a>
+  <a class="component-card" href="components/settings-panel.html">
+    <h3>SettingsPanel</h3>
+    <p>Popover panel for user settings (checkboxes, numbers).</p>
+    <span class="card-tag">Utility</span>
+  </a>
+  <a class="component-card" href="components/state-multi-select.html">
+    <h3>StateMultiSelect</h3>
+    <p>Colored pill multi-select for state/health filtering.</p>
+    <span class="card-tag">Filters</span>
+  </a>
+  <a class="component-card" href="components/status-badge.html">
+    <h3>StatusBadge</h3>
+    <p>Unified health/state badge. Accepts any status vocabulary (firing, up, ok, etc.).</p>
+    <span class="card-tag">Status & Health</span>
+  </a>
+  <a class="component-card" href="components/theme-toggle.html">
+    <h3>ThemeToggle</h3>
+    <p>Cycles light → dark → auto color scheme.</p>
+    <span class="card-tag">Utility</span>
+  </a>
 </div>
 
-<h2 id="by-category">By Category</h2>
-
-<h3>Layout</h3>
-<ul>
-  <li><a href="components/app-shell.html">PrometheusAppShell</a> — Application layout shell</li>
-  <li><a href="components/info-page-layout.html">InfoPageLayout</a> — Centered page wrapper</li>
-  <li><a href="components/info-card.html">InfoCard</a> — Icon + title card</li>
-</ul>
-
-<h3>Status &amp; Health</h3>
-<ul>
-  <li><a href="components/status-badge.html">StatusBadge</a> — Unified health badge</li>
-  <li><a href="components/health-panel.html">HealthPanel</a> — Accordion item with health border</li>
-</ul>
-
-<h3>Labels</h3>
-<ul>
-  <li><a href="components/label-badge.html">LabelBadge / LabelBadgeSet</a> — Metric label pills</li>
-</ul>
-
-<h3>Filters &amp; Interaction</h3>
-<ul>
-  <li><a href="components/filter-toolbar.html">FilterToolbar</a> — Unified filter bar</li>
-  <li><a href="components/state-multi-select.html">StateMultiSelect</a> — Colored pill multi-select</li>
-</ul>
-
-<h3>Data Display</h3>
-<ul>
-  <li><a href="components/data-table.html">DataTable</a> — Sortable data table</li>
-  <li><a href="components/key-value-table.html">KeyValueTable</a> — Two-column KV display</li>
-  <li><a href="components/code-block.html">CodeBlock</a> — Code display container</li>
-  <li><a href="components/series-name.html">SeriesName</a> — Metric label set display</li>
-  <li><a href="components/endpoint-link.html">EndpointLink</a> — Scrape endpoint display</li>
-  <li><a href="components/pool-accordion.html">PoolAccordion</a> — Scrape pool accordion</li>
-</ul>
-
-<h3>Utility</h3>
-<ul>
-  <li><a href="components/empty-state.html">EmptyState</a> — Empty state display</li>
-  <li><a href="components/error-alert.html">ErrorAlert</a> — Error/warning/info alerts</li>
-  <li><a href="components/settings-panel.html">SettingsPanel</a> — Settings popover</li>
-  <li><a href="components/theme-toggle.html">ThemeToggle</a> — Color scheme toggle</li>
-</ul>
-
-<h3>Navigation</h3>
-<ul>
-  <li><a href="components/nav-button.html">NavButton</a> — Header nav link</li>
-</ul>
 
   </div>
 </main>
