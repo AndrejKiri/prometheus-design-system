@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Getting Started — Prometheus Design System</title>
+  <title>Prometheus Design System</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,165 +31,92 @@
 
 <aside class="doc-sidebar" id="sidebar">
   <nav>
-    <div class="doc-nav-section">Getting Started</div>
-    <a class="doc-nav-link" href="index.html">Introduction</a>
-    <a class="doc-nav-link" href="principles.html">Design Principles</a>
-
-    <div class="doc-nav-section">Foundations</div>
+    <a class="doc-nav-link" href="index.html">Home</a>
     <a class="doc-nav-link" href="tokens.html">Design Tokens</a>
-    <a class="doc-nav-link" href="accessibility.html">Accessibility</a>
-    <a class="doc-nav-link" href="architecture-decisions.html">Architecture Decisions</a>
-
-    <div class="doc-nav-section">Components</div>
-    <a class="doc-nav-link" href="components.html">Overview</a>
-    <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
-    <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
-    <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
-    <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
-    <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
-    <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
-    <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
-    <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
-    <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
-    <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
-    <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
-    <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
-    <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
-    <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
-    <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
-    <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
-    <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
-    <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
-    <a class="doc-nav-link sub" href="components/app-shell.html">PrometheusAppShell</a>
-
-    <div class="doc-nav-section">Patterns</div>
-    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
-
-    <div class="doc-nav-section">For Designers</div>
-    <a class="doc-nav-link" href="figma.html">Figma Structure</a>
     <a class="doc-nav-link" href="icons.html">Icon Inventory</a>
-
-    <div class="doc-nav-section">Changelog &amp; Roadmap</div>
-    <a class="doc-nav-link" href="changelog.html">Changelog</a>
+    <details class="doc-nav-details">
+      <summary class="doc-nav-link doc-nav-summary">Components</summary>
+      <a class="doc-nav-link sub" href="components.html">Overview</a>
+      <a class="doc-nav-link sub" href="components/app-shell.html">AppShell</a>
+      <a class="doc-nav-link sub" href="components/code-block.html">CodeBlock</a>
+      <a class="doc-nav-link sub" href="components/data-table.html">DataTable</a>
+      <a class="doc-nav-link sub" href="components/empty-state.html">EmptyState</a>
+      <a class="doc-nav-link sub" href="components/endpoint-link.html">EndpointLink</a>
+      <a class="doc-nav-link sub" href="components/error-alert.html">ErrorAlert</a>
+      <a class="doc-nav-link sub" href="components/filter-toolbar.html">FilterToolbar</a>
+      <a class="doc-nav-link sub" href="components/health-panel.html">HealthPanel</a>
+      <a class="doc-nav-link sub" href="components/info-card.html">InfoCard</a>
+      <a class="doc-nav-link sub" href="components/info-page-layout.html">InfoPageLayout</a>
+      <a class="doc-nav-link sub" href="components/key-value-table.html">KeyValueTable</a>
+      <a class="doc-nav-link sub" href="components/label-badge.html">LabelBadge</a>
+      <a class="doc-nav-link sub" href="components/nav-button.html">NavButton</a>
+      <a class="doc-nav-link sub" href="components/pool-accordion.html">PoolAccordion</a>
+      <a class="doc-nav-link sub" href="components/series-name.html">SeriesName</a>
+      <a class="doc-nav-link sub" href="components/settings-panel.html">SettingsPanel</a>
+      <a class="doc-nav-link sub" href="components/state-multi-select.html">StateMultiSelect</a>
+      <a class="doc-nav-link sub" href="components/status-badge.html">StatusBadge</a>
+      <a class="doc-nav-link sub" href="components/theme-toggle.html">ThemeToggle</a>
+    </details>
+    <a class="doc-nav-link" href="patterns.html">UI Patterns</a>
     <a class="doc-nav-link" href="action-items.html">Action Items</a>
-
-    <div class="doc-nav-section">Reference</div>
-    <a class="doc-nav-link" href="contributing.html">Contributing</a>
-    <a class="doc-nav-link" href="inconsistencies.html">Inconsistency Log</a>
-    <a class="doc-nav-link" href="audit-report.html">Audit Report</a>
   </nav>
 </aside>
 <div class="doc-sidebar-overlay" id="sidebar-overlay"></div>
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><span>Docs</span></div>
-    <h1>Getting Started</h1>
+    <h1>Prometheus Design System</h1>
     <p class="doc-subtitle">A design system proposal for the Prometheus monitoring UI.</p>
-    
+
 <div class="callout callout-warn" style="margin-bottom:2rem">
   <div class="callout-title">Work in Progress — Early Draft</div>
   This is a very early version of a design system proposal for the Prometheus UI.
   It is actively being worked on and not yet ready for review.
   Feedback is welcome, but nobody is expected to give feedback at this stage.
-  Built on Mantine 8 + React 19 + TypeScript — the same stack already used in the Prometheus web UI.
 </div>
 
-<div class="flex-row gap-sm mb-lg">
-  <span class="version-badge">Mantine 8</span>
-  <span class="version-badge">React 19</span>
-  <span class="version-badge">TypeScript</span>
-</div>
+<p>Every token, component, and pattern here was <em>derived</em> from the actual <a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener">Prometheus</a> codebase — not invented from scratch. The system documents what already exists in the Mantine 8 + React 19 + TypeScript web UI and resolves inconsistencies where the same pattern was implemented differently across pages.</p>
 
-<h2 id="what">What is the Prometheus Design System?</h2>
-
-<p>The Prometheus Design System is an extraction and normalization of the UI patterns, tokens, and components found in the Prometheus monitoring tool's web interface.</p>
-
-<p>It solves concrete problems found during a <a href="inconsistencies.html">deep codebase audit</a>:</p>
-<ul>
-  <li><strong>Fragmented health badge system</strong> → unified <a href="components/status-badge.html">StatusBadge</a> component</li>
-  <li><strong>Dual border inconsistency</strong> (AlertsPage vs RulesPage) → <a href="components/health-panel.html">HealthPanel</a></li>
-  <li><strong>4 different filter bars</strong> → <a href="components/filter-toolbar.html">FilterToolbar</a></li>
-  <li><strong>Hardcoded light-mode-only colors</strong> → <code>light-dark()</code> CSS throughout</li>
-  <li><strong>Missing dark mode on SeriesName hover</strong> → fixed</li>
-  <li><strong>Hardcoded spacing values</strong> → named tokens</li>
-</ul>
-
-<h2 id="philosophy">Design Philosophy</h2>
-
-<h3>"Derive, not invent"</h3>
-<p>Every token, component, and pattern in this design system was <em>derived</em> from the actual Prometheus codebase — not invented from scratch. The system documents what already exists and resolves inconsistencies where the same pattern was implemented differently across pages.</p>
-
-<p>This means:</p>
-<ul>
-  <li>System UI fonts, not custom web fonts (this is a developer tool)</li>
-  <li><code>DejaVu Sans Mono</code> for code (the Prometheus-specific choice)</li>
-  <li>Mantine's default spacing and radius scales (intentionally not customized)</li>
-  <li>The header is <em>always dark</em> — this is Prometheus brand identity, not a bug</li>
-</ul>
-
-<h2 id="governance">About This Project</h2>
-
-<p>This design system is an <strong>independent proposal</strong> — it is not currently an official Prometheus project or a Grafana Labs initiative. It was created by extracting and normalizing patterns from the <code>prometheus/prometheus</code> web UI codebase.</p>
-
-<p>The goal is to propose this work to the Prometheus maintainer community for adoption. The path forward:</p>
-<ol>
-  <li>Gather feedback from Prometheus maintainers on this documentation and component library</li>
-  <li>Open upstream PRs to <code>prometheus/prometheus</code> for the inconsistency fixes documented here</li>
-  <li>Propose the design system as an official sub-project through the CNCF governance process</li>
-  <li>Transfer ownership to the <code>prometheus</code> GitHub organization if accepted</li>
-</ol>
-
-<p><strong>Decision-making:</strong> All design decisions are documented in <a href="architecture-decisions.html">Architecture Decisions</a>. Proposed changes follow the process described in <a href="contributing.html">Contributing</a>.</p>
-
-
-<h2 id="components-overview">Component Library</h2>
-
-<p>The library exports <strong>19 components</strong> organized into categories:</p>
+<h2 id="explore">Explore</h2>
 
 <div class="doc-card-grid">
-  <a class="component-card" href="components/status-badge.html">
-    <h3>StatusBadge</h3>
-    <p>Unified health/state badge for all status vocabularies</p>
-    <span class="card-tag">Status &amp; Health</span>
+  <a class="component-card" href="tokens.html">
+    <h3>Design Tokens</h3>
+    <p>Color, typography, spacing, and elevation values derived from the codebase.</p>
+    <span class="card-tag">Foundations</span>
   </a>
-  <a class="component-card" href="components/health-panel.html">
-    <h3>HealthPanel</h3>
-    <p>Accordion item with health-state colored left border</p>
-    <span class="card-tag">Status &amp; Health</span>
+  <a class="component-card" href="icons.html">
+    <h3>Icon Inventory</h3>
+    <p>Tabler icons used across the Prometheus UI with usage context.</p>
+    <span class="card-tag">Foundations</span>
   </a>
-  <a class="component-card" href="components/filter-toolbar.html">
-    <h3>FilterToolbar</h3>
-    <p>Unified filter bar with search, state filter, and collapse</p>
-    <span class="card-tag">Filters</span>
+  <a class="component-card" href="components.html">
+    <h3>Components</h3>
+    <p>19 components extracted from the Prometheus UI, with Figma plugin.</p>
+    <span class="card-tag">Components</span>
   </a>
-  <a class="component-card" href="components/data-table.html">
-    <h3>DataTable</h3>
-    <p>Generic sortable data table with custom cell renderers</p>
-    <span class="card-tag">Data Display</span>
+  <a class="component-card" href="patterns.html">
+    <h3>UI Patterns</h3>
+    <p>Recurring layout and interaction patterns across Prometheus pages.</p>
+    <span class="card-tag">Patterns</span>
+  </a>
+  <a class="component-card" href="action-items.html">
+    <h3>Action Items</h3>
+    <p>Concrete tasks and PRs to bring the UI into compliance.</p>
+    <span class="card-tag">Roadmap</span>
   </a>
 </div>
-
-<p><a href="components.html">View all 19 components →</a></p>
-
-<h2 id="tokens-overview">Design Tokens</h2>
-
-<p>All tokens are documented as CSS custom properties (<code>--prom-*</code>), derived from the actual values used in the Prometheus codebase.</p>
-
-<p><a href="tokens.html">Explore all design tokens →</a></p>
-
 
 <h2 id="acknowledgements">Acknowledgements</h2>
 
-<p>This design system was created by <a href="https://github.com/andrejkiri" target="_blank" rel="noopener"><strong>AndrejKiri</strong></a> by auditing and extracting patterns from the Prometheus web UI codebase. For feedback, questions, or suggestions, please <a href="https://github.com/andrejkiri/prometheus-design-system/issues" target="_blank" rel="noopener">open an issue</a> or reach out directly.</p>
+<p>Created by <a href="https://github.com/andrejkiri" target="_blank" rel="noopener"><strong>AndrejKiri</strong></a> by auditing and extracting patterns from the Prometheus web UI. For feedback or suggestions, <a href="https://github.com/andrejkiri/prometheus-design-system/issues" target="_blank" rel="noopener">open an issue</a>.</p>
 
-<p>The components, tokens, and patterns documented here are derived from the <a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener"><code>prometheus/prometheus</code></a> web UI. Credit and thanks to the Prometheus UI contributors whose work makes this possible:</p>
+<p>Derived from the <a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener"><code>prometheus/prometheus</code></a> web UI. Credit to:</p>
 <ul>
-  <li><a href="https://github.com/juliusv" target="_blank" rel="noopener"><strong>Julius Volz</strong></a> — Prometheus co-founder and lead of the 3.x UI rewrite (React 19 + Mantine)</li>
-  <li><a href="https://github.com/nicholasgasior" target="_blank" rel="noopener"><strong>nicholasgasior</strong></a> — contributor to Prometheus UI components</li>
-  <li>All <a href="https://github.com/prometheus/prometheus/graphs/contributors" target="_blank" rel="noopener"><strong>Prometheus UI contributors</strong></a> who have worked on the <code>web/ui</code> directory</li>
+  <li><a href="https://github.com/juliusv" target="_blank" rel="noopener"><strong>Julius Volz</strong></a> — Prometheus co-founder, 3.x UI rewrite lead</li>
+  <li><a href="https://github.com/nicholasgasior" target="_blank" rel="noopener"><strong>nicholasgasior</strong></a> — Prometheus UI contributor</li>
+  <li>All <a href="https://github.com/prometheus/prometheus/graphs/contributors" target="_blank" rel="noopener"><strong>Prometheus UI contributors</strong></a></li>
 </ul>
-
 
   </div>
 </main>

@@ -231,6 +231,37 @@ a:hover { text-decoration: underline; }
   font-size: 0.75rem;
 }
 
+/* Collapsible nav section */
+.doc-nav-details summary {
+  list-style: none;
+  cursor: pointer;
+  display: block;
+  padding: 0.375rem 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--doc-text-secondary);
+  border-left: 2px solid transparent;
+  transition: all 100ms ease;
+  line-height: 1.5;
+  position: relative;
+  user-select: none;
+}
+.doc-nav-details summary:hover {
+  color: var(--doc-text);
+  background: var(--doc-bg-secondary);
+}
+.doc-nav-details summary::-webkit-details-marker { display: none; }
+.doc-nav-details summary::marker { display: none; content: ""; }
+.doc-nav-details summary::after {
+  content: "›";
+  position: absolute;
+  right: 1rem;
+  font-size: 0.875rem;
+  transition: transform 150ms ease;
+}
+.doc-nav-details[open] > summary::after {
+  transform: rotate(90deg);
+}
+
 /* Main content */
 .doc-main {
   display: flex;
