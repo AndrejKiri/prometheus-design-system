@@ -115,13 +115,31 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { NavButton } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { IconDatabase } <span class="kw">from</span> <span class="str">"@tabler/icons-react"</span>;
+<h2 id="code">Current Implementation</h2>
+<p>From <code>App.tsx + App.module.css</code> in the Prometheus codebase:</p>
+<pre><code><span class="cmt">/* App.tsx */</span>
+{mainNavPages.map((p) =&gt; (
+  &lt;<span class="tag">Button</span> <span class="attr">key</span>={p.path} <span class="attr">component</span>={NavLink} <span class="attr">to</span>={p.path}
+    <span class="attr">className</span>={classes.link} <span class="attr">leftSection</span>={p.icon} <span class="attr">px</span>={navLinkXPadding}&gt;
+    {p.title}
+  &lt;/<span class="tag">Button</span>&gt;
+))}
 
-&lt;<span class="tag">NavButton</span> <span class="attr">href</span>=<span class="str">"/query"</span> <span class="attr">icon</span>={&lt;<span class="tag">IconDatabase</span> <span class="attr">size</span>={<span class="num">16</span>} /&gt;}&gt;
-  Query
-&lt;/<span class="tag">NavButton</span>&gt;</code></pre>
+<span class="cmt">/* App.module.css */</span>
+.link {
+  display: block;
+  padding: rem(<span class="num">8px</span>) rem(<span class="num">12px</span>);
+  border-radius: <span class="kw">var</span>(--mantine-radius-sm);
+  color: <span class="kw">var</span>(--mantine-color-gray-<span class="num">0</span>);
+  font-size: <span class="kw">var</span>(--mantine-font-size-sm);
+  font-weight: <span class="num">500</span>;
+  background-color: transparent;
+}
+.link:hover { background-color: <span class="kw">var</span>(--mantine-color-gray-<span class="num">6</span>); }
+.link[aria-current=<span class="str">&quot;page&quot;</span>] {
+  background-color: <span class="kw">var</span>(--mantine-color-blue-filled);
+  color: <span class="kw">var</span>(--mantine-color-white);
+}</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -134,17 +152,6 @@
     <tr><td>Active BG</td><td>#228be6 (primary)</td></tr>
     <tr><td>Hover BG</td><td>rgba(255,255,255,0.1)</td></tr>
     <tr><td>Text Color</td><td>rgba(255,255,255,0.8)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>href</code></td><td><code>string</code></td><td>—</td><td>Navigation path <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>active</code></td><td><code>boolean</code></td><td>auto</td><td>Whether this link is active (auto-detected via NavLink) </td></tr>
-    <tr><td><code>icon</code></td><td><code>React.ReactNode</code></td><td>undefined</td><td>Optional icon element </td></tr>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Link label text <span class="doc-tag doc-tag-required">Required</span></td></tr>
   </tbody>
 </table>
 

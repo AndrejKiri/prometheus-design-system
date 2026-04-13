@@ -113,18 +113,15 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { InfoPageLayout, InfoCard } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { IconServer, IconClock } <span class="kw">from</span> <span class="str">"@tabler/icons-react"</span>;
-
-&lt;<span class="tag">InfoPageLayout</span>&gt;
-  &lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Runtime Information"</span> <span class="attr">icon</span>={IconServer}&gt;
-    ...
-  &lt;/<span class="tag">InfoCard</span>&gt;
-  &lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Build Information"</span> <span class="attr">icon</span>={IconClock}&gt;
-    ...
-  &lt;/<span class="tag">InfoCard</span>&gt;
-&lt;/<span class="tag">InfoPageLayout</span>&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/InfoPageStack.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">const</span> InfoPageStack: FC&lt;{ children: ReactNode }&gt; = ({ children }) =&gt; {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">Stack</span> <span class="attr">gap</span>=<span class="str">&quot;lg&quot;</span> <span class="attr">maw</span>={<span class="num">1000</span>} <span class="attr">mx</span>=<span class="str">&quot;auto&quot;</span> <span class="attr">mt</span>=<span class="str">&quot;xs&quot;</span>&gt;
+      {children}
+    &lt;/<span class="tag">Stack</span>&gt;
+  );
+};</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -134,16 +131,6 @@
     <tr><td>Gap</td><td>20px (lg) default</td></tr>
     <tr><td>Margin Top</td><td>8px (xs) default</td></tr>
     <tr><td>Padding</td><td>0 (handled by AppShell main padding 16px)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Page content (typically InfoCard components) <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>gap</code></td><td><code>MantineSpacing</code></td><td>"lg"</td><td>Gap between child elements </td></tr>
-    <tr><td><code>mt</code></td><td><code>MantineSpacing</code></td><td>"xs"</td><td>Top margin </td></tr>
   </tbody>
 </table>
 

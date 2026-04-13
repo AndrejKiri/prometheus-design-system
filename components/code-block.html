@@ -113,20 +113,27 @@ global:
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { CodeBlock } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/ConfigPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">export</span> <span class="kw">default</span> <span class="kw">function</span> ConfigPage() {
+  <span class="kw">const</span> {
+    data: {
+      data: { yaml },
+    },
+  } = useSuspenseAPIQuery&lt;<span class="tag">ConfigResult</span>&gt;({ path: <span class="str">`/status/config`</span> });
 
-<span class="cmt">// PromQL display</span>
-&lt;<span class="tag">CodeBlock</span> <span class="attr">language</span>=<span class="str">"promql"</span>&gt;
-  &lt;<span class="tag">code</span> <span class="attr">className</span>=<span class="str">"promql-code"</span>&gt;
-    rate(http_requests_total[5m])
-  &lt;/<span class="tag">code</span>&gt;
-&lt;/<span class="tag">CodeBlock</span>&gt;
-
-<span class="cmt">// Scrollable mode</span>
-&lt;<span class="tag">CodeBlock</span> <span class="attr">overflow</span>=<span class="str">"scroll"</span>&gt;
-  &lt;<span class="tag">pre</span>&gt;long output text...&lt;/<span class="tag">pre</span>&gt;
-&lt;/<span class="tag">CodeBlock</span>&gt;</code></pre>
+  <span class="kw">return</span> (
+    &lt;<span class="tag">CodeHighlight</span>
+      <span class="attr">code</span>={yaml}
+      <span class="attr">language</span>=<span class="str">&quot;yaml&quot;</span>
+      <span class="attr">miw</span>=<span class="str">&quot;50vw&quot;</span>
+      <span class="attr">w</span>=<span class="str">&quot;fit-content&quot;</span>
+      <span class="attr">maw</span>=<span class="str">&quot;calc(100vw - 75px)&quot;</span>
+      <span class="attr">mx</span>=<span class="str">&quot;auto&quot;</span>
+      <span class="attr">mt</span>=<span class="str">&quot;xs&quot;</span>
+    /&gt;
+  );
+}</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -138,17 +145,6 @@ global:
     <tr><td>Font Family</td><td>DejaVu Sans Mono</td></tr>
     <tr><td>Font Size</td><td>13px</td></tr>
     <tr><td>Line Height</td><td>1.6</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>The code content to display <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>language</code></td><td><code>string</code></td><td>undefined</td><td>Programming language for syntax highlighting metadata </td></tr>
-    <tr><td><code>overflow</code></td><td><code>"wrap" | "scroll"</code></td><td>"wrap"</td><td>Whether to wrap long lines or scroll horizontally </td></tr>
-    <tr><td><code>padding</code></td><td><code>MantineSpacing</code></td><td>"md"</td><td>Card padding </td></tr>
   </tbody>
 </table>
 

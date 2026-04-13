@@ -117,19 +117,34 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { SeriesName } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-<span class="cmt">// Plain display</span>
-&lt;<span class="tag">SeriesName</span>
-  <span class="attr">labels</span>={{ __name__: <span class="str">"up"</span>, job: <span class="str">"prometheus"</span>, instance: <span class="str">"localhost:9090"</span> }}
-/&gt;
-
-<span class="cmt">// Formatted (double-click to copy matchers)</span>
-&lt;<span class="tag">SeriesName</span>
-  <span class="attr">labels</span>={{ __name__: <span class="str">"up"</span>, job: <span class="str">"prometheus"</span> }}
-  <span class="attr">formatted</span>
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/query/SeriesName.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">const</span> SeriesName: FC&lt;<span class="tag">SeriesNameProps</span>&gt; = ({ labels, format }) =&gt; {
+  <span class="kw">const</span> renderFormatted = (): React.ReactElement =&gt; {
+    <span class="kw">const</span> labelNodes: React.ReactElement[] = [];
+    <span class="kw">let</span> first = true;
+    <span class="kw">for</span> (<span class="kw">const</span> label <span class="kw">in</span> labels) {
+      <span class="kw">if</span> (label === <span class="str">&quot;__name__&quot;</span>) continue;
+      labelNodes.push(
+        &lt;span <span class="attr">key</span>={label}&gt;
+          {!first &amp;&amp; <span class="str">&quot;, &quot;</span>}
+          &lt;span <span class="attr">className</span>={classes.labelPair}
+            <span class="attr">title</span>=<span class="str">&quot;Double click to copy label matcher&quot;</span>&gt;
+            &lt;span <span class="attr">className</span>={classes.labelName}&gt;{maybeQuoteLabelName(label)}&lt;/span&gt;
+            =<span class="str">&quot;&lt;span className={classes.labelValue}&gt;{escapeString(labels[label])}&lt;/span&gt;&quot;</span>
+          &lt;/span&gt;
+        &lt;/span&gt;
+      );
+      <span class="kw">if</span> (first) first = false;
+    }
+    <span class="kw">return</span> (
+      &lt;span&gt;
+        &lt;span <span class="attr">className</span>={classes.metricName}&gt;{labels?.__name__ || <span class="str">&quot;&quot;</span>}&lt;/span&gt;
+        {<span class="str">&quot;{&quot;</span>}{labelNodes}{<span class="str">&quot;}&quot;</span>}
+      &lt;/span&gt;
+    );
+  };
+};</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -141,16 +156,6 @@
     <tr><td>Metric Name Weight</td><td>500 (medium)</td></tr>
     <tr><td>Label Name Color</td><td>light-dark(#800000, #ff8585)</td></tr>
     <tr><td>Label Value Color</td><td>light-dark(#a31515, #fca5a5)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>labels</code></td><td><code>Labels | null</code></td><td>—</td><td>The metric labels to display. If null, displays '{}' <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>formatted</code></td><td><code>boolean</code></td><td>false</td><td>Formatted mode: clickable label pairs that copy PromQL matchers on double-click </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

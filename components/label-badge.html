@@ -132,19 +132,21 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { LabelBadge, LabelBadgeSet } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-<span class="cmt">// Single label</span>
-&lt;<span class="tag">LabelBadge</span> <span class="attr">name</span>=<span class="str">"job"</span> <span class="attr">value</span>=<span class="str">"prometheus"</span> /&gt;
-
-<span class="cmt">// Discovered label (blue styling)</span>
-&lt;<span class="tag">LabelBadge</span> <span class="attr">name</span>=<span class="str">"instance"</span> <span class="attr">value</span>=<span class="str">"localhost:9090"</span> <span class="attr">variant</span>=<span class="str">"discovered"</span> /&gt;
-
-<span class="cmt">// Full label set</span>
-&lt;<span class="tag">LabelBadgeSet</span>
-  <span class="attr">labels</span>={{ __name__: <span class="str">"up"</span>, job: <span class="str">"prometheus"</span>, instance: <span class="str">"localhost:9090"</span> }}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/LabelBadges.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">export</span> <span class="kw">const</span> LabelBadges: FC&lt;<span class="tag">LabelBadgesProps</span>&gt; = ({
+  labels,
+  wrapper: Wrapper = Group,
+  style,
+}) =&gt; (
+  &lt;<span class="tag">Wrapper</span> <span class="attr">gap</span>=<span class="str">&quot;xs&quot;</span>&gt;
+    {Object.entries(labels).map(([k, v]) =&gt; (
+      &lt;span <span class="attr">key</span>={k} <span class="attr">className</span>={badgeClasses.labelBadge} <span class="attr">style</span>={style}&gt;
+        {maybeQuoteLabelName(k)}=<span class="str">&quot;{escapeString(v)}&quot;</span>
+      &lt;/span&gt;
+    ))}
+  &lt;/<span class="tag">Wrapper</span>&gt;
+);</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -157,18 +159,6 @@
     <tr><td>Font Family</td><td>DejaVu Sans Mono</td></tr>
     <tr><td>Border Radius</td><td>999px (pill)</td></tr>
     <tr><td>Border Width</td><td>none</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>name</code></td><td><code>string</code></td><td>—</td><td>The label name (key) <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>value</code></td><td><code>string</code></td><td>—</td><td>The label value <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>variant</code></td><td><code>"default" | "discovered"</code></td><td>"default"</td><td>Visual variant. Discovered uses blue styling </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
-    <tr><td><code>style</code></td><td><code>React.CSSProperties</code></td><td>undefined</td><td>Additional inline styles </td></tr>
   </tbody>
 </table>
 

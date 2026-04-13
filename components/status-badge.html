@@ -155,23 +155,31 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { StatusBadge } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+<h2 id="code">Current Implementation</h2>
+<p>From <code>Badge.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="cmt">/* Badge.module.css */</span>
+.healthOk {
+  background-color: light-dark(
+    <span class="kw">var</span>(--mantine-color-green-<span class="num">1</span>),
+    <span class="kw">var</span>(--mantine-color-green-<span class="num">9</span>)
+  );
+  color: light-dark(<span class="kw">var</span>(--mantine-color-green-<span class="num">9</span>), <span class="kw">var</span>(--mantine-color-green-<span class="num">1</span>));
+}
 
-<span class="cmt">// Alert states</span>
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"firing"</span> /&gt;
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"pending"</span> /&gt;
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"inactive"</span> /&gt;
+.healthErr {
+  background-color: light-dark(
+    <span class="kw">var</span>(--mantine-color-red-<span class="num">1</span>),
+    darken(<span class="kw">var</span>(--mantine-color-red-<span class="num">9</span>), 0.<span class="num">25</span>)
+  );
+  color: light-dark(<span class="kw">var</span>(--mantine-color-red-<span class="num">9</span>), <span class="kw">var</span>(--mantine-color-red-<span class="num">1</span>));
+}
 
-<span class="cmt">// Target health</span>
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"up"</span> /&gt;
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"down"</span> /&gt;
-
-<span class="cmt">// Custom label</span>
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"warn"</span> <span class="attr">label</span>=<span class="str">"degraded"</span> /&gt;
-
-<span class="cmt">// Stats variant</span>
-&lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"ok"</span> <span class="attr">variant</span>=<span class="str">"stats"</span> <span class="attr">label</span>=<span class="str">"3 / 3 active"</span> /&gt;</code></pre>
+<span class="cmt">/* AlertsPage.tsx usage */</span>
+{g.counts.firing &gt; <span class="num">0</span> &amp;&amp; (
+  &lt;<span class="tag">Badge</span> <span class="attr">className</span>={badgeClasses.healthErr}&gt;
+    firing ({g.counts.firing})
+  &lt;/<span class="tag">Badge</span>&gt;
+)}</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -183,19 +191,6 @@
     <tr><td>Border Radius</td><td colspan="3">999px (pill)</td></tr>
     <tr><td>Border Width</td><td colspan="3">none</td></tr>
     <tr><td>Letter Spacing</td><td colspan="3">0.02em</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>status</code></td><td><code>StatusBadgeStatus</code></td><td>—</td><td>The health/state status to display <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>label</code></td><td><code>string</code></td><td>undefined</td><td>Override the display label. If not provided, a normalized default is used </td></tr>
-    <tr><td><code>size</code></td><td><code>"sm" | "md" | "lg"</code></td><td>"sm"</td><td>Badge size </td></tr>
-    <tr><td><code>variant</code></td><td><code>"health" | "stats"</code></td><td>"health"</td><td>Visual variant — health (colored) or stats (neutral gray) </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
-    <tr><td><code>style</code></td><td><code>React.CSSProperties</code></td><td>undefined</td><td>Additional inline styles </td></tr>
   </tbody>
 </table>
 

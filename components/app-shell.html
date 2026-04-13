@@ -132,22 +132,37 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { PrometheusAppShell, NavButton, ThemeToggle, SettingsPanel } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { IconDatabase } <span class="kw">from</span> <span class="str">"@tabler/icons-react"</span>;
-
-&lt;<span class="tag">PrometheusAppShell</span>
-  <span class="attr">logo</span>={&lt;<span class="tag">YourLogo</span> /&gt;}
-  <span class="attr">navLinks</span>={
-    &lt;&gt;
-      &lt;<span class="tag">NavButton</span> <span class="attr">href</span>=<span class="str">"/query"</span> <span class="attr">icon</span>={&lt;<span class="tag">IconDatabase</span> <span class="attr">size</span>={<span class="num">16</span>} /&gt;}&gt;Query&lt;/<span class="tag">NavButton</span>&gt;
-      &lt;<span class="tag">NavButton</span> <span class="attr">href</span>=<span class="str">"/alerts"</span>&gt;Alerts&lt;/<span class="tag">NavButton</span>&gt;
-    &lt;/&gt;
-  }
-  <span class="attr">actions</span>={&lt;&gt;&lt;<span class="tag">ThemeToggle</span> /&gt;&lt;<span class="tag">SettingsPanel</span> <span class="attr">groups</span>={[...]} /&gt;&lt;/&gt;}
-&gt;
-  &lt;<span class="tag">Routes</span>&gt;...&lt;/<span class="tag">Routes</span>&gt;
-&lt;/<span class="tag">PrometheusAppShell</span>&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>App.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">AppShell</span> <span class="attr">header</span>={{ height: <span class="num">56</span> }}
+  <span class="attr">navbar</span>={{ width: <span class="num">300</span>, breakpoint: <span class="str">&quot;sm&quot;</span>,
+            collapsed: { desktop: true, mobile: !opened } }}
+  <span class="attr">padding</span>=<span class="str">&quot;md&quot;</span>&gt;
+  &lt;<span class="tag">AppShell.Header</span> <span class="attr">bg</span>=<span class="str">&quot;rgb(65, 73, 81)&quot;</span> <span class="attr">c</span>=<span class="str">&quot;#fff&quot;</span>&gt;
+    &lt;<span class="tag">Group</span> <span class="attr">h</span>=<span class="str">&quot;100%&quot;</span> <span class="attr">px</span>=<span class="str">&quot;md&quot;</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span>&gt;
+      &lt;<span class="tag">Group</span> <span class="attr">style</span>={{ flex: <span class="num">1</span> }} <span class="attr">justify</span>=<span class="str">&quot;space-between&quot;</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span>&gt;
+        &lt;<span class="tag">Group</span> <span class="attr">gap</span>={<span class="num">40</span>} <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span>&gt;
+          &lt;<span class="tag">Link</span> <span class="attr">to</span>=<span class="str">&quot;/&quot;</span> <span class="attr">style</span>={{ textDecoration: <span class="str">&quot;none&quot;</span>, color: <span class="str">&quot;white&quot;</span> }}&gt;
+            &lt;<span class="tag">Group</span> <span class="attr">gap</span>={<span class="num">10</span>} <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span>&gt;
+              &lt;img <span class="attr">src</span>={PrometheusLogo} <span class="attr">height</span>={<span class="num">30</span>} /&gt;
+              &lt;<span class="tag">Text</span> <span class="attr">fz</span>={<span class="num">20</span>}&gt;Prometheus&lt;/<span class="tag">Text</span>&gt;
+            &lt;/<span class="tag">Group</span>&gt;
+          &lt;/<span class="tag">Link</span>&gt;
+          &lt;<span class="tag">Group</span> <span class="attr">gap</span>={<span class="num">12</span>} <span class="attr">visibleFrom</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span>&gt;{navLinks}&lt;/<span class="tag">Group</span>&gt;
+        &lt;/<span class="tag">Group</span>&gt;
+        &lt;<span class="tag">Group</span> <span class="attr">visibleFrom</span>=<span class="str">&quot;xs&quot;</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span> <span class="attr">gap</span>=<span class="str">&quot;xs&quot;</span>&gt;{navActionIcons}&lt;/<span class="tag">Group</span>&gt;
+      &lt;/<span class="tag">Group</span>&gt;
+      &lt;<span class="tag">Burger</span> <span class="attr">opened</span>={opened} <span class="attr">onClick</span>={toggle} <span class="attr">hiddenFrom</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">size</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">color</span>=<span class="str">&quot;gray.2&quot;</span> /&gt;
+    &lt;/<span class="tag">Group</span>&gt;
+  &lt;/<span class="tag">AppShell.Header</span>&gt;
+  &lt;<span class="tag">AppShell.Main</span>&gt;
+    &lt;<span class="tag">ErrorBoundary</span> <span class="attr">key</span>={location.pathname}&gt;
+      &lt;<span class="tag">Suspense</span> <span class="attr">fallback</span>={null}&gt;
+        &lt;<span class="tag">Routes</span>&gt;...&lt;/<span class="tag">Routes</span>&gt;
+      &lt;/<span class="tag">Suspense</span>&gt;
+    &lt;/<span class="tag">ErrorBoundary</span>&gt;
+  &lt;/<span class="tag">AppShell.Main</span>&gt;
+&lt;/<span class="tag">AppShell</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -162,17 +177,6 @@
     <tr><td>Main Padding</td><td>16px (md)</td></tr>
     <tr><td>Navbar Width (mobile)</td><td>300px</td></tr>
     <tr><td>Navbar Breakpoint</td><td>sm (768px)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>logo</code></td><td><code>React.ReactNode</code></td><td>undefined</td><td>Logo element for the header </td></tr>
-    <tr><td><code>navLinks</code></td><td><code>React.ReactNode</code></td><td>undefined</td><td>Navigation links (NavButton components) </td></tr>
-    <tr><td><code>actions</code></td><td><code>React.ReactNode</code></td><td>undefined</td><td>Header action buttons (ThemeToggle, SettingsPanel) </td></tr>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Main content area <span class="doc-tag doc-tag-required">Required</span></td></tr>
   </tbody>
 </table>
 

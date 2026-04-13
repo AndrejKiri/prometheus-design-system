@@ -124,20 +124,32 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { SettingsPanel } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">SettingsPanel</span>
-  <span class="attr">groups</span>={[
-    {
-      title: <span class="str">"Query Settings"</span>,
-      settings: [
-        { type: <span class="str">"checkbox"</span>, label: <span class="str">"Enable syntax highlighting"</span>, checked: <span class="kw">true</span>, onChange: ... },
-        { type: <span class="str">"checkbox"</span>, label: <span class="str">"Enable linting"</span>, checked: <span class="kw">false</span>, onChange: ... },
-      ],
-    },
-  ]}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/SettingsMenu.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Popover</span> <span class="attr">position</span>=<span class="str">&quot;bottom&quot;</span> withArrow <span class="attr">shadow</span>=<span class="str">&quot;md&quot;</span>&gt;
+  &lt;<span class="tag">Popover.Target</span>&gt;
+    &lt;<span class="tag">ActionIcon</span> <span class="attr">color</span>=<span class="str">&quot;gray&quot;</span> <span class="attr">title</span>=<span class="str">&quot;Settings&quot;</span> <span class="attr">size</span>={<span class="num">32</span>}&gt;
+      &lt;<span class="tag">IconSettings</span> <span class="attr">style</span>={actionIconStyle} /&gt;
+    &lt;/<span class="tag">ActionIcon</span>&gt;
+  &lt;/<span class="tag">Popover.Target</span>&gt;
+  &lt;<span class="tag">Popover.Dropdown</span>&gt;
+    &lt;<span class="tag">Stack</span>&gt;
+      &lt;<span class="tag">Fieldset</span> <span class="attr">p</span>=<span class="str">&quot;md&quot;</span> <span class="attr">legend</span>=<span class="str">&quot;Global settings&quot;</span>&gt;
+        &lt;<span class="tag">Checkbox</span> <span class="attr">checked</span>={useLocalTime} <span class="attr">label</span>=<span class="str">&quot;Use local time&quot;</span>
+          <span class="attr">onChange</span>={(e) =&gt;
+            dispatch(updateSettings({ useLocalTime: e.currentTarget.checked }))
+          } /&gt;
+      &lt;/<span class="tag">Fieldset</span>&gt;
+      &lt;<span class="tag">Fieldset</span> <span class="attr">p</span>=<span class="str">&quot;md&quot;</span> <span class="attr">legend</span>=<span class="str">&quot;Query page settings&quot;</span>&gt;
+        &lt;<span class="tag">Stack</span>&gt;
+          &lt;<span class="tag">Checkbox</span> <span class="attr">checked</span>={enableQueryHistory} <span class="attr">label</span>=<span class="str">&quot;Enable query history&quot;</span> /&gt;
+          &lt;<span class="tag">Checkbox</span> <span class="attr">checked</span>={enableAutocomplete} <span class="attr">label</span>=<span class="str">&quot;Enable autocomplete&quot;</span> /&gt;
+          &lt;<span class="tag">Checkbox</span> <span class="attr">checked</span>={enableSyntaxHighlighting} <span class="attr">label</span>=<span class="str">&quot;Enable syntax highlighting&quot;</span> /&gt;
+        &lt;/<span class="tag">Stack</span>&gt;
+      &lt;/<span class="tag">Fieldset</span>&gt;
+    &lt;/<span class="tag">Stack</span>&gt;
+  &lt;/<span class="tag">Popover.Dropdown</span>&gt;
+&lt;/<span class="tag">Popover</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -151,15 +163,6 @@
     <tr><td>Group Title Font Size</td><td>12px</td></tr>
     <tr><td>Item Font Size</td><td>13px</td></tr>
     <tr><td>Checkbox Size</td><td>16px</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>groups</code></td><td><code>SettingGroup[]</code></td><td>—</td><td>Array of setting groups to display <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

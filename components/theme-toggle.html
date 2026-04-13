@@ -114,11 +114,21 @@
 <h3>ColorSchemePreference Type</h3>
 <pre><code><span class="kw">type</span> <span class="typ">ColorSchemePreference</span> = <span class="str">"light"</span> | <span class="str">"dark"</span> | <span class="str">"auto"</span>;</code></pre>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { ThemeToggle } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-<span class="cmt">// In AppShell actions</span>
-&lt;<span class="tag">ThemeToggle</span> /&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/ThemeSelector.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">export</span> <span class="kw">const</span> ThemeSelector: FC = () =&gt; {
+  <span class="kw">const</span> { colorScheme, setColorScheme } = useMantineColorScheme();
+  <span class="kw">return</span> (
+    &lt;<span class="tag">ActionIcon</span> <span class="attr">color</span>=<span class="str">&quot;gray&quot;</span> <span class="attr">size</span>={<span class="num">32</span>}
+      <span class="attr">onClick</span>={() =&gt; setColorScheme(
+        colorScheme === <span class="str">&quot;light&quot;</span> ? <span class="str">&quot;dark&quot;</span> : colorScheme === <span class="str">&quot;dark&quot;</span> ? <span class="str">&quot;auto&quot;</span> : <span class="str">&quot;light&quot;</span>
+      )}&gt;
+      {colorScheme === <span class="str">&quot;light&quot;</span> ? &lt;<span class="tag">IconSunFilled</span> /&gt; :
+       colorScheme === <span class="str">&quot;dark&quot;</span> ? &lt;<span class="tag">IconMoonFilled</span> /&gt; :
+       &lt;<span class="tag">IconBrightnessFilled</span> /&gt;}
+    &lt;/<span class="tag">ActionIcon</span>&gt;
+  );
+};</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -130,14 +140,6 @@
     <tr><td>Icon Size</td><td>16px</td></tr>
     <tr><td>BG</td><td>rgba(255,255,255,0.1)</td></tr>
     <tr><td>Hover BG</td><td>rgba(255,255,255,0.25)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

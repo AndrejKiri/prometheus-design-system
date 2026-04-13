@@ -118,20 +118,29 @@
 <h3>Color Steps</h3>
 <p>The canonical resolution: <strong>Step-3 (light) / Step-8 (dark)</strong> for all border colors. This normalizes the RulesPage which was using step-4.</p>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { HealthPanel } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { Accordion } <span class="kw">from</span> <span class="str">"@mantine/core"</span>;
+<h2 id="code">Current Implementation</h2>
+<p>From <code>Panel.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="cmt">/* Panel.module.css */</span>
+.panelHealthOk {
+  border-left: <span class="num">5px</span> solid
+    light-dark(<span class="kw">var</span>(--mantine-color-green-<span class="num">3</span>), <span class="kw">var</span>(--mantine-color-green-<span class="num">8</span>)) !important;
+}
 
-&lt;<span class="tag">Accordion</span> <span class="attr">multiple</span> <span class="attr">variant</span>=<span class="str">"separated"</span>&gt;
-  &lt;<span class="tag">HealthPanel</span> <span class="attr">value</span>=<span class="str">"group-1"</span> <span class="attr">status</span>=<span class="str">"ok"</span>&gt;
-    &lt;<span class="tag">Accordion.Control</span>&gt;recording_rules&lt;/<span class="tag">Accordion.Control</span>&gt;
-    &lt;<span class="tag">Accordion.Panel</span>&gt;...&lt;/<span class="tag">Accordion.Panel</span>&gt;
-  &lt;/<span class="tag">HealthPanel</span>&gt;
-  &lt;<span class="tag">HealthPanel</span> <span class="attr">value</span>=<span class="str">"group-2"</span> <span class="attr">status</span>=<span class="str">"firing"</span>&gt;
-    &lt;<span class="tag">Accordion.Control</span>&gt;critical_alerts&lt;/<span class="tag">Accordion.Control</span>&gt;
-    &lt;<span class="tag">Accordion.Panel</span>&gt;...&lt;/<span class="tag">Accordion.Panel</span>&gt;
-  &lt;/<span class="tag">HealthPanel</span>&gt;
-&lt;/<span class="tag">Accordion</span>&gt;</code></pre>
+.panelHealthErr {
+  border-left: <span class="num">5px</span> solid
+    light-dark(<span class="kw">var</span>(--mantine-color-red-<span class="num">3</span>), <span class="kw">var</span>(--mantine-color-red-<span class="num">9</span>)) !important;
+}
+
+<span class="cmt">/* AlertsPage.tsx — applied to Accordion.Item */</span>
+&lt;<span class="tag">Accordion.Item</span>
+  <span class="attr">className</span>={
+    r.counts.firing &gt; <span class="num">0</span>
+      ? panelClasses.panelHealthErr
+      : r.counts.pending &gt; <span class="num">0</span>
+        ? panelClasses.panelHealthWarn
+        : panelClasses.panelHealthOk
+  }
+&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -144,17 +153,6 @@
     <tr><td>Border Width (outline)</td><td>1px</td></tr>
     <tr><td>Min Height</td><td>auto (content-driven)</td></tr>
     <tr><td>Title Font Size</td><td>14px (sm)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>status</code></td><td><code>HealthPanelStatus</code></td><td>undefined</td><td>Health status determining the left border color. Accepts any StatusBadge vocabulary. </td></tr>
-    <tr><td><code>value</code></td><td><code>string</code></td><td>—</td><td>Accordion item value (required by Mantine Accordion) <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Accordion.Control and Accordion.Panel children <span class="doc-tag doc-tag-required">Required</span></td></tr>
   </tbody>
 </table>
 

@@ -991,13 +991,6 @@
 
 <p>The design system can be adopted incrementally. You don't need to rewrite everything at once. Follow these phases in order, each building on the previous.</p>
 
-<div class="callout callout-info">
-  <div class="callout-title">Before you start</div>
-  Install the package and import both CSS files in your app entry point:
-  <pre style="margin-top:0.5rem;margin-bottom:0"><code><span class="kw">import</span> <span class="str">"@mantine/core/styles.css"</span>;
-<span class="kw">import</span> <span class="str">"@prometheus-io/design-system/styles.css"</span>;</code></pre>
-</div>
-
 <h2 id="phase-1">Phase 1: Design Tokens</h2>
 
 <p><strong>Effort: Low</strong> — Replace hardcoded values with CSS variables and TS constants.</p>
@@ -1045,7 +1038,6 @@
 &lt;/<span class="tag">Badge</span>&gt;
 
 <span class="cmt">// After — unified</span>
-<span class="kw">import</span> { StatusBadge } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
 &lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"firing"</span> /&gt;
 &lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>=<span class="str">"err"</span> /&gt;
 &lt;<span class="tag">StatusBadge</span> <span class="attr">status</span>={target.health} /&gt;</code></pre>
@@ -1058,14 +1050,12 @@
 &lt;<span class="tag">Accordion.Item</span> <span class="attr">style</span>={{ borderLeft: <span class="str">`5px solid var(--mantine-color-red-4)`</span> }}&gt;
 
 <span class="cmt">// After — consistent step-3/step-8 colors</span>
-<span class="kw">import</span> { HealthPanel } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
 &lt;<span class="tag">HealthPanel</span> <span class="attr">value</span>={name} <span class="attr">status</span>={health}&gt;...&lt;/<span class="tag">HealthPanel</span>&gt;</code></pre>
 
 <h3>FilterToolbar (replaces 4 separate implementations)</h3>
 <pre><code><span class="cmt">// Before — copy-pasted Group + StateMultiSelect + TextInput in 4 files</span>
 
 <span class="cmt">// After</span>
-<span class="kw">import</span> { FilterToolbar } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
 &lt;<span class="tag">FilterToolbar</span>
   <span class="attr">searchValue</span>={search}
   <span class="attr">onSearchChange</span>={setSearch}

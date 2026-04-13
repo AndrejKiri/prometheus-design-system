@@ -133,21 +133,33 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { DataTable } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">DataTable</span>
-  <span class="attr">columns</span>={[
-    { key: <span class="str">"flag"</span>, header: <span class="str">"Flag"</span>, sortable: <span class="kw">true</span> },
-    { key: <span class="str">"value"</span>, header: <span class="str">"Value"</span> },
-  ]}
-  <span class="attr">data</span>={flags}
-  <span class="attr">rowKey</span>=<span class="str">"flag"</span>
-  <span class="attr">emptyMessage</span>=<span class="str">"No flags found"</span>
-  <span class="attr">sortKey</span>={sortKey}
-  <span class="attr">sortDirection</span>={sortDirection}
-  <span class="attr">onSort</span>={handleSort}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Table</span>&gt;
+  &lt;<span class="tag">Table.Thead</span>&gt;
+    &lt;<span class="tag">Table.Tr</span>&gt;
+      &lt;<span class="tag">Table.Th</span> <span class="attr">w</span>=<span class="str">&quot;25%&quot;</span>&gt;Endpoint&lt;/<span class="tag">Table.Th</span>&gt;
+      &lt;<span class="tag">Table.Th</span>&gt;Labels&lt;/<span class="tag">Table.Th</span>&gt;
+      &lt;<span class="tag">Table.Th</span> <span class="attr">w</span>={<span class="num">230</span>}&gt;Last scrape&lt;/<span class="tag">Table.Th</span>&gt;
+      &lt;<span class="tag">Table.Th</span> <span class="attr">w</span>={<span class="num">100</span>}&gt;State&lt;/<span class="tag">Table.Th</span>&gt;
+    &lt;/<span class="tag">Table.Tr</span>&gt;
+  &lt;/<span class="tag">Table.Thead</span>&gt;
+  &lt;<span class="tag">Table.Tbody</span>&gt;
+    {items.map((target, i) =&gt; (
+      &lt;<span class="tag">Table.Tr</span> <span class="attr">key</span>={i}&gt;
+        &lt;<span class="tag">Table.Td</span>&gt;
+          &lt;<span class="tag">EndpointLink</span> <span class="attr">endpoint</span>={target.scrapeUrl} <span class="attr">globalUrl</span>={target.globalUrl} /&gt;
+        &lt;/<span class="tag">Table.Td</span>&gt;
+        &lt;<span class="tag">Table.Td</span>&gt;
+          &lt;<span class="tag">TargetLabels</span> <span class="attr">labels</span>={target.labels} /&gt;
+        &lt;/<span class="tag">Table.Td</span>&gt;
+        &lt;<span class="tag">Table.Td</span>&gt;
+          &lt;<span class="tag">Badge</span> <span class="attr">className</span>={healthBadgeClass(target.health)}&gt;{target.health}&lt;/<span class="tag">Badge</span>&gt;
+        &lt;/<span class="tag">Table.Td</span>&gt;
+      &lt;/<span class="tag">Table.Tr</span>&gt;
+    ))}
+  &lt;/<span class="tag">Table.Tbody</span>&gt;
+&lt;/<span class="tag">Table</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -160,23 +172,6 @@
     <tr><td>Font Size</td><td>12px (xs) default</td></tr>
     <tr><td>Header Font Size</td><td>11px</td></tr>
     <tr><td>Min Height</td><td>auto (content-driven)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>columns</code></td><td><code>DataTableColumn<T>[]</code></td><td>—</td><td>Column definitions <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>data</code></td><td><code>T[]</code></td><td>—</td><td>Table data rows <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>rowKey</code></td><td><code>string | ((row: T, index: number) => string)</code></td><td>undefined</td><td>Key or function for unique row key </td></tr>
-    <tr><td><code>emptyMessage</code></td><td><code>string</code></td><td>"No data"</td><td>Message shown when data is empty </td></tr>
-    <tr><td><code>sortKey</code></td><td><code>string</code></td><td>undefined</td><td>Currently sorted column key </td></tr>
-    <tr><td><code>sortDirection</code></td><td><code>"asc" | "desc" | null</code></td><td>undefined</td><td>Current sort direction </td></tr>
-    <tr><td><code>onSort</code></td><td><code>(key: string, direction: SortDirection) => void</code></td><td>undefined</td><td>Sort change callback </td></tr>
-    <tr><td><code>scrollable</code></td><td><code>boolean</code></td><td>true</td><td>Wrap in ScrollArea for horizontal overflow </td></tr>
-    <tr><td><code>onRowClick</code></td><td><code>(row: T, index: number) => void</code></td><td>undefined</td><td>Row click handler </td></tr>
-    <tr><td><code>fz</code></td><td><code>MantineSize</code></td><td>"xs"</td><td>Font size </td></tr>
   </tbody>
 </table>
 

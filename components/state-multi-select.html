@@ -118,17 +118,32 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { StateMultiSelect } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">StateMultiSelect</span>
-  <span class="attr">options</span>={[<span class="str">"firing"</span>, <span class="str">"pending"</span>, <span class="str">"inactive"</span>]}
-  <span class="attr">values</span>={selectedStates}
-  <span class="attr">onChange</span>={setSelectedStates}
-  <span class="attr">placeholder</span>=<span class="str">"Filter by state"</span>
-  <span class="attr">optionClass</span>={(option) =&gt; healthClasses[option] ?? <span class="str">""</span>}
-  <span class="attr">optionCount</span>={(option) =&gt; counts[option]}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/StateMultiSelect.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Combobox</span> <span class="attr">store</span>={combobox} <span class="attr">onOptionSubmit</span>={handleValueSelect}&gt;
+  &lt;<span class="tag">Combobox.DropdownTarget</span>&gt;
+    &lt;<span class="tag">PillsInput</span> pointer <span class="attr">onClick</span>={() =&gt; combobox.toggleDropdown()} <span class="attr">miw</span>={<span class="num">200</span>}
+      <span class="attr">leftSection</span>={&lt;<span class="tag">IconHeartRateMonitor</span> <span class="attr">style</span>={inputIconStyle} /&gt;}&gt;
+      &lt;<span class="tag">Pill.Group</span>&gt;
+        {renderedValues.length &gt; <span class="num">0</span> ? renderedValues : (
+          &lt;<span class="tag">PillsInput.Field</span> <span class="attr">placeholder</span>={placeholder} <span class="attr">mt</span>={<span class="num">1</span>} /&gt;
+        )}
+      &lt;/<span class="tag">Pill.Group</span>&gt;
+    &lt;/<span class="tag">PillsInput</span>&gt;
+  &lt;/<span class="tag">Combobox.DropdownTarget</span>&gt;
+  &lt;<span class="tag">Combobox.Dropdown</span>&gt;
+    &lt;<span class="tag">Combobox.Options</span>&gt;
+      {options.map((value) =&gt; (
+        &lt;<span class="tag">Combobox.Option</span> <span class="attr">value</span>={value} <span class="attr">key</span>={value} <span class="attr">active</span>={values.includes(value)}&gt;
+          &lt;<span class="tag">Group</span> <span class="attr">gap</span>=<span class="str">&quot;sm&quot;</span>&gt;
+            {values.includes(value) ? &lt;<span class="tag">CheckIcon</span> <span class="attr">size</span>={<span class="num">12</span>} /&gt; : null}
+            &lt;<span class="tag">StatePill</span> <span class="attr">value</span>={value} <span class="attr">className</span>={optionClass(value)} /&gt;
+          &lt;/<span class="tag">Group</span>&gt;
+        &lt;/<span class="tag">Combobox.Option</span>&gt;
+      ))}
+    &lt;/<span class="tag">Combobox.Options</span>&gt;
+  &lt;/<span class="tag">Combobox.Dropdown</span>&gt;
+&lt;/<span class="tag">Combobox</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -140,19 +155,6 @@
     <tr><td>Border Width</td><td>1px</td></tr>
     <tr><td>Font Size</td><td>13px</td></tr>
     <tr><td>Dropdown Shadow</td><td>md (--mantine-shadow-md)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>options</code></td><td><code>string[]</code></td><td>—</td><td>Available state options <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>values</code></td><td><code>string[]</code></td><td>—</td><td>Currently selected values <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>onChange</code></td><td><code>(values: string[]) => void</code></td><td>—</td><td>Change callback <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>placeholder</code></td><td><code>string</code></td><td>"Filter by state"</td><td>Placeholder text </td></tr>
-    <tr><td><code>optionClass</code></td><td><code>(option: string) => string</code></td><td>—</td><td>Function returning CSS class for option color <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>optionCount</code></td><td><code>(option: string) => number | undefined</code></td><td>undefined</td><td>Function returning count for each option </td></tr>
   </tbody>
 </table>
 
