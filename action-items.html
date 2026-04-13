@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Next Steps — Prometheus Design System</title>
+  <title>Action Items — Prometheus Design System</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -71,7 +71,7 @@
 
     <div class="doc-nav-section">Changelog &amp; Roadmap</div>
     <a class="doc-nav-link" href="changelog.html">Changelog</a>
-    <a class="doc-nav-link" href="next-steps.html">Next Steps</a>
+    <a class="doc-nav-link" href="action-items.html">Action Items</a>
 
     <div class="doc-nav-section">Reference</div>
     <a class="doc-nav-link" href="contributing.html">Contributing</a>
@@ -83,8 +83,8 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Next Steps</span></div>
-    <h1>Next Steps</h1>
+    <div class="doc-breadcrumb"><a href="index.html">Docs</a><span class="sep">›</span><span>Action Items</span></div>
+    <h1>Action Items</h1>
     <p class="doc-subtitle">Concrete tasks to bring the Prometheus UI into compliance with the design system and improve visual polish.</p>
 
 
@@ -99,7 +99,8 @@
         <div>
           <div class="pr-card-title">Replace hardcoded header colors with design tokens</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-tokens">tokens</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-tokens">tokens</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -171,7 +172,8 @@
         <div>
           <div class="pr-card-title">Unify health status badges with StatusBadge</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-components">components</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-components">components</span>
             <span class="pr-label pr-label-medium">medium</span>
           </div>
         </div>
@@ -202,22 +204,41 @@
             </div>
           </div>
           <div class="pr-ba-after">
-            <div class="pr-ba-label">After — unified StatusBadge everywhere</div>
-            <div style="display: flex; flex-direction: column; gap: 0.625rem; font-size: 0.8125rem;">
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="color: var(--doc-text-tertiary); font-size: 0.75rem; min-width: 5.5rem;">AlertsPage:</span>
-                <span class="mock-badge mock-badge-ok">firing</span>
-                <span class="mock-badge mock-badge-warn">pending</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="color: var(--doc-text-tertiary); font-size: 0.75rem; min-width: 5.5rem;">RulesPage:</span>
-                <span class="mock-badge mock-badge-ok">ok</span>
-                <span class="mock-badge mock-badge-err">err</span>
-              </div>
-              <div style="display: flex; align-items: center; gap: 0.5rem;">
-                <span style="color: var(--doc-text-tertiary); font-size: 0.75rem; min-width: 5.5rem;">Targets:</span>
-                <span class="mock-badge mock-badge-ok">up</span>
-                <span class="mock-badge mock-badge-err">down</span>
+            <div class="pr-ba-label">After — choose approach</div>
+            <div class="pr-tabs">
+              <input type="radio" name="pr2-tabs" id="pr2-tab-recommended" checked>
+              <label for="pr2-tab-recommended">Recommended: CSS modules</label>
+              <input type="radio" name="pr2-tabs" id="pr2-tab-alt-a">
+              <label for="pr2-tab-alt-a">Alt: Mantine color prop</label>
+              <input type="radio" name="pr2-tabs" id="pr2-tab-alt-b">
+              <label for="pr2-tab-alt-b">Alt: Conditional color</label>
+              <div class="pr-tab-panels">
+                <div class="pr-tab-panel-recommended">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">CSS module classes with <code>light-dark()</code> step-1/step-9 colors. Best dark mode support, avoids Mantine Badge overhead for performance-critical label rendering.</p>
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <span class="mock-badge mock-badge-ok">firing</span>
+                    <span class="mock-badge mock-badge-warn">pending</span>
+                    <span class="mock-badge mock-badge-ok">ok</span>
+                    <span class="mock-badge mock-badge-err">err</span>
+                    <span class="mock-badge mock-badge-ok">up</span>
+                    <span class="mock-badge mock-badge-err">down</span>
+                  </div>
+                </div>
+                <div class="pr-tab-panel-alt-a">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Use Mantine <code>&lt;Badge color="red"&gt;</code> prop directly. Simpler API but uses Mantine's default shade (step-6 filled), less control over dark mode colors.</p>
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <span class="mock-badge" style="background:#2f9e44;color:white;border-radius:3px;">ok</span>
+                    <span class="mock-badge" style="background:#e03131;color:white;border-radius:3px;">err</span>
+                    <span class="mock-badge" style="background:#e8590c;color:white;border-radius:3px;">pending</span>
+                  </div>
+                </div>
+                <div class="pr-tab-panel-alt-b">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Conditional color prop: <code>color={health === "up" ? "green" : "red"}</code>. Minimal code but no nuance for warning/unknown states, no dark mode optimization.</p>
+                  <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <span class="mock-badge" style="background:#37b24d;color:#ebfbee;font-size:0.6875rem;">up</span>
+                    <span class="mock-badge" style="background:#f03e3e;color:#fff5f5;font-size:0.6875rem;">down</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -251,7 +272,8 @@
         <div>
           <div class="pr-card-title">Unify panel borders with HealthPanel</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-components">components</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-components">components</span>
             <span class="pr-label pr-label-medium">medium</span>
           </div>
         </div>
@@ -275,15 +297,39 @@
             </div>
           </div>
           <div class="pr-ba-after">
-            <div class="pr-ba-label">After — consistent HealthPanel everywhere</div>
-            <div style="display: flex; flex-direction: column; gap: 0.375rem;">
-              <div class="mock-health-panel mock-health-panel-ok">
-                <div class="mock-health-panel-title">node_cpu_seconds (green-3)</div>
-                <div class="mock-health-panel-sub">ok · HealthPanel</div>
-              </div>
-              <div class="mock-health-panel mock-health-panel-err">
-                <div class="mock-health-panel-title">disk_read_errors (red-3)</div>
-                <div class="mock-health-panel-sub">err · HealthPanel</div>
+            <div class="pr-ba-label">After — choose color steps</div>
+            <div class="pr-tabs">
+              <input type="radio" name="pr3-tabs" id="pr3-tab-recommended" checked>
+              <label for="pr3-tab-recommended">Recommended: Step-3/8</label>
+              <input type="radio" name="pr3-tabs" id="pr3-tab-alt-a">
+              <label for="pr3-tab-alt-a">Alt: Step-4/7</label>
+              <div class="pr-tab-panels">
+                <div class="pr-tab-panel-recommended">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Step-3 (light) / step-8 (dark) from AlertsPage. Lighter, more subtle border accent. CSS modules, more maintainable.</p>
+                  <div style="display: flex; flex-direction: column; gap: 0.375rem;">
+                    <div class="mock-health-panel mock-health-panel-ok">
+                      <div class="mock-health-panel-title">node_cpu_seconds (green-3)</div>
+                      <div class="mock-health-panel-sub">ok · HealthPanel</div>
+                    </div>
+                    <div class="mock-health-panel mock-health-panel-err">
+                      <div class="mock-health-panel-title">disk_read_errors (red-3)</div>
+                      <div class="mock-health-panel-sub">err · HealthPanel</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pr-tab-panel-alt-a">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Step-4 (light) / step-7 (dark) from RulesPage. Bolder borders, more prominent. Uses inline styles.</p>
+                  <div style="display: flex; flex-direction: column; gap: 0.375rem;">
+                    <div class="mock-health-panel mock-health-panel-ok" style="border-left-color: #69db7c;">
+                      <div class="mock-health-panel-title">node_cpu_seconds (green-4)</div>
+                      <div class="mock-health-panel-sub">ok · inline style</div>
+                    </div>
+                    <div class="mock-health-panel mock-health-panel-err" style="border-left-color: #ff6b6b;">
+                      <div class="mock-health-panel-title">disk_read_errors (red-4)</div>
+                      <div class="mock-health-panel-sub">err · inline style</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -312,7 +358,8 @@
         <div>
           <div class="pr-card-title">Extract shared FilterToolbar component</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-components">components</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-components">components</span>
             <span class="pr-label pr-label-medium">medium</span>
           </div>
         </div>
@@ -331,13 +378,31 @@
             <div style="font-size: 0.6875rem; color: var(--doc-text-tertiary); margin-top: 0.25rem; padding-left: 0.25rem;">Repeated identically in AlertsPage, RulesPage, TargetsPage, ServiceDiscoveryPage</div>
           </div>
           <div class="pr-ba-after">
-            <div class="pr-ba-label">After — single FilterToolbar component</div>
-            <div class="mock-filter-bar">
-              <div class="mock-select" style="min-width: 120px; font-size: 0.75rem; padding: 0.3rem 0.6rem;">All states ▾</div>
-              <div class="mock-input" style="flex:1; font-size: 0.75rem; padding: 0.3rem 0.6rem;">🔍 Search…</div>
-              <div class="mock-icon-btn" title="Collapse all">⊟</div>
+            <div class="pr-ba-label">After — choose approach</div>
+            <div class="pr-tabs">
+              <input type="radio" name="pr4-tabs" id="pr4-tab-recommended" checked>
+              <label for="pr4-tab-recommended">Recommended: Shared component</label>
+              <input type="radio" name="pr4-tabs" id="pr4-tab-alt-a">
+              <label for="pr4-tab-alt-a">Alt: Keep copy-paste</label>
+              <div class="pr-tab-panels">
+                <div class="pr-tab-panel-recommended">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Single <code>&lt;FilterToolbar&gt;</code> with optional <code>showCollapseAll</code> prop. DRY, one place to maintain.</p>
+                  <div class="mock-filter-bar">
+                    <div class="mock-select" style="min-width: 120px; font-size: 0.75rem; padding: 0.3rem 0.6rem;">All states ▾</div>
+                    <div class="mock-input" style="flex:1; font-size: 0.75rem; padding: 0.3rem 0.6rem;">🔍 Search…</div>
+                    <div class="mock-icon-btn" title="Collapse all">⊟</div>
+                  </div>
+                </div>
+                <div class="pr-tab-panel-alt-a">
+                  <p style="font-size:0.8125rem;margin:0.5rem 0">Keep the 4 separate implementations but normalize them to use the same spacing, sizing, and state classes. Less coupling, but duplication persists.</p>
+                  <div class="mock-filter-bar">
+                    <div class="mock-select" style="min-width: 120px; font-size: 0.75rem; padding: 0.3rem 0.6rem;">All states ▾</div>
+                    <div class="mock-input" style="flex:1; font-size: 0.75rem; padding: 0.3rem 0.6rem;">🔍 Search alerts…</div>
+                  </div>
+                  <div style="font-size: 0.6875rem; color: var(--doc-text-tertiary); margin-top: 0.25rem;">× 4 pages, each slightly different</div>
+                </div>
+              </div>
             </div>
-            <div style="font-size: 0.6875rem; color: var(--doc-text-tertiary); margin-top: 0.25rem; padding-left: 0.25rem;"><code>&lt;FilterToolbar showCollapseAll /&gt;</code> — optional prop for Targets/SD pages</div>
           </div>
         </div>
 
@@ -371,7 +436,8 @@
         <div>
           <div class="pr-card-title">Fix localStorage key collision between AlertsPage and RulesPage</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-fix">fix</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-fix">fix</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -407,7 +473,8 @@
         <div>
           <div class="pr-card-title">Fix SeriesName dark mode hover colors</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-fix">fix</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-fix">fix</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -440,7 +507,8 @@
         <div>
           <div class="pr-card-title">Fix Prometheus logo text visibility gap between sm and md breakpoints</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-fix">fix</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-fix">fix</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -474,7 +542,8 @@
         <div>
           <div class="pr-card-title">Replace hardcoded spacing values with Mantine spacing tokens</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-tokens">tokens</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-tokens">tokens</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -511,7 +580,8 @@
         <div>
           <div class="pr-card-title">Convert logo font size from unitless px to rem token</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-tokens">tokens</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-tokens">tokens</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -545,7 +615,8 @@
         <div>
           <div class="pr-card-title">Replace inline icon style objects with shared constants</div>
           <div class="pr-card-labels">
-            <span class="pr-label pr-label-tokens">tokens</span>
+            
+            <span class="pr-label pr-label-inconsistency">inconsistency</span><span class="pr-label pr-label-tokens">tokens</span>
             <span class="pr-label pr-label-easy">easy</span>
           </div>
         </div>
@@ -978,14 +1049,6 @@
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <h2 id="migration">Migration Guide</h2>
     <p>How to adopt the Prometheus Design System incrementally. These phases can be followed in order, each building on the previous.</p>
-    <a href="#overview">Overview</a>
-  <a href="#phase-1">Phase 1: Tokens</a>
-  <a href="#phase-2">Phase 2: Shared Components</a>
-  <a href="#phase-3">Phase 3: Domain Components</a>
-  <a href="#phase-4">Phase 4: Layout</a>
-  <a href="#component-mapping">Component Mapping</a>
-  <a href="#css-migration">CSS Variable Migration</a>
-</div>
 
 <h2 id="overview">Incremental Adoption</h2>
 
