@@ -233,15 +233,43 @@ a:hover { text-decoration: underline; }
 
 /* Main content */
 .doc-main {
+  display: flex;
   margin-left: var(--doc-sidebar-width);
   margin-top: var(--doc-header-height);
   min-height: calc(100vh - var(--doc-header-height));
 }
 
 .doc-content {
+  flex: 1;
+  min-width: 0;
   max-width: 960px;
-  margin: 0 auto;
   padding: 2rem 2.5rem 4rem;
+}
+
+/* Right TOC sidebar */
+.doc-toc-sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  padding: 2rem 1rem 2rem 0;
+  position: sticky;
+  top: calc(var(--doc-header-height) + 1rem);
+  align-self: flex-start;
+  max-height: calc(100vh - var(--doc-header-height) - 2rem);
+  overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+  .doc-toc-sidebar { display: none; }
+}
+
+.doc-toc-sidebar .toc-inline {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  border-left: 2px solid var(--doc-border-light);
+  padding-left: 0.75rem;
 }
 
 /* Breadcrumb */
@@ -895,6 +923,7 @@ td code {
   .doc-burger { display: flex; }
   .doc-main { margin-left: 0; }
   .doc-content { padding: 1.5rem 1rem 3rem; }
+  .doc-toc-sidebar { display: none; }
   .doc-header-subtitle { display: none; }
   h1 { font-size: 1.625rem; }
   h2 { font-size: 1.25rem; }
