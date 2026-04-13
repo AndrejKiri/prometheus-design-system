@@ -279,23 +279,24 @@ a:hover { text-decoration: underline; }
 .sidebar-collapse-btn {
   position: fixed;
   top: calc(var(--doc-header-height) + 0.5rem);
-  left: calc(var(--doc-sidebar-width) - 12px);
-  width: 24px;
-  height: 24px;
+  left: calc(var(--doc-sidebar-width) - 14px);
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid var(--doc-border);
   background: var(--doc-bg);
-  color: var(--doc-text-tertiary);
+  color: var(--doc-text-secondary);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 91;
   transition: all 200ms ease;
+  box-shadow: 2px 0 4px rgba(0,0,0,0.06);
 }
-.sidebar-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); }
+.sidebar-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); border-color: var(--doc-accent); }
 
 /* Collapsed sidebar state */
 .sidebar-collapsed .doc-sidebar {
@@ -324,24 +325,25 @@ a:hover { text-decoration: underline; }
 /* TOC collapse toggle */
 .toc-collapse-btn {
   position: absolute;
-  top: 0;
-  left: -12px;
-  width: 24px;
-  height: 24px;
+  top: 0.25rem;
+  left: -14px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   border: 1px solid var(--doc-border);
   background: var(--doc-bg);
-  color: var(--doc-text-tertiary);
+  color: var(--doc-text-secondary);
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
   transition: all 150ms ease;
+  box-shadow: -2px 0 4px rgba(0,0,0,0.06);
 }
-.toc-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); }
+.toc-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); border-color: var(--doc-accent); }
 .doc-toc-sidebar { position: relative; transition: width 200ms ease, padding 200ms ease; }
 
 /* TOC dots (shown when collapsed) */
