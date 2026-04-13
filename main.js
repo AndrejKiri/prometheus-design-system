@@ -99,12 +99,12 @@
     var sidebar = document.getElementById("sidebar");
     if (!sidebar) return;
 
-    // Create toggle button
+    // Create toggle button (fixed position, appended to body)
     var btn = document.createElement("button");
     btn.className = "sidebar-collapse-btn";
     btn.setAttribute("aria-label", "Toggle sidebar");
     btn.innerHTML = "‹";
-    sidebar.appendChild(btn);
+    document.body.appendChild(btn);
 
     // Restore state
     var collapsed = localStorage.getItem("sidebar-collapsed") === "true";

@@ -275,11 +275,11 @@ a:hover { text-decoration: underline; }
 }
 .doc-nav-link.sub { display: block; }
 
-/* Sidebar collapse toggle */
+/* Sidebar collapse toggle — fixed position so it's never clipped */
 .sidebar-collapse-btn {
-  position: absolute;
-  top: 0.5rem;
-  right: -12px;
+  position: fixed;
+  top: calc(var(--doc-header-height) + 0.5rem);
+  left: calc(var(--doc-sidebar-width) - 12px);
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -293,7 +293,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   justify-content: center;
   z-index: 91;
-  transition: all 150ms ease;
+  transition: all 200ms ease;
 }
 .sidebar-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); }
 
@@ -315,9 +315,8 @@ a:hover { text-decoration: underline; }
   border-left: none;
 }
 .sidebar-collapsed .doc-sidebar .doc-nav-details { pointer-events: none; }
-.sidebar-collapsed .doc-sidebar .sidebar-collapse-btn {
-  right: auto;
-  left: 12px;
+.sidebar-collapsed .sidebar-collapse-btn {
+  left: 36px;
   transform: rotate(180deg);
 }
 .sidebar-collapsed .doc-main { margin-left: 48px; }
@@ -343,10 +342,10 @@ a:hover { text-decoration: underline; }
   transition: all 150ms ease;
 }
 .toc-collapse-btn:hover { color: var(--doc-text); background: var(--doc-bg-secondary); }
-.doc-toc-sidebar { position: relative; }
+.doc-toc-sidebar { position: relative; transition: width 200ms ease, padding 200ms ease; }
 
 /* TOC dots (shown when collapsed) */
-.toc-dots { display: none; flex-direction: column; gap: 6px; padding: 0.25rem 0; }
+.toc-dots { display: none; flex-direction: column; align-items: center; gap: 6px; padding: 0.25rem 0; }
 .toc-dot {
   width: 6px;
   height: 6px;
@@ -357,8 +356,8 @@ a:hover { text-decoration: underline; }
 }
 .toc-dot:hover { background: var(--doc-accent); }
 
-/* Collapsed TOC state */
-.toc-collapsed { width: 28px !important; padding: 2rem 0.5rem 2rem 0.5rem; }
+/* Collapsed TOC state — shrinks to right edge */
+.toc-collapsed { width: 24px !important; padding: 2rem 0 2rem 0; align-items: center; display: flex; flex-direction: column; }
 .toc-collapsed .toc-inline { display: none; }
 .toc-collapsed .toc-dots { display: flex; }
 .toc-collapsed .toc-collapse-btn { left: -12px; transform: rotate(180deg); }
