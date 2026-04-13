@@ -94,12 +94,76 @@
     });
   }
 
+  // ─── Collapsible Sidebar ───────────────────────────────────────────────
+  function setupCollapsibleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    if (!sidebar) return;
+
+    // Create toggle button
+    var btn = document.createElement("button");
+    btn.className = "sidebar-collapse-btn";
+    btn.setAttribute("aria-label", "Toggle sidebar");
+    btn.innerHTML = "‹";
+    sidebar.appendChild(btn);
+
+    // Restore state
+    var collapsed = localStorage.getItem("sidebar-collapsed") === "true";
+    if (collapsed) document.body.classList.add("sidebar-collapsed");
+
+    btn.addEventListener("click", function () {
+      document.body.classList.toggle("sidebar-collapsed");
+      var isCollapsed = document.body.classList.contains("sidebar-collapsed");
+      localStorage.setItem("sidebar-collapsed", isCollapsed);
+    });
+  }
+
+  // ─── Collapsible TOC ─────────────────────────────────────────────────
+  function setupCollapsibleToc() {
+    var toc = document.querySelector(".doc-toc-sidebar");
+    if (!toc) return;
+
+    // Create toggle button
+    var btn = document.createElement("button");
+    btn.className = "toc-collapse-btn";
+    btn.setAttribute("aria-label", "Toggle table of contents");
+    btn.innerHTML = "›";
+    toc.appendChild(btn);
+
+    // Create dot indicators
+    var tocInline = toc.querySelector(".toc-inline");
+    if (tocInline) {
+      var dots = document.createElement("div");
+      dots.className = "toc-dots";
+      var links = tocInline.querySelectorAll("a");
+      links.forEach(function (link) {
+        var dot = document.createElement("a");
+        dot.className = "toc-dot";
+        dot.href = link.href;
+        dot.title = link.textContent;
+        dots.appendChild(dot);
+      });
+      toc.appendChild(dots);
+    }
+
+    // Restore state
+    var collapsed = localStorage.getItem("toc-collapsed") === "true";
+    if (collapsed) toc.classList.add("toc-collapsed");
+
+    btn.addEventListener("click", function () {
+      toc.classList.toggle("toc-collapsed");
+      var isCollapsed = toc.classList.contains("toc-collapsed");
+      localStorage.setItem("toc-collapsed", isCollapsed);
+    });
+  }
+
   // ─── Init ─────────────────────────────────────────────────────────────
   document.addEventListener("DOMContentLoaded", function () {
     setTheme(getPreferredTheme());
     highlightActiveNav();
     setupMobileSidebar();
     setupCopyButtons();
+    setupCollapsibleSidebar();
+    setupCollapsibleToc();
 
     var toggle = document.getElementById("theme-toggle");
     if (toggle) toggle.addEventListener("click", toggleTheme);
