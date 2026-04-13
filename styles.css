@@ -231,6 +231,26 @@ a:hover { text-decoration: underline; }
   font-size: 0.75rem;
 }
 
+/* Collapsible nav section */
+.doc-nav-details { }
+.doc-nav-details summary {
+  list-style: none;
+  cursor: pointer;
+}
+.doc-nav-details summary::-webkit-details-marker { display: none; }
+.doc-nav-details summary::marker { display: none; content: ""; }
+.doc-nav-summary { position: relative; }
+.doc-nav-summary::after {
+  content: "›";
+  position: absolute;
+  right: 1rem;
+  font-size: 0.875rem;
+  transition: transform 150ms ease;
+}
+.doc-nav-details[open] > summary .doc-nav-summary::after {
+  transform: rotate(90deg);
+}
+
 /* Main content */
 .doc-main {
   display: flex;
