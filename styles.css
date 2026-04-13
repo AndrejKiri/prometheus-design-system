@@ -1096,6 +1096,7 @@ h2[id], h3[id], h4[id] { scroll-margin-top: calc(var(--doc-header-height) + 1.5r
 .pr-label-tokens { background: #e0e7ff; color: #3730a3; }
 .pr-label-components { background: #fce7f3; color: #9d174d; }
 .pr-label-layout { background: #f3e8ff; color: #6b21a8; }
+.pr-label-inconsistency { background: #fed7aa; color: #9a3412; }
 .pr-label-easy { background: #ecfdf5; color: #047857; }
 .pr-label-medium { background: #fffbeb; color: #b45309; }
 
@@ -1105,8 +1106,35 @@ h2[id], h3[id], h4[id] { scroll-margin-top: calc(var(--doc-header-height) + 1.5r
 [data-theme="dark"] .pr-label-tokens { background: rgba(99, 102, 241, 0.2); color: #a5b4fc; }
 [data-theme="dark"] .pr-label-components { background: rgba(236, 72, 153, 0.2); color: #f9a8d4; }
 [data-theme="dark"] .pr-label-layout { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; }
+[data-theme="dark"] .pr-label-inconsistency { background: rgba(251, 146, 60, 0.2); color: #fdba74; }
 [data-theme="dark"] .pr-label-easy { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
 [data-theme="dark"] .pr-label-medium { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+/* CSS-only tabs for alternative solutions */
+.pr-tabs { margin-top: 0.75rem; }
+.pr-tabs input[type="radio"] { display: none; }
+.pr-tabs > label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--doc-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pr-tabs > label:hover { color: var(--doc-accent); }
+.pr-tabs input:checked + label { color: var(--doc-accent); border-bottom-color: var(--doc-accent); }
+.pr-tab-panels > div { display: none; }
+/* Show panel when corresponding radio is checked — general sibling combinator */
+#pr2-tab-recommended:checked ~ .pr-tab-panels > .pr-tab-panel-recommended,
+#pr2-tab-alt-a:checked ~ .pr-tab-panels > .pr-tab-panel-alt-a,
+#pr2-tab-alt-b:checked ~ .pr-tab-panels > .pr-tab-panel-alt-b,
+#pr3-tab-recommended:checked ~ .pr-tab-panels > .pr-tab-panel-recommended,
+#pr3-tab-alt-a:checked ~ .pr-tab-panels > .pr-tab-panel-alt-a,
+#pr4-tab-recommended:checked ~ .pr-tab-panels > .pr-tab-panel-recommended,
+#pr4-tab-alt-a:checked ~ .pr-tab-panels > .pr-tab-panel-alt-a { display: block; }
+.pr-tab-panels { border-top: 2px solid var(--doc-border-light); padding-top: 0.75rem; margin-top: -2px; }
 
 .pr-card-body {
   padding: 1.25rem;
