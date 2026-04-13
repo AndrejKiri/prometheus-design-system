@@ -119,16 +119,26 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { KeyValueTable } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">KeyValueTable</span>
-  <span class="attr">object</span>={{
-    version: <span class="str">"2.47.0"</span>,
-    revision: <span class="str">"abc123"</span>,
-    goVersion: <span class="str">"go1.21.5"</span>,
-  }}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/FlagsPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Table</span> <span class="attr">horizontalSpacing</span>=<span class="str">&quot;md&quot;</span> <span class="attr">verticalSpacing</span>=<span class="str">&quot;xs&quot;</span> <span class="attr">miw</span>={<span class="num">700</span>} <span class="attr">layout</span>=<span class="str">&quot;fixed&quot;</span>&gt;
+  &lt;<span class="tag">Table.Tbody</span>&gt;
+    &lt;<span class="tag">Table.Tr</span>&gt;
+      &lt;<span class="tag">Th</span> <span class="attr">sorted</span>={sortBy === <span class="str">&quot;flag&quot;</span>} <span class="attr">reversed</span>={reverseSortDirection}
+          <span class="attr">onSort</span>={() =&gt; setSorting(<span class="str">&quot;flag&quot;</span>)}&gt;Flag&lt;/<span class="tag">Th</span>&gt;
+      &lt;<span class="tag">Th</span> <span class="attr">sorted</span>={sortBy === <span class="str">&quot;value&quot;</span>} <span class="attr">reversed</span>={reverseSortDirection}
+          <span class="attr">onSort</span>={() =&gt; setSorting(<span class="str">&quot;value&quot;</span>)}&gt;Value&lt;/<span class="tag">Th</span>&gt;
+    &lt;/<span class="tag">Table.Tr</span>&gt;
+  &lt;/<span class="tag">Table.Tbody</span>&gt;
+  &lt;<span class="tag">Table.Tbody</span>&gt;
+    {sortedData.map((row) =&gt; (
+      &lt;<span class="tag">Table.Tr</span> <span class="attr">key</span>={row.flag}&gt;
+        &lt;<span class="tag">Table.Td</span>&gt;&lt;code&gt;--{row.flag}&lt;/code&gt;&lt;/<span class="tag">Table.Td</span>&gt;
+        &lt;<span class="tag">Table.Td</span>&gt;&lt;code&gt;{row.value}&lt;/code&gt;&lt;/<span class="tag">Table.Td</span>&gt;
+      &lt;/<span class="tag">Table.Tr</span>&gt;
+    ))}
+  &lt;/<span class="tag">Table.Tbody</span>&gt;
+&lt;/<span class="tag">Table</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -139,16 +149,6 @@
     <tr><td>Font Size</td><td>13px</td></tr>
     <tr><td>Key Column Width</td><td>40%</td></tr>
     <tr><td>Key Font Weight</td><td>600 (semibold)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>object</code></td><td><code>Record<string, string | number | boolean></code></td><td>undefined</td><td>Plain object to render as key-value pairs </td></tr>
-    <tr><td><code>data</code></td><td><code>KeyValueEntry[]</code></td><td>undefined</td><td>Array of { key, value } entries (alternative to object) </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

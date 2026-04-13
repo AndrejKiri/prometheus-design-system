@@ -113,15 +113,23 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { EmptyState } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { IconDatabase } <span class="kw">from</span> <span class="str">"@tabler/icons-react"</span>;
-
-&lt;<span class="tag">EmptyState</span>
-  <span class="attr">icon</span>={IconDatabase}
-  <span class="attr">message</span>=<span class="str">"No targets found"</span>
-  <span class="attr">description</span>=<span class="str">"No scrape targets match your current filter."</span>
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code>{alertsPageData.groups.length === <span class="num">0</span> ? (
+  &lt;<span class="tag">Alert</span> <span class="attr">title</span>=<span class="str">&quot;No rules found&quot;</span> <span class="attr">icon</span>={&lt;<span class="tag">IconInfoCircle</span> /&gt;}&gt;
+    No rules found.
+  &lt;/<span class="tag">Alert</span>&gt;
+) : (
+  !showEmptyGroups &amp;&amp;
+  alertsPageData.groups.length !== shownGroups.length &amp;&amp; (
+    &lt;<span class="tag">Alert</span> <span class="attr">title</span>=<span class="str">&quot;Hiding groups with no matching rules&quot;</span> <span class="attr">icon</span>={&lt;<span class="tag">IconInfoCircle</span> /&gt;}&gt;
+      Hiding {alertsPageData.groups.length - shownGroups.length} empty groups.
+      &lt;<span class="tag">Anchor</span> <span class="attr">ml</span>=<span class="str">&quot;md&quot;</span> <span class="attr">fz</span>=<span class="str">&quot;1em&quot;</span> <span class="attr">onClick</span>={() =&gt; setShowEmptyGroups(true)}&gt;
+        Show empty groups
+      &lt;/<span class="tag">Anchor</span>&gt;
+    &lt;/<span class="tag">Alert</span>&gt;
+  )
+)}</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -134,19 +142,6 @@
     <tr><td>Message Font Weight</td><td>500 (medium)</td></tr>
     <tr><td>Description Font Size</td><td>13px</td></tr>
     <tr><td>Text Align</td><td>center</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>message</code></td><td><code>string</code></td><td>"No items"</td><td>Primary message </td></tr>
-    <tr><td><code>description</code></td><td><code>string</code></td><td>undefined</td><td>Secondary description </td></tr>
-    <tr><td><code>icon</code></td><td><code>React.ComponentType<IconProps></code></td><td>undefined</td><td>Tabler icon to display </td></tr>
-    <tr><td><code>action</code></td><td><code>React.ReactNode</code></td><td>undefined</td><td>Optional action button or link </td></tr>
-    <tr><td><code>gap</code></td><td><code>MantineSpacing</code></td><td>"sm"</td><td>Gap between elements </td></tr>
-    <tr><td><code>py</code></td><td><code>MantineSpacing</code></td><td>"xl"</td><td>Vertical padding </td></tr>
   </tbody>
 </table>
 

@@ -134,17 +134,29 @@
   </tbody>
 </table>
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { PoolAccordion } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">PoolAccordion</span>
-  <span class="attr">items</span>={pools.map(pool =&gt; ({
-    name: pool.name,
-    status: pool.health,
-    stats: pool.stats,
-    children: &lt;<span class="tag">TargetList</span> <span class="attr">targets</span>={pool.targets} /&gt;
-  }))}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Accordion</span> multiple <span class="attr">variant</span>=<span class="str">&quot;separated&quot;</span> <span class="attr">keepMounted</span>={false}
+  <span class="attr">value</span>={allPoolNames.filter((p) =&gt; !collapsedPools.includes(p))}
+  <span class="attr">onChange</span>={(value) =&gt;
+    dispatch(setCollapsedPools(allPoolNames.filter((p) =&gt; !value.includes(p))))
+  }
+&gt;
+  {shownPoolNames.map((poolName) =&gt; {
+    <span class="kw">const</span> pool = allPools[poolName];
+    <span class="kw">return</span> (
+      &lt;<span class="tag">Accordion.Item</span> <span class="attr">key</span>={poolName} <span class="attr">value</span>={poolName}
+        <span class="attr">className</span>={poolPanelHealthClass(pool)}&gt;
+        &lt;<span class="tag">Accordion.Control</span>&gt;
+          &lt;<span class="tag">Group</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span> <span class="attr">justify</span>=<span class="str">&quot;space-between&quot;</span> <span class="attr">mr</span>=<span class="str">&quot;lg&quot;</span>&gt;
+            &lt;<span class="tag">Text</span>&gt;{poolName}&lt;/<span class="tag">Text</span>&gt;
+            &lt;<span class="tag">Text</span> <span class="attr">c</span>=<span class="str">&quot;gray.6&quot;</span>&gt;{pool.upCount} / {pool.count} up&lt;/<span class="tag">Text</span>&gt;
+          &lt;/<span class="tag">Group</span>&gt;
+        &lt;/<span class="tag">Accordion.Control</span>&gt;
+      &lt;/<span class="tag">Accordion.Item</span>&gt;
+    );
+  })}
+&lt;/<span class="tag">Accordion</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -158,16 +170,6 @@
     <tr><td>Title Font Size</td><td>14px (sm)</td></tr>
     <tr><td>Title Font Weight</td><td>600 (semibold)</td></tr>
     <tr><td>Stats Badge Gap</td><td>6px (0.375rem)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>items</code></td><td><code>PoolAccordionItemProps[]</code></td><td>—</td><td>Array of pool items to render <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>multiple</code></td><td><code>boolean</code></td><td>true</td><td>Allow multiple panels open </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

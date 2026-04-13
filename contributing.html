@@ -122,97 +122,16 @@
   <li><strong>Documentation</strong> — the component page, changelog, and any affected architecture decisions are updated as part of the PR</li>
 </ol>
 
-<h2 id="dev-setup">Development Setup</h2>
+<h2 id="dev-setup">Running the Documentation Site</h2>
 
 <pre><code><span class="cmt"># Clone the repository</span>
 git clone https://github.com/andrejkiri/prometheus-design-system.git
 cd prometheus-design-system
 
-<span class="cmt"># Install dependencies</span>
-npm install
+<span class="cmt"># Serve the docs site locally (static HTML, no build step)</span>
+npx serve . -l 3000</code></pre>
 
-<span class="cmt"># Start the development server (Storybook)</span>
-npm run storybook
-
-<span class="cmt"># Run the test suite</span>
-npm test
-
-<span class="cmt"># Build the documentation site</span>
-npm run docs:build
-
-<span class="cmt"># Lint and type-check</span>
-npm run lint
-npm run typecheck</code></pre>
-
-<h3>Project structure</h3>
-<pre><code>prometheus-design-system/
-├── src/
-│   ├── components/       <span class="cmt"># React components</span>
-│   │   ├── StatusBadge/
-│   │   │   ├── StatusBadge.tsx
-│   │   │   ├── StatusBadge.module.css
-│   │   │   ├── StatusBadge.test.tsx
-│   │   │   └── StatusBadge.story.tsx
-│   │   └── ...
-│   ├── tokens/           <span class="cmt"># Design token definitions</span>
-│   │   ├── colors.ts
-│   │   ├── spacing.ts
-│   │   └── tokens.css
-│   └── index.ts          <span class="cmt"># Public API exports</span>
-├── docs/                 <span class="cmt"># Documentation site source</span>
-├── .storybook/           <span class="cmt"># Storybook configuration</span>
-└── package.json</code></pre>
-
-<h2 id="pr-process">PR Review Process</h2>
-
-<h3>What a component PR should include</h3>
-<ol>
-  <li>Component implementation (<code>.tsx</code> + <code>.module.css</code>)</li>
-  <li>Storybook story showing all variants and states</li>
-  <li>Unit tests for logic and accessibility</li>
-  <li>Documentation page update</li>
-  <li>Changelog entry</li>
-</ol>
-
-<h3>Review checklist</h3>
-<table>
-  <thead><tr><th>Check</th><th>Requirement</th></tr></thead>
-  <tbody>
-    <tr><td>Derivation</td><td>Component is derived from existing Prometheus UI code — link to source required</td></tr>
-    <tr><td>Dark mode</td><td>Works correctly in both light and dark mode using <code>light-dark()</code></td></tr>
-    <tr><td>Performance</td><td>Tested with realistic data volumes (100+ items where applicable)</td></tr>
-    <tr><td>Accessibility</td><td>Keyboard navigable, screen reader friendly, WCAG AA contrast</td></tr>
-    <tr><td>TypeScript</td><td>Full type coverage, exported interface for props</td></tr>
-    <tr><td>Tokens</td><td>Uses <code>--prom-*</code> tokens — no hardcoded colors or spacing values</td></tr>
-    <tr><td>Documentation</td><td>Props table, usage examples, variant demos on the docs site</td></tr>
-  </tbody>
-</table>
-
-<h2 id="code-standards">Code Standards</h2>
-
-<h3>Component structure</h3>
-<ul>
-  <li>One component per directory under <code>src/components/</code></li>
-  <li>CSS Modules for styling (<code>.module.css</code>) — no inline styles except for dynamic values</li>
-  <li>All components accept <code>className</code> and <code>style</code> as escape hatches</li>
-  <li>Export a TypeScript <code>interface</code> for props (not just <code>type</code>)</li>
-</ul>
-
-<h3>Naming conventions</h3>
-<ul>
-  <li>PascalCase for components: <code>StatusBadge</code>, <code>HealthPanel</code></li>
-  <li>camelCase for props: <code>showCollapseAll</code>, <code>defaultStatus</code></li>
-  <li><code>--prom-</code> prefix for all CSS custom properties</li>
-  <li>Descriptive, specific names — <code>FilterToolbar</code> not <code>Toolbar</code></li>
-</ul>
-
-<h3>CSS conventions</h3>
-<ul>
-  <li>Use <code>light-dark()</code> for all mode-dependent colors</li>
-  <li>Reference <code>--prom-*</code> tokens instead of Mantine color steps directly</li>
-  <li>Avoid <code>!important</code> — if overrides are needed, the component API is insufficient</li>
-  <li>Use Mantine's spacing scale (<code>xs</code>, <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code>) — don't invent new sizes</li>
-</ul>
+<p>The documentation site is a static HTML/CSS/JS bundle. There is no npm package, build process, or component library yet — this is a design specification only.</p>
 
   </div>
   <aside class="doc-toc-sidebar">
@@ -220,9 +139,7 @@ npm run typecheck</code></pre>
   <div class="toc-inline-title">On this page</div>
   <a href="#propose-component">Proposing a New Component</a>
   <a href="#design-decisions">How Design Decisions Are Made</a>
-  <a href="#dev-setup">Development Setup</a>
-  <a href="#pr-process">PR Review Process</a>
-  <a href="#code-standards">Code Standards</a>
+  <a href="#dev-setup">Running the Docs Site</a>
 </div>
   </aside>
 </main>

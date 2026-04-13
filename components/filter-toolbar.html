@@ -128,31 +128,34 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { FilterToolbar } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-<span class="cmt">// AlertsPage / RulesPage style</span>
-&lt;<span class="tag">FilterToolbar</span>
-  <span class="attr">searchValue</span>={search}
-  <span class="attr">onSearchChange</span>={setSearch}
-  <span class="attr">searchPlaceholder</span>=<span class="str">"Filter by name or labels..."</span>
-  <span class="attr">stateOptions</span>={[<span class="str">"firing"</span>, <span class="str">"pending"</span>, <span class="str">"inactive"</span>]}
-  <span class="attr">selectedStates</span>={states}
-  <span class="attr">onStatesChange</span>={setStates}
-  <span class="attr">statePlaceholder</span>=<span class="str">"Filter by state"</span>
-/&gt;
-
-<span class="cmt">// TargetsPage style (with collapse all)</span>
-&lt;<span class="tag">FilterToolbar</span>
-  <span class="attr">searchValue</span>={search}
-  <span class="attr">onSearchChange</span>={setSearch}
-  <span class="attr">stateOptions</span>={[<span class="str">"up"</span>, <span class="str">"down"</span>, <span class="str">"unknown"</span>]}
-  <span class="attr">selectedStates</span>={states}
-  <span class="attr">onStatesChange</span>={setStates}
-  <span class="attr">showCollapseAll</span>
-  <span class="attr">allCollapsed</span>={collapsed}
-  <span class="attr">onCollapseAllChange</span>={setCollapsed}
-/&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
+<pre><code>&lt;<span class="tag">Group</span>&gt;
+  &lt;<span class="tag">StateMultiSelect</span>
+    <span class="attr">options</span>={[<span class="str">&quot;inactive&quot;</span>, <span class="str">&quot;pending&quot;</span>, <span class="str">&quot;firing&quot;</span>, <span class="str">&quot;unknown&quot;</span>]}
+    <span class="attr">optionClass</span>={(o) =&gt;
+      o === <span class="str">&quot;inactive&quot;</span>
+        ? badgeClasses.healthOk
+        : o === <span class="str">&quot;pending&quot;</span>
+          ? badgeClasses.healthWarn
+          : o === <span class="str">&quot;firing&quot;</span>
+            ? badgeClasses.healthErr
+            : badgeClasses.healthUnknown
+    }
+    <span class="attr">placeholder</span>=<span class="str">&quot;Filter by rule group state&quot;</span>
+    <span class="attr">values</span>={stateFilter || []}
+    <span class="attr">onChange</span>={(values) =&gt; setStateFilter(values)}
+  /&gt;
+  &lt;<span class="tag">TextInput</span>
+    <span class="attr">flex</span>={<span class="num">1</span>}
+    <span class="attr">leftSection</span>={&lt;<span class="tag">IconSearch</span> <span class="attr">style</span>={inputIconStyle} /&gt;}
+    <span class="attr">placeholder</span>=<span class="str">&quot;Filter by rule name or labels&quot;</span>
+    <span class="attr">value</span>={searchFilter || <span class="str">&quot;&quot;</span>}
+    <span class="attr">onChange</span>={(event) =&gt;
+      setSearchFilter(event.currentTarget.value || null)
+    }
+  /&gt;
+&lt;/<span class="tag">Group</span>&gt;</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -165,28 +168,6 @@
     <tr><td>Border Radius (inputs)</td><td>4px (default)</td></tr>
     <tr><td>Border Width</td><td>1px</td></tr>
     <tr><td>Min Width (select)</td><td>180px</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>searchValue</code></td><td><code>string</code></td><td>""</td><td>Search input value </td></tr>
-    <tr><td><code>onSearchChange</code></td><td><code>(value: string) => void</code></td><td>undefined</td><td>Callback when search value changes </td></tr>
-    <tr><td><code>searchPlaceholder</code></td><td><code>string</code></td><td>"Filter..."</td><td>Search input placeholder </td></tr>
-    <tr><td><code>stateOptions</code></td><td><code>string[]</code></td><td>undefined</td><td>State filter options </td></tr>
-    <tr><td><code>selectedStates</code></td><td><code>string[]</code></td><td>[]</td><td>Currently selected state filters </td></tr>
-    <tr><td><code>onStatesChange</code></td><td><code>(values: string[]) => void</code></td><td>undefined</td><td>Callback when selected states change </td></tr>
-    <tr><td><code>statePlaceholder</code></td><td><code>string</code></td><td>"Filter by state"</td><td>State filter placeholder </td></tr>
-    <tr><td><code>getStateClass</code></td><td><code>(state: string) => string</code></td><td>undefined</td><td>CSS class for state option styling </td></tr>
-    <tr><td><code>getStateCount</code></td><td><code>(state: string) => number | undefined</code></td><td>undefined</td><td>Count for state option </td></tr>
-    <tr><td><code>showCollapseAll</code></td><td><code>boolean</code></td><td>false</td><td>Whether to show collapse/expand all button </td></tr>
-    <tr><td><code>allCollapsed</code></td><td><code>boolean</code></td><td>false</td><td>Whether all panels are currently collapsed </td></tr>
-    <tr><td><code>onCollapseAllChange</code></td><td><code>(collapsed: boolean) => void</code></td><td>undefined</td><td>Callback to toggle collapse all </td></tr>
-    <tr><td><code>showSearch</code></td><td><code>boolean</code></td><td>true</td><td>Whether to show the search field </td></tr>
-    <tr><td><code>showStateFilter</code></td><td><code>boolean</code></td><td>auto</td><td>Whether to show the state filter (auto: true if stateOptions provided) </td></tr>
-    <tr><td><code>gap</code></td><td><code>MantineSpacing</code></td><td>"sm"</td><td>Gap between toolbar elements </td></tr>
   </tbody>
 </table>
 

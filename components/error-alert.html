@@ -122,20 +122,22 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { ErrorAlert } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
+<h2 id="code">Current Implementation</h2>
+<p>From <code>pages/RulesPage.tsx + pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="cmt">/* RulesPage.tsx — rule evaluation error */</span>
+{r.lastError &amp;&amp; (
+  &lt;<span class="tag">Alert</span> <span class="attr">color</span>=<span class="str">&quot;red&quot;</span> <span class="attr">mt</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">title</span>=<span class="str">&quot;Rule failed to evaluate&quot;</span>
+         <span class="attr">icon</span>={&lt;<span class="tag">IconAlertTriangle</span> /&gt;}&gt;
+    &lt;strong&gt;Error:&lt;/strong&gt; {r.lastError}
+  &lt;/<span class="tag">Alert</span>&gt;
+)}
 
-&lt;<span class="tag">ErrorAlert</span> <span class="attr">title</span>=<span class="str">"Failed to load targets"</span>&gt;
-  {error.message}
-&lt;/<span class="tag">ErrorAlert</span>&gt;
-
-&lt;<span class="tag">ErrorAlert</span> <span class="attr">severity</span>=<span class="str">"warning"</span> <span class="attr">title</span>=<span class="str">"Prometheus is starting up"</span>&gt;
-  WAL replay in progress: {progress}%
-&lt;/<span class="tag">ErrorAlert</span>&gt;
-
-&lt;<span class="tag">ErrorAlert</span> <span class="attr">severity</span>=<span class="str">"info"</span>&gt;
-  Prometheus is running in agent mode.
-&lt;/<span class="tag">ErrorAlert</span>&gt;</code></pre>
+<span class="cmt">/* ScrapePoolsList.tsx — target scrape error */</span>
+{target.lastError &amp;&amp; (
+  &lt;<span class="tag">Alert</span> <span class="attr">color</span>=<span class="str">&quot;red&quot;</span> <span class="attr">mb</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">icon</span>={&lt;<span class="tag">IconAlertTriangle</span> /&gt;}&gt;
+    &lt;strong&gt;Error scraping target:&lt;/strong&gt; {target.lastError}
+  &lt;/<span class="tag">Alert</span>&gt;
+)}</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -148,17 +150,6 @@
     <tr><td>Max Width</td><td>500px default</td></tr>
     <tr><td>Font Size</td><td>13px</td></tr>
     <tr><td>Title Font Weight</td><td>600 (semibold)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>severity</code></td><td><code>"error" | "warning" | "info"</code></td><td>"error"</td><td>Error severity level </td></tr>
-    <tr><td><code>title</code></td><td><code>string</code></td><td>undefined</td><td>Error title </td></tr>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Error message content <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>maxWidth</code></td><td><code>string | number</code></td><td>500</td><td>Maximum width constraint </td></tr>
   </tbody>
 </table>
 

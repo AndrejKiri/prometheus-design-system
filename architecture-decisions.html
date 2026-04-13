@@ -114,17 +114,7 @@
 
 <h2 id="bundle-size">Bundle Size Impact</h2>
 
-<p>The design system adds minimal overhead beyond what the Prometheus UI already bundles:</p>
-
-<table>
-  <thead><tr><th>Package</th><th>Gzip Size</th><th>Notes</th></tr></thead>
-  <tbody>
-    <tr><td><code>@prometheus-io/design-system</code></td><td>~12 KB</td><td>19 components + token definitions</td></tr>
-    <tr><td><code>@mantine/core</code></td><td>~45 KB</td><td>Already a peer dep — no new cost</td></tr>
-    <tr><td><code>@tabler/icons-react</code></td><td>Tree-shakeable</td><td>Only used icons are bundled</td></tr>
-    <tr><td>CSS tokens (<code>--prom-*</code>)</td><td>~2 KB</td><td>Standalone, no JS required</td></tr>
-  </tbody>
-</table>
+<p>The design system builds on dependencies the Prometheus UI already uses — <code>@mantine/core</code> and <code>@tabler/icons-react</code> — so adoption adds no new framework cost. The <code>--prom-*</code> CSS tokens are standalone and can be used without any JS.</p>
 
 <h3>Performance-conscious components</h3>
 <p>Several components deliberately avoid Mantine wrappers where performance matters:</p>
@@ -138,10 +128,7 @@
 
 <p>The <code>--prom-*</code> CSS custom properties are designed to be consumed without the React components:</p>
 
-<pre><code><span class="cmt">&lt;!-- Use tokens without React --&gt;</span>
-&lt;link rel="stylesheet" href="@prometheus-io/design-system/tokens.css"&gt;
-
-<span class="cmt">&lt;!-- Then in your CSS --&gt;</span>
+<pre><code><span class="cmt">/* Use tokens in your CSS */</span>
 .my-status {
   background: var(--prom-health-ok-bg);
   color: var(--prom-health-ok-text);

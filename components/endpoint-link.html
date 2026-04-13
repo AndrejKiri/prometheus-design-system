@@ -116,11 +116,29 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { EndpointLink } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-&lt;<span class="tag">EndpointLink</span> <span class="attr">endpoint</span>=<span class="str">"http://localhost:9090/metrics"</span> /&gt;
-&lt;<span class="tag">EndpointLink</span> <span class="attr">endpoint</span>=<span class="str">"http://localhost:9090/api/v1/query?query=up"</span> /&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/EndpointLink.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">const</span> EndpointLink: FC&lt;<span class="tag">EndpointLinkProps</span>&gt; = ({ endpoint, globalUrl }) =&gt; {
+  <span class="kw">let</span> url: URL;
+  <span class="kw">try</span> {
+    url = <span class="kw">new</span> URL(endpoint);
+  } <span class="kw">catch</span> {
+    url = <span class="kw">new</span> URL(<span class="str">&quot;http://0.0.0.0&quot;</span> + endpoint.substring(endpoint.indexOf(<span class="str">&quot;?&quot;</span>)));
+  }
+  <span class="kw">const</span> { host, pathname, protocol, searchParams } = url;
+  <span class="kw">return</span> (
+    &lt;<span class="tag">Stack</span> <span class="attr">gap</span>={<span class="num">0</span>}&gt;
+      &lt;<span class="tag">Anchor</span> <span class="attr">size</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">href</span>={globalUrl} <span class="attr">target</span>=<span class="str">&quot;_blank&quot;</span>&gt;
+        {protocol}<span class="cmt">//{host}{pathname}
+      &lt;/Anchor&gt;
+      {Array.from(searchParams.entries()).map(([k, v]) =&gt; (
+        &lt;Badge size=&quot;sm&quot; variant=&quot;light&quot; color=&quot;gray&quot; key={k}&gt;
+          {k}=&quot;{v}&quot;
+        &lt;/Badge&gt;
+      ))}
+    &lt;/Stack&gt;
+  );
+};</span></code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -132,16 +150,6 @@
     <tr><td>Badge Padding</td><td>0 6px</td></tr>
     <tr><td>Badge Border Radius</td><td>999px (pill)</td></tr>
     <tr><td>Badge Font Size</td><td>10px</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>endpoint</code></td><td><code>string</code></td><td>—</td><td>The endpoint URL to display <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>globalUrl</code></td><td><code>string</code></td><td>undefined</td><td>Optional global URL prefix </td></tr>
-    <tr><td><code>className</code></td><td><code>string</code></td><td>undefined</td><td>Additional CSS class </td></tr>
   </tbody>
 </table>
 

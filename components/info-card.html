@@ -121,13 +121,25 @@
 
 
 
-<h2 id="code">Code Example</h2>
-<pre><code><span class="kw">import</span> { InfoCard, KeyValueTable } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-<span class="kw">import</span> { IconServer } <span class="kw">from</span> <span class="str">"@tabler/icons-react"</span>;
-
-&lt;<span class="tag">InfoCard</span> <span class="attr">title</span>=<span class="str">"Runtime Information"</span> <span class="attr">icon</span>={IconServer}&gt;
-  &lt;<span class="tag">KeyValueTable</span> <span class="attr">object</span>={runtimeInfo} /&gt;
-&lt;/<span class="tag">InfoCard</span>&gt;</code></pre>
+<h2 id="code">Current Implementation</h2>
+<p>From <code>components/InfoPageCard.tsx</code> in the Prometheus codebase:</p>
+<pre><code><span class="kw">const</span> InfoPageCard: FC&lt;{
+  children: ReactNode;
+  title?: string;
+  icon?: React.ComponentType&lt;<span class="tag">IconProps</span>&gt;;
+}&gt; = ({ children, title, icon: Icon }) =&gt; {
+  <span class="kw">return</span> (
+    &lt;<span class="tag">Card</span> <span class="attr">shadow</span>=<span class="str">&quot;xs&quot;</span> withBorder <span class="attr">p</span>=<span class="str">&quot;md&quot;</span>&gt;
+      {title &amp;&amp; (
+        &lt;<span class="tag">Group</span> <span class="attr">wrap</span>=<span class="str">&quot;nowrap&quot;</span> <span class="attr">align</span>=<span class="str">&quot;center&quot;</span> <span class="attr">ml</span>=<span class="str">&quot;xs&quot;</span> <span class="attr">mb</span>=<span class="str">&quot;sm&quot;</span> <span class="attr">gap</span>=<span class="str">&quot;xs&quot;</span> <span class="attr">fz</span>=<span class="str">&quot;xl&quot;</span> <span class="attr">fw</span>={<span class="num">600</span>}&gt;
+          {Icon &amp;&amp; &lt;<span class="tag">Icon</span> <span class="attr">style</span>={infoPageCardTitleIconStyle} /&gt;}
+          {title}
+        &lt;/<span class="tag">Group</span>&gt;
+      )}
+      {children}
+    &lt;/<span class="tag">Card</span>&gt;
+  );
+};</code></pre>
 
 <h2 id="layout">Layout Specs</h2>
 <table>
@@ -141,17 +153,6 @@
     <tr><td>Header Gap</td><td>8px (0.5rem)</td></tr>
     <tr><td>Header Title Font Size</td><td>18px (lg)</td></tr>
     <tr><td>Header Title Font Weight</td><td>600 (semibold)</td></tr>
-  </tbody>
-</table>
-
-<h2 id="props">Props</h2>
-<table class="props-table">
-  <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
-  <tbody>
-    <tr><td><code>title</code></td><td><code>string</code></td><td>undefined</td><td>Card title displayed in the header </td></tr>
-    <tr><td><code>icon</code></td><td><code>React.ComponentType<IconProps></code></td><td>undefined</td><td>Tabler icon component for the header </td></tr>
-    <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>—</td><td>Card content <span class="doc-tag doc-tag-required">Required</span></td></tr>
-    <tr><td><code>padding</code></td><td><code>MantineSpacing</code></td><td>"md"</td><td>Card padding </td></tr>
   </tbody>
 </table>
 
