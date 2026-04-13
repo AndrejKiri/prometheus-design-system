@@ -21,7 +21,7 @@
 </svg>
     <span class="doc-header-title">Prometheus Design System</span>
   </a>
-  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0</a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0 — WIP</a>
   <div class="doc-header-spacer"></div>
   <div class="doc-header-actions">
     <a href="https://github.com/andrejkiri/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
@@ -87,22 +87,12 @@
     <h1>Getting Started</h1>
     <p class="doc-subtitle">A design system proposal for the Prometheus monitoring UI.</p>
     
-<div class="callout callout-info" style="margin-bottom:2rem">
-  <div class="callout-title">RFC / Proposal — Seeking Feedback</div>
-  This design system is a proposal for standardizing the Prometheus UI component library.
-  Built on Mantine 8 + React 19 + TypeScript — the same stack already used in the Prometheus web UI.
-  The package is not yet published to npm. This documentation describes what a Prometheus design system
-  <em>should</em> look like, derived from the actual codebase, and is seeking review from maintainers.
-</div>
-
 <div class="callout callout-warn" style="margin-bottom:2rem">
-  <div class="callout-title">Roadmap to v1.0</div>
-  <ul style="margin:0.5rem 0 0 0; padding-left:1.25rem">
-    <li><strong>v0.1.0</strong> (current) — 19 components extracted, 9 inconsistencies resolved, documentation site</li>
-    <li><strong>v0.2.0</strong> — Prometheus 3.x components (native histograms, UTF-8 label display), npm publish</li>
-    <li><strong>v0.3.0</strong> — Upstream PRs merged, Storybook integration, Figma component library</li>
-    <li><strong>v1.0.0</strong> — Stable API, full test coverage, adopted in <code>prometheus/prometheus</code></li>
-  </ul>
+  <div class="callout-title">Work in Progress — Early Draft</div>
+  This is a very early version of a design system proposal for the Prometheus UI.
+  It is actively being worked on and not yet ready for review.
+  Feedback is welcome, but nobody is expected to give feedback at this stage.
+  Built on Mantine 8 + React 19 + TypeScript — the same stack already used in the Prometheus web UI.
 </div>
 
 <div class="flex-row gap-sm mb-lg">
@@ -113,7 +103,7 @@
 
 <h2 id="what">What is the Prometheus Design System?</h2>
 
-<p>The Prometheus Design System (<code>@prometheus-io/design-system</code>) is an extraction and normalization of the UI patterns, tokens, and components found in the Prometheus monitoring tool's web interface.</p>
+<p>The Prometheus Design System is an extraction and normalization of the UI patterns, tokens, and components found in the Prometheus monitoring tool's web interface.</p>
 
 <p>It solves concrete problems found during a <a href="inconsistencies.html">deep codebase audit</a>:</p>
 <ul>
@@ -152,29 +142,6 @@
 
 <p><strong>Decision-making:</strong> All design decisions are documented in <a href="architecture-decisions.html">Architecture Decisions</a>. Proposed changes follow the process described in <a href="contributing.html">Contributing</a>.</p>
 
-<h2 id="install">Installation</h2>
-
-<pre><code><span class="cmt"># Install the design system</span>
-npm install @prometheus-io/design-system
-
-<span class="cmt"># Peer dependencies (install alongside)</span>
-npm install @mantine/core @mantine/hooks @tabler/icons-react react react-dom</code></pre>
-
-<h2 id="quickstart">Quick Start</h2>
-
-<pre><code><span class="cmt">// In your app entry point (e.g., main.tsx):</span>
-<span class="kw">import</span> <span class="str">"@mantine/core/styles.css"</span>;
-<span class="kw">import</span> <span class="str">"@prometheus-io/design-system/styles.css"</span>;
-
-<span class="kw">import</span> { PrometheusThemeProvider } <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;
-
-<span class="kw">function</span> <span class="fn">App</span>() {
-  <span class="kw">return</span> (
-    &lt;<span class="tag">PrometheusThemeProvider</span> <span class="attr">defaultColorScheme</span>=<span class="str">"auto"</span>&gt;
-      &lt;<span class="tag">YourApp</span> /&gt;
-    &lt;/<span class="tag">PrometheusThemeProvider</span>&gt;
-  );
-}</code></pre>
 
 <h2 id="components-overview">Component Library</h2>
 
@@ -207,34 +174,10 @@ npm install @mantine/core @mantine/hooks @tabler/icons-react react react-dom</co
 
 <h2 id="tokens-overview">Design Tokens</h2>
 
-<p>All tokens are exported as TypeScript constants and CSS custom properties (<code>--prom-*</code>).</p>
-
-<pre><code><span class="kw">import</span> {
-  BRAND_ORANGE,     <span class="cmt">// "#e6522c"</span>
-  HEADER_BG,        <span class="cmt">// "rgb(65, 73, 81)"</span>
-  healthColors,     <span class="cmt">// { ok: { badgeBgLight, ... }, err: {...}, ... }</span>
-  fontFamilies,     <span class="cmt">// { body, mono, completionTooltip }</span>
-  spacing,          <span class="cmt">// { xs, sm, md, lg, xl } → CSS var references</span>
-  motion,           <span class="cmt">// { hoverReveal, accordionChevron, ... }</span>
-} <span class="kw">from</span> <span class="str">"@prometheus-io/design-system"</span>;</code></pre>
+<p>All tokens are documented as CSS custom properties (<code>--prom-*</code>), derived from the actual values used in the Prometheus codebase.</p>
 
 <p><a href="tokens.html">Explore all design tokens →</a></p>
 
-<h2 id="prometheus-3x">Prometheus 3.x Compatibility</h2>
-
-<p>This design system is derived from the current Prometheus web UI codebase. Active work is planned to track Prometheus 3.x features:</p>
-
-<table>
-  <thead><tr><th>3.x Feature</th><th>Design System Status</th><th>Target</th></tr></thead>
-  <tbody>
-    <tr><td>Native histogram display</td><td>Planned — new <code>HistogramChart</code> component</td><td>v0.2.0</td></tr>
-    <tr><td>UTF-8 metric/label names</td><td>Planned — update <code>LabelBadge</code>, <code>SeriesName</code> rendering</td><td>v0.2.0</td></tr>
-    <tr><td>New UI overhaul (React 19)</td><td>Already aligned — built on React 19 + Mantine 8</td><td>v0.1.0 ✓</td></tr>
-    <tr><td>OTLP ingestion UI</td><td>Tracking — components TBD pending upstream UI work</td><td>v0.3.0</td></tr>
-  </tbody>
-</table>
-
-<p>The design system aims to be an <strong>active partner</strong> in the Prometheus 3.x UI work, not a retrospective cleanup exercise. Component proposals for new 3.x features will be tracked in the <a href="https://github.com/andrejkiri/prometheus-design-system/issues">GitHub issue tracker</a>.</p>
 
 <h2 id="acknowledgements">Acknowledgements</h2>
 
@@ -247,19 +190,6 @@ npm install @mantine/core @mantine/hooks @tabler/icons-react react react-dom</co
   <li>All <a href="https://github.com/prometheus/prometheus/graphs/contributors" target="_blank" rel="noopener"><strong>Prometheus UI contributors</strong></a> who have worked on the <code>web/ui</code> directory</li>
 </ul>
 
-<h2 id="peer-deps">Peer Dependencies</h2>
-
-<table>
-  <thead><tr><th>Package</th><th>Version</th></tr></thead>
-  <tbody>
-    <tr><td><code>@mantine/core</code></td><td><code>^8.0.0</code></td></tr>
-    <tr><td><code>@mantine/hooks</code></td><td><code>^8.0.0</code></td></tr>
-    <tr><td><code>@mantine/code-highlight</code></td><td><code>^8.0.0</code></td></tr>
-    <tr><td><code>@tabler/icons-react</code></td><td><code>^3.0.0</code></td></tr>
-    <tr><td><code>react</code></td><td><code>^18.0.0 || ^19.0.0</code></td></tr>
-    <tr><td><code>react-dom</code></td><td><code>^18.0.0 || ^19.0.0</code></td></tr>
-  </tbody>
-</table>
 
   </div>
 </main>

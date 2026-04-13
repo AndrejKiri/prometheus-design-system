@@ -2,8 +2,8 @@
 
 A design system proposal for the [Prometheus](https://prometheus.io/) monitoring UI. Built on **Mantine 8 + React 19 + TypeScript** — the same stack already used in the Prometheus web interface.
 
-> **RFC / Proposal — Seeking Feedback**
-> This package is not yet published to npm. The documentation describes what a Prometheus design system *should* look like, derived from the actual codebase, and is seeking review from maintainers.
+> **Work in Progress — Early Draft**
+> This is a very early version of a design system proposal for the Prometheus UI. It is actively being worked on and not yet ready for review. Feedback is welcome, but nobody is expected to give feedback at this stage.
 
 ## What this solves
 
