@@ -92,60 +92,6 @@
       <p>Audited path: <code>prometheus-source/web/ui/mantine-ui/src/</code> &nbsp;·&nbsp; Package version: <code>0.310.0</code> &nbsp;·&nbsp; Audit date: 2026-03-30</p>
     </div>
 
-    <div class="toc-inline">
-      <div class="toc-inline-title">On this page</div>
-      <a href="#tech-stack">1. Tech Stack &amp; Dependencies</a>
-      <a href="#design-tokens">2. Design Tokens Currently in Use</a>
-      <a href="#color-values">2.1 Color Values</a>
-      <a href="#font-families">2.2 Font Families</a>
-      <a href="#font-sizes">2.3 Font Sizes</a>
-      <a href="#font-weights">2.4 Font Weights</a>
-      <a href="#spacing">2.5 Spacing Values</a>
-      <a href="#border-radii">2.6 Border Radii</a>
-      <a href="#shadows">2.7 Shadows / Elevations</a>
-      <a href="#transitions">2.8 Transition / Animation Values</a>
-      <a href="#breakpoints">2.9 Breakpoints</a>
-      <a href="#component-inventory">3. Component Inventory</a>
-      <a href="#custom-components">3.1 Custom Components</a>
-      <a href="#mantine-components">3.2 Mantine Components Used</a>
-      <a href="#mantine-hooks">3.3 Mantine Hooks Used</a>
-      <a href="#tabler-icons">3.4 Tabler Icons Used</a>
-      <a href="#layout-patterns">4. Layout Patterns</a>
-      <a href="#app-shell">4.1 App Shell Structure</a>
-      <a href="#info-page">4.2 Status/Info Page Pattern</a>
-      <a href="#accordion-list">4.3 Accordion-Based List Pattern</a>
-      <a href="#query-panel">4.4 Query Page Panel Pattern</a>
-      <a href="#common-compositions">4.5 Common Layout Compositions</a>
-      <a href="#responsive">4.6 Responsive Behavior</a>
-      <a href="#interaction-patterns">5. Interaction Patterns</a>
-      <a href="#form-controls">5.1 Form Controls</a>
-      <a href="#promql-input">5.2 PromQL Expression Input</a>
-      <a href="#filtering">5.3 Filtering / Search</a>
-      <a href="#navigation">5.4 Navigation</a>
-      <a href="#data-loading">5.5 Data Loading</a>
-      <a href="#infinite-scroll">5.6 Infinite Scroll</a>
-      <a href="#inconsistencies">6. Inconsistencies &amp; Issues</a>
-      <a href="#hardcoded-colors">6.1 Hardcoded Color Values Bypassing Theme</a>
-      <a href="#health-borders">6.2 Inconsistent Health Status Borders</a>
-      <a href="#localstorage-collision">6.3 Duplicate localStorage Key</a>
-      <a href="#duplicate-structure">6.4 Duplicate Page Structure Code</a>
-      <a href="#a11y">6.5 Missing Accessibility Attributes</a>
-      <a href="#icon-inconsistencies">6.6 Icon Style Inconsistencies</a>
-      <a href="#mantine-overrides">6.7 Mantine-Overrides.css Scope</a>
-      <a href="#styling-approach">6.8 CSS Module vs Inline Style vs Mantine Props</a>
-      <a href="#datatable-flex">6.9 DataTable.tsx Inline Flexbox Styles</a>
-      <a href="#navbar-text">6.10 Navbar Duplicate Text Visibility</a>
-      <a href="#commented-code">6.11 Commented-Out Code</a>
-      <a href="#missing-keys">6.12 Missing key Props and TODO Comments</a>
-      <a href="#domain-patterns">7. Domain-Specific Patterns</a>
-      <a href="#promql-arch">7.1 PromQL Expression Input Architecture</a>
-      <a href="#graph-rendering">7.2 Time Series Graph Rendering</a>
-      <a href="#metric-display">7.3 Metric Display Formatting</a>
-      <a href="#label-display">7.4 Label/Badge Display</a>
-      <a href="#ast-tree">7.5 PromQL AST Tree View</a>
-      <a href="#health-state">7.6 Health State System</a>
-      <a href="#summary">8. Summary of Key Findings</a>
-    </div>
 
     <!-- ─── Section 1 ─────────────────────────────────────────────────────── -->
     <h2 id="tech-stack">1. Tech Stack &amp; Dependencies</h2>
@@ -992,6 +938,62 @@ cursor lines: light-dark(<span class="str">#607d8b</span>, <span class="str">#90
     </ol>
 
   </div>
+  <aside class="doc-toc-sidebar">
+    <div class="toc-inline">
+      <div class="toc-inline-title">On this page</div>
+      <a href="#tech-stack">1. Tech Stack &amp; Dependencies</a>
+      <a href="#design-tokens">2. Design Tokens Currently in Use</a>
+      <a href="#color-values">2.1 Color Values</a>
+      <a href="#font-families">2.2 Font Families</a>
+      <a href="#font-sizes">2.3 Font Sizes</a>
+      <a href="#font-weights">2.4 Font Weights</a>
+      <a href="#spacing">2.5 Spacing Values</a>
+      <a href="#border-radii">2.6 Border Radii</a>
+      <a href="#shadows">2.7 Shadows / Elevations</a>
+      <a href="#transitions">2.8 Transition / Animation Values</a>
+      <a href="#breakpoints">2.9 Breakpoints</a>
+      <a href="#component-inventory">3. Component Inventory</a>
+      <a href="#custom-components">3.1 Custom Components</a>
+      <a href="#mantine-components">3.2 Mantine Components Used</a>
+      <a href="#mantine-hooks">3.3 Mantine Hooks Used</a>
+      <a href="#tabler-icons">3.4 Tabler Icons Used</a>
+      <a href="#layout-patterns">4. Layout Patterns</a>
+      <a href="#app-shell">4.1 App Shell Structure</a>
+      <a href="#info-page">4.2 Status/Info Page Pattern</a>
+      <a href="#accordion-list">4.3 Accordion-Based List Pattern</a>
+      <a href="#query-panel">4.4 Query Page Panel Pattern</a>
+      <a href="#common-compositions">4.5 Common Layout Compositions</a>
+      <a href="#responsive">4.6 Responsive Behavior</a>
+      <a href="#interaction-patterns">5. Interaction Patterns</a>
+      <a href="#form-controls">5.1 Form Controls</a>
+      <a href="#promql-input">5.2 PromQL Expression Input</a>
+      <a href="#filtering">5.3 Filtering / Search</a>
+      <a href="#navigation">5.4 Navigation</a>
+      <a href="#data-loading">5.5 Data Loading</a>
+      <a href="#infinite-scroll">5.6 Infinite Scroll</a>
+      <a href="#inconsistencies">6. Inconsistencies &amp; Issues</a>
+      <a href="#hardcoded-colors">6.1 Hardcoded Color Values Bypassing Theme</a>
+      <a href="#health-borders">6.2 Inconsistent Health Status Borders</a>
+      <a href="#localstorage-collision">6.3 Duplicate localStorage Key</a>
+      <a href="#duplicate-structure">6.4 Duplicate Page Structure Code</a>
+      <a href="#a11y">6.5 Missing Accessibility Attributes</a>
+      <a href="#icon-inconsistencies">6.6 Icon Style Inconsistencies</a>
+      <a href="#mantine-overrides">6.7 Mantine-Overrides.css Scope</a>
+      <a href="#styling-approach">6.8 CSS Module vs Inline Style vs Mantine Props</a>
+      <a href="#datatable-flex">6.9 DataTable.tsx Inline Flexbox Styles</a>
+      <a href="#navbar-text">6.10 Navbar Duplicate Text Visibility</a>
+      <a href="#commented-code">6.11 Commented-Out Code</a>
+      <a href="#missing-keys">6.12 Missing key Props and TODO Comments</a>
+      <a href="#domain-patterns">7. Domain-Specific Patterns</a>
+      <a href="#promql-arch">7.1 PromQL Expression Input Architecture</a>
+      <a href="#graph-rendering">7.2 Time Series Graph Rendering</a>
+      <a href="#metric-display">7.3 Metric Display Formatting</a>
+      <a href="#label-display">7.4 Label/Badge Display</a>
+      <a href="#ast-tree">7.5 PromQL AST Tree View</a>
+      <a href="#health-state">7.6 Health State System</a>
+      <a href="#summary">8. Summary of Key Findings</a>
+    </div>
+  </aside>
 </main>
 
 <script src="main.js"></script>
