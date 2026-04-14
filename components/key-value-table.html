@@ -65,7 +65,6 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>KeyValueTable</span></div>
     <h1>KeyValueTable</h1>
     <p class="doc-subtitle">Two-column key-value display table for build info, runtime info, and configuration flags.</p>
     
@@ -75,12 +74,23 @@
 <div class="do-dont-grid">
   <div class="do-box">
     <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying build information</li><li>Runtime information</li><li>Configuration flags</li><li>Any two-column name-value data</li><li>Use KeyValueTable for all two-column key-value display. Pass a plain object for simple cases.</li></ul>
+    <ul><li>Two-column key-value display (build info, runtime, flags)</li><li>Pass a plain object for simple cases</li><li>Lightweight alternative to DataTable</li></ul>
   </div>
   <div class="dont-box">
     <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Multi-column data (use DataTable)</li><li>Interactive or sortable data</li><li>Large datasets</li><li>Don't build custom two-column tables. Don't use DataTable for simple key-value data.</li></ul>
+    <ul><li>Multi-column or sortable data (use DataTable)</li><li>Large datasets</li><li>Custom two-column table layouts</li></ul>
   </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">KeyValueTable Example</div>
+  <table class="mock-kv-table">
+    <tr><td>Version</td><td>2.47.0</td></tr>
+    <tr><td>Revision</td><td>abc123def</td></tr>
+    <tr><td>Go Version</td><td>go1.21.5</td></tr>
+    <tr><td>Build Date</td><td>2024-01-15</td></tr>
+  </table>
 </div>
 
 <details class="component-reference">
@@ -98,19 +108,6 @@
   </div>
 </div>
 </details>
-
-<h2 id="design">Design</h2>
-<div class="example-box">
-<div class="example-label">KeyValueTable Example</div>
-  <table class="mock-kv-table">
-    <tr><td>Version</td><td>2.47.0</td></tr>
-    <tr><td>Revision</td><td>abc123def</td></tr>
-    <tr><td>Go Version</td><td>go1.21.5</td></tr>
-    <tr><td>Build Date</td><td>2024-01-15</td></tr>
-  </table>
-</div>
-
-
 
 <h2 id="implementation">Implementation</h2>
 <p>From <code>pages/FlagsPage.tsx</code> in the Prometheus codebase:</p>

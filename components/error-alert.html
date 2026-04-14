@@ -65,7 +65,6 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>ErrorAlert</span></div>
     <h1>ErrorAlert</h1>
     <p class="doc-subtitle">Standardized alert component for error, warning, and info messages.</p>
     
@@ -75,24 +74,13 @@
 <div class="do-dont-grid">
   <div class="do-box">
     <div class="do-box-title">✓ Do</div>
-    <ul><li>API error display</li><li>Readiness/startup warnings</li><li>Informational messages about running mode (agent mode, etc.)</li><li>Any feedback that needs user attention</li><li>Use ErrorAlert for all error/warning/info messages. Use severity prop to set the appropriate color and icon.</li></ul>
+    <ul><li>API error display</li><li>Readiness/startup warnings</li><li>Informational messages about running mode</li></ul>
   </div>
   <div class="dont-box">
     <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Empty states (use EmptyState)</li><li>Success confirmations (use Mantine Notification)</li><li>Inline validation errors (use Mantine input error prop)</li><li>Don't use inline <code>&lt;Alert color="red"&gt;</code>. Don't omit titles for error severity.</li></ul>
+    <ul><li>Empty states (use EmptyState)</li><li>Success confirmations (use Mantine Notification)</li><li>Inline validation errors (use input error prop)</li></ul>
   </div>
 </div>
-
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/query" target="_blank" rel="noopener">View in Prometheus UI →  /query</a>
-    <img src="../screenshots/query-page.jpg" alt="ErrorAlert in the Query page — displayed when PromQL query fails" loading="lazy">
-    <p>ErrorAlert in the Query page — displayed when PromQL query fails</p>
-  </div>
-</div>
-</details>
 
 <h2 id="design">Design</h2>
 <div class="example-box">
@@ -113,7 +101,16 @@
   </div>
 </div>
 
-
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/query" target="_blank" rel="noopener">View in Prometheus UI →  /query</a>
+    <img src="../screenshots/query-page.jpg" alt="ErrorAlert in the Query page — displayed when PromQL query fails" loading="lazy">
+    <p>ErrorAlert in the Query page — displayed when PromQL query fails</p>
+  </div>
+</div>
+</details>
 
 <h2 id="implementation">Implementation</h2>
 <p>From <code>pages/RulesPage.tsx + pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>

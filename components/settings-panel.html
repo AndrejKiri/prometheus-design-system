@@ -65,7 +65,6 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>SettingsPanel</span></div>
     <h1>SettingsPanel</h1>
     <p class="doc-subtitle">Popover panel for user settings.</p>
     
@@ -75,24 +74,13 @@
 <div class="do-dont-grid">
   <div class="do-box">
     <div class="do-box-title">✓ Do</div>
-    <ul><li>Application-level settings (syntax highlighting, linting, time format)</li><li>User preferences that persist to localStorage</li><li>Use SettingsPanel in the header actions area. Group related settings logically.</li></ul>
+    <ul><li>Application-level settings (syntax highlighting, linting, time format)</li><li>User preferences that persist to localStorage</li><li>Place in the header actions area, group related settings logically</li></ul>
   </div>
   <div class="dont-box">
     <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Page-level filters (use FilterToolbar)</li><li>Modal dialogs with complex forms</li><li>Don't create custom popover settings. Don't put page-level filters in settings.</li></ul>
+    <ul><li>Page-level filters (use FilterToolbar)</li><li>Modal dialogs with complex forms</li><li>Custom popover settings outside this component</li></ul>
   </div>
 </div>
-
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/" target="_blank" rel="noopener">View in Prometheus UI →  /</a>
-    <img src="../screenshots/app-shell.jpg" alt="SettingsPanel accessed from the gear icon in the header" loading="lazy">
-    <p>SettingsPanel accessed from the gear icon in the header</p>
-  </div>
-</div>
-</details>
 
 <h2 id="design">Design</h2>
 <div class="example-box">
@@ -116,6 +104,17 @@
     <tr><td><code>settings</code></td><td><code>(SettingCheckbox | SettingNumber)[]</code></td><td>Settings in this group</td></tr>
   </tbody>
 </table>
+
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/" target="_blank" rel="noopener">View in Prometheus UI →  /</a>
+    <img src="../screenshots/app-shell.jpg" alt="SettingsPanel accessed from the gear icon in the header" loading="lazy">
+    <p>SettingsPanel accessed from the gear icon in the header</p>
+  </div>
+</div>
+</details>
 
 <h2 id="implementation">Implementation</h2>
 <p>From <code>components/SettingsMenu.tsx</code> in the Prometheus codebase:</p>

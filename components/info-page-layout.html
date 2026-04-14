@@ -65,7 +65,6 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>InfoPageLayout</span></div>
     <h1>InfoPageLayout</h1>
     <p class="doc-subtitle">Centered, max-width page layout wrapper for status/info pages.</p>
     
@@ -75,11 +74,21 @@
 <div class="do-dont-grid">
   <div class="do-box">
     <div class="do-box-title">✓ Do</div>
-    <ul><li>Any page that displays informational content (status, build info, TSDB, flags)</li><li>Pages composed of multiple InfoCard components</li><li>Wrap all info/status pages in InfoPageLayout for consistent centering and max-width.</li></ul>
+    <ul><li>Info/status pages (status, build info, TSDB, flags)</li><li>Pages composed of multiple InfoCard components</li><li>Consistent centering and max-width for content pages</li></ul>
   </div>
   <div class="dont-box">
     <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>List/accordion pages (Alerts, Rules, Targets) — they use full-width layout</li><li>Query page — uses its own custom layout</li><li>Don't hardcode <code>maw={1000}</code> on individual Stack components.</li></ul>
+    <ul><li>List/accordion pages (Alerts, Rules, Targets)</li><li>Query page (uses its own custom layout)</li><li>Hardcoding <code>maw={1000}</code> on individual Stacks</li></ul>
+  </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">Layout Structure</div>
+  <div style="border:1px dashed var(--doc-border); border-radius:6px; padding:1rem; max-width:500px; margin: 0 auto;">
+    <div style="text-align:center; color:var(--doc-text-tertiary); font-size:0.75rem; margin-bottom:0.5rem">max-width: 1000px, centered</div>
+    <div class="mock-info-card" style="margin-bottom:0.5rem"><div class="mock-info-card-header"><span>Card 1</span></div><div style="height:40px;background:var(--doc-bg-secondary);border-radius:4px"></div></div>
+    <div class="mock-info-card"><div class="mock-info-card-header"><span>Card 2</span></div><div style="height:40px;background:var(--doc-bg-secondary);border-radius:4px"></div></div>
   </div>
 </div>
 
@@ -93,18 +102,6 @@
   </div>
 </div>
 </details>
-
-<h2 id="design">Design</h2>
-<div class="example-box">
-<div class="example-label">Layout Structure</div>
-  <div style="border:1px dashed var(--doc-border); border-radius:6px; padding:1rem; max-width:500px; margin: 0 auto;">
-    <div style="text-align:center; color:var(--doc-text-tertiary); font-size:0.75rem; margin-bottom:0.5rem">max-width: 1000px, centered</div>
-    <div class="mock-info-card" style="margin-bottom:0.5rem"><div class="mock-info-card-header"><span>Card 1</span></div><div style="height:40px;background:var(--doc-bg-secondary);border-radius:4px"></div></div>
-    <div class="mock-info-card"><div class="mock-info-card-header"><span>Card 2</span></div><div style="height:40px;background:var(--doc-bg-secondary);border-radius:4px"></div></div>
-  </div>
-</div>
-
-
 
 <h2 id="implementation">Implementation</h2>
 <p>From <code>components/InfoPageStack.tsx</code> in the Prometheus codebase:</p>

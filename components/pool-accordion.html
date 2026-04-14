@@ -65,7 +65,6 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>PoolAccordion</span></div>
     <h1>PoolAccordion</h1>
     <p class="doc-subtitle">Accordion component for scrape pool and target group display.</p>
     
@@ -75,29 +74,13 @@
 <div class="do-dont-grid">
   <div class="do-box">
     <div class="do-box-title">✓ Do</div>
-    <ul><li>Targets page — scrape pool groups</li><li>Service Discovery page — discovered pool groups</li><li>Any grouped list with health status and counts</li><li>Use PoolAccordion for Targets and Service Discovery pages.</li></ul>
+    <ul><li>Targets page scrape pool groups</li><li>Service Discovery discovered pool groups</li><li>Any grouped list with health status and counts</li></ul>
   </div>
   <div class="dont-box">
     <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Alert/rule groups (use HealthPanel directly)</li><li>Non-grouped content</li><li>Don't build custom accordion layouts with manual health border logic per page.</li></ul>
+    <ul><li>Alert/rule groups (use HealthPanel directly)</li><li>Non-grouped content</li><li>Custom accordion layouts with manual health borders</li></ul>
   </div>
 </div>
-
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
-    <img src="../screenshots/targets-page.jpg" alt="PoolAccordion on the Targets page — scrape pool grouping" loading="lazy">
-    <p>PoolAccordion on the Targets page — scrape pool grouping</p>
-  </div>
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/service-discovery" target="_blank" rel="noopener">View in Prometheus UI →  /service-discovery</a>
-    <img src="../screenshots/service-discovery-page.jpg" alt="PoolAccordion on the Service Discovery page" loading="lazy">
-    <p>PoolAccordion on the Service Discovery page</p>
-  </div>
-</div>
-</details>
 
 <h2 id="design">Design</h2>
 <div class="example-box">
@@ -126,6 +109,22 @@
     <tr><td><code>children</code></td><td><code>React.ReactNode</code></td><td>Panel content</td></tr>
   </tbody>
 </table>
+
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
+    <img src="../screenshots/targets-page.jpg" alt="PoolAccordion on the Targets page — scrape pool grouping" loading="lazy">
+    <p>PoolAccordion on the Targets page — scrape pool grouping</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/service-discovery" target="_blank" rel="noopener">View in Prometheus UI →  /service-discovery</a>
+    <img src="../screenshots/service-discovery-page.jpg" alt="PoolAccordion on the Service Discovery page" loading="lazy">
+    <p>PoolAccordion on the Service Discovery page</p>
+  </div>
+</div>
+</details>
 
 <h2 id="implementation">Implementation</h2>
 <p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
