@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Syntax-highlighted code display container. Provides the card wrapper with appropriate codebox background and no shadow. Used for PromQL expressions, YAML config, and general code display.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying PromQL expressions in read-only mode</li><li>Showing configuration YAML</li><li>Rule definition display</li><li>Any code or pre-formatted text</li><li>Use CodeBlock for all code display. Use <code>overflow="scroll"</code> for wide content.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Editable code (use CodeMirror)</li><li>Simple inline code (use <code>&lt;code&gt;</code> element)</li><li>Don't use Mantine Card with manual background colors for code display.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">CodeBlock Example</div>
   <div class="mock-code-block"><span style="color:#008080">rate</span>(http_requests_total{<span style="color:#800000">job</span>=<span style="color:#a31515">"prometheus"</span>}[<span style="color:#09885a">5m</span>])</div>
@@ -95,7 +106,7 @@ global:
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/ConfigPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">export</span> <span class="kw">default</span> <span class="kw">function</span> ConfigPage() {
   <span class="kw">const</span> {
@@ -135,17 +146,6 @@ global:
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying PromQL expressions in read-only mode</li><li>Showing configuration YAML</li><li>Rule definition display</li><li>Any code or pre-formatted text</li><li>Use CodeBlock for all code display. Use <code>overflow="scroll"</code> for wide content.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Editable code (use CodeMirror)</li><li>Simple inline code (use <code>&lt;code&gt;</code> element)</li><li>Don't use Mantine Card with manual background colors for code display.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

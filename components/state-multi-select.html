@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Colored pill multi-select for state/health filtering. Renders health states as colored pills in the input. Used inside FilterToolbar but can be used standalone.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Filtering by health/operational state</li><li>Multi-select where options have color coding</li><li>Part of FilterToolbar composition</li><li>Use StateMultiSelect (usually via FilterToolbar) for all health/state filtering.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Generic multi-select without color coding (use Mantine MultiSelect)</li><li>Single-select state filter</li><li>Don't use plain Mantine MultiSelect for health state filtering — it won't color the pills.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">StateMultiSelect (selected states)</div>
   <div style="display:inline-flex; align-items:center; border:1px solid var(--doc-border); border-radius:4px; padding:0.25rem 0.5rem; gap:0.375rem; min-width:220px; background:var(--doc-card-bg)">
@@ -100,7 +111,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/StateMultiSelect.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Combobox</span> <span class="attr">store</span>={combobox} <span class="attr">onOptionSubmit</span>={handleValueSelect}&gt;
   &lt;<span class="tag">Combobox.DropdownTarget</span>&gt;
@@ -145,17 +156,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Filtering by health/operational state</li><li>Multi-select where options have color coding</li><li>Part of FilterToolbar composition</li><li>Use StateMultiSelect (usually via FilterToolbar) for all health/state filtering.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Generic multi-select without color coding (use Mantine MultiSelect)</li><li>Single-select state filter</li><li>Don't use plain Mantine MultiSelect for health state filtering — it won't color the pills.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

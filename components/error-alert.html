@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Standardized alert component for error, warning, and info messages. Used throughout Prometheus UI for API errors, readiness warnings, and informational messages. Wraps Mantine Alert with semantic severity.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>API error display</li><li>Readiness/startup warnings</li><li>Informational messages about running mode (agent mode, etc.)</li><li>Any feedback that needs user attention</li><li>Use ErrorAlert for all error/warning/info messages. Use severity prop to set the appropriate color and icon.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Empty states (use EmptyState)</li><li>Success confirmations (use Mantine Notification)</li><li>Inline validation errors (use Mantine input error prop)</li><li>Don't use inline <code>&lt;Alert color="red"&gt;</code>. Don't omit titles for error severity.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Error</div>
   <div class="mock-alert mock-alert-error mb-sm">
@@ -104,7 +115,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/RulesPage.tsx + pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* RulesPage.tsx — rule evaluation error */</span>
 {r.lastError &amp;&amp; (
@@ -140,17 +151,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>API error display</li><li>Readiness/startup warnings</li><li>Informational messages about running mode (agent mode, etc.)</li><li>Any feedback that needs user attention</li><li>Use ErrorAlert for all error/warning/info messages. Use severity prop to set the appropriate color and icon.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Empty states (use EmptyState)</li><li>Success confirmations (use Mantine Notification)</li><li>Inline validation errors (use Mantine input error prop)</li><li>Don't use inline <code>&lt;Alert color="red"&gt;</code>. Don't omit titles for error severity.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

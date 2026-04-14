@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Two-column key-value display table for build info, runtime info, and configuration flags. A lightweight alternative to DataTable for simple key-value pair display.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying build information</li><li>Runtime information</li><li>Configuration flags</li><li>Any two-column name-value data</li><li>Use KeyValueTable for all two-column key-value display. Pass a plain object for simple cases.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Multi-column data (use DataTable)</li><li>Interactive or sortable data</li><li>Large datasets</li><li>Don't build custom two-column tables. Don't use DataTable for simple key-value data.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">KeyValueTable Example</div>
   <table class="mock-kv-table">
@@ -101,7 +112,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/FlagsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Table</span> <span class="attr">horizontalSpacing</span>=<span class="str">&quot;md&quot;</span> <span class="attr">verticalSpacing</span>=<span class="str">&quot;xs&quot;</span> <span class="attr">miw</span>={<span class="num">700</span>} <span class="attr">layout</span>=<span class="str">&quot;fixed&quot;</span>&gt;
   &lt;<span class="tag">Table.Tbody</span>&gt;
@@ -137,19 +148,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Table uses proper <code>&lt;table&gt;</code> semantics</li><li>Keys and values are read naturally by screen readers</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying build information</li><li>Runtime information</li><li>Configuration flags</li><li>Any two-column name-value data</li><li>Use KeyValueTable for all two-column key-value display. Pass a plain object for simple cases.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Multi-column data (use DataTable)</li><li>Interactive or sortable data</li><li>Large datasets</li><li>Don't build custom two-column tables. Don't use DataTable for simple key-value data.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

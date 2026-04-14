@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>A Card with a consistent icon + title header for status and info pages. Equivalent to InfoPageCard in the Prometheus source. Used on StatusPage, TSDBStatusPage, AgentPage, and FlagsPage.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Status/info pages that display categorized information</li><li>Building information with icon + title header</li><li>Wrapping KeyValueTable or DataTable content</li><li>Use InfoCard consistently on all info/status pages. Always provide both icon and title.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Full-width content that doesn't need a card wrapper</li><li>Interactive cards that need click handlers (use a button)</li><li>Accordion items (use HealthPanel or Mantine Accordion)</li><li>Don't create custom Card + Group + Text header patterns. Don't use shadow="md" — InfoCard uses "xs".</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">InfoCard with title and icon</div>
   <div class="mock-info-card">
@@ -103,7 +114,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/InfoPageCard.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> InfoPageCard: FC&lt;{
   children: ReactNode;
@@ -141,19 +152,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Card has semantic <code>article</code> structure via Mantine Card</li><li>Title uses heading-level font size for visual hierarchy</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Status/info pages that display categorized information</li><li>Building information with icon + title header</li><li>Wrapping KeyValueTable or DataTable content</li><li>Use InfoCard consistently on all info/status pages. Always provide both icon and title.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Full-width content that doesn't need a card wrapper</li><li>Interactive cards that need click handlers (use a button)</li><li>Accordion items (use HealthPanel or Mantine Accordion)</li><li>Don't create custom Card + Group + Text header patterns. Don't use shadow="md" — InfoCard uses "xs".</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

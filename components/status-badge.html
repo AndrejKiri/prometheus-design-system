@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Unified health/state badge that resolves the fragmented badge system in the Prometheus UI. A single component handles all status vocabularies across alerts, rules, targets, and service discovery pages.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Display health or operational state for any Prometheus entity</li><li>Show alert states (firing, pending, inactive)</li><li>Show target health (up, down, unknown)</li><li>Show rule states (ok, err, unknown)</li><li>Show service discovery states (active, dropped)</li><li>Display neutral counts (stats variant)</li><li>Use StatusBadge for all health/state display. Pass the raw status string and let the component normalize it.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Decorative coloring unrelated to health state</li><li>Navigation or interactive elements (use a button instead)</li><li>Long text content (badges are for short status labels)</li><li>Don't use Mantine Badge with manual color props for health states. Don't create separate badge implementations per page.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -93,7 +104,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Health Variants</div>
   <div class="flex-row gap-sm mb-md">
@@ -137,7 +148,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>Badge.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* Badge.module.css */</span>
 .healthOk {
@@ -181,17 +192,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Display health or operational state for any Prometheus entity</li><li>Show alert states (firing, pending, inactive)</li><li>Show target health (up, down, unknown)</li><li>Show rule states (ok, err, unknown)</li><li>Show service discovery states (active, dropped)</li><li>Display neutral counts (stats variant)</li><li>Use StatusBadge for all health/state display. Pass the raw status string and let the component normalize it.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Decorative coloring unrelated to health state</li><li>Navigation or interactive elements (use a button instead)</li><li>Long text content (badges are for short status labels)</li><li>Don't use Mantine Badge with manual color props for health states. Don't create separate badge implementations per page.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

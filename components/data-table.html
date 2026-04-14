@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Generic sortable data display table. Supports custom cell rendering, column sorting, empty states, and horizontal scroll. Used throughout Prometheus UI for flags, statistics, and tabular data display.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying tabular data (flags, stats, TSDB info)</li><li>Sortable columns with visual sort indicators</li><li>Tables with custom cell renderers (badges, links, formatted values)</li><li>Use DataTable for all tabular data. Use column <code>render</code> for custom cell content. Use <code>rowKey</code> for stable React keys.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Key-value pair display (use KeyValueTable)</li><li>Complex interactive grids with editing capabilities</li><li>Don't build custom <code>&lt;Table&gt;</code> layouts with manual sort logic. Don't use array index as key without rowKey.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">DataTable Example</div>
   <table class="mock-table">
@@ -115,7 +126,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Table</span>&gt;
   &lt;<span class="tag">Table.Thead</span>&gt;
@@ -162,17 +173,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying tabular data (flags, stats, TSDB info)</li><li>Sortable columns with visual sort indicators</li><li>Tables with custom cell renderers (badges, links, formatted values)</li><li>Use DataTable for all tabular data. Use column <code>render</code> for custom cell content. Use <code>rowKey</code> for stable React keys.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Key-value pair display (use KeyValueTable)</li><li>Complex interactive grids with editing capabilities</li><li>Don't build custom <code>&lt;Table&gt;</code> layouts with manual sort logic. Don't use array index as key without rowKey.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Renders a metric label set in Prometheus format: <code>metric_name{label="value",label2="value2"}</code>. In formatted mode, double-clicking a label pair copies the PromQL matcher to clipboard.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying metric series in query results</li><li>Table cells showing series identifiers</li><li>Any context showing Prometheus label sets</li><li>Use <code>formatted</code> for interactive contexts. Use plain mode for large result sets (>1000 series) for performance.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Displaying a single label (use LabelBadge)</li><li>Editable label display</li><li>Don't use formatted mode for >1000 series — the interactive elements add overhead.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Plain Mode</div>
   <div class="mock-series mb-md">
@@ -99,7 +110,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/query/SeriesName.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> SeriesName: FC&lt;<span class="tag">SeriesNameProps</span>&gt; = ({ labels, format }) =&gt; {
   <span class="kw">const</span> renderFormatted = (): React.ReactElement =&gt; {
@@ -146,17 +157,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying metric series in query results</li><li>Table cells showing series identifiers</li><li>Any context showing Prometheus label sets</li><li>Use <code>formatted</code> for interactive contexts. Use plain mode for large result sets (>1000 series) for performance.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Displaying a single label (use LabelBadge)</li><li>Editable label display</li><li>Don't use formatted mode for >1000 series — the interactive elements add overhead.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

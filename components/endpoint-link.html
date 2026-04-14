@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Scrape endpoint URL display with query parameter badges. Parses the URL and renders query parameters as small gray pill badges alongside the clickable link.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying scrape target endpoints</li><li>Any URL display that benefits from parsed query params</li><li>Use EndpointLink for all scrape target endpoint display.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Generic link display without query parameter parsing</li><li>Navigation links (use NavButton)</li><li>Don't manually parse URLs and render query params as badges.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">EndpointLink Example</div>
   <div class="mock-endpoint mb-sm">
@@ -98,7 +109,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/EndpointLink.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> EndpointLink: FC&lt;<span class="tag">EndpointLinkProps</span>&gt; = ({ endpoint, globalUrl }) =&gt; {
   <span class="kw">let</span> url: URL;
@@ -140,17 +151,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying scrape target endpoints</li><li>Any URL display that benefits from parsed query params</li><li>Use EndpointLink for all scrape target endpoint display.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Generic link display without query parameter parsing</li><li>Navigation links (use NavButton)</li><li>Don't manually parse URLs and render query params as badges.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

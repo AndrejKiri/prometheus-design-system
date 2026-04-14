@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Performance-optimized metric label pill. Uses plain <code>&lt;span&gt;</code> elements instead of Mantine Badge for high-throughput rendering. Mantine's Badge has significant rendering overhead when displaying hundreds of metric labels. Also exports <code>LabelBadgeSet</code> for rendering full label sets.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Display individual metric labels (key=value pairs)</li><li>Show sets of labels for targets, series, or alert instances</li><li>High-performance scenarios with hundreds or thousands of labels</li><li>Show discovered (pre-relabeling) labels with distinct styling</li><li>Use LabelBadge for all metric label display. The performance optimization matters at scale.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Status/health display (use StatusBadge)</li><li>Generic tags or categories unrelated to Prometheus labels</li><li>Interactive filtering controls (use StateMultiSelect)</li><li>Don't use Mantine Badge for label display. The overhead is measurable with hundreds of labels.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Default Variant</div>
   <div class="flex-row gap-xs mb-md">
@@ -114,7 +125,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/LabelBadges.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">export</span> <span class="kw">const</span> LabelBadges: FC&lt;<span class="tag">LabelBadgesProps</span>&gt; = ({
   labels,
@@ -149,17 +160,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Display individual metric labels (key=value pairs)</li><li>Show sets of labels for targets, series, or alert instances</li><li>High-performance scenarios with hundreds or thousands of labels</li><li>Show discovered (pre-relabeling) labels with distinct styling</li><li>Use LabelBadge for all metric label display. The performance optimization matters at scale.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Status/health display (use StatusBadge)</li><li>Generic tags or categories unrelated to Prometheus labels</li><li>Interactive filtering controls (use StateMultiSelect)</li><li>Don't use Mantine Badge for label display. The overhead is measurable with hundreds of labels.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

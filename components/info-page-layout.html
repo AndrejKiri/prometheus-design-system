@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Centered, max-width page layout wrapper for status/info pages. Sets a max-width of 1000px and appropriate top margin. Equivalent to InfoPageStack in the Prometheus source.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Any page that displays informational content (status, build info, TSDB, flags)</li><li>Pages composed of multiple InfoCard components</li><li>Wrap all info/status pages in InfoPageLayout for consistent centering and max-width.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>List/accordion pages (Alerts, Rules, Targets) — they use full-width layout</li><li>Query page — uses its own custom layout</li><li>Don't hardcode <code>maw={1000}</code> on individual Stack components.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Layout Structure</div>
   <div style="border:1px dashed var(--doc-border); border-radius:6px; padding:1rem; max-width:500px; margin: 0 auto;">
@@ -95,7 +106,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/InfoPageStack.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> InfoPageStack: FC&lt;{ children: ReactNode }&gt; = ({ children }) =&gt; {
   <span class="kw">return</span> (
@@ -121,17 +132,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Any page that displays informational content (status, build info, TSDB, flags)</li><li>Pages composed of multiple InfoCard components</li><li>Wrap all info/status pages in InfoPageLayout for consistent centering and max-width.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>List/accordion pages (Alerts, Rules, Targets) — they use full-width layout</li><li>Query page — uses its own custom layout</li><li>Don't hardcode <code>maw={1000}</code> on individual Stack components.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

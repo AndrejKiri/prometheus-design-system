@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Popover panel for user settings. Renders as a gear icon button that opens a settings popover with grouped checkboxes and number inputs. Replaces SettingsMenu from the source.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Application-level settings (syntax highlighting, linting, time format)</li><li>User preferences that persist to localStorage</li><li>Use SettingsPanel in the header actions area. Group related settings logically.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Page-level filters (use FilterToolbar)</li><li>Modal dialogs with complex forms</li><li>Don't create custom popover settings. Don't put page-level filters in settings.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">SettingsPanel Popover</div>
   <div class="mock-settings">
@@ -106,7 +117,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/SettingsMenu.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Popover</span> <span class="attr">position</span>=<span class="str">&quot;bottom&quot;</span> withArrow <span class="attr">shadow</span>=<span class="str">&quot;md&quot;</span>&gt;
   &lt;<span class="tag">Popover.Target</span>&gt;
@@ -153,17 +164,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Application-level settings (syntax highlighting, linting, time format)</li><li>User preferences that persist to localStorage</li><li>Use SettingsPanel in the header actions area. Group related settings logically.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Page-level filters (use FilterToolbar)</li><li>Modal dialogs with complex forms</li><li>Don't create custom popover settings. Don't put page-level filters in settings.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

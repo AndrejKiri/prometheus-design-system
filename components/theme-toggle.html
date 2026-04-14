@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Cycles through light → dark → auto color scheme. Replaces ThemeSelector from the source. Renders as an action icon button showing the current theme state.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Application header — theme switching</li><li>Any context where users need to control color scheme</li><li>Place ThemeToggle in the header actions area. Let it manage color scheme state internally.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Page-level theme sections</li><li>Content-specific color controls</li><li>Don't create separate theme switching mechanisms outside of ThemeToggle.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">ThemeToggle States (on dark header)</div>
   <div style="background:rgb(65,73,81); padding:0.75rem 1rem; border-radius:6px; display:inline-flex; gap:0.75rem; align-items:center">
@@ -96,7 +107,7 @@
 <h3>ColorSchemePreference Type</h3>
 <pre><code><span class="kw">type</span> <span class="typ">ColorSchemePreference</span> = <span class="str">"light"</span> | <span class="str">"dark"</span> | <span class="str">"auto"</span>;</code></pre>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/ThemeSelector.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">export</span> <span class="kw">const</span> ThemeSelector: FC = () =&gt; {
   <span class="kw">const</span> { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -128,19 +139,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Button has descriptive <code>aria-label</code> showing current and next state</li><li>Cycles through three states: light → dark → auto → light</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Application header — theme switching</li><li>Any context where users need to control color scheme</li><li>Place ThemeToggle in the header actions area. Let it manage color scheme state internally.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Page-level theme sections</li><li>Content-specific color controls</li><li>Don't create separate theme switching mechanisms outside of ThemeToggle.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

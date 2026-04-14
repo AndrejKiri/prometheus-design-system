@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>An Accordion.Item with a health-state left border. Resolves the dual AlertsPage/RulesPage border inconsistency where AlertsPage used CSS module classes with step-3 colors and RulesPage used inline styles with step-4 colors.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying groups of alerts with health state</li><li>Displaying rule groups with health state</li><li>Any accordion item that needs a colored health indicator</li><li>Use HealthPanel for all accordion items that represent groups with health state.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Non-accordion card layouts (use InfoCard instead)</li><li>Single status display without expandable content</li><li>Cases where the border color doesn't represent health</li><li>Don't use inline border styles or separate CSS modules per page. Don't mix color steps.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Health Panel Variants</div>
   <div class="mock-health-panel mock-health-panel-ok"><div class="mock-health-panel-title">▸ recording_rules <span class="mock-badge mock-badge-sm mock-badge-ok" style="margin-left:0.5rem">ok</span></div><div class="mock-health-panel-sub">3 rules, last evaluation: 1.2ms</div></div>
@@ -100,7 +111,7 @@
 <h3>Color Steps</h3>
 <p>The canonical resolution: <strong>Step-3 (light) / Step-8 (dark)</strong> for all border colors. This normalizes the RulesPage which was using step-4.</p>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>Panel.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* Panel.module.css */</span>
 .panelHealthOk {
@@ -141,19 +152,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Inherits Mantine Accordion accessibility (arrow keys, Enter/Space to toggle)</li><li>Health status is conveyed visually through border color, complemented by StatusBadge text labels inside the panel header</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying groups of alerts with health state</li><li>Displaying rule groups with health state</li><li>Any accordion item that needs a colored health indicator</li><li>Use HealthPanel for all accordion items that represent groups with health state.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Non-accordion card layouts (use InfoCard instead)</li><li>Single status display without expandable content</li><li>Cases where the border color doesn't represent health</li><li>Don't use inline border styles or separate CSS modules per page. Don't mix color steps.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

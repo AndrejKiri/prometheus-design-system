@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Unifies the 4 different filter bars in the Prometheus codebase: AlertsPage, RulesPage, TargetsPage, and ServiceDiscoveryPage. Provides search input, state multi-select, and optional collapse/expand button.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Any page with filterable list content</li><li>Pages that need state/health filtering (alerts, rules, targets)</li><li>Pages with collapsible accordion panels that need a collapse-all button</li><li>Use FilterToolbar for all page-level filter bars. It handles all four Prometheus filter patterns.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Simple text-only search (use a plain TextInput)</li><li>Complex filter UIs with multiple dimensions beyond state + text</li><li>Don't build custom filter bars with separate Group + StateMultiSelect + TextInput combinations.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -93,7 +104,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">AlertsPage / RulesPage Style</div>
   <div class="mock-filter-bar mb-md">
@@ -110,7 +121,7 @@
 
 
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Group</span>&gt;
   &lt;<span class="tag">StateMultiSelect</span>
@@ -158,17 +169,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Any page with filterable list content</li><li>Pages that need state/health filtering (alerts, rules, targets)</li><li>Pages with collapsible accordion panels that need a collapse-all button</li><li>Use FilterToolbar for all page-level filter bars. It handles all four Prometheus filter patterns.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Simple text-only search (use a plain TextInput)</li><li>Complex filter UIs with multiple dimensions beyond state + text</li><li>Don't build custom filter bars with separate Group + StateMultiSelect + TextInput combinations.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Accordion component for scrape pool and target group display. Combines HealthPanel with pool-specific header layout including stats badges and target counts.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Targets page — scrape pool groups</li><li>Service Discovery page — discovered pool groups</li><li>Any grouped list with health status and counts</li><li>Use PoolAccordion for Targets and Service Discovery pages.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Alert/rule groups (use HealthPanel directly)</li><li>Non-grouped content</li><li>Don't build custom accordion layouts with manual health border logic per page.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -88,7 +99,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">PoolAccordion Example</div>
   <div class="mock-pool-item">
@@ -116,7 +127,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Accordion</span> multiple <span class="attr">variant</span>=<span class="str">&quot;separated&quot;</span> <span class="attr">keepMounted</span>={false}
   <span class="attr">value</span>={allPoolNames.filter((p) =&gt; !collapsedPools.includes(p))}
@@ -160,17 +171,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Targets page — scrape pool groups</li><li>Service Discovery page — discovered pool groups</li><li>Any grouped list with health status and counts</li><li>Use PoolAccordion for Targets and Service Discovery pages.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Alert/rule groups (use HealthPanel directly)</li><li>Non-grouped content</li><li>Don't build custom accordion layouts with manual health border logic per page.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

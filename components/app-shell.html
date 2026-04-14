@@ -72,6 +72,17 @@
 <h2 id="description">Description</h2>
 <p>Application layout shell with the intentionally-always-dark header. Wraps Mantine AppShell with Prometheus-specific header styling, navigation, and responsive behavior. The header uses <code>rgb(65, 73, 81)</code> background and never adapts to theme.</p>
 
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Top-level application wrapper</li><li>Main layout structure with header + nav + content area</li><li>Use PrometheusAppShell as the top-level layout. The always-dark header is intentional brand identity.</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Embedded widgets (they don't need the full app shell)</li><li>Pages without navigation</li><li>Don't try to make the header respond to light/dark mode. Don't hardcode header colors elsewhere.</li></ul>
+  </div>
+</div>
+
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
 <div class="reference-content">
@@ -83,7 +94,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">AppShell Layout</div>
   <div class="mock-app-shell">
@@ -114,7 +125,7 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>App.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">AppShell</span> <span class="attr">header</span>={{ height: <span class="num">56</span> }}
   <span class="attr">navbar</span>={{ width: <span class="num">300</span>, breakpoint: <span class="str">&quot;sm&quot;</span>,
@@ -167,17 +178,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Top-level application wrapper</li><li>Main layout structure with header + nav + content area</li><li>Use PrometheusAppShell as the top-level layout. The always-dark header is intentional brand identity.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Embedded widgets (they don't need the full app shell)</li><li>Pages without navigation</li><li>Don't try to make the header respond to light/dark mode. Don't hardcode header colors elsewhere.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 
