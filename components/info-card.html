@@ -65,12 +65,35 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>InfoCard</span></div>
     <h1>InfoCard</h1>
     <p class="doc-subtitle">A Card with a consistent icon + title header for status and info pages.</p>
     
 <h2 id="description">Description</h2>
 <p>A Card with a consistent icon + title header for status and info pages. Equivalent to InfoPageCard in the Prometheus source. Used on StatusPage, TSDBStatusPage, AgentPage, and FlagsPage.</p>
+
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Status/info pages with categorized information</li><li>Content with icon + title header pattern</li><li>Wrapping KeyValueTable or DataTable content</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Full-width content without need for a card wrapper</li><li>Interactive cards needing click handlers (use a button)</li><li>Accordion items (use HealthPanel)</li></ul>
+  </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">InfoCard with title and icon</div>
+  <div class="mock-info-card">
+    <div class="mock-info-card-header"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg><span>Runtime Information</span></div>
+    <table class="mock-kv-table">
+      <tr><td>Version</td><td>2.47.0</td></tr>
+      <tr><td>Go Version</td><td>go1.21.5</td></tr>
+      <tr><td>Uptime</td><td>3d 14h 22m</td></tr>
+    </table>
+  </div>
+</div>
 
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
@@ -88,22 +111,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
-<div class="example-box">
-<div class="example-label">InfoCard with title and icon</div>
-  <div class="mock-info-card">
-    <div class="mock-info-card-header"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="8" x2="16" y2="8"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="12" y2="16"/></svg><span>Runtime Information</span></div>
-    <table class="mock-kv-table">
-      <tr><td>Version</td><td>2.47.0</td></tr>
-      <tr><td>Go Version</td><td>go1.21.5</td></tr>
-      <tr><td>Uptime</td><td>3d 14h 22m</td></tr>
-    </table>
-  </div>
-</div>
-
-
-
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/InfoPageCard.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> InfoPageCard: FC&lt;{
   children: ReactNode;
@@ -141,19 +149,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Card has semantic <code>article</code> structure via Mantine Card</li><li>Title uses heading-level font size for visual hierarchy</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Status/info pages that display categorized information</li><li>Building information with icon + title header</li><li>Wrapping KeyValueTable or DataTable content</li><li>Use InfoCard consistently on all info/status pages. Always provide both icon and title.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Full-width content that doesn't need a card wrapper</li><li>Interactive cards that need click handlers (use a button)</li><li>Accordion items (use HealthPanel or Mantine Accordion)</li><li>Don't create custom Card + Group + Text header patterns. Don't use shadow="md" — InfoCard uses "xs".</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

@@ -65,12 +65,34 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>NavButton</span></div>
     <h1>NavButton</h1>
     <p class="doc-subtitle">Header navigation link with active state highlighting.</p>
     
 <h2 id="description">Description</h2>
 <p>Header navigation link with active state highlighting. Renders inside the always-dark header. Uses Mantine Button styled as a nav link with react-router-dom NavLink for route matching.</p>
+
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Primary navigation in the application header</li><li>Links to main pages (Query, Alerts, Targets, etc.)</li><li>Let active state be auto-detected from route</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Sidebar or in-page navigation</li><li>External links</li><li>Raw Button with manual active state logic</li></ul>
+  </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">NavButton States (on dark header)</div>
+  <div style="background:rgb(65,73,81); padding:0.75rem 1rem; border-radius:6px; display:inline-flex; gap:0.25rem">
+    <span class="mock-nav-btn active">Query</span>
+    <span class="mock-nav-btn">Alerts</span>
+    <span class="mock-nav-btn">Rules</span>
+    <span class="mock-nav-btn">Targets</span>
+    <span class="mock-nav-btn">Status</span>
+  </div>
+</div>
 
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
@@ -83,21 +105,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
-<div class="example-box">
-<div class="example-label">NavButton States (on dark header)</div>
-  <div style="background:rgb(65,73,81); padding:0.75rem 1rem; border-radius:6px; display:inline-flex; gap:0.25rem">
-    <span class="mock-nav-btn active">Query</span>
-    <span class="mock-nav-btn">Alerts</span>
-    <span class="mock-nav-btn">Rules</span>
-    <span class="mock-nav-btn">Targets</span>
-    <span class="mock-nav-btn">Status</span>
-  </div>
-</div>
-
-
-
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>App.tsx + App.module.css</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* App.tsx */</span>
 {mainNavPages.map((p) =&gt; (
@@ -142,17 +150,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Primary navigation in the application header</li><li>Links to main pages (Query, Alerts, Rules, Targets, etc.)</li><li>Use NavButton for all header navigation links. Let active state be auto-detected from route.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Sidebar navigation</li><li>In-page anchor links</li><li>External links</li><li>Don't use raw Button components with manual active state logic for navigation.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

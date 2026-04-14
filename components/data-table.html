@@ -65,30 +65,24 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>DataTable</span></div>
     <h1>DataTable</h1>
     <p class="doc-subtitle">Generic sortable data display table.</p>
     
 <h2 id="description">Description</h2>
 <p>Generic sortable data display table. Supports custom cell rendering, column sorting, empty states, and horizontal scroll. Used throughout Prometheus UI for flags, statistics, and tabular data display.</p>
 
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/flags" target="_blank" rel="noopener">View in Prometheus UI →  /flags</a>
-    <img src="../screenshots/flags-page.jpg" alt="DataTable on the Flags page — sortable table with flag values" loading="lazy">
-    <p>DataTable on the Flags page — sortable table with flag values</p>
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>All tabular data (flags, stats, TSDB info)</li><li>Sortable columns with visual sort indicators</li><li>Use column <code>render</code> for custom cells, <code>rowKey</code> for stable keys</li></ul>
   </div>
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/tsdb-status" target="_blank" rel="noopener">View in Prometheus UI →  /tsdb-status</a>
-    <img src="../screenshots/tsdb-status-page.jpg" alt="DataTable on the TSDB Status page — top 10 metrics" loading="lazy">
-    <p>DataTable on the TSDB Status page — top 10 metrics</p>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Key-value pair display (use KeyValueTable)</li><li>Complex interactive grids with editing</li><li>Custom <code>&lt;Table&gt;</code> layouts with manual sort logic</li></ul>
   </div>
 </div>
-</details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">DataTable Example</div>
   <table class="mock-table">
@@ -115,7 +109,23 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/flags" target="_blank" rel="noopener">View in Prometheus UI →  /flags</a>
+    <img src="../screenshots/flags-page.jpg" alt="DataTable on the Flags page — sortable table with flag values" loading="lazy">
+    <p>DataTable on the Flags page — sortable table with flag values</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/tsdb-status" target="_blank" rel="noopener">View in Prometheus UI →  /tsdb-status</a>
+    <img src="../screenshots/tsdb-status-page.jpg" alt="DataTable on the TSDB Status page — top 10 metrics" loading="lazy">
+    <p>DataTable on the TSDB Status page — top 10 metrics</p>
+  </div>
+</div>
+</details>
+
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/targets/ScrapePoolsList.tsx</code> in the Prometheus codebase:</p>
 <pre><code>&lt;<span class="tag">Table</span>&gt;
   &lt;<span class="tag">Table.Thead</span>&gt;
@@ -162,17 +172,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying tabular data (flags, stats, TSDB info)</li><li>Sortable columns with visual sort indicators</li><li>Tables with custom cell renderers (badges, links, formatted values)</li><li>Use DataTable for all tabular data. Use column <code>render</code> for custom cell content. Use <code>rowKey</code> for stable React keys.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Key-value pair display (use KeyValueTable)</li><li>Complex interactive grids with editing capabilities</li><li>Don't build custom <code>&lt;Table&gt;</code> layouts with manual sort logic. Don't use array index as key without rowKey.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

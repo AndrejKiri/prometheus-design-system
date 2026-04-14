@@ -65,25 +65,24 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>EndpointLink</span></div>
     <h1>EndpointLink</h1>
     <p class="doc-subtitle">Scrape endpoint URL display with query parameter badges.</p>
     
 <h2 id="description">Description</h2>
 <p>Scrape endpoint URL display with query parameter badges. Parses the URL and renders query parameters as small gray pill badges alongside the clickable link.</p>
 
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
-    <img src="../screenshots/targets-page.jpg" alt="EndpointLink on the Targets page — clickable scrape endpoint URLs" loading="lazy">
-    <p>EndpointLink on the Targets page — clickable scrape endpoint URLs</p>
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Scrape target endpoint display</li><li>Any URL that benefits from parsed query param badges</li><li>Consistent endpoint formatting across all pages</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Generic links without query parameter parsing</li><li>Navigation links (use NavButton)</li><li>Manually parsing URLs and rendering query param badges</li></ul>
   </div>
 </div>
-</details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">EndpointLink Example</div>
   <div class="mock-endpoint mb-sm">
@@ -96,9 +95,18 @@
   </div>
 </div>
 
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
+    <img src="../screenshots/targets-page.jpg" alt="EndpointLink on the Targets page — clickable scrape endpoint URLs" loading="lazy">
+    <p>EndpointLink on the Targets page — clickable scrape endpoint URLs</p>
+  </div>
+</div>
+</details>
 
-
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>components/EndpointLink.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="kw">const</span> EndpointLink: FC&lt;<span class="tag">EndpointLinkProps</span>&gt; = ({ endpoint, globalUrl }) =&gt; {
   <span class="kw">let</span> url: URL;
@@ -140,17 +148,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying scrape target endpoints</li><li>Any URL display that benefits from parsed query params</li><li>Use EndpointLink for all scrape target endpoint display.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Generic link display without query parameter parsing</li><li>Navigation links (use NavButton)</li><li>Don't manually parse URLs and render query params as badges.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

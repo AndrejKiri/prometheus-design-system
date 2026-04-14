@@ -65,12 +65,34 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>HealthPanel</span></div>
     <h1>HealthPanel</h1>
     <p class="doc-subtitle">An Accordion.</p>
     
 <h2 id="description">Description</h2>
 <p>An Accordion.Item with a health-state left border. Resolves the dual AlertsPage/RulesPage border inconsistency where AlertsPage used CSS module classes with step-3 colors and RulesPage used inline styles with step-4 colors.</p>
+
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Displaying groups of alerts with health state</li><li>Displaying rule groups with health state</li><li>Any accordion item needing a colored health indicator</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Non-accordion card layouts (use InfoCard)</li><li>Single status display without expandable content</li><li>Inline border styles or mixing color steps across pages</li></ul>
+  </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">Health Panel Variants</div>
+  <div class="mock-health-panel mock-health-panel-ok"><div class="mock-health-panel-title">▸ recording_rules <span class="mock-badge mock-badge-sm mock-badge-ok" style="margin-left:0.5rem">ok</span></div><div class="mock-health-panel-sub">3 rules, last evaluation: 1.2ms</div></div>
+  <div class="mock-health-panel mock-health-panel-err"><div class="mock-health-panel-title">▸ critical_alerts <span class="mock-badge mock-badge-sm mock-badge-err" style="margin-left:0.5rem">firing</span></div><div class="mock-health-panel-sub">2 of 5 alerts firing</div></div>
+  <div class="mock-health-panel mock-health-panel-warn"><div class="mock-health-panel-title">▸ warning_rules <span class="mock-badge mock-badge-sm mock-badge-warn" style="margin-left:0.5rem">pending</span></div><div class="mock-health-panel-sub">1 pending alert</div></div>
+  <div class="mock-health-panel mock-health-panel-unknown"><div class="mock-health-panel-title">▸ unknown_group <span class="mock-badge mock-badge-sm mock-badge-unknown" style="margin-left:0.5rem">unknown</span></div><div class="mock-health-panel-sub">No evaluation data</div></div>
+</div>
+
+<h3>Color Steps</h3>
+<p>The canonical resolution: <strong>Step-3 (light) / Step-8 (dark)</strong> for all border colors. This normalizes the RulesPage which was using step-4.</p>
 
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
@@ -88,19 +110,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
-<div class="example-box">
-<div class="example-label">Health Panel Variants</div>
-  <div class="mock-health-panel mock-health-panel-ok"><div class="mock-health-panel-title">▸ recording_rules <span class="mock-badge mock-badge-sm mock-badge-ok" style="margin-left:0.5rem">ok</span></div><div class="mock-health-panel-sub">3 rules, last evaluation: 1.2ms</div></div>
-  <div class="mock-health-panel mock-health-panel-err"><div class="mock-health-panel-title">▸ critical_alerts <span class="mock-badge mock-badge-sm mock-badge-err" style="margin-left:0.5rem">firing</span></div><div class="mock-health-panel-sub">2 of 5 alerts firing</div></div>
-  <div class="mock-health-panel mock-health-panel-warn"><div class="mock-health-panel-title">▸ warning_rules <span class="mock-badge mock-badge-sm mock-badge-warn" style="margin-left:0.5rem">pending</span></div><div class="mock-health-panel-sub">1 pending alert</div></div>
-  <div class="mock-health-panel mock-health-panel-unknown"><div class="mock-health-panel-title">▸ unknown_group <span class="mock-badge mock-badge-sm mock-badge-unknown" style="margin-left:0.5rem">unknown</span></div><div class="mock-health-panel-sub">No evaluation data</div></div>
-</div>
-
-<h3>Color Steps</h3>
-<p>The canonical resolution: <strong>Step-3 (light) / Step-8 (dark)</strong> for all border colors. This normalizes the RulesPage which was using step-4.</p>
-
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>Panel.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* Panel.module.css */</span>
 .panelHealthOk {
@@ -141,19 +151,6 @@
 <h2 id="accessibility">Accessibility</h2>
 <ul><li>Inherits Mantine Accordion accessibility (arrow keys, Enter/Space to toggle)</li><li>Health status is conveyed visually through border color, complemented by StatusBadge text labels inside the panel header</li></ul>
 
-
-
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Displaying groups of alerts with health state</li><li>Displaying rule groups with health state</li><li>Any accordion item that needs a colored health indicator</li><li>Use HealthPanel for all accordion items that represent groups with health state.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Non-accordion card layouts (use InfoCard instead)</li><li>Single status display without expandable content</li><li>Cases where the border color doesn't represent health</li><li>Don't use inline border styles or separate CSS modules per page. Don't mix color steps.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

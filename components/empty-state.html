@@ -65,12 +65,32 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>EmptyState</span></div>
     <h1>EmptyState</h1>
     <p class="doc-subtitle">Centered empty state display with icon, message, description, and optional action.</p>
     
 <h2 id="description">Description</h2>
 <p>Centered empty state display with icon, message, description, and optional action. Used when filter results are empty, data hasn't loaded, or there are genuinely no items to display.</p>
+
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>Empty filter results or zero items in a list</li><li>No data loaded yet / first-time empty state</li><li>Always provide a descriptive message</li></ul>
+  </div>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Loading states (use Skeleton or LoadingOverlay)</li><li>Error states (use ErrorAlert)</li><li>Empty tables with no user-facing indication</li></ul>
+  </div>
+</div>
+
+<h2 id="design">Design</h2>
+<div class="example-box">
+<div class="example-label">EmptyState Example</div>
+  <div class="mock-empty">
+    <div class="mock-empty-icon">🗄️</div>
+    <div class="mock-empty-msg">No targets found</div>
+    <div class="mock-empty-desc">No scrape targets match your current filter.</div>
+  </div>
+</div>
 
 <details class="component-reference">
 <summary>Where this component exists in the Prometheus UI</summary>
@@ -83,19 +103,7 @@
 </div>
 </details>
 
-<h2 id="examples">Visual Examples</h2>
-<div class="example-box">
-<div class="example-label">EmptyState Example</div>
-  <div class="mock-empty">
-    <div class="mock-empty-icon">🗄️</div>
-    <div class="mock-empty-msg">No targets found</div>
-    <div class="mock-empty-desc">No scrape targets match your current filter.</div>
-  </div>
-</div>
-
-
-
-<h2 id="code">Current Implementation</h2>
+<h2 id="implementation">Implementation</h2>
 <p>From <code>pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code>{alertsPageData.groups.length === <span class="num">0</span> ? (
   &lt;<span class="tag">Alert</span> <span class="attr">title</span>=<span class="str">&quot;No rules found&quot;</span> <span class="attr">icon</span>={&lt;<span class="tag">IconInfoCircle</span> /&gt;}&gt;
@@ -132,17 +140,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Empty filter results</li><li>No data loaded yet</li><li>Zero items in a list</li><li>First-time empty state</li><li>Use EmptyState for all empty list/table states. Always provide a descriptive message.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Loading states (use Mantine Skeleton or LoadingOverlay)</li><li>Error states (use ErrorAlert)</li><li>Don't display empty tables with no indication. Don't use EmptyState for loading or error states.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

@@ -65,35 +65,24 @@
 
 <main class="doc-main">
   <div class="doc-content">
-    <div class="doc-breadcrumb"><a href="../index.html">Docs</a><span class="sep">›</span><a href="../components.html">Components</a><span class="sep">›</span><span>StatusBadge</span></div>
     <h1>StatusBadge</h1>
     <p class="doc-subtitle">Unified health/state badge that resolves the fragmented badge system in the Prometheus UI.</p>
     
 <h2 id="description">Description</h2>
 <p>Unified health/state badge that resolves the fragmented badge system in the Prometheus UI. A single component handles all status vocabularies across alerts, rules, targets, and service discovery pages.</p>
 
-<details class="component-reference">
-<summary>Where this component exists in the Prometheus UI</summary>
-<div class="reference-content">
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/alerts" target="_blank" rel="noopener">View in Prometheus UI →  /alerts</a>
-    <img src="../screenshots/alerts-page.jpg" alt="StatusBadge on the Alerts page — firing/pending/inactive badges" loading="lazy">
-    <p>StatusBadge on the Alerts page — firing/pending/inactive badges</p>
+<div class="do-dont-grid">
+  <div class="do-box">
+    <div class="do-box-title">✓ Do</div>
+    <ul><li>All health/state display across alerts, targets, rules, and SD pages</li><li>Pass the raw status string and let the component normalize it</li><li>Neutral counts via the stats variant</li></ul>
   </div>
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
-    <img src="../screenshots/targets-page.jpg" alt="StatusBadge on the Targets page — up/down health indicators" loading="lazy">
-    <p>StatusBadge on the Targets page — up/down health indicators</p>
-  </div>
-  <div class="reference-item">
-    <a href="https://prometheus-e83j.onrender.com/rules" target="_blank" rel="noopener">View in Prometheus UI →  /rules</a>
-    <img src="../screenshots/rules-page.jpg" alt="StatusBadge on the Rules page — ok/err state badges" loading="lazy">
-    <p>StatusBadge on the Rules page — ok/err state badges</p>
+  <div class="dont-box">
+    <div class="dont-box-title">✗ Don&rsquo;t</div>
+    <ul><li>Decorative coloring unrelated to health state</li><li>Interactive elements (use a button instead)</li><li>Mantine Badge with manual color props or separate per-page badge implementations</li></ul>
   </div>
 </div>
-</details>
 
-<h2 id="examples">Visual Examples</h2>
+<h2 id="design">Design</h2>
 <div class="example-box">
 <div class="example-label">Health Variants</div>
   <div class="flex-row gap-sm mb-md">
@@ -137,7 +126,28 @@
   </tbody>
 </table>
 
-<h2 id="code">Current Implementation</h2>
+<details class="component-reference">
+<summary>Where this component exists in the Prometheus UI</summary>
+<div class="reference-content">
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/alerts" target="_blank" rel="noopener">View in Prometheus UI →  /alerts</a>
+    <img src="../screenshots/alerts-page.jpg" alt="StatusBadge on the Alerts page — firing/pending/inactive badges" loading="lazy">
+    <p>StatusBadge on the Alerts page — firing/pending/inactive badges</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/targets" target="_blank" rel="noopener">View in Prometheus UI →  /targets</a>
+    <img src="../screenshots/targets-page.jpg" alt="StatusBadge on the Targets page — up/down health indicators" loading="lazy">
+    <p>StatusBadge on the Targets page — up/down health indicators</p>
+  </div>
+  <div class="reference-item">
+    <a href="https://prometheus-e83j.onrender.com/rules" target="_blank" rel="noopener">View in Prometheus UI →  /rules</a>
+    <img src="../screenshots/rules-page.jpg" alt="StatusBadge on the Rules page — ok/err state badges" loading="lazy">
+    <p>StatusBadge on the Rules page — ok/err state badges</p>
+  </div>
+</div>
+</details>
+
+<h2 id="implementation">Implementation</h2>
 <p>From <code>Badge.module.css + pages/AlertsPage.tsx</code> in the Prometheus codebase:</p>
 <pre><code><span class="cmt">/* Badge.module.css */</span>
 .healthOk {
@@ -181,17 +191,6 @@
 
 
 
-<h2 id="guidelines">Do / Don&rsquo;t</h2>
-<div class="do-dont-grid">
-  <div class="do-box">
-    <div class="do-box-title">✓ Do</div>
-    <ul><li>Display health or operational state for any Prometheus entity</li><li>Show alert states (firing, pending, inactive)</li><li>Show target health (up, down, unknown)</li><li>Show rule states (ok, err, unknown)</li><li>Show service discovery states (active, dropped)</li><li>Display neutral counts (stats variant)</li><li>Use StatusBadge for all health/state display. Pass the raw status string and let the component normalize it.</li></ul>
-  </div>
-  <div class="dont-box">
-    <div class="dont-box-title">✗ Don&rsquo;t</div>
-    <ul><li>Decorative coloring unrelated to health state</li><li>Navigation or interactive elements (use a button instead)</li><li>Long text content (badges are for short status labels)</li><li>Don't use Mantine Badge with manual color props for health states. Don't create separate badge implementations per page.</li></ul>
-  </div>
-</div>
   </div>
 </main>
 

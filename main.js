@@ -145,6 +145,75 @@
     });
   }
 
+  // ─── GitHub Issue Links for Action Items ───────────────────────────────
+  var GITHUB_REPO = "prometheus/prometheus";
+  var GITHUB_ICON_SVG = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+
+  function buildIssueUrl(title, body) {
+    return "https://github.com/" + GITHUB_REPO + "/issues/new?title=" +
+      encodeURIComponent(title) + "&body=" + encodeURIComponent(body);
+  }
+
+  function makeGithubLink(href, text) {
+    var a = document.createElement("a");
+    a.className = "pr-github-link";
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.innerHTML = GITHUB_ICON_SVG + " " + text;
+    return a;
+  }
+
+  function getCardItemUrl(card) {
+    return window.location.origin + window.location.pathname + "#" + card.id;
+  }
+
+  function setupGithubIssueLinks() {
+    var cards = document.querySelectorAll(".pr-card");
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      var number = card.querySelector(".pr-card-number");
+      var titleEl = card.querySelector(".pr-card-title");
+      var body = card.querySelector(".pr-card-body");
+      if (!titleEl || !body) return;
+
+      var title = titleEl.textContent.trim();
+      var numText = number ? number.textContent.trim() : "";
+      var itemUrl = getCardItemUrl(card);
+
+      // Extract problem description (first <p> in card body)
+      var problemP = body.querySelector(":scope > p");
+      var problemText = problemP ? problemP.textContent.trim() : "";
+
+      // Detect if this is a bug-like item
+      var isBug = !!card.querySelector(".pr-label-fix");
+
+      // --- "Open Issue" link after problem paragraph ---
+      var issueBody;
+      if (isBug) {
+        issueBody = "## What did you do?\n" +
+          problemText + "\n\n" +
+          "## What did you expect to see?\n" +
+          "Consistent, correct behavior as described in the design system.\n\n" +
+          "## What did you see instead? Under which circumstances?\n" +
+          "See details in the design system audit.\n\n" +
+          "---\n_From [Prometheus Design System \u2014 Action Item " + numText + "](" + itemUrl + ")_";
+      } else {
+        issueBody = "## Proposal\n" +
+          problemText + "\n\n" +
+          "---\n_From [Prometheus Design System \u2014 Action Item " + numText + "](" + itemUrl + ")_";
+      }
+
+      var issueLink = makeGithubLink(buildIssueUrl(title, issueBody), "Open Issue");
+      issueLink.classList.add("pr-issue-link");
+      if (problemP) {
+        problemP.insertAdjacentElement("afterend", issueLink);
+      }
+
+    });
+  }
+
   // ─── Init ─────────────────────────────────────────────────────────────
   document.addEventListener("DOMContentLoaded", function () {
     setTheme(getPreferredTheme());
@@ -153,6 +222,7 @@
     setupCopyButtons();
     setupCollapsibleSidebar();
     setupCollapsibleToc();
+    setupGithubIssueLinks();
 
     var toggle = document.getElementById("theme-toggle");
     if (toggle) toggle.addEventListener("click", toggleTheme);
