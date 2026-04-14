@@ -122,36 +122,25 @@
     var toc = document.querySelector(".doc-toc-sidebar");
     if (!toc) return;
 
-    // Create toggle button
+    // Create toggle button (fixed position on body)
     var btn = document.createElement("button");
     btn.className = "toc-collapse-btn";
     btn.setAttribute("aria-label", "Toggle table of contents");
-    btn.innerHTML = "›";
-    toc.appendChild(btn);
-
-    // Create dot indicators
-    var tocInline = toc.querySelector(".toc-inline");
-    if (tocInline) {
-      var dots = document.createElement("div");
-      dots.className = "toc-dots";
-      var links = tocInline.querySelectorAll("a");
-      links.forEach(function (link) {
-        var dot = document.createElement("a");
-        dot.className = "toc-dot";
-        dot.href = link.href;
-        dot.title = link.textContent;
-        dots.appendChild(dot);
-      });
-      toc.appendChild(dots);
-    }
+    var arrow = document.createElement("span");
+    arrow.className = "toc-arrow";
+    arrow.textContent = "›";
+    btn.appendChild(arrow);
+    document.body.appendChild(btn);
 
     // Restore state
     var collapsed = localStorage.getItem("toc-collapsed") === "true";
-    if (collapsed) toc.classList.add("toc-collapsed");
+    if (collapsed) {
+      document.body.classList.add("toc-collapsed");
+    }
 
     btn.addEventListener("click", function () {
-      toc.classList.toggle("toc-collapsed");
-      var isCollapsed = toc.classList.contains("toc-collapsed");
+      document.body.classList.toggle("toc-collapsed");
+      var isCollapsed = document.body.classList.contains("toc-collapsed");
       localStorage.setItem("toc-collapsed", isCollapsed);
     });
   }
