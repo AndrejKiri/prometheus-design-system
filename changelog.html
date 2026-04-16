@@ -21,7 +21,7 @@
 </svg>
     <span class="doc-header-title">Prometheus Design System</span>
   </a>
-  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.0 — WIP</a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.2.0</a>
   <div class="doc-header-spacer"></div>
   <div class="doc-header-actions">
     <a href="https://github.com/andrejkiri/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
@@ -71,52 +71,97 @@
 <div class="callout callout-info" style="margin-bottom:2rem">
   <div class="callout-title">Versioning</div>
   This project follows <a href="https://semver.org" target="_blank" rel="noopener">Semantic Versioning</a>.
-  This project follows semantic versioning.
+  The patch number is incremented automatically on each push. Major versions reflect significant shifts in scope or approach.
 </div>
 
-<h2 id="v010">v0.1.0 — Initial Release</h2>
-<p style="color:var(--doc-text-secondary)"><em>March 2026</em></p>
+<!-- ─── v0.2 ─────────────────────────────────────────────────── -->
+<h2 id="v02">v0.2 — Documentation maturity</h2>
+<p style="color:var(--doc-text-secondary)"><em>April 2026</em></p>
+<p>A focused pass on making the docs site honest, navigable, and useful. Speculative and placeholder content was replaced with real source references. Navigation was restructured from scratch — collapsible sidebar, sticky TOC, icons throughout. All 19 component pages received Do/Don't usage guidelines. The site now clearly signals its WIP state and links every action item back to a GitHub issue.</p>
 
-<h3>Components</h3>
+<h3 id="v023">v0.2.3</h3>
+<ul>
+  <li>Do/Don't usage guidelines added to all 19 component pages</li>
+  <li>Component pages restructured: sections reordered, headings renamed, content condensed</li>
+  <li>Breadcrumb navigation removed across the site</li>
+  <li>Vertical spacing tightened: headings, Do/Don't boxes, example boxes, paragraphs</li>
+  <li>Acknowledgements updated with warmer contributor credit and feedback CTA</li>
+</ul>
+
+<h3 id="v022">v0.2.2</h3>
+<ul>
+  <li>Next Steps renamed to <strong>Action Items</strong> — more concrete framing</li>
+  <li>Inconsistency tags and alternative-approach tabs added to action item entries</li>
+  <li>GitHub issue links added to each action item for traceability</li>
+  <li>Broken HTML structure fixed across component and action-items pages</li>
+</ul>
+
+<h3 id="v021">v0.2.1</h3>
+<ul>
+  <li>Inline TOC moved to sticky right sidebar — 2-column layout on wide screens</li>
+  <li>Sidebar and TOC made collapsible; collapse buttons made larger and more visible</li>
+  <li>Icons added to nav links</li>
+  <li>Components dropdown in nav made collapsible; Overview link added under it</li>
+  <li>Downloadable zip of the Figma bootstrap plugin added to the Figma page</li>
+</ul>
+
+<h3 id="v020">v0.2.0</h3>
+<ul>
+  <li>Site restructured: new home page, simplified top-level nav, low-value pages removed</li>
+  <li>WIP messaging added sitewide — honest about pre-release status</li>
+  <li>Placeholder npm package content replaced with real <code>prometheus/prometheus</code> source references</li>
+</ul>
+
+<hr style="margin:2.5rem 0; border-color:var(--doc-border)">
+
+<!-- ─── v0.1 ─────────────────────────────────────────────────── -->
+<h2 id="v01">v0.1 — Foundation</h2>
+<p style="color:var(--doc-text-secondary)"><em>March 2026 · tagged <code>v0.1.0</code></em></p>
+<p>First complete draft of the Prometheus Design System. The work began as a deep audit of the <code>prometheus/prometheus</code> Mantine-based UI, identifying recurring patterns and inconsistencies. From that audit, 19 reusable components were extracted and documented, a <code>--prom-*</code> design token layer was defined, 9 audited inconsistencies were resolved, and a full static documentation site was shipped alongside a Figma bootstrap plugin that sets up the component library in one run.</p>
+
+<h3 id="v012">v0.1.2</h3>
+<ul>
+  <li>Figma plugin rebuilt to match design system specs exactly — component scaffolds now reflect real Prometheus component structure</li>
+  <li>Fixed runtime crashes in component creation logic</li>
+  <li>Fixed Inter font style lookup (<code>SemiBold</code> → <code>Semi Bold</code>)</li>
+  <li>Fixed auto-layout sizing: <code>layoutSizingVertical</code> must be set after appending to parent</li>
+  <li>Fixed <code>FILL</code> sizing: use <code>layoutSizingVertical</code> not <code>counterAxisSizingMode</code></li>
+  <li>Fixed Figma plugin component layout and sizing issues</li>
+</ul>
+
+<h3 id="v011">v0.1.1</h3>
+<ul>
+  <li>Figma bootstrap plugin shipped — automates design token variables, color styles, text styles, and component scaffolds</li>
+  <li>Dev Mode support added to the plugin</li>
+  <li>Proper attribution added to the project</li>
+  <li>Incorrect AI-generated links fixed in documentation</li>
+</ul>
+
+<h3 id="v010">v0.1.0</h3>
 <ul>
   <li>Extracted <strong>19 components</strong> from the <code>prometheus/prometheus</code> Mantine UI codebase:
     StatusBadge, HealthPanel, LabelBadge, FilterToolbar, InfoCard, InfoPageLayout,
     DataTable, KeyValueTable, CodeBlock, SeriesName, EndpointLink, EmptyState,
     ErrorAlert, PoolAccordion, NavButton, StateMultiSelect, SettingsPanel,
     ThemeToggle, PrometheusAppShell</li>
-</ul>
-
-<h3>Inconsistency Fixes</h3>
-<ul>
-  <li>Resolved <strong>9 audited inconsistencies</strong> (see <a href="inconsistencies.html">Inconsistency Log</a>)</li>
+  <li>Resolved <strong>9 audited inconsistencies</strong> — see <a href="inconsistencies.html">Inconsistency Log</a></li>
   <li>Unified 3 different health badge implementations → <code>StatusBadge</code></li>
   <li>Consolidated 4 duplicate filter bars → <code>FilterToolbar</code></li>
-  <li>Fixed <code>localStorage</code> key collision between AlertsPage and RulesPage (<code>alertsPage.showEmptyGroups</code> → <code>rulesPage.showEmptyGroups</code>)</li>
+  <li>Fixed <code>localStorage</code> key collision between AlertsPage and RulesPage</li>
   <li>Added dark mode support to <code>SeriesName</code> hover colors</li>
-  <li>Normalized panel border color steps (step-3/step-8) across AlertsPage and RulesPage</li>
+  <li>Normalized panel border color steps across AlertsPage and RulesPage</li>
   <li>Fixed navbar text visibility gap between <code>sm</code> and <code>md</code> breakpoints</li>
-</ul>
-
-<h3>Design Tokens</h3>
-<ul>
   <li>Defined <code>--prom-*</code> CSS custom properties for colors, spacing, typography, and motion</li>
   <li>Health color system: 5-state semantic palette (ok/err/warn/info/unknown) with light and dark mode values</li>
-  <li>Exported all tokens as TypeScript constants and CSS custom properties</li>
-</ul>
-
-<h3>Documentation</h3>
-<ul>
-  <li>Complete documentation site with component pages, design principles, migration guide, and architecture decisions</li>
-  <li>Figma structure guide with 12-step bootstrap workflow and Figma plugin</li>
-  <li>Accessibility documentation (WCAG AA compliance)</li>
+  <li>Complete documentation site: component pages, design tokens, icon inventory, UI patterns, Figma guide, migration, inconsistency log</li>
+  <li>Accessibility documentation (WCAG AA compliance target)</li>
   <li>Pattern documentation for 28 identified UI patterns</li>
 </ul>
 
 <hr style="margin:2.5rem 0; border-color:var(--doc-border)">
 
 <p style="color:var(--doc-text-tertiary); font-style:italic">
-  Older versions: This is the initial release. Previous work was conducted as an internal audit
-  documented in the <a href="audit-report.html">Audit Report</a>.
+  The initial audit that informed v0.1.0 is documented in the <a href="audit-report.html">Audit Report</a>.
 </p>
 
   </div>

@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'CMD=$(echo \"$CLAUDE_TOOL_INPUT\" | python3 -c \"import json,sys; print(json.load(sys.stdin).get(\\\"command\\\",\\\"\\\"))\" 2>/dev/null || true); if echo \"$CMD\" | grep -qE \"git push\"; then bash /home/user/prometheus-design-system/scripts/bump-version.sh; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
