@@ -21,7 +21,7 @@
 </svg>
     <span class="doc-header-title">Prometheus Design System</span>
   </a>
-  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.2.0</a>
+  <a href="changelog.html" class="doc-header-subtitle" title="View changelog">v0.1.3</a>
   <div class="doc-header-spacer"></div>
   <div class="doc-header-actions">
     <a href="https://github.com/andrejkiri/prometheus-design-system" class="doc-github-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" title="View on GitHub"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-label="GitHub"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
@@ -74,59 +74,35 @@
   The patch number is incremented automatically on each push. Major versions reflect significant shifts in scope or approach.
 </div>
 
-<!-- ─── v0.2 ─────────────────────────────────────────────────── -->
-<h2 id="v02">v0.2 — Documentation maturity</h2>
-<p style="color:var(--doc-text-secondary)"><em>April 2026</em></p>
-<p>A focused pass on making the docs site honest, navigable, and useful. Speculative and placeholder content was replaced with real source references. Navigation was restructured from scratch — collapsible sidebar, sticky TOC, icons throughout. All 19 component pages received Do/Don't usage guidelines. The site now clearly signals its WIP state and links every action item back to a GitHub issue.</p>
+<!-- ─── v0.1 ─────────────────────────────────────────────────── -->
+<h2 id="v01">v0.1 — Foundation</h2>
+<p style="color:var(--doc-text-secondary)"><em>March–April 2026</em></p>
+<p>First complete arc of the Prometheus Design System. Started with a deep audit of the <code>prometheus/prometheus</code> Mantine-based UI, extracting 19 reusable components, defining a <code>--prom-*</code> design token layer, and resolving 9 audited inconsistencies. A Figma bootstrap plugin was shipped to set up the component library in one run. The second wave focused on maturing the documentation site: cleaning up speculative content, restructuring navigation, adding Do/Don't guidelines for all components, and wiring every action item to a GitHub issue. v0.2 will ship when the reusable SKILL for recreating this kind of design system is complete.</p>
 
-<h3 id="v023">v0.2.3</h3>
+<h3 id="v013">v0.1.3</h3>
 <ul>
   <li>Do/Don't usage guidelines added to all 19 component pages</li>
   <li>Component pages restructured: sections reordered, headings renamed, content condensed</li>
   <li>Breadcrumb navigation removed across the site</li>
   <li>Vertical spacing tightened: headings, Do/Don't boxes, example boxes, paragraphs</li>
   <li>Acknowledgements updated with warmer contributor credit and feedback CTA</li>
-</ul>
-
-<h3 id="v022">v0.2.2</h3>
-<ul>
-  <li>Next Steps renamed to <strong>Action Items</strong> — more concrete framing</li>
-  <li>Inconsistency tags and alternative-approach tabs added to action item entries</li>
+  <li>Next Steps renamed to <strong>Action Items</strong>; inconsistency tags and alternative-approach tabs added</li>
   <li>GitHub issue links added to each action item for traceability</li>
-  <li>Broken HTML structure fixed across component and action-items pages</li>
-</ul>
-
-<h3 id="v021">v0.2.1</h3>
-<ul>
   <li>Inline TOC moved to sticky right sidebar — 2-column layout on wide screens</li>
   <li>Sidebar and TOC made collapsible; collapse buttons made larger and more visible</li>
-  <li>Icons added to nav links</li>
-  <li>Components dropdown in nav made collapsible; Overview link added under it</li>
+  <li>Icons added to nav links; Components dropdown made collapsible</li>
   <li>Downloadable zip of the Figma bootstrap plugin added to the Figma page</li>
-</ul>
-
-<h3 id="v020">v0.2.0</h3>
-<ul>
   <li>Site restructured: new home page, simplified top-level nav, low-value pages removed</li>
-  <li>WIP messaging added sitewide — honest about pre-release status</li>
-  <li>Placeholder npm package content replaced with real <code>prometheus/prometheus</code> source references</li>
+  <li>WIP messaging added sitewide; placeholder npm content replaced with real <code>prometheus/prometheus</code> source references</li>
 </ul>
-
-<hr style="margin:2.5rem 0; border-color:var(--doc-border)">
-
-<!-- ─── v0.1 ─────────────────────────────────────────────────── -->
-<h2 id="v01">v0.1 — Foundation</h2>
-<p style="color:var(--doc-text-secondary)"><em>March 2026 · tagged <code>v0.1.0</code></em></p>
-<p>First complete draft of the Prometheus Design System. The work began as a deep audit of the <code>prometheus/prometheus</code> Mantine-based UI, identifying recurring patterns and inconsistencies. From that audit, 19 reusable components were extracted and documented, a <code>--prom-*</code> design token layer was defined, 9 audited inconsistencies were resolved, and a full static documentation site was shipped alongside a Figma bootstrap plugin that sets up the component library in one run.</p>
 
 <h3 id="v012">v0.1.2</h3>
 <ul>
-  <li>Figma plugin rebuilt to match design system specs exactly — component scaffolds now reflect real Prometheus component structure</li>
+  <li>Figma plugin rebuilt to match design system specs exactly</li>
   <li>Fixed runtime crashes in component creation logic</li>
   <li>Fixed Inter font style lookup (<code>SemiBold</code> → <code>Semi Bold</code>)</li>
   <li>Fixed auto-layout sizing: <code>layoutSizingVertical</code> must be set after appending to parent</li>
   <li>Fixed <code>FILL</code> sizing: use <code>layoutSizingVertical</code> not <code>counterAxisSizingMode</code></li>
-  <li>Fixed Figma plugin component layout and sizing issues</li>
 </ul>
 
 <h3 id="v011">v0.1.1</h3>
@@ -137,7 +113,7 @@
   <li>Incorrect AI-generated links fixed in documentation</li>
 </ul>
 
-<h3 id="v010">v0.1.0</h3>
+<h3 id="v010">v0.1.0 · <code>tagged</code></h3>
 <ul>
   <li>Extracted <strong>19 components</strong> from the <code>prometheus/prometheus</code> Mantine UI codebase:
     StatusBadge, HealthPanel, LabelBadge, FilterToolbar, InfoCard, InfoPageLayout,
