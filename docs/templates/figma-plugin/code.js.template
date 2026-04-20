@@ -1,0 +1,191 @@
+// Figma bootstrap plugin skeleton.
+// Populate the token constants from tokens.json before shipping.
+//
+// Critical font rules (bugs found during development):
+//   - Figma uses "Semi Bold" (with space), NOT "SemiBold". Will crash if wrong.
+//   - "DejaVu Sans Mono" and "Roboto Mono" are NOT bundled with Figma. Use "Courier New".
+//   - "Inter" is the ultimate safe fallback — always bundled.
+//   - Some families only ship "Regular". Requesting "Medium"/"Bold" throws. Always wrap in try/catch.
+
+// ─── Token Definitions ──────────────────────────────────────────────────────
+// Populate these from tokens.json. RGB values are Figma's 0-1 range (hex / 255).
+
+const BRAND_COLORS = {
+  // "brand/primary": { r: 0.0, g: 0.0, b: 0.0 },
+  // {{POPULATE_FROM_tokens.colors.brand}}
+};
+
+const STATUS_COLORS = {
+  // ok: {
+  //   light: { bg: {r,g,b}, text: {r,g,b}, border: {r,g,b} },
+  //   dark:  { bg: {r,g,b}, text: {r,g,b}, border: {r,g,b} }
+  // },
+  // {{POPULATE_FROM_tokens.colors.status}}
+};
+
+const SURFACE_COLORS = {
+  // "surface/page-bg": { light: {r,g,b}, dark: {r,g,b} },
+  // {{POPULATE_FROM_tokens.colors.surface}}
+};
+
+const TEXT_COLORS = {
+  // "text/primary": { light: {r,g,b}, dark: {r,g,b} },
+  // {{POPULATE_FROM_tokens.colors.text}}
+};
+
+const SPACING = {
+  // "spacing/xs": 8,
+  // {{POPULATE_FROM_tokens.spacing.scale}}
+};
+
+const RADIUS = {
+  // "radius/default": 4,
+  // {{POPULATE_FROM_tokens.border_radius}}
+};
+
+const TEXT_STYLES = [
+  // { name: "heading/page", family: "Inter",       size: 20, weight: 700, lineHeight: 1.25 },
+  // { name: "body/default", family: "Inter",       size: 14, weight: 400, lineHeight: 1.5  },
+  // { name: "code/default", family: "Courier New", size: 13, weight: 400, lineHeight: 1.6  },
+  // {{POPULATE_FROM_tokens.typography.styles}}
+];
+
+const SHADOW_STYLES = [
+  // {
+  //   name: "elevation/sm",
+  //   effects: [{
+  //     type: "DROP_SHADOW",
+  //     color: { r: 0, g: 0, b: 0, a: 0.08 },
+  //     offset: { x: 0, y: 1 }, radius: 3, spread: 0,
+  //     visible: true, blendMode: "NORMAL"
+  //   }]
+  // },
+  // {{POPULATE_FROM_tokens.elevation}}
+];
+
+// ─── Variable Collections ───────────────────────────────────────────────────
+
+async function createVariableCollections() {
+  figma.notify("Creating variable collections...");
+
+  // Brand — single mode
+  const brandColl = figma.variables.createVariableCollection("Brand");
+  const brandMode = brandColl.modes[0].modeId;
+  for (const [name, rgb] of Object.entries(BRAND_COLORS)) {
+    const v = figma.variables.createVariable(name, brandColl, "COLOR");
+    v.setValueForMode(brandMode, rgb);
+  }
+
+  // Spacing — single mode, FLOAT
+  const spacingColl = figma.variables.createVariableCollection("Spacing");
+  const spacingMode = spacingColl.modes[0].modeId;
+  for (const [name, value] of Object.entries(SPACING)) {
+    const v = figma.variables.createVariable(name, spacingColl, "FLOAT");
+    v.setValueForMode(spacingMode, value);
+  }
+
+  // Radius — single mode, FLOAT
+  const radiusColl = figma.variables.createVariableCollection("Radius");
+  const radiusMode = radiusColl.modes[0].modeId;
+  for (const [name, value] of Object.entries(RADIUS)) {
+    const v = figma.variables.createVariable(name, radiusColl, "FLOAT");
+    v.setValueForMode(radiusMode, value);
+  }
+
+  // Status Colors — Light + Dark modes
+  const statusColl = figma.variables.createVariableCollection("Status Colors");
+  const lightId = statusColl.modes[0].modeId;
+  statusColl.renameMode(lightId, "Light");
+  const darkId = statusColl.addMode("Dark");
+  for (const [status, modes] of Object.entries(STATUS_COLORS)) {
+    for (const suffix of ["bg", "text", "border"]) {
+      const v = figma.variables.createVariable(`status/${status}-${suffix}`, statusColl, "COLOR");
+      v.setValueForMode(lightId, modes.light[suffix]);
+      v.setValueForMode(darkId,  modes.dark[suffix]);
+    }
+  }
+
+  // Surface / Text — Light + Dark modes
+  for (const [collName, tokenMap] of [["Surface", SURFACE_COLORS], ["Text", TEXT_COLORS]]) {
+    const coll = figma.variables.createVariableCollection(collName);
+    const lId = coll.modes[0].modeId;
+    coll.renameMode(lId, "Light");
+    const dId = coll.addMode("Dark");
+    for (const [name, modes] of Object.entries(tokenMap)) {
+      const v = figma.variables.createVariable(name, coll, "COLOR");
+      v.setValueForMode(lId, modes.light);
+      v.setValueForMode(dId, modes.dark);
+    }
+  }
+}
+
+// ─── Text Styles (with font fallback) ───────────────────────────────────────
+
+async function createTextStyles() {
+  figma.notify("Creating text styles...");
+
+  for (const def of TEXT_STYLES) {
+    const weightStyle = def.weight >= 700 ? "Bold"
+      : def.weight >= 600 ? "Semi Bold"  // Figma naming — with space
+      : def.weight >= 500 ? "Medium"
+      : "Regular";
+
+    let resolvedFamily = def.family;
+    let resolvedStyle  = weightStyle;
+
+    try {
+      await figma.loadFontAsync({ family: def.family, style: weightStyle });
+    } catch (_e) {
+      try {
+        await figma.loadFontAsync({ family: def.family, style: "Regular" });
+        resolvedStyle = "Regular";
+      } catch (_e2) {
+        try {
+          await figma.loadFontAsync({ family: "Inter", style: weightStyle });
+          resolvedFamily = "Inter";
+        } catch (_e3) {
+          await figma.loadFontAsync({ family: "Inter", style: "Regular" });
+          resolvedFamily = "Inter";
+          resolvedStyle  = "Regular";
+        }
+      }
+    }
+
+    const style = figma.createTextStyle();
+    style.name     = def.name;
+    style.fontName = { family: resolvedFamily, style: resolvedStyle };
+    style.fontSize = def.size;
+    style.lineHeight = { value: def.lineHeight * 100, unit: "PERCENT" };
+  }
+}
+
+// ─── Effect Styles ──────────────────────────────────────────────────────────
+
+async function createEffectStyles() {
+  figma.notify("Creating elevation styles...");
+  for (const def of SHADOW_STYLES) {
+    const style = figma.createEffectStyle();
+    style.name    = def.name;
+    style.effects = def.effects;
+  }
+}
+
+// ─── Main ───────────────────────────────────────────────────────────────────
+
+async function main() {
+  try {
+    figma.notify("Design System Bootstrap starting...", { timeout: 2000 });
+    await createVariableCollections();
+    await createTextStyles();
+    await createEffectStyles();
+    figma.notify("Bootstrap complete!", { timeout: 5000 });
+  } catch (error) {
+    const msg = error && error.message ? error.message : String(error);
+    figma.notify("Error: " + msg, { error: true, timeout: 8000 });
+    console.error("Plugin error:", error);
+  } finally {
+    figma.closePlugin();
+  }
+}
+
+main();

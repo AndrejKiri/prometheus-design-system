@@ -1,0 +1,9 @@
+{
+  "name": "{{PROJECT_NAME}} DS Bootstrap",
+  "id": "{{UNIQUE_ID}}",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "capabilities": [],
+  "permissions": []
+}

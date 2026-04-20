@@ -1,0 +1,163 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComponentInventory",
+  "description": "All UI components extracted and documented from the target application.",
+  "type": "object",
+  "required": ["app_url", "extraction_date", "components"],
+  "properties": {
+    "app_url": { "type": "string", "format": "uri" },
+    "extraction_date": { "type": "string", "format": "date" },
+    "component_count": { "type": "integer" },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "slug", "description", "complexity", "category", "pages", "variants", "layout", "dos_and_donts"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "PascalCase. Must match pattern names from audit-results.json."
+          },
+          "slug": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$",
+            "description": "URL-safe slug. Used as components/{slug}.html."
+          },
+          "description": { "type": "string" },
+          "subtitle": { "type": "string" },
+          "complexity": {
+            "type": "string",
+            "enum": ["simple", "medium", "complex"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["navigation", "data-display", "input", "feedback", "layout", "overlay", "media", "utility"]
+          },
+          "pages": { "type": "array", "items": { "type": "string" } },
+          "source_files": { "type": "array", "items": { "type": "string" } },
+          "props": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "type", "description"],
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "default": { "type": ["string", "null"] },
+                "required": { "type": "boolean", "default": false },
+                "description": { "type": "string" }
+              }
+            }
+          },
+          "variants": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["name", "description"],
+              "properties": {
+                "name": { "type": "string" },
+                "description": { "type": "string" },
+                "mock_css_class": { "type": ["string", "null"] },
+                "mock_html": { "type": ["string", "null"] },
+                "tokens_used": { "type": "array", "items": { "type": "string" } }
+              }
+            }
+          },
+          "layout": {
+            "type": "object",
+            "required": ["specs"],
+            "properties": {
+              "specs": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["property", "value"],
+                  "properties": {
+                    "property": { "type": "string" },
+                    "value": { "type": "string" },
+                    "token": { "type": ["string", "null"] }
+                  }
+                }
+              }
+            }
+          },
+          "dos_and_donts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["type", "text"],
+              "properties": {
+                "type": { "type": "string", "enum": ["do", "dont"] },
+                "text": { "type": "string" },
+                "example": { "type": ["string", "null"] }
+              }
+            }
+          },
+          "accessibility": {
+            "type": "object",
+            "properties": {
+              "aria_labels": { "type": ["string", "null"] },
+              "keyboard": { "type": ["string", "null"] },
+              "contrast": { "type": ["string", "null"] },
+              "screen_reader": { "type": ["string", "null"] }
+            }
+          },
+          "code_example": { "type": ["string", "null"] },
+          "related_inconsistencies": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "origin": {
+            "type": "string",
+            "enum": ["derived", "docs-meta"],
+            "default": "derived",
+            "description": "'derived' = extracted from target app. 'docs-meta' = component of the docs site itself (e.g., theme toggle, nav button) added for docs UX."
+          }
+        }
+      }
+    },
+    "action_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "priority", "effort", "labels", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "priority": {
+            "type": "string",
+            "enum": ["p0-critical", "p1-high", "p2-medium", "p3-low"]
+          },
+          "effort": {
+            "type": "string",
+            "enum": ["easy", "medium", "hard"]
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["inconsistency", "tokens", "component", "accessibility", "responsive", "documentation", "refactor"]
+            }
+          },
+          "description": { "type": "string" },
+          "related_inconsistency": { "type": ["string", "null"] },
+          "related_component": { "type": ["string", "null"] },
+          "files_changed": { "type": "array", "items": { "type": "string" } },
+          "before_after": {
+            "type": "object",
+            "properties": {
+              "before_html": { "type": ["string", "null"] },
+              "after_html": { "type": ["string", "null"] },
+              "diff": { "type": ["string", "null"] }
+            }
+          },
+          "github_issue_title": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

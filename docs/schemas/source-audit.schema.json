@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SourceAudit",
+  "description": "Findings from source code analysis. Supplements the visual audit with exact values and file mappings.",
+  "type": "object",
+  "required": ["repo_url", "audit_date", "tech_stack", "theme_config", "component_files"],
+  "properties": {
+    "repo_url": { "type": "string", "format": "uri" },
+    "audit_date": { "type": "string", "format": "date" },
+    "tech_stack": {
+      "type": "object",
+      "required": ["framework", "css_approach"],
+      "properties": {
+        "framework": { "type": "string" },
+        "framework_version": { "type": ["string", "null"] },
+        "ui_library": { "type": ["string", "null"] },
+        "ui_library_version": { "type": ["string", "null"] },
+        "css_approach": { "type": "string" },
+        "language": { "type": "string" },
+        "build_tool": { "type": ["string", "null"] }
+      }
+    },
+    "theme_config": {
+      "type": "object",
+      "properties": {
+        "file_path": { "type": "string" },
+        "format": {
+          "type": "string",
+          "enum": ["css-custom-properties", "css-in-js", "tailwind-config", "sass-variables", "less-variables", "json", "other"]
+        },
+        "raw_values": { "type": "object" }
+      }
+    },
+    "route_definitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "component_file"],
+        "properties": {
+          "path": { "type": "string" },
+          "component_file": { "type": "string" },
+          "name": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "component_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pattern_name", "files"],
+        "properties": {
+          "pattern_name": { "type": "string" },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path", "type"],
+              "properties": {
+                "path": { "type": "string" },
+                "type": {
+                  "type": "string",
+                  "enum": ["component", "style", "test", "story", "type-definition"]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
