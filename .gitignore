@@ -1,4 +1,5 @@
-outputs/*.zip
 docs/SKILL-create.md
 .claude/settings.local.json
+.claude/launch.json
 .claude/skills/wrapup
+.DS_Store
