@@ -43,7 +43,19 @@ Schemas are authoritative. Prose summarizes; schemas define.
 
 ## Entry Check — Start Here
 
-Before doing anything else, check the project folder:
+### 1. Resolve the project folder
+
+Check how the skill was invoked:
+
+| Invocation | Project folder |
+|------------|---------------|
+| `/extract-design-system ~/path/to/folder` | Use that path |
+| `/extract-design-system ~/path/to/audit-results.json` | Use that file's parent directory |
+| No argument | Ask the user: *"Where is the project folder containing audit-results.json (or where should output files be written)?"* |
+
+All output files (`source-audit.json`, `tokens.json`, `components.json`, `design-system/`) are written into this folder. Confirm the path with the user before writing anything.
+
+### 2. Check what exists in the project folder
 
 | Situation | Action |
 |-----------|--------|
