@@ -43,9 +43,10 @@ Run Phases 0 and 1 in order, then stop and hand off.
 
 Ask the user:
 1. URL of the application.
-2. Authentication — credentials, SSO details, or API token.
-3. Source code repo URL (optional — helps Claude Code extract exact token values).
-4. GitHub repo URL (optional — used to generate GitHub issue links on action-item cards).
+2. Project folder path — where all output files (`audit-results.json`, `screenshots/`, `CLAUDE.md`) will be written. If not provided, default to `~/audit/<app-hostname>` and confirm with the user before proceeding.
+3. Authentication — credentials, SSO details, or API token.
+4. Source code repo URL (optional — helps Claude Code extract exact token values).
+5. GitHub repo URL (optional — used to generate GitHub issue links on action-item cards).
 
 Test login immediately. If it fails, stop and ask for corrected credentials — do not proceed.
 
