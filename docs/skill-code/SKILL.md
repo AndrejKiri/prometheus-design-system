@@ -8,7 +8,7 @@ description: >
   Requires filesystem access. No browser needed.
 metadata:
   author: AndrejKiri
-  version: '1.0'
+  version: '0.1'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   paired-skill: ui-audit (docs/skill-cowork/SKILL.md)
 ---
