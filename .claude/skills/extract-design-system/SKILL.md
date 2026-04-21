@@ -51,7 +51,8 @@ Check how the skill was invoked:
 |------------|---------------|
 | `/extract-design-system ~/path/to/folder` | Use that path |
 | `/extract-design-system ~/path/to/audit-results.json` | Use that file's parent directory |
-| No argument | Ask the user: *"Where is the project folder containing audit-results.json (or where should output files be written)?"* |
+| `/extract-design-system ~/path/to/audit.zip` | Extract the zip first, then use the extracted folder |
+| No argument | Ask the user: *"Where is the project folder or handoff zip from the ui-audit skill?"* |
 
 All output files (`source-audit.json`, `tokens.json`, `components.json`, `design-system/`) are written into this folder. Confirm the path with the user before writing anything.
 
@@ -313,6 +314,22 @@ Open the deployed site and verify:
 - Component page section order matches the template.
 
 If no browser is available, report the checklist to the user and ask them to spot-check.
+
+### Create output zip
+
+Once QA passes, zip the entire project folder — this includes the Cowork audit inputs and all Claude Code outputs:
+
+```bash
+cd <project-folder>/..
+zip -r <app-hostname>-design-system.zip <project-folder-name>/
+```
+
+The zip contains:
+- `audit-results.json`, `source-audit.json` (if run), `screenshots/` — from the audit phase
+- `tokens.json`, `components.json` — extracted design data
+- `design-system/` — the full static docs site + Figma plugin
+
+Name it after the app hostname (e.g. `prometheus.io-design-system.zip`).
 
 ---
 

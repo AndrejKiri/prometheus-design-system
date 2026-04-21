@@ -167,8 +167,17 @@ Before handing off, confirm:
 - [ ] `screenshots/` directory exists with one file per audited page
 - [ ] `CLAUDE.md` progress shows Phase 0 and Phase 1 checked off
 
+### Create handoff zip
+
+```bash
+cd <project-folder>/..
+zip -r <app-hostname>-audit.zip <project-folder-name>/
+```
+
+Name the zip after the app hostname (e.g. `prometheus.io-audit.zip`). This zip is the handoff package for Claude Code.
+
 Then tell the user:
 
-> **Audit complete.** Hand this project folder to Claude Code with the `extract-design-system` skill (`docs/skill-code/SKILL.md`). Point it at this folder — it will pick up from Phase 2 automatically.
+> **Audit complete.** The handoff zip `<app-hostname>-audit.zip` is ready. Pass it to Claude Code with the `extract-design-system` skill — point it at the zip or the extracted folder and it will pick up from Phase 2 automatically.
 >
 > If you also have the source repo, provide it to Claude Code — it can run a source audit (Phase 1-Source) to get exact token values before extracting.
