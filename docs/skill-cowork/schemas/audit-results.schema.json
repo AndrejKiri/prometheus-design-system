@@ -1,0 +1,204 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AuditResults",
+  "description": "Structured findings from the visual audit of a web application.",
+  "type": "object",
+  "required": ["app_url", "audit_date", "tool", "scope", "pages_audited", "patterns", "inconsistencies", "raw_observations"],
+  "properties": {
+    "app_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URL of the audited application."
+    },
+    "source_repo": {
+      "type": ["string", "null"],
+      "description": "URL of the source code repository, or null if unavailable."
+    },
+    "audit_date": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date when the audit was performed (YYYY-MM-DD)."
+    },
+    "tool": {
+      "type": "string",
+      "enum": ["perplexity-computer", "claude-code", "claude-cowork", "manual"],
+      "description": "Which tool performed the audit."
+    },
+    "scope": {
+      "type": "object",
+      "required": ["tier", "description", "total_routes_discovered", "routes_audited"],
+      "properties": {
+        "tier": {
+          "type": "string",
+          "enum": ["core", "core-plus-data", "full", "custom"]
+        },
+        "description": { "type": "string" },
+        "total_routes_discovered": { "type": "integer", "minimum": 1 },
+        "routes_audited": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "auth": {
+      "type": "object",
+      "properties": {
+        "required": { "type": "boolean" },
+        "method": {
+          "type": ["string", "null"],
+          "enum": ["username-password", "sso", "api-token", "oauth", "none", null]
+        }
+      }
+    },
+    "tech_stack": {
+      "type": "object",
+      "properties": {
+        "framework": { "type": ["string", "null"] },
+        "ui_library": { "type": ["string", "null"] },
+        "css_approach": { "type": ["string", "null"] },
+        "language": { "type": ["string", "null"] },
+        "build_tool": { "type": ["string", "null"] }
+      }
+    },
+    "pages_audited": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["url", "name", "screenshot", "elements"],
+        "properties": {
+          "url": { "type": "string" },
+          "name": { "type": "string" },
+          "screenshot": { "type": "string" },
+          "additional_screenshots": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path", "state"],
+              "properties": {
+                "path": { "type": "string" },
+                "state": { "type": "string" }
+              }
+            }
+          },
+          "elements": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "has_data": { "type": "boolean" },
+          "notes": { "type": "string" }
+        }
+      }
+    },
+    "patterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "pages", "instance_count", "variation_count", "description", "category"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "PascalCase name. Must match names used in pages_audited.elements."
+          },
+          "pages": { "type": "array", "items": { "type": "string" } },
+          "instance_count": { "type": "integer", "minimum": 1 },
+          "variation_count": { "type": "integer", "minimum": 1 },
+          "description": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["navigation", "data-display", "input", "feedback", "layout", "overlay", "media", "utility"]
+          },
+          "observed_styles": {
+            "type": "object",
+            "properties": {
+              "colors": { "type": "array", "items": { "type": "string" } },
+              "font_sizes": { "type": "array", "items": { "type": "string" } },
+              "spacing": { "type": "array", "items": { "type": "string" } },
+              "border_radius": { "type": ["string", "null"] }
+            }
+          },
+          "source_files": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "inconsistencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "severity", "type", "pages", "variants", "canonical", "reasoning"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (e.g., 'INC-001')."
+          },
+          "title": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "major", "minor", "cosmetic"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["implementation-drift", "hardcoded-values", "missing-normalization", "style-drift", "duplicated-logic", "accessibility", "responsive"]
+          },
+          "pages": { "type": "array", "items": { "type": "string" } },
+          "pattern": { "type": ["string", "null"] },
+          "variants": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["page", "implementation"],
+              "properties": {
+                "page": { "type": "string" },
+                "implementation": { "type": "string" },
+                "source_file": { "type": ["string", "null"] },
+                "source_line": { "type": ["integer", "null"] }
+              }
+            }
+          },
+          "canonical": { "type": "string" },
+          "reasoning": { "type": "string" },
+          "fix": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "raw_observations": {
+      "type": "object",
+      "properties": {
+        "colors_observed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["value", "usage"],
+            "properties": {
+              "value": { "type": "string" },
+              "usage": { "type": "string" },
+              "pages": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "fonts_observed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["family", "usage"],
+            "properties": {
+              "family": { "type": "string" },
+              "usage": { "type": "string" }
+            }
+          }
+        },
+        "spacing_observed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "string" },
+              "usage": { "type": "string" }
+            }
+          }
+        },
+        "has_dark_mode": { "type": "boolean" },
+        "theming_approach": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

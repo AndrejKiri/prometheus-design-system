@@ -1,0 +1,336 @@
+---
+name: extract-design-system
+description: >
+  Extract design tokens and components from a visual audit package or source
+  repo. Produces tokens.json, components.json, a static design system docs
+  site, and a Figma bootstrap plugin. Picks up from audit-results.json
+  (produced by the ui-audit Cowork skill) or from a source repo alone.
+  Requires filesystem access. No browser needed.
+metadata:
+  author: AndrejKiri
+  version: '1.0'
+  reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
+  paired-skill: ui-audit (docs/skill-cowork/SKILL.md)
+---
+
+# Extract Design System — Claude Code Skill
+
+---
+
+## Core Principle
+
+**Derive, not invent.** Every token, component, and pattern must come from the actual application. Document what exists, then resolve inconsistencies with reasoning and a canonical choice.
+
+**Exception — docs-site meta components.** The documentation site has its own UI (theme toggle, sidebar nav button, copy-code button). Tag these `origin: "docs-meta"` in `components.json` — do not mistake them for derived components.
+
+---
+
+## Supporting Files
+
+| File | Purpose |
+|------|---------|
+| [`schemas/audit-results.schema.json`](schemas/audit-results.schema.json) | Schema for `audit-results.json` (input) |
+| [`schemas/source-audit.schema.json`](schemas/source-audit.schema.json) | Schema for `source-audit.json` (Phase 1-Source output) |
+| [`schemas/tokens.schema.json`](schemas/tokens.schema.json) | Schema for `tokens.json` (Phase 2 output) |
+| [`schemas/components.schema.json`](schemas/components.schema.json) | Schema for `components.json` (Phase 3 output) |
+| [`scripts/validate-handoff.py`](scripts/validate-handoff.py) | Progressive validator — run after each phase |
+| [`templates/figma-plugin/manifest.json.template`](templates/figma-plugin/manifest.json.template) | Figma plugin manifest skeleton |
+| [`templates/figma-plugin/code.js.template`](templates/figma-plugin/code.js.template) | Figma plugin skeleton with font-fallback pattern |
+
+Schemas are authoritative. Prose summarizes; schemas define.
+
+---
+
+## Entry Check — Start Here
+
+Before doing anything else, check the project folder:
+
+| Situation | Action |
+|-----------|--------|
+| `audit-results.json` exists and validates | → Start Phase 2 |
+| `audit-results.json` exists but has errors | → Fix errors, then Phase 2 |
+| No `audit-results.json`, but source repo provided | → Run Phase 1-Source, then Phase 2 |
+| Neither | → Stop. Tell the user to run the `ui-audit` Cowork skill first, or provide a source repo URL |
+
+Run the validator immediately on any existing files:
+
+```bash
+python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>
+```
+
+The validator is progressive — it checks whatever files exist. Exit 0 = pass, 1 = errors, 2 = missing required files.
+
+---
+
+## Shared Project Folder
+
+All output files go in the project folder. If `CLAUDE.md` exists (created by the Cowork skill), read it for context. If it does not exist, create it:
+
+```markdown
+# Design System Project
+
+## Target Application
+- URL: <app-url>
+- Source repo: <repo-url or "N/A">
+- Auth: <method — do NOT store credentials here>
+
+## Scope
+- Tier: <core | core-plus-data | full | custom>
+- Pages audited: <count>
+
+## Progress
+- [ ] Phase 0: Scope assessment
+- [ ] Phase 1: Visual audit (tool: ___)
+- [ ] Phase 1-Source: Source audit (tool: claude-code, optional)
+- [ ] Phase 2: Token extraction
+- [ ] Phase 3: Component extraction
+- [ ] Phase 4: Documentation site
+- [ ] Phase 5: Figma plugin
+- [ ] Phase 6: Deploy + QA
+
+## Handoff Files
+- audit-results.json  — Phase 1 output
+- source-audit.json   — Phase 1-Source output (optional)
+- tokens.json         — Phase 2 output
+- components.json     — Phase 3 output
+- screenshots/        — reference screenshots
+```
+
+Check off progress items as you complete each phase.
+
+---
+
+## Phase 1-Source — Source Audit (optional supplement)
+
+Run this when a source repo is available. Provides exact token values and file mappings that visual audit cannot reliably capture. Skip if no repo is provided.
+
+```bash
+git clone --depth 1 <repo-url> source-code
+```
+
+**Priority reading order for large codebases:**
+1. `package.json` — framework, UI library, CSS approach.
+2. Theme config file (search for `theme`, `tokens`, `colors`).
+3. Route definitions.
+4. Shared/common components directory.
+5. Layout/shell components.
+6. Page-level components (one per route in scope).
+
+Write `source-audit.json` in the project folder, conforming to [`schemas/source-audit.schema.json`](schemas/source-audit.schema.json).
+
+**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+
+---
+
+## Phase 2 — Extract Tokens
+
+Read `audit-results.json` (and `source-audit.json` if available). Produce `tokens.json` conforming to [`schemas/tokens.schema.json`](schemas/tokens.schema.json).
+
+### Coverage requirements
+
+| Category | Required content |
+|---|---|
+| `colors.brand` | ≥ 1 entry (header/accent) |
+| `colors.status` | ≥ 2 entries (typically ok + error); each with `light.{bg,text,border}`; `dark` required if app has dark mode |
+| `colors.surface` | at minimum page-bg, card-bg |
+| `colors.text` | at minimum primary, secondary |
+| `spacing.scale` | named scale (xs/sm/md/lg/xl) with px values |
+| `typography.families` | ≥ body font; include `figma_family` safe-name for Phase 5 |
+| `typography.styles` | ≥ 1 heading, 1 body, 1 code style |
+| `border_radius` | named scale |
+
+### Pre-compute for Figma
+
+Fill `figma_rgb` (0–1 range) on brand colors and `figma_effects` on shadows. Saves Phase 5 conversion work.
+
+**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+
+---
+
+## Phase 3 — Extract Components
+
+Read `audit-results.json` and `tokens.json`. Produce `components.json` conforming to [`schemas/components.schema.json`](schemas/components.schema.json).
+
+Per component, document: name (PascalCase), slug (lowercase-hyphenated), description, complexity (`simple`/`medium`/`complex`), category, pages, props, variants (with `mock_css_class` + `mock_html` for Phase 4 rendering), layout specs, dos/donts, accessibility notes, code example, `related_inconsistencies`, `origin` (`derived` or `docs-meta`).
+
+### Complexity tiers
+
+- **Simple** — stateless, few props (EmptyState, ErrorAlert, InfoCard).
+- **Medium** — some internal state or composition (CodeBlock, KeyValueTable, HealthPanel).
+- **Complex** — significant interactivity (DataTable, FilterToolbar, AppShell).
+
+### Action items
+
+Populate `action_items[]` with PR-style task cards — one per inconsistency plus any improvement opportunities. Each card: priority, effort, labels, before/after, files changed.
+
+**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+
+---
+
+## Phase 4 — Build Docs Site
+
+Read `tokens.json`, `components.json`, `audit-results.json`. Produce a static HTML/CSS/JS site — no frameworks, no build step. Write all files into a `design-system/` subdirectory of the project folder.
+
+### File structure
+
+```
+design-system/
+├── index.html                      # Home page with card grid
+├── tokens.html                     # Token docs with visual swatches
+├── icons.html                      # Icon inventory (if applicable)
+├── components.html                 # Component catalog overview
+├── components/<slug>.html          # Individual component pages
+├── patterns.html                   # Composition patterns
+├── action-items.html               # PR-style task cards
+├── audit-report.html               # Full audit findings
+├── inconsistencies.html            # Inconsistency resolution log
+├── migration.html                  # Migration/adoption guide (optional)
+├── changelog.html                  # Version history
+├── figma.html                      # Figma plugin docs
+├── figma-plugin/                   # Built from templates/
+├── screenshots/                    # Symlink or copy from project root
+├── styles.css                      # Single global stylesheet
+├── main.js                         # Vanilla JS IIFE
+└── README.md
+```
+
+**Path collision warning.** `components.html` and `components/` coexist. Always link with explicit `.html` (`components.html`) or trailing slash (`components/<slug>.html`) — never bare `/components`.
+
+### CSS architecture
+
+Single stylesheet with CSS custom properties. Prefix all tokens with `--doc-`. Brand tokens may embed the product name for readability (e.g., `--doc-brand-orange`) — `--doc-brand-primary` is the generic form.
+
+Organize with comment delimiters: Custom Properties → Reset → Layout → Typography → Code → Tables → Cards → Visual examples (`.mock-*`) → Color swatches → Do/Don't grid → Callouts → PR task cards → Responsive.
+
+Light/dark with `[data-theme="dark"]` selector. Respect `prefers-color-scheme` on first load, persist choice in localStorage.
+
+### main.js — vanilla IIFE
+
+1. Theme toggle (light/dark, respects `prefers-color-scheme`).
+2. Active nav highlighting.
+3. Mobile sidebar burger toggle + overlay.
+4. Auto-generated copy buttons on `<pre>` blocks.
+5. Collapsible sidebar with localStorage persistence.
+6. GitHub issue links on action-item cards (if repo URL provided in CLAUDE.md).
+
+### Navigation
+
+Sidebar nav is hardcoded identically in every HTML file. When adding/removing a page, **always batch-update with Python**:
+
+```python
+import glob
+OLD_NAV = '<the old nav block>'
+NEW_NAV = '<the new nav block>'
+for f in sorted(glob.glob("*.html") + glob.glob("components/*.html")):
+    c = open(f).read().replace(OLD_NAV, NEW_NAV)
+    open(f, "w").write(c)
+```
+
+Paths: top-level pages `href="tokens.html"`; component pages `href="../tokens.html"`.
+
+### Component page template
+
+Section order (all `<h2 id="...">` for deep-linking):
+
+1. Title + subtitle (`<h1>` + `<p class="doc-subtitle">`).
+2. `#description`.
+3. Do/Don't grid (no heading — visual block between title and description).
+4. `#design` — visual examples via `.mock-*` CSS classes.
+5. Component Reference — collapsible `<details>` with screenshots and live-app links.
+6. `#implementation` — source code with syntax-highlighted spans.
+7. `#layout` — pixel measurements table.
+8. `#accessibility` — ARIA, contrast, keyboard notes.
+
+### Mock component CSS
+
+`.mock-*` classes render static previews on component pages. Examples: `.mock-badge` + `.mock-badge-{ok,err,warn,info,unknown}`, `.mock-panel` + variants, `.mock-app-shell`, `.mock-app-header`.
+
+### Syntax highlighting (inline spans)
+
+`.cmt` comments · `.kw` keywords · `.str` strings · `.num` numbers · `.tag` tags · `.attr` attributes.
+
+### Action items page
+
+PR-style task cards with: number, title, labels (inconsistency / tokens / component / easy / medium / hard), problem description, before/after mockups, code diff, files changed. `main.js` turns these into GitHub issue links if a repo URL is in CLAUDE.md.
+
+---
+
+## Phase 5 — Figma Plugin
+
+Copy templates, populate from `tokens.json`, ship.
+
+```bash
+cp <path-to-this-skill>/templates/figma-plugin/manifest.json.template design-system/figma-plugin/manifest.json
+cp <path-to-this-skill>/templates/figma-plugin/code.js.template       design-system/figma-plugin/code.js
+```
+
+Replace `{{PROJECT_NAME}}` and `{{UNIQUE_ID}}` in the manifest. In `code.js`, replace the `// {{POPULATE_FROM_…}}` markers with JS object literals derived from `tokens.json`.
+
+### Font rules (learned from real bugs)
+
+- Figma uses `"Semi Bold"` with a space. `"SemiBold"` crashes.
+- `"DejaVu Sans Mono"` and `"Roboto Mono"` are **not** bundled. Use `"Courier New"` for monospace.
+- `"Inter"` is the ultimate safe fallback — always bundled.
+- Some families only ship `"Regular"` — requesting `"Medium"`/`"Bold"` throws. Always wrap `loadFontAsync` in try/catch.
+
+The template already implements the three-level fallback (requested family+weight → requested family+Regular → Inter+weight → Inter+Regular).
+
+### Distributing
+
+Zip `design-system/figma-plugin/` into `figma-plugin.zip` and commit. Users import via **Figma → Plugins → Development → Import plugin from manifest**.
+
+---
+
+## Phase 6 — Deploy & QA
+
+Docs site is pure static HTML. Deploy via:
+
+- **GitHub Pages** — push to `main`, enable Pages.
+- **Any static host** — Netlify, Vercel, S3.
+- **Local** — `npx serve design-system -l 3000`.
+
+### Visual QA
+
+Open the deployed site and verify:
+
+- Light and dark mode on every page.
+- Mobile responsive — burger menu works.
+- All screenshots load in collapsible component references.
+- Copy buttons work on every code block.
+- No broken links (`../` vs direct).
+- Component page section order matches the template.
+
+If no browser is available, report the checklist to the user and ask them to spot-check.
+
+---
+
+## Quality Checklist
+
+- [ ] `audit-results.json` was the starting point — no values invented.
+- [ ] All inconsistencies documented with resolution reasoning.
+- [ ] Token values match the actual source (not approximated).
+- [ ] `validate-handoff.py` exits 0.
+- [ ] All component pages follow the template section order.
+- [ ] Light and dark mode render correctly on every page.
+- [ ] Navigation is identical across all HTML files.
+- [ ] Mobile responsive — burger menu works.
+- [ ] Screenshots load in collapsible references.
+- [ ] Figma plugin runs without crashing — font fallbacks tested.
+- [ ] Copy buttons work on all code blocks.
+- [ ] `CLAUDE.md` progress checklist fully checked off.
+
+---
+
+## Reference Implementation Notes
+
+The [Prometheus Design System](https://github.com/AndrejKiri/prometheus-design-system) is the reference implementation. It documents ~17 components extracted from the Prometheus monitoring UI plus 2 docs-site meta components, with a working Figma plugin and 11 screenshots.
+
+**Known deviations from strict skill output** (the reference was hand-authored before this skill existed):
+
+- Handoff JSON files (`audit-results.json`, `tokens.json`, `components.json`) are not committed. Regenerating via the skill requires authoring them first.
+- Two components (`theme-toggle`, `nav-button`) are `origin: "docs-meta"` — parts of the docs site chrome, not extracted from Prometheus.
+- CSS uses `--doc-brand-orange` rather than the generic `--doc-brand-primary` — a readability choice for a product whose brand color is orange.
+- `migration.html` is included. Optional in the skill; include when the design system describes a migration path.
+- `additional_screenshots` (interactive states like modals, expanded accordions) are not captured — the reference only has the 11 static page shots.
+
+When generating from scratch via this skill, produce the JSON files first, tag docs-meta components explicitly, and decide brand-token naming up front.
