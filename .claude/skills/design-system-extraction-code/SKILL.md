@@ -241,7 +241,20 @@ Per component, document: name (PascalCase — `StatusBadge`, `HealthPanel`, `Dat
 
 Populate `components.json → action_items[]` with PR-style task cards — not a separate file. One card per inconsistency (cross-reference via `related_inconsistency`) plus any improvement opportunities surfaced during component extraction.
 
-Each card: `id`, `title`, `description`, `priority`, `effort`, `labels`, `related_inconsistency` (INC-NNN or null), optional before/after and files-changed.
+**Target depth:** aim for **15–25 cards** for a mid-sized app. If you produce fewer than 10, the action items page looks thin and readers suspect the audit was shallow. Include every `INC-NNN` plus tokenization opportunities, accessibility gaps, responsive issues, and deprecation candidates.
+
+Each card: `id`, `title`, `description`, `priority`, `effort`, `labels`, `related_inconsistency` (INC-NNN or null), `before` (description or code snippet of current state), `after` (description or code snippet of canonical state), `files_changed` (estimated file list — read the source repo if available).
+
+Render on `action-items.html` as cards with:
+- Priority badge (p0/p1/p2/p3) top-left.
+- Effort chip (easy/medium/hard) next to priority.
+- Before / After side-by-side code blocks where applicable.
+- Files-changed collapsible list.
+- "Open issue" link (populated by `main.js` from `GITHUB_REPO_URL`).
+
+### Migration guide
+
+When ≥ 3 action items share a theme (e.g. "replace hardcoded colors with tokens"), add a `migration.html` page that groups them into a step-by-step adoption plan. Link from the homepage card grid. Skip if the action items are disparate.
 
 **Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 
