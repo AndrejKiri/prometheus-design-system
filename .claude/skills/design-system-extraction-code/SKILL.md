@@ -306,6 +306,14 @@ Light/dark with `[data-theme="dark"]` selector. Respect `prefers-color-scheme` o
 
 ### Navigation
 
+Sidebar nav is **grouped into three sections** — not a flat list. Use this structure:
+
+1. **Foundations** — Home, Tokens, Icons
+2. **Components** — Components catalog, Patterns (composition), Action Items
+3. **Audit** (only visible when audit files exist) — Audit Report, Inconsistencies, Figma Plugin, Changelog
+
+Section headings are `<div class="sidebar-section">` elements between the `<ul>` groups; group each section's links in its own `<ul>`. `gen.py` should render all three sections in every HTML file.
+
 Sidebar nav is hardcoded identically in every HTML file. When adding/removing a page, **always batch-update with Python**:
 
 ```python
