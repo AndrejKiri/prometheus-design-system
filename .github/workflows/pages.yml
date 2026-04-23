@@ -25,13 +25,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Find latest skill run
-        id: latest-run
+      - name: Assemble site
         run: |
+          mkdir -p _site/skill-output
+
+          # Copy root site files (main website)
+          cp -r index.html tokens.html icons.html components.html patterns.html \
+                action-items.html audit-report.html figma.html inconsistencies.html \
+                changelog.html migration.html styles.css main.js components/ \
+                screenshots/ figma-plugin/ figma-plugin.zip _site/
+
+          # Find latest skill run and copy its design-system/ to /skill-output/
           latest_run=$(ls -d skill-outputs/run*/ | sort -V | tail -1 | sed 's|/$||')
           design_sys=$(find "$latest_run" -maxdepth 3 -name "design-system" -type d | head -1)
-          echo "run=$latest_run" >> "$GITHUB_OUTPUT"
-          echo "path=$design_sys" >> "$GITHUB_OUTPUT"
+          cp -r "$design_sys"/. _site/skill-output/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -39,7 +46,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.latest-run.outputs.path }}
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

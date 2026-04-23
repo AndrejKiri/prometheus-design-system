@@ -8,7 +8,7 @@ A design system proposal for the [Prometheus](https://prometheus.io/) monitoring
 ## Live preview
 
 The latest skill-output run is published at:
-**[https://andrejkiri.github.io/prometheus-design-system/](https://andrejkiri.github.io/prometheus-design-system/)**
+**[https://andrejkiri.github.io/prometheus-design-system/skill-output/](https://andrejkiri.github.io/prometheus-design-system/skill-output/)**
 
 > Deployed automatically from `skill-outputs/` on push to `main`. Source for all runs is preserved in [skill-outputs/](skill-outputs/).
 
