@@ -225,7 +225,9 @@ Per component, document: name (PascalCase), slug (lowercase-hyphenated), descrip
 
 ### Action items
 
-Populate `action_items[]` with PR-style task cards — one per inconsistency plus any improvement opportunities. Each card: priority, effort, labels, before/after, files changed.
+Populate `components.json → action_items[]` with PR-style task cards — not a separate file. One card per inconsistency (cross-reference via `related_inconsistency`) plus any improvement opportunities surfaced during component extraction.
+
+Each card: `id`, `title`, `description`, `priority`, `effort`, `labels`, `related_inconsistency` (INC-NNN or null), optional before/after and files-changed.
 
 **Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 

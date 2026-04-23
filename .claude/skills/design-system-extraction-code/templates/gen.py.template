@@ -243,6 +243,8 @@ def gen_component_page(comp, tokens):
 
 
 def gen_action_items(components):
+    # action_items[] lives in components.json (not a separate file).
+    # One card per inconsistency + any improvement opportunities from Phase 3.
     items = components.get("action_items", [])
     cards = ""
     for ai in items:
