@@ -356,6 +356,17 @@ Section order (all `<h2 id="...">` for deep-linking):
 7. `#layout` — pixel measurements table.
 8. `#accessibility` — ARIA, contrast, keyboard notes.
 
+### Icons page
+
+When the audited app has a recognisable icon library, render `icons.html` with:
+
+1. **Library header** — name of the library, version if known, default size.
+2. **Grouped grid** — group icons by usage category (navigation, status, action, chart, decorative). Not alphabetical.
+3. **Per-icon card** — SVG preview, icon name, usage description, import code snippet (e.g. `import { IconChevronRight } from '@tabler/icons-react'` or the app's actual import pattern).
+4. **Search/filter** input at the top.
+
+If `tokens.json → icons` is absent or empty, write a short placeholder paragraph on `icons.html` instead of omitting the page (sidebar still links to it).
+
 ### Mock component CSS
 
 `.mock-*` classes render static previews on component pages. Naming convention: `.mock-<component-slug>` for the base class, then `.mock-<slug>--<variant>` or `.mock-<slug>-<state>` for modifiers (e.g. `.mock-badge`, `.mock-badge-ok`, `.mock-badge-err`, `.mock-panel--dark`).
