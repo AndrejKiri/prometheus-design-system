@@ -9,7 +9,7 @@ description: >
   structure. Run at the end of a design-system-extraction-code session.
 metadata:
   author: AndrejKiri
-  version: '0.1'
+  version: '0.2'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   paired-skill: design-system-extraction-code
 ---

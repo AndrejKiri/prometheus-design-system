@@ -9,7 +9,7 @@ description: >
   Runs in Claude Code after the Cowork handoff zip has been received.
 metadata:
   author: AndrejKiri
-  version: '0.1'
+  version: '0.2'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   paired-skill: design-system-extraction-cowork
 ---
