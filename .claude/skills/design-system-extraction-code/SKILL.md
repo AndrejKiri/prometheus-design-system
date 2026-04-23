@@ -361,9 +361,11 @@ Sidebar nav is **grouped into three sections** — not a flat list. Use this str
 
 1. **Foundations** — Home, Tokens, Icons
 2. **Components** — Components catalog, Patterns (composition), Action Items
-3. **Audit** (only visible when audit files exist) — Audit Report, Inconsistencies, Figma Plugin, Changelog
+3. **Audit** — Audit Report, Inconsistencies, Figma Plugin, Changelog
 
 Section headings are `<div class="sidebar-section">` elements between the `<ul>` groups; group each section's links in its own `<ul>`. `gen.py` should render all three sections in every HTML file.
+
+**Conditional Audit section:** if `audit-results.json` is absent (source-only run) or has `raw_observations.audit_only: false`, consolidate the Audit group so only pages that have real content are linked. Never show sidebar links that lead to 404s or empty pages — omit them from the nav rendering.
 
 Sidebar nav is hardcoded identically in every HTML file. When adding/removing a page, **always batch-update with Python**:
 
