@@ -1,0 +1,34 @@
+{
+  "_comment": "Map state keys (used in audit-results.json additional_screenshots[].state) to Playwright action sequences.",
+  "_state_keys": "Use controlled vocabulary: light-theme, dark-theme, modal-open-<name>, tab-<name>, hover-<selector>, expanded-<group>, error-<code>, empty-state, loading-state",
+  "dark-theme": {
+    "theme": "dark",
+    "actions": []
+  },
+  "light-theme": {
+    "theme": "light",
+    "actions": []
+  },
+  "modal-open-settings": {
+    "theme": "light",
+    "actions": [
+      { "click": "[aria-label='Settings'], button:has-text('Settings')" },
+      { "waitForSelector": "[role='dialog'], .mantine-Modal-root", "timeout": 3000 },
+      { "wait": 300 }
+    ]
+  },
+  "expanded-accordion": {
+    "theme": "light",
+    "actions": [
+      { "click": ".mantine-Accordion-control:first-child" },
+      { "wait": 500 }
+    ]
+  },
+  "tab-graph": {
+    "theme": "light",
+    "actions": [
+      { "click": "[role='tab']:has-text('Graph')" },
+      { "wait": 300 }
+    ]
+  }
+}

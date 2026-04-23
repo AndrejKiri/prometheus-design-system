@@ -292,18 +292,31 @@ def validate_audit(data, project_dir, report):
         else:
             report.ok(f"has_dark_mode = {obs['has_dark_mode']}")
 
+    # Fix: issue #1 from run1 — screenshots_are_placeholders flag
+    are_placeholders = data.get("screenshots_are_placeholders", False)
+    if are_placeholders:
+        report.warn("screenshots_are_placeholders=true — screenshots are 1x1 placeholders. Run Phase 1.5 (capture-screenshots.mjs) in Claude Code to backfill real screenshots.")
+
     # Screenshot file existence
     screenshots_dir = project_dir / "screenshots"
     if screenshots_dir.exists():
         missing_screenshots = []
+        placeholder_screenshots = []
         for ss_path in screenshot_paths:
             full_path = project_dir / ss_path
             if not full_path.exists():
                 missing_screenshots.append(ss_path)
+            elif full_path.stat().st_size <= 500:
+                placeholder_screenshots.append(ss_path)
         if missing_screenshots:
             for ss in missing_screenshots:
                 report.error(f"Screenshot file not found: {ss}")
-        else:
+        if placeholder_screenshots and not are_placeholders:
+            for ss in placeholder_screenshots:
+                report.warn(f"Screenshot looks like placeholder (≤500 bytes): {ss} — set screenshots_are_placeholders=true if intentional")
+        elif placeholder_screenshots and are_placeholders:
+            report.warn(f"{len(placeholder_screenshots)} of {len(screenshot_paths)} screenshots are placeholders — run Phase 1.5 to backfill")
+        if not missing_screenshots:
             report.ok(f"All {len(screenshot_paths)} screenshot files exist")
     elif screenshot_paths:
         report.warn(f"screenshots/ directory not found — cannot verify {len(screenshot_paths)} screenshot paths")

@@ -106,12 +106,14 @@ Create a `CLAUDE.md` in the shared project folder (the folder where all handoff 
 
 ## Phase 1 — Visual Audit
 
+> **Screenshot export note.** Cowork's sandbox blocks reliable screenshot export (base64 filtered, `save_to_disk` returns opaque IDs, not filesystem paths). **Do not spend more than 3 attempts on screenshot export.** On failure, enter [Degraded Screenshot Mode](#fallback--degraded-screenshot-mode) and continue. Claude Code's Phase 1.5 will backfill real screenshots locally via Playwright.
+
 ### 1.1 Browse every page in scope
 
 Navigate to each URL in scope using the browser. For each page:
 
 1. Navigate to the URL and wait for the page to fully load.
-2. Take a full-page screenshot. Save to `screenshots/<page-name>.jpg` in the project folder.
+2. Attempt a full-page screenshot. Save to `screenshots/<page-name>.jpg` in the project folder. If export fails after 3 attempts, skip and proceed — see [Fallback](#fallback--degraded-screenshot-mode).
 3. Scroll through the full page — do not miss content below the fold.
 4. Expand accordions, click tabs, open dropdowns, hover interactive elements.
 5. Screenshot each notable interactive state (expanded accordion, open dropdown, hover button, filled form, error state).
@@ -154,6 +156,47 @@ python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>
 ```
 
 Fix every `[FAIL]` before proceeding. Warnings are acceptable.
+
+---
+
+## Phase 1.5 — Screenshot Capture (Claude Code, local)
+
+**This phase runs in Claude Code after receiving the handoff zip — before Phase 2.**
+
+Cowork cannot reliably export screenshots. Claude Code runs locally with Playwright and a real filesystem. If `audit-results.json` contains `"screenshots_are_placeholders": true`, or any screenshot file is ≤ 500 bytes, run:
+
+```bash
+node .claude/skills/design-system-extraction-cowork/scripts/capture-screenshots.mjs <project-folder>
+```
+
+The script reads `pages_audited[].screenshot` and `pages_audited[].additional_screenshots[].path` from `audit-results.json` and writes real JPEGs to `screenshots/`. Viewport: 1280×800. Both light and dark themes if `has_dark_mode` is true.
+
+**One-time setup:** `npm install playwright` then `npx playwright install chromium`
+
+For interactive states (modals, expanded accordions, hover):
+
+```bash
+node .claude/skills/design-system-extraction-cowork/scripts/capture-interactive.mjs <project-folder>
+```
+
+Reads `interaction-recipes.json` (in the project folder) for `state → action` mappings. A template `interaction-recipes.json` is in `scripts/`.
+
+After capture, re-run the validator:
+
+```bash
+python3 "$(pwd)/.claude/skills/design-system-extraction-cowork/scripts/validate-handoff.py" <project-folder>
+```
+
+---
+
+## Fallback — Degraded Screenshot Mode
+
+If screenshot export is blocked after 3 attempts:
+
+1. Run `bash .claude/skills/design-system-extraction-cowork/scripts/init-placeholders.sh <project-folder>` to create 1×1 placeholder files at every referenced screenshot path.
+2. Set `"screenshots_are_placeholders": true` at the top level of `audit-results.json`.
+3. Document the failure in `raw_observations.screenshot_limitations`.
+4. Continue — the validator prints `[WARN]` not `[FAIL]` for placeholder files when `screenshots_are_placeholders: true`.
 
 ---
 
