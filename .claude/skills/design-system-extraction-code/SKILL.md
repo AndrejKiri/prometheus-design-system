@@ -453,15 +453,15 @@ Once QA passes, zip the entire project folder — this includes the Cowork audit
 
 ```bash
 cd <project-folder>/..
-zip -r <app-hostname>-design-system.zip <project-folder-name>/
+zip -r <app-hostname>-design-system-<YYYY-MM-DD>.zip <project-folder-name>/
 ```
+
+**Naming format: `<app-hostname>-design-system-<YYYY-MM-DD>.zip`** — hostname + date keeps runs distinguishable. Examples: `prometheus.io-design-system-2026-04-23.zip`, `grafana.com-design-system-2026-05-01.zip`. Do not commit these zips — they're session artifacts, not source.
 
 The zip contains:
 - `audit-results.json`, `source-audit.json` (if run), `screenshots/` — from the audit phase
 - `tokens.json`, `components.json` — extracted design data
 - `design-system/` — the full static docs site + Figma plugin
-
-Name it after the app hostname (e.g. `prometheus.io-design-system.zip`).
 
 ---
 
