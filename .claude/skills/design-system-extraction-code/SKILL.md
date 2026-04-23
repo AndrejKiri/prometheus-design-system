@@ -25,6 +25,34 @@ metadata:
 
 ---
 
+## Phase Overview
+
+```
+[design-system-extraction-cowork]
+         │
+         ▼ audit-results.json + screenshots/
+ Phase 1-Source (optional)
+         │ source-audit.json
+         ▼
+    Phase 2: Token Extraction
+         │ tokens.json
+         ▼
+    Phase 3: Component Extraction
+         │ components.json
+         ▼
+    Phase 4: Docs Site (gen.py)
+         │ design-system/
+         ▼
+    Phase 5: Figma Plugin
+         │ design-system/figma-plugin/
+         ▼
+    Phase 6: Deploy + QA → GitHub Pages
+```
+
+Each phase validates with `python3 validate-handoff.py <project-folder>` before proceeding.
+
+---
+
 ## Supporting Files
 
 | File | Purpose |
