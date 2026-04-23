@@ -179,9 +179,14 @@ Read `audit-results.json` (and `source-audit.json` if available). Produce `token
 | `colors.surface` | at minimum page-bg, card-bg |
 | `colors.text` | at minimum primary, secondary |
 | `spacing.scale` | named scale (xs/sm/md/lg/xl) with px values |
+| `spacing.semantic` | optional — named pairs like `page-padding`, `card-gap`, `section-margin` that reference the scale |
 | `typography.families` | ≥ body font; include `figma_family` safe-name for Phase 5 |
 | `typography.styles` | ≥ 1 heading, 1 body, 1 code style |
 | `border_radius` | named scale |
+| `breakpoints` | optional — named responsive breakpoints (mobile/tablet/desktop/wide) with px values |
+| `motion` | optional — named durations (fast/base/slow) and easing curves (ease-in-out, etc.) |
+| `domain_lexicon` | optional but encouraged — product-specific glossary (e.g. PromQL operators, custom status values) the docs site should render as a reference |
+| CSS custom-property table | Tokens page must include a table mapping every token name to its `--doc-*` CSS var, so consumers can copy-paste |
 
 ### Handling gaps in audit-results.json
 
