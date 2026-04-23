@@ -159,6 +159,87 @@ Fix every `[FAIL]` before proceeding. Warnings are acceptable.
 
 ---
 
+## Gotchas
+
+### Workspace delete permissions
+
+The Cowork workspace folder (`/sessions/<session-id>/mnt/Claude/`) is delete-protected by default. Any `rm` call or attempt to overwrite files there will fail with `Operation not permitted`.
+
+**Before any cleanup step that involves `rm` or overwriting files in the workspace, call `allow_cowork_file_delete` once per target directory:**
+
+```
+mcp__cowork__allow_cowork_file_delete(path="/sessions/<session-id>/mnt/Claude/")
+```
+
+### Packaging the handoff zip
+
+The `zip` CLI cannot overwrite a pre-existing file it considers a corrupt archive (e.g. a 0-byte file created by a failed earlier run). Use Python's `zipfile` module instead — it handles pre-existing files gracefully:
+
+```python
+import zipfile, os, sys
+src = sys.argv[1]; out = sys.argv[2]
+with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:
+    for root, _, files in os.walk(src):
+        for f in files:
+            full = os.path.join(root, f)
+            arc = os.path.relpath(full, os.path.dirname(src))
+            z.write(full, arc)
+```
+
+Run as: `python3 -c "..." <project-folder> <output.zip>`
+
+### `await` at top level in javascript_tool
+
+`javascript_tool` evaluates scripts as classic (non-module) expressions. Top-level `await` throws `SyntaxError`. Wrap every async block in an IIFE:
+
+```js
+(async () => {
+  const result = await fetch('/api/data').then(r => r.json());
+  return result;
+})()
+```
+
+Pre-seed this helper early in the session:
+
+```js
+window.__runAsync = fn => (async () => fn())();
+```
+
+Then use: `window.__runAsync(async () => { ... })`
+
+### Runtime.evaluate timeout on large return values
+
+Chrome DevTools Protocol times out (~45s) on return payloads exceeding a few KB. Cap per-call returns to ~2KB. For anything larger:
+- Spit data to `window.__audit_buffer` and read in chunks
+- Or delegate to Claude Code's Playwright script
+
+Never attempt to return screenshot data (base64) from `javascript_tool` — the payload is too large and also filtered by the sandbox.
+
+### Brave browser blocks the Claude extension
+
+Brave Shields blocks WebSocket connections on `claude.ai`. If the Chrome MCP extension fails to connect or the first screenshot hangs >10s, Brave is the likely cause.
+
+**Fix:** Either disable Brave Shields on `claude.ai` (per-site), or use standard Chrome.
+
+Add an environment check at the start of Phase 0: ask the user which browser they're using, and if Brave, prompt them to switch or disable Shields before proceeding.
+
+### Theme toggle — ARIA text describes the action, not the state
+
+Mantine's theme-toggle ActionIcon label reads "Switch to light theme" or "Switch to dark theme" — i.e., what the click *will do*, not the current state. Clicking once does not reliably set a known theme because Mantine supports `auto | light | dark`.
+
+**Always set theme directly via JS instead of clicking the button:**
+
+```js
+document.documentElement.setAttribute('data-mantine-color-scheme', 'dark');
+localStorage.setItem('mantine-color-scheme-value', 'dark');
+```
+
+Verify by checking: `getComputedStyle(document.body).backgroundColor`
+
+Cache the reference background colors for light (`rgb(255,255,255)` or similar) and dark early in the session — use these as ground-truth for which theme is active.
+
+---
+
 ## Phase 1.5 — Screenshot Capture (Claude Code, local)
 
 **This phase runs in Claude Code after receiving the handoff zip — before Phase 2.**
