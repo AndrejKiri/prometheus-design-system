@@ -246,6 +246,15 @@ Each card: `id`, `title`, `description`, `priority`, `effort`, `labels`, `relate
 
 Read `tokens.json`, `components.json`, `audit-results.json`. Produce a static HTML/CSS/JS site — no frameworks, no build step. Write all files into a `design-system/` subdirectory of the project folder.
 
+### Homepage chrome — version chip + WIP callout
+
+The homepage (`index.html`) header should include two elements above the card grid:
+
+1. **Version chip** — a small `<span class="version-chip">v{VERSION}</span>` near the title. Read `{VERSION}` from `audit-results.json.audit_date` (e.g. `v2026.04.23`) or from a `version` field in CLAUDE.md if present.
+2. **WIP callout** — an `<aside class="callout callout-wip">` paragraph below the title explaining this is an auto-extracted design system, not hand-authored, and may contain inferred values. One sentence is enough.
+
+Style the version chip as a small pill (same shape as `.tag`). The WIP callout uses the standard `.callout` class with a `callout-wip` modifier (yellow-ish background).
+
 ### Generator script
 
 **Always write a `gen.py` in the project folder** and generate HTML from it — do not write HTML files directly. This keeps regeneration fast, prevents stale content, and handles screenshots and sidebar sync correctly.
