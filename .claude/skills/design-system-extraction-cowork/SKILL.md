@@ -106,7 +106,7 @@ Create a `CLAUDE.md` in the shared project folder (the folder where all handoff 
 
 ## Phase 1 — Visual Audit
 
-> **Screenshot export note.** Cowork's sandbox blocks reliable screenshot export (base64 filtered, `save_to_disk` returns opaque IDs, not filesystem paths). **Do not spend more than 3 attempts on screenshot export.** On failure, enter [Degraded Screenshot Mode](#fallback--degraded-screenshot-mode) and continue. Claude Code's Phase 1.5 will backfill real screenshots locally via Playwright.
+> **Screenshot export note.** Cowork's sandbox blocks reliable screenshot export (base64 filtered, `save_to_disk` returns an opaque ID like `ss_<hash>` — **not a filesystem path**). **Do not spend more than 3 attempts on screenshot export.** On failure, enter [Degraded Screenshot Mode](#fallback--degraded-screenshot-mode) and continue. Claude Code's Phase 1.5 will backfill real screenshots locally via Playwright. See [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md) for full details.
 
 ### 1.1 Browse every page in scope
 
