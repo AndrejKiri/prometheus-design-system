@@ -144,7 +144,7 @@ Read `audit-results.json` (and `source-audit.json` if available). Produce `token
 | Category | Required content |
 |---|---|
 | `colors.brand` | ≥ 1 entry (header/accent) |
-| `colors.status` | ≥ 2 entries (typically ok + error); each with `light.{bg,text,border}`; `dark` required if app has dark mode |
+| `colors.status` | ≥ 2 entries (typically ok + error); each with `light.{bg,text,border}`; `dark` required if app has dark mode. Use `"transparent"` for border when the status has no visible border (not `""` or `null`) |
 | `colors.surface` | at minimum page-bg, card-bg |
 | `colors.text` | at minimum primary, secondary |
 | `spacing.scale` | named scale (xs/sm/md/lg/xl) with px values |

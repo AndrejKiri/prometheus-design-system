@@ -93,6 +93,11 @@ async function createVariableCollections() {
   }
 
   // Status Colors — Light + Dark modes
+  // Note: tokens.json uses "transparent" (CSS string) for invisible borders.
+  // Map "transparent" to { r:0, g:0, b:0, a:0 } so Figma doesn't default to black.
+  const TRANSPARENT_RGB = { r: 0, g: 0, b: 0, a: 0 };
+  const resolveColor = (v) => v === "transparent" ? TRANSPARENT_RGB : v;
+
   const statusColl = figma.variables.createVariableCollection("Status Colors");
   const lightId = statusColl.modes[0].modeId;
   statusColl.renameMode(lightId, "Light");
@@ -100,8 +105,8 @@ async function createVariableCollections() {
   for (const [status, modes] of Object.entries(STATUS_COLORS)) {
     for (const suffix of ["bg", "text", "border"]) {
       const v = figma.variables.createVariable(`status/${status}-${suffix}`, statusColl, "COLOR");
-      v.setValueForMode(lightId, modes.light[suffix]);
-      v.setValueForMode(darkId,  modes.dark[suffix]);
+      v.setValueForMode(lightId, resolveColor(modes.light[suffix]));
+      v.setValueForMode(darkId,  resolveColor(modes.dark[suffix]));
     }
   }
 
