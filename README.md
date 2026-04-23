@@ -5,6 +5,13 @@ A design system proposal for the [Prometheus](https://prometheus.io/) monitoring
 > **Work in Progress — Early Draft**
 > This is a very early version of a design system proposal for the Prometheus UI. It is actively being worked on and not yet ready for review. Feedback is welcome, but nobody is expected to give feedback at this stage.
 
+## Live preview
+
+The latest skill-output run is published at:
+**[https://andrejkiri.github.io/prometheus-design-system/](https://andrejkiri.github.io/prometheus-design-system/)**
+
+> Deployed automatically from `skill-outputs/` on push to `main`. Source for all runs is preserved in [skill-outputs/](skill-outputs/).
+
 ## Documentation site
 
 The docs site is a static HTML/CSS/JS bundle — no build step required.

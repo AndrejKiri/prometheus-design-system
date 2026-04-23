@@ -1,0 +1,46 @@
+name: Deploy Design System to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skill-outputs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find latest skill run
+        id: latest-run
+        run: |
+          latest_run=$(ls -d skill-outputs/run*/ | sort -V | tail -1 | sed 's|/$||')
+          design_sys=$(find "$latest_run" -maxdepth 3 -name "design-system" -type d | head -1)
+          echo "run=$latest_run" >> "$GITHUB_OUTPUT"
+          echo "path=$design_sys" >> "$GITHUB_OUTPUT"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.latest-run.outputs.path }}
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
