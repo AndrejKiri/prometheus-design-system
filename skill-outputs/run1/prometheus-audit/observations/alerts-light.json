@@ -1,0 +1,25 @@
+{
+  "url": "/alerts",
+  "theme": "light",
+  "viewport_context": "empty state (no rules in demo)",
+  "counts": {"buttons": 7, "inputs": 3},
+  "new_patterns_observed": [
+    "Alert/callout component (Mantine Alert): bg rgba(34,139,230,0.1), 4px radius, no border, info icon on left, title bold colored, body regular",
+    "Select filter input with chevron icon + leading icon: 'Filter by rule group state'",
+    "Text filter input with leading search icon, 1px solid rgb(206,212,218) border, 4px radius, padding 0 12px 0 34px"
+  ],
+  "status_palette_discovered": {
+    "success_bg": "rgb(211,249,216)",
+    "success_text": "rgb(43,138,62)",
+    "warning_bg": "rgb(255,243,191)",
+    "warning_text": "rgb(230,119,0)",
+    "danger_bg": "rgb(255,227,227)",
+    "danger_text": "rgb(201,42,42)",
+    "info_bg": "rgba(34,139,230,0.1)",
+    "info_text": "rgb(34,139,230)"
+  },
+  "new_neutral_grey_text": "rgb(73,80,87)",
+  "input_component_consistency": "WARNING: inner <input> elements report 0px border, padding 0 and 0px radius — outer wrapper has 1px solid rgb(206,212,218), 4px radius, padding 0 12px 0 34px (search icon space). This is Mantine composite-input pattern — not a real inconsistency, but composite-input internals should be documented so downstream tooling doesn't pick wrong element.",
+  "pill_radius_found": "16000px (used somewhere as capsule)",
+  "alerts_section_empty_state": "Single Mantine Alert card with info icon + title + body text — looks OK, consistent pattern"
+}

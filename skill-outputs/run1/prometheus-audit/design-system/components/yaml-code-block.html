@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YAML Code Block — Prometheus Design System</title>
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="../index.html" class="doc-nav-link">Home</a>
+      <a href="../tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="../icons.html" class="doc-nav-link">Icons</a>
+      <a href="../patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="../components.html" class="doc-nav-link">All Components</a>
+      <a href="../components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="../components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="../components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="../components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="../components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="../components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="../components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="../components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="../components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="../components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="../components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="../components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="../components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="../components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="../components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="../components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="../components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="../components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="../action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="../inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="../audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="../figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="../changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>YAML Code Block</h1>
+<p class="doc-subtitle">Syntax-highlighted configuration display</p>
+
+<div class="do-dont-grid"><div class="do-item"><strong>✓ Do</strong>Declare an explicit monospace font stack (e.g. &#x27;ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace&#x27;) to ensure consistent rendering across OS (fixes INC-009).</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use &#x27;monospace&#x27; as the sole font-family value — it resolves to different fonts on macOS, Windows, and Linux.</div><div class="do-item"><strong>✓ Do</strong>Keep hljs-attr and hljs-string in the same hue families across light and dark to avoid color-role swaps (fixes INC-008).</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t let highlight.js token colors swap semantic roles (keys ↔ strings) between themes.</div></div>
+
+<h2 id="description">Description</h2>
+<p>Full config rendered as a &lt;pre&gt;&lt;code class=&#x27;language-yaml&#x27;&gt; block with highlight.js syntax highlighting inside a Mantine Card. Font is browser-default &#x27;monospace&#x27; with no explicit stack (INC-009). Syntax token colors swap roles between light and dark themes (INC-008).</p>
+<p><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span>&nbsp;<span class="doc-badge doc-badge-gray">/config</span></p>
+<p style='font-size:13px'>Related inconsistencies: <a href="../inconsistencies.html#inc-008">INC-008</a> <a href="../inconsistencies.html#inc-009">INC-009</a></p>
+
+<h2 id="design">Design variants</h2>
+<h3>default</h3>
+<p style="font-size:13px;color:var(--doc-text-secondary)">Highlight.js YAML-highlighted code block in a card.</p>
+<div class="mock-preview"><pre class="mock-code-block"><code><span class="mock-hljs-attr">global:</span><br>  <span class="mock-hljs-attr">scrape_interval:</span> <span class="mock-hljs-string">15s</span></code></pre></div>
+<p style='font-size:11px;color:var(--doc-text-secondary)'>Tokens: <code>code/block, card-bg</code></p>
+
+<details>
+<summary>Component Reference — screenshots &amp; live links</summary>
+<div class="details-body"><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/config — <a href="https://prometheus-e83j.onrender.com/config" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/config-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/config-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div></div>
+</details>
+
+<h2 id='implementation'>Implementation</h2><pre><code>// In your CSS/theme:
+// pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+&lt;Card&gt;
+  &lt;Group justify=&quot;flex-end&quot;&gt;
+    &lt;CopyButton value={configYaml} /&gt;
+  &lt;/Group&gt;
+  &lt;pre&gt;
+    &lt;code
+      className=&quot;language-yaml&quot;
+      ref={(el) =&gt; el &amp;&amp; hljs.highlightElement(el)}
+    &gt;
+      {configYaml}
+    &lt;/code&gt;
+  &lt;/pre&gt;
+&lt;/Card&gt;</code></pre>
+
+<h2 id="layout">Layout specifications</h2>
+<table class="spec-table"><tbody><tr><td>font-family</td><td><code>monospace (browser default — INC-009)</code><br><small>token: <code>mono</code></small></td></tr>
+<tr><td>font-size</td><td><code>16px</code><br><small>token: <code>code/block</code></small></td></tr>
+<tr><td>line-height</td><td><code>1.5</code></td></tr>
+<tr><td>hljs-attr (light)</td><td><code>rgb(92,148,13) olive-green</code></td></tr>
+<tr><td>hljs-string (light)</td><td><code>rgb(24,100,171) blue</code></td></tr>
+<tr><td>hljs-attr (dark)</td><td><code>rgb(165,216,255) light-blue (role swapped — INC-008)</code></td></tr>
+<tr><td>hljs-string (dark)</td><td><code>rgb(64,192,87) green (role swapped — INC-008)</code></td></tr></tbody></table>
+
+<h2 id="accessibility">Accessibility</h2>
+<table><tbody><tr><td><b>Contrast</b></td><td>Light hljs-attr rgb(92,148,13) on white — check contrast for WCAG AA. Dark hljs-attr rgb(165,216,255) on dark bg — verify.</td></tr><tr><td><b>Screen reader</b></td><td>Pre blocks should have role=&#x27;region&#x27; with an aria-label if the content is important.</td></tr></tbody></table>
+</main>
+</div>
+<script src="../main.js"></script>
+</body>
+</html>

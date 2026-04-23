@@ -1,0 +1,35 @@
+{
+  "url": "/targets",
+  "theme": "light",
+  "counts": {"buttons": 21, "inputs": 5, "links": 14},
+  "new_patterns": [
+    "Mantine Accordion (collapsible scrape-pool cards): bg white, border 1px solid rgb(222,226,230), border-radius 4px, items separated; left 4px accent bar in status color (green rgb(211,249,216) / red rgb(255,227,227))",
+    "Accordion header: padding 0 16px, font-size 16px/400, neutral text, chevron icon on right",
+    "Group header RHS stats: 'N / M up' label + colored status dot",
+    "Table (nested inside accordion item): collapse, th 14px/700 padding 7px 10px, td 14px/400 padding 7px 10px, no row borders (relies on whitespace)",
+    "Status Badge component (_healthOk / _healthErr classes): pill radius 1000px, padding 0 10px, 11px/700, textTransform uppercase — dom text is lowercase 'up'/'down', rendered uppercase via CSS",
+    "Label Badge (_labelBadge): same pill shape bg rgb(241,243,245) text rgb(73,80,87) 11px/700 padding 0 10px — textTransform NONE (raw label=\"value\" preserved)",
+    "Stats Badge (_statsBadge): same pill shape, same colors, BUT textTransform uppercase (so '5.41s ago' becomes '5.41S AGO'). Visually identical to _labelBadge except for uppercase.",
+    "Filter toolbar: 3 inputs — Select (chevron), Select (chevron + icon), Text (search icon) + icon-button on far right (data-table toggle?)"
+  ],
+  "status_normalization_finding": {
+    "dom_values": ["up", "down"],
+    "display_values": ["UP", "DOWN"],
+    "mechanism": "CSS textTransform: uppercase",
+    "note": "Text is stored lowercase in DOM but displayed uppercase. Downstream ingestion (logs, copy-paste) will produce lowercase."
+  },
+  "colors_new_this_page": ["rgb(33,37,41) very-dark-grey", "rgb(241,243,245) surface-soft/badge-neutral", "rgba(134,142,150,0.1) subtle-grey", "rgba(250,82,82,0.1) danger-tint", "rgb(250,82,82) danger-pure"],
+  "radii_new": ["1000px (pill — badges)", "16000px (capsule — already on alerts)"],
+  "elements": [
+    "Header/navbar (same as query)",
+    "Top nav active pill showing breadcrumb-style 'Status > Target health' inside primary blue pill",
+    "Filter toolbar (3 filters + icon button)",
+    "Scrape-pool accordion group",
+    "Target row in nested table",
+    "Label Badge pill",
+    "Status Badge (health up/down)",
+    "Stats Badge (time ago / duration)",
+    "Endpoint link (blue)",
+    "Caret-down kebab 'show more labels' button"
+  ]
+}

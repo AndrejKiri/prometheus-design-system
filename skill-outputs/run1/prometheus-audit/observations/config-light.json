@@ -1,0 +1,11 @@
+{
+  "url": "/config",
+  "theme": "light",
+  "elements": ["header/navbar", "Mantine Card containing a <pre> code block with highlight.js YAML highlighting", "Copy-to-clipboard ActionIcon (top-right of card)"],
+  "notes": [
+    "Syntax highlighting via highlight.js (hljs-* classes). Keys: rgb(92,148,13) olive-green. Strings/values: rgb(24,100,171) blue. No obvious color for booleans in CSS — but visually false is red-tinted in screenshot. Need to verify darker tokens.",
+    "Font family: 'monospace' (browser default) — not an explicit font stack. May render differently across OS/browsers.",
+    "Font size on <pre>: 16px. Elsewhere body text is 14-16px. Code blocks bigger-than-body is fine but worth noting.",
+    "Copy button uses the Mantine ActionIcon pattern — same component family is used for theme toggle, settings gear, docs in the navbar. Consistent."
+  ]
+}

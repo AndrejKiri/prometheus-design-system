@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit Report — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Audit Report</h1>
+<p class="doc-subtitle">Phase 1 visual audit · 2026-04-21 · tool: claude-cowork · <a href="https://prometheus-e83j.onrender.com" target="_blank">https://prometheus-e83j.onrender.com</a></p>
+
+<h2 id="scope">Scope</h2>
+<p>Full audit of all 10 primary pages of the Prometheus web UI in both light and dark themes, covering navigation, query, alerting, service discovery, status, and configuration surfaces.</p>
+<table>
+<thead><tr><th>URL</th><th>Name</th><th>Elements audited</th></tr></thead>
+<tbody><tr><td><code>/query</code></td><td>Query (PromQL explorer)</td><td>Header/Navbar, Primary Button, Button Variants Group</td></tr>
+<tr><td><code>/alerts</code></td><td>Alerts</td><td>Header/Navbar, Mantine Alert Info Callout, Filter Input (Pills)</td></tr>
+<tr><td><code>/rules</code></td><td>Rules</td><td>Header/Navbar, Mantine Alert Info Callout, Filter Input (Pills)</td></tr>
+<tr><td><code>/targets</code></td><td>Targets</td><td>Header/Navbar, Mantine Card, Mantine Accordion, Filter Input (Pills), Health Status Badge, Label Badge, Stats Badge</td></tr>
+<tr><td><code>/service-discovery</code></td><td>Service Discovery</td><td>Header/Navbar, Mantine Card, Discovered/Target Labels Layout, Filter Input (Pills)</td></tr>
+<tr><td><code>/status</code></td><td>Status</td><td>Header/Navbar, Mantine Card, Card Title with Icon, Key-Value Table</td></tr>
+<tr><td><code>/tsdb-status</code></td><td>TSDB Status</td><td>Header/Navbar, Mantine Card, Card Title without Icon, Key-Value Table</td></tr>
+<tr><td><code>/flags</code></td><td>Flags</td><td>Header/Navbar, Mantine Card, Card Title without Icon, Filter Input (Single Field), Sortable Table</td></tr>
+<tr><td><code>/config</code></td><td>Config</td><td>Header/Navbar, Mantine Card, YAML Code Block, Copy Button</td></tr>
+<tr><td><code>/alertmanager-discovery</code></td><td>Alertmanager Discovery</td><td>Header/Navbar, Mantine Card, Card Title with Icon, Mantine Alert Info Callout</td></tr></tbody>
+</table>
+
+<h2 id="patterns">All 18 Patterns</h2>
+<table>
+<thead><tr><th>Name</th><th>Category</th><th>Instances</th><th>Variations</th><th>Pages</th></tr></thead>
+<tbody><tr><td>Header/Navbar</td><td><span class="doc-badge doc-badge-gray">navigation</span></td><td>10</td><td>1</td><td style="font-size:12px">/query, /alerts, /rules, /targets, /service-discovery, /status, /tsdb-status, /flags, /config, /alertmanager-discovery</td></tr>
+<tr><td>Mantine Card</td><td><span class="doc-badge doc-badge-gray">layout</span></td><td>15</td><td>1</td><td style="font-size:12px">/targets, /service-discovery, /status, /tsdb-status, /flags, /config, /alertmanager-discovery</td></tr>
+<tr><td>Card Title with Icon</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>4</td><td>1</td><td style="font-size:12px">/status, /alertmanager-discovery</td></tr>
+<tr><td>Card Title without Icon</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>3</td><td>1</td><td style="font-size:12px">/tsdb-status, /flags</td></tr>
+<tr><td>Mantine Alert Info Callout</td><td><span class="doc-badge doc-badge-gray">feedback</span></td><td>3</td><td>1</td><td style="font-size:12px">/alerts, /rules, /alertmanager-discovery</td></tr>
+<tr><td>Primary Button</td><td><span class="doc-badge doc-badge-gray">input</span></td><td>1</td><td>1</td><td style="font-size:12px">/query</td></tr>
+<tr><td>Button Variants Group</td><td><span class="doc-badge doc-badge-gray">input</span></td><td>9</td><td>9</td><td style="font-size:12px">/query</td></tr>
+<tr><td>Filter Input (Pills)</td><td><span class="doc-badge doc-badge-gray">input</span></td><td>4</td><td>1</td><td style="font-size:12px">/alerts, /rules, /targets, /service-discovery</td></tr>
+<tr><td>Filter Input (Single Field)</td><td><span class="doc-badge doc-badge-gray">input</span></td><td>1</td><td>1</td><td style="font-size:12px">/flags</td></tr>
+<tr><td>Health Status Badge</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>20</td><td>2</td><td style="font-size:12px">/targets</td></tr>
+<tr><td>Label Badge</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>200</td><td>1</td><td style="font-size:12px">/targets</td></tr>
+<tr><td>Stats Badge</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>10</td><td>1</td><td style="font-size:12px">/targets</td></tr>
+<tr><td>Mantine Accordion</td><td><span class="doc-badge doc-badge-gray">layout</span></td><td>3</td><td>1</td><td style="font-size:12px">/targets</td></tr>
+<tr><td>Sortable Table</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>1</td><td>1</td><td style="font-size:12px">/flags</td></tr>
+<tr><td>Key-Value Table</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>4</td><td>1</td><td style="font-size:12px">/status, /tsdb-status</td></tr>
+<tr><td>Discovered/Target Labels Layout</td><td><span class="doc-badge doc-badge-gray">layout</span></td><td>3</td><td>1</td><td style="font-size:12px">/service-discovery</td></tr>
+<tr><td>YAML Code Block</td><td><span class="doc-badge doc-badge-gray">data-display</span></td><td>1</td><td>1</td><td style="font-size:12px">/config</td></tr>
+<tr><td>Copy Button</td><td><span class="doc-badge doc-badge-gray">input</span></td><td>1</td><td>1</td><td style="font-size:12px">/config</td></tr></tbody>
+</table>
+
+<h2 id="palette">Raw Palette</h2>
+<div class="callout callout-warn">Error badge exact values not captured — estimated from Mantine red palette. Re-capture with a Playwright script if pixel-exact values are required.</div>
+<table>
+<thead><tr><th>Token</th><th>Light</th><th>Dark</th></tr></thead>
+<tbody><tr><td><code>health_ok_bg</code></td><td><span style="background:rgb(211,249,216); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(211,249,216)</code></td><td><span style="background:rgb(43,138,62); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(43,138,62)</code></td></tr>
+<tr><td><code>primary_button_fg</code></td><td><span style="background:rgb(255,255,255); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(255,255,255)</code></td><td><span style="background:rgb(255,255,255); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(255,255,255)</code></td></tr>
+<tr><td><code>info_callout_bg</code></td><td><span style="background:rgba(34,139,230,0.1); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgba(34,139,230,0.1)</code></td><td><span style="background:rgba(34,139,230,0.15); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgba(34,139,230,0.15)</code></td></tr>
+<tr><td><code>card_bg</code></td><td><span style="background:rgb(255,255,255); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(255,255,255)</code></td><td><span style="background:rgb(46,46,46); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(46,46,46)</code></td></tr>
+<tr><td><code>primary_button_bg</code></td><td><span style="background:rgb(34,139,230); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(34,139,230)</code></td><td><span style="background:rgb(25,113,194); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(25,113,194)</code></td></tr>
+<tr><td><code>info_callout_fg</code></td><td><span style="background:rgb(24,100,171); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(24,100,171)</code></td><td><span style="background:rgb(116,192,252); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(116,192,252)</code></td></tr>
+<tr><td><code>health_ok_fg</code></td><td><span style="background:rgb(43,138,62); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(43,138,62)</code></td><td><span style="background:rgb(211,249,216); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(211,249,216)</code></td></tr>
+<tr><td><code>card_border</code></td><td><span style="background:rgb(222,226,230); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(222,226,230)</code></td><td><span style="background:rgb(66,66,66); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(66,66,66)</code></td></tr>
+<tr><td><code>nav_bg</code></td><td><span style="background:rgb(65,73,81); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(65,73,81)</code></td><td><span style="background:rgb(65,73,81); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(65,73,81)</code></td></tr>
+<tr><td><code>body_fg</code></td><td><span style="background:rgb(0,0,0); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(0,0,0)</code></td><td><span style="background:rgb(201,201,201); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(201,201,201)</code></td></tr>
+<tr><td><code>body_bg</code></td><td><span style="background:rgb(255,255,255); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(255,255,255)</code></td><td><span style="background:rgb(36,36,36); display:inline-block; width:16px; height:16px; border:1px solid var(--doc-border); border-radius:2px; vertical-align:middle"></span> <code>rgb(36,36,36)</code></td></tr></tbody>
+</table>
+
+<h2 id="framework">Framework Notes</h2>
+<p>UI is built with Mantine v7+ (html[data-mantine-color-scheme] light|dark). Syntax highlighting uses highlight.js (hljs-* classes). Primary brand color is Mantine blue rgb(34,139,230) in light / rgb(25,113,194) in dark. Nav bar is a fixed dark slate rgb(65,73,81) that is identical across both themes.</p>
+
+<h2 id="screenshots">Screenshot Limitation</h2>
+<p class="callout callout-warn">Screenshots in screenshots/ are 1x1 placeholder JPEGs (196 bytes each). The Cowork sandbox&#x27;s javascript_tool blocks base64/hex image data returning from html2canvas, so rendered page imagery could not be exfiltrated through the browser automation channel. All observations in this report are derived from live DOM inspection via getComputedStyle, class-name surveys, and in-context screenshot viewing through the Chrome MCP extension — not from post-hoc image analysis. A downstream consumer that needs real pixel-level screenshots should re-capture them using a local Playwright/Puppeteer script against the same URL.</p>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

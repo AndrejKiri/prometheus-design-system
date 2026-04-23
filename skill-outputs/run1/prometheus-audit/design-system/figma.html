@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figma Plugin — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Figma Plugin</h1>
+<p class="doc-subtitle">Bootstrap Figma variables from the extracted token set</p>
+
+<div class="callout callout-info">The plugin bootstraps color variables, text styles, and effects from <code>tokens.json</code>. Import via Figma → Plugins → Development → Import plugin from manifest.</div>
+
+<h2 id="install">Installation</h2>
+<ol>
+<li>Download <code>figma-plugin.zip</code> from the project folder.</li>
+<li>Unzip to a local directory.</li>
+<li>In Figma: Plugins → Development → Import plugin from manifest → select <code>manifest.json</code>.</li>
+<li>Run the plugin from Plugins → Development → Prometheus Design System.</li>
+</ol>
+
+<h2 id="what-it-creates">What the plugin creates</h2>
+<table>
+<thead><tr><th>Figma artefact</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Color variables (brand, status, surface, text, border)</td><td><code>tokens.json → colors</code></td></tr>
+<tr><td>Text styles (heading, body, label, code)</td><td><code>tokens.json → typography.styles</code></td></tr>
+<tr><td>Drop shadow effects</td><td><code>tokens.json → elevation</code></td></tr>
+</tbody>
+</table>
+
+<h2 id="font-notes">Font notes</h2>
+<ul style="font-size:13px;margin-left:16px">
+<li>Body font maps to <b>Inter</b> — always bundled in Figma.</li>
+<li>Mono font maps to <b>Courier New</b> — bundled; DejaVu Sans Mono and Roboto Mono are not available.</li>
+<li>Font weights are wrapped in try/catch — families that only ship "Regular" will gracefully fall back.</li>
+<li>Use "Semi Bold" (with space) not "SemiBold" for Figma font weight strings.</li>
+</ul>
+
+<h2 id="tokens-used">Token preview</h2>
+<table>
+<thead><tr><th>Variable name</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td><code>brand-blue-light</code></td><td><span style="background:rgb(34,139,230);display:inline-block;width:14px;height:14px;border-radius:2px;border:1px solid var(--doc-border);vertical-align:middle"></span> <code>rgb(34,139,230)</code></td></tr><tr><td><code>brand-blue-dark</code></td><td><span style="background:rgb(25,113,194);display:inline-block;width:14px;height:14px;border-radius:2px;border:1px solid var(--doc-border);vertical-align:middle"></span> <code>rgb(25,113,194)</code></td></tr><tr><td><code>nav-slate</code></td><td><span style="background:rgb(65,73,81);display:inline-block;width:14px;height:14px;border-radius:2px;border:1px solid var(--doc-border);vertical-align:middle"></span> <code>rgb(65,73,81)</code></td></tr>
+</tbody>
+</table>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

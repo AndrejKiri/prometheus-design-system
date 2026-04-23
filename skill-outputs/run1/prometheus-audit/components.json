@@ -1,0 +1,1001 @@
+{
+  "app_url": "https://prometheus-e83j.onrender.com",
+  "extraction_date": "2026-04-22",
+  "component_count": 18,
+  "components": [
+    {
+      "name": "Header/Navbar",
+      "slug": "header-navbar",
+      "description": "Fixed top navigation bar present on every page. Contains the Prometheus logo, primary route links, and right-side utility ActionIcons. Background is a dark slate that does not change between light and dark themes.",
+      "subtitle": "Global app shell navigation",
+      "complexity": "complex",
+      "category": "navigation",
+      "pages": ["/query", "/alerts", "/rules", "/targets", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "props": [
+        { "name": "activeRoute", "type": "string", "default": null, "required": false, "description": "Current route path — highlights the matching nav link." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Full navbar with logo, route links (Alerts, Graph, Status, Help), and utility icons (theme toggle, settings, docs).",
+          "mock_css_class": "mock-app-header",
+          "mock_html": "<div class=\"mock-app-header\"><span class=\"mock-app-header-logo\">🔥 Prometheus</span><nav class=\"mock-app-header-nav\"><a class=\"mock-nav-link mock-nav-active\" href=\"#\">Graph</a><a class=\"mock-nav-link\" href=\"#\">Alerts</a><a class=\"mock-nav-link\" href=\"#\">Status</a><a class=\"mock-nav-link\" href=\"#\">Help</a></nav><div class=\"mock-app-header-actions\"><button class=\"mock-action-icon\" title=\"Toggle theme\">☀</button><button class=\"mock-action-icon\" title=\"Settings\">⚙</button><button class=\"mock-action-icon\" title=\"Docs\">📖</button></div></div>",
+          "tokens_used": ["nav-slate", "inverted"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "56px", "token": "navbar-height" },
+          { "property": "background", "value": "rgb(65,73,81)", "token": "nav-slate" },
+          { "property": "position", "value": "fixed top-0" },
+          { "property": "padding-inline", "value": "16px", "token": "md" },
+          { "property": "z-index", "value": "100 (above page content)" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Keep the navbar background rgb(65,73,81) identical in light and dark themes — it is a product-brand anchor." },
+        { "type": "do", "text": "Use Tabler Icons for all ActionIcons to stay consistent with the rest of the icon set." },
+        { "type": "dont", "text": "Don't change the navbar background based on color scheme — it breaks the brand identity." },
+        { "type": "dont", "text": "Don't add more than 4 primary route links without a dropdown or secondary nav." }
+      ],
+      "accessibility": {
+        "aria_labels": "Theme toggle ActionIcon uses aria-label that flips between 'Switch to light theme' / 'Switch to dark theme'.",
+        "keyboard": "Tab through nav links and ActionIcons. Active route link should have aria-current='page'.",
+        "contrast": "White text on rgb(65,73,81) slate passes WCAG AA (contrast ~5.1:1).",
+        "screen_reader": null
+      },
+      "code_example": "<AppShell header={{ height: 56 }}>\n  <AppShell.Header style={{ background: 'rgb(65,73,81)' }}>\n    <Group h=\"100%\" px=\"md\" justify=\"space-between\">\n      <Text c=\"white\" fw={700}>Prometheus</Text>\n      <Group gap=\"xs\">\n        <NavLink label=\"Graph\" href=\"/query\" />\n        <NavLink label=\"Alerts\" href=\"/alerts\" />\n      </Group>\n      <Group gap=\"xs\">\n        <ActionIcon aria-label=\"Switch to dark theme\" variant=\"transparent\" color=\"white\">\n          <IconSun size={18} />\n        </ActionIcon>\n      </Group>\n    </Group>\n  </AppShell.Header>\n</AppShell>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Mantine Card",
+      "slug": "mantine-card",
+      "description": "Primary content container used on 7 of 10 pages. Wraps all major content sections with a consistent white/dark background, 1px border, 4px corner radius, and a subtle box shadow.",
+      "subtitle": "Content section container",
+      "complexity": "simple",
+      "category": "layout",
+      "pages": ["/targets", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "props": [
+        { "name": "children", "type": "ReactNode", "default": null, "required": true, "description": "Card content." },
+        { "name": "padding", "type": "MantineSize", "default": "md", "required": false, "description": "Inner padding. Default 'md' = 16px." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Standard content card with border and shadow.",
+          "mock_css_class": "mock-panel",
+          "mock_html": "<div class=\"mock-panel\"><p>Card content goes here.</p></div>",
+          "tokens_used": ["card-bg", "default", "sm", "card"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "background (light)", "value": "rgb(255,255,255)", "token": "card-bg" },
+          { "property": "background (dark)", "value": "rgb(46,46,46)", "token": "card-bg" },
+          { "property": "border", "value": "1px solid rgb(222,226,230) / rgb(66,66,66)", "token": "default" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "padding", "value": "16px", "token": "card-padding" },
+          { "property": "box-shadow", "value": "0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1)", "token": "card" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use Mantine Card as the single wrapping container for any page-level content section." },
+        { "type": "do", "text": "Maintain 16px internal padding consistently — do not override with tighter values." },
+        { "type": "dont", "text": "Don't nest cards inside cards — use Accordion or Table rows for sub-grouping instead." },
+        { "type": "dont", "text": "Don't use the card border-radius token (4px) for pill/badge shapes — use the pill token (1000px)." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": null,
+        "contrast": "Card bg passes WCAG AA for body text in both light (black on white) and dark (rgb(201,201,201) on rgb(46,46,46)).",
+        "screen_reader": null
+      },
+      "code_example": "<Card padding=\"md\" radius=\"sm\" withBorder>\n  {/* content */}\n</Card>",
+      "related_inconsistencies": ["INC-001"],
+      "origin": "derived"
+    },
+    {
+      "name": "Card Title with Icon",
+      "slug": "card-title-with-icon",
+      "description": "Card header variant that places a semantically relevant Tabler icon immediately before the title text. Used on /status (Build, Runtime) and /alertmanager-discovery (Active, Dropped).",
+      "subtitle": "Titled card header with leading icon",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/status", "/alertmanager-discovery"],
+      "props": [
+        { "name": "icon", "type": "TablerIcon", "default": null, "required": true, "description": "Tabler icon component matching the card's semantic content." },
+        { "name": "title", "type": "string", "default": null, "required": true, "description": "Card section heading text." }
+      ],
+      "variants": [
+        {
+          "name": "with-icon",
+          "description": "Title row with leading Tabler icon (18px) followed by heading text.",
+          "mock_css_class": "mock-card-title-icon",
+          "mock_html": "<div class=\"mock-card-title-icon\"><span class=\"mock-icon\">🗄</span><span class=\"mock-card-title-text\">Build Information</span></div>",
+          "tokens_used": ["brand-blue-light", "heading/card-title"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "icon-size", "value": "18px" },
+          { "property": "icon-color", "value": "Mantine primary (brand blue)" },
+          { "property": "gap (icon → text)", "value": "8px", "token": "sm" },
+          { "property": "font", "value": "18px / weight 600", "token": "heading/card-title" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Choose an icon that semantically relates to the card content (database → build, bell → alerts)." },
+        { "type": "do", "text": "Apply this pattern consistently to all cards that currently have it — and consider extending it to cards without icons (INC-001)." },
+        { "type": "dont", "text": "Don't use decorative or random icons — every icon should communicate something about the card's subject." },
+        { "type": "dont", "text": "Don't mix icon-title cards and plain-title cards on the same page without visual justification." }
+      ],
+      "accessibility": {
+        "aria_labels": "Icon should be aria-hidden='true' — the title text carries the accessible name.",
+        "keyboard": null,
+        "contrast": null,
+        "screen_reader": "Screen readers should read the title only; hide icon with aria-hidden."
+      },
+      "code_example": "<Group gap=\"xs\" mb=\"xs\">\n  <IconDatabase size={18} aria-hidden />\n  <Title order={4}>Build Information</Title>\n</Group>",
+      "related_inconsistencies": ["INC-001"],
+      "origin": "derived"
+    },
+    {
+      "name": "Card Title without Icon",
+      "slug": "card-title-without-icon",
+      "description": "Card header variant that renders only the title text with no leading icon. Used on /tsdb-status and /flags. Visually lighter than the icon variant and creates an inconsistency with icon-title cards elsewhere.",
+      "subtitle": "Plain text card header",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/tsdb-status", "/flags"],
+      "props": [
+        { "name": "title", "type": "string", "default": null, "required": true, "description": "Card section heading text." }
+      ],
+      "variants": [
+        {
+          "name": "plain",
+          "description": "Title rendered as heading text with no leading icon.",
+          "mock_css_class": "mock-card-title-plain",
+          "mock_html": "<div class=\"mock-card-title-plain\"><span class=\"mock-card-title-text\">TSDB Head Status</span></div>",
+          "tokens_used": ["heading/card-title"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "font", "value": "18px / weight 600", "token": "heading/card-title" },
+          { "property": "margin-bottom", "value": "8px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use plain titles for cards where no icon adds semantic value." },
+        { "type": "dont", "text": "Don't mix icon and plain card titles on the same page — pick one style and apply it consistently (see INC-001)." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": null,
+        "contrast": null,
+        "screen_reader": null
+      },
+      "code_example": "<Title order={4} mb=\"xs\">TSDB Head Status</Title>",
+      "related_inconsistencies": ["INC-001"],
+      "origin": "derived"
+    },
+    {
+      "name": "Mantine Alert Info Callout",
+      "slug": "mantine-alert-info-callout",
+      "description": "Shared empty-state pattern rendered as a Mantine Alert in 'info' color. Appears on /alerts, /rules, and /alertmanager-discovery when there is no data to display. Provides a subtle blue tint in both themes.",
+      "subtitle": "Empty-state info alert",
+      "complexity": "simple",
+      "category": "feedback",
+      "pages": ["/alerts", "/rules", "/alertmanager-discovery"],
+      "props": [
+        { "name": "title", "type": "string", "default": null, "required": false, "description": "Optional alert title." },
+        { "name": "children", "type": "ReactNode", "default": null, "required": true, "description": "Alert body text." },
+        { "name": "color", "type": "string", "default": "blue", "required": false, "description": "Mantine color — always 'blue' in this app." }
+      ],
+      "variants": [
+        {
+          "name": "info",
+          "description": "Blue-tinted informational callout used as empty state.",
+          "mock_css_class": "mock-alert-info",
+          "mock_html": "<div class=\"mock-alert-info\"><span class=\"mock-alert-icon\">ℹ</span><span>No alerting rules found.</span></div>",
+          "tokens_used": ["info", "info-callout"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "background (light)", "value": "rgba(34,139,230,0.1)", "token": "info" },
+          { "property": "background (dark)", "value": "rgba(34,139,230,0.15)", "token": "info" },
+          { "property": "text-color (light)", "value": "rgb(24,100,171)", "token": "info-callout" },
+          { "property": "text-color (dark)", "value": "rgb(116,192,252)", "token": "info-callout" },
+          { "property": "border", "value": "none" },
+          { "property": "padding", "value": "12px 16px", "token": "sm-lg" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use this pattern consistently for all empty states across the app." },
+        { "type": "do", "text": "Include a meaningful message explaining why the list is empty (e.g. 'No rules found' not just 'Empty')." },
+        { "type": "dont", "text": "Don't use this for error states — use the error badge/status pattern instead." },
+        { "type": "dont", "text": "Don't add a border to the callout — it does not have one in the current implementation." }
+      ],
+      "accessibility": {
+        "aria_labels": "Mantine Alert renders with role='alert' by default.",
+        "keyboard": null,
+        "contrast": "Light: rgb(24,100,171) on rgba(34,139,230,0.1) ≈ 4.7:1 — passes AA. Dark: rgb(116,192,252) on rgba(34,139,230,0.15) — verify contrast.",
+        "screen_reader": "role='alert' causes screen readers to announce the content. Use only for genuinely important empty states."
+      },
+      "code_example": "<Alert color=\"blue\" icon={<IconInfoCircle />}>\n  No alerting rules found.\n</Alert>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Primary Button",
+      "slug": "primary-button",
+      "description": "The single primary call-to-action button in the app — the 'Execute' button on the PromQL query page. Filled blue background with white text, 14px semibold, 4px radius.",
+      "subtitle": "Primary filled action button",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/query"],
+      "props": [
+        { "name": "children", "type": "string", "default": null, "required": true, "description": "Button label text." },
+        { "name": "onClick", "type": "function", "default": null, "required": false, "description": "Click handler." },
+        { "name": "loading", "type": "boolean", "default": "false", "required": false, "description": "Shows loading spinner while query executes." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Filled primary blue button.",
+          "mock_css_class": "mock-btn-primary",
+          "mock_html": "<button class=\"mock-btn-primary\">Execute</button>",
+          "tokens_used": ["brand-blue-light", "brand-blue-dark", "label/button", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "background (light)", "value": "rgb(34,139,230)", "token": "brand-blue-light" },
+          { "property": "background (dark)", "value": "rgb(25,113,194)", "token": "brand-blue-dark" },
+          { "property": "color", "value": "rgb(255,255,255)", "token": "inverted" },
+          { "property": "font-size", "value": "14px", "token": "label/button" },
+          { "property": "font-weight", "value": "600" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "padding", "value": "8px 16px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use this variant only for the single primary action per page/form." },
+        { "type": "do", "text": "Show a loading state during async operations (Mantine Button loading prop)." },
+        { "type": "dont", "text": "Don't use more than one primary button per surface — it dilutes the hierarchy." },
+        { "type": "dont", "text": "Don't use a different blue — only rgb(34,139,230) light / rgb(25,113,194) dark." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": "Focusable via Tab, activatable via Enter/Space.",
+        "contrast": "White on rgb(34,139,230) = ~4.5:1 — passes WCAG AA.",
+        "screen_reader": null
+      },
+      "code_example": "<Button color=\"blue\" variant=\"filled\" radius=\"sm\">\n  Execute\n</Button>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Button Variants Group",
+      "slug": "button-variants-group",
+      "description": "The dense toolbar on the PromQL query page containing nine visually distinct button variants: Execute (primary filled), metrics explorer (subtle), tree-view toggle, result tabs (segmented control), timestamp toggle, history dropdown, and add-panel button.",
+      "subtitle": "Multi-variant query toolbar",
+      "complexity": "complex",
+      "category": "input",
+      "pages": ["/query"],
+      "props": [],
+      "variants": [
+        {
+          "name": "subtle",
+          "description": "Subtle text-only button used for secondary actions (metrics explorer, tree-view toggle).",
+          "mock_css_class": "mock-btn-subtle",
+          "mock_html": "<button class=\"mock-btn-subtle\">Metrics Explorer</button>",
+          "tokens_used": ["brand-blue-light", "label/button"]
+        },
+        {
+          "name": "segmented-control",
+          "description": "Tab-style segmented control for result view (Graph / Table / Explain).",
+          "mock_css_class": "mock-segmented",
+          "mock_html": "<div class=\"mock-segmented\"><button class=\"mock-seg-active\">Graph</button><button class=\"mock-seg\">Table</button><button class=\"mock-seg\">Explain</button></div>",
+          "tokens_used": ["brand-blue-light", "label/button", "sm"]
+        },
+        {
+          "name": "action-icon",
+          "description": "Icon-only ActionIcon for compact secondary actions (history, add panel).",
+          "mock_css_class": "mock-action-icon",
+          "mock_html": "<button class=\"mock-action-icon\" title=\"History\">🕐</button>",
+          "tokens_used": ["brand-blue-light"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "toolbar-gap", "value": "8px", "token": "sm" },
+          { "property": "button-height", "value": "36px" },
+          { "property": "segmented-control-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Group related controls visually using gaps and Mantine Group component." },
+        { "type": "do", "text": "Reserve the filled/primary variant for the single most important action." },
+        { "type": "dont", "text": "Don't add more primary-filled buttons to this toolbar — the Execute button is the only call-to-action." },
+        { "type": "dont", "text": "Don't replicate this dense toolbar pattern elsewhere — it is specific to the query surface." }
+      ],
+      "accessibility": {
+        "aria_labels": "Each ActionIcon needs an explicit aria-label. SegmentedControl should use role='tablist' / role='tab'.",
+        "keyboard": "All controls reachable via Tab. SegmentedControl navigable with arrow keys.",
+        "contrast": null,
+        "screen_reader": null
+      },
+      "code_example": "<Group gap=\"xs\">\n  <Button variant=\"filled\" color=\"blue\">Execute</Button>\n  <Button variant=\"subtle\">Metrics Explorer</Button>\n  <SegmentedControl data={['Graph', 'Table', 'Explain']} />\n  <ActionIcon aria-label=\"History\" variant=\"subtle\">\n    <IconHistory size={18} />\n  </ActionIcon>\n</Group>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Filter Input (Pills)",
+      "slug": "filter-input-pills",
+      "description": "Multi-filter toolbar built with Mantine PillsInput that lets users add multiple chip-style labeled filters. Used across four pages for label-oriented filtering. Placeholder text is shared verbatim between /alerts and /rules.",
+      "subtitle": "Multi-chip filter toolbar",
+      "complexity": "medium",
+      "category": "input",
+      "pages": ["/alerts", "/rules", "/targets", "/service-discovery"],
+      "props": [
+        { "name": "placeholder", "type": "string", "default": "Filter by rule name or labels", "required": false, "description": "Input placeholder text shown when no filters are active." },
+        { "name": "value", "type": "string[]", "default": "[]", "required": false, "description": "Active filter chips." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Empty filter bar with placeholder.",
+          "mock_css_class": "mock-filter-pills",
+          "mock_html": "<div class=\"mock-filter-pills\"><span class=\"mock-pill\">instance=localhost:9090 ✕</span><input class=\"mock-filter-input\" placeholder=\"Add filter…\" /></div>",
+          "tokens_used": ["default", "sm", "label-badge-bg"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px (min, grows with chips)" },
+          { "property": "border", "value": "1px solid", "token": "default" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "chip-radius", "value": "1000px", "token": "pill" },
+          { "property": "chip-padding", "value": "4px 8px", "token": "xs sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use this for list pages where users need to filter by multiple label dimensions simultaneously." },
+        { "type": "do", "text": "Keep placeholder text descriptive of what can be filtered (e.g. 'Filter by rule name or labels')." },
+        { "type": "dont", "text": "Don't use this where a simple text match is sufficient — consider the single-field filter instead (INC-004)." },
+        { "type": "dont", "text": "Don't use the same placeholder on different pages if the filterable fields differ." }
+      ],
+      "accessibility": {
+        "aria_labels": "PillsInput should have an associated label element.",
+        "keyboard": "Tab to enter input, Enter/comma to commit chip, Backspace to remove last chip.",
+        "contrast": null,
+        "screen_reader": "Each pill should be announced when added/removed."
+      },
+      "code_example": "<PillsInput label=\"Filter\">\n  <Pill.Group>\n    {values.map(v => <Pill key={v} withRemoveButton>{v}</Pill>)}\n    <PillsInput.Field placeholder=\"Filter by rule name or labels\" />\n  </Pill.Group>\n</PillsInput>",
+      "related_inconsistencies": ["INC-004"],
+      "origin": "derived"
+    },
+    {
+      "name": "Filter Input (Single Field)",
+      "slug": "filter-input-single-field",
+      "description": "Simple full-width Mantine TextInput with a leading search icon affix. Used only on /flags for substring filtering. Simpler interaction model than the Pills variant — no chip creation, just text match.",
+      "subtitle": "Single-field text filter",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/flags"],
+      "props": [
+        { "name": "placeholder", "type": "string", "default": "Filter by flag name or value", "required": false, "description": "Placeholder text." },
+        { "name": "value", "type": "string", "default": "", "required": false, "description": "Current filter value." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Full-width text input with search icon prefix.",
+          "mock_css_class": "mock-filter-single",
+          "mock_html": "<div class=\"mock-filter-single\"><span class=\"mock-filter-icon\">🔍</span><input class=\"mock-filter-text\" placeholder=\"Filter by flag name or value\" /></div>",
+          "tokens_used": ["default", "sm", "body/default"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "width", "value": "100%" },
+          { "property": "height", "value": "36px" },
+          { "property": "border", "value": "1px solid", "token": "default" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "icon-size", "value": "18px" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use for simple substring filtering when no label-structured data is involved." },
+        { "type": "dont", "text": "Don't use this on pages that filter by structured labels — use the Pills variant instead (INC-004)." },
+        { "type": "dont", "text": "Don't omit the search icon prefix — it signals the input is a filter, not a form field." }
+      ],
+      "accessibility": {
+        "aria_labels": "Include a visible label or aria-label='Filter flags'.",
+        "keyboard": "Standard text input keyboard behavior.",
+        "contrast": null,
+        "screen_reader": null
+      },
+      "code_example": "<TextInput\n  placeholder=\"Filter by flag name or value\"\n  leftSection={<IconSearch size={18} />}\n/>",
+      "related_inconsistencies": ["INC-004"],
+      "origin": "derived"
+    },
+    {
+      "name": "Health Status Badge",
+      "slug": "health-status-badge",
+      "description": "Green/red pill badge shown on each scrape target to indicate health status ('UP' or 'DOWN'). Fully rounded (pill radius). Light/dark swap the fg and bg values. Note: DOM contains lowercase 'up'/'down' but CSS uppercases via textTransform — see INC-007.",
+      "subtitle": "Target health status indicator",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "props": [
+        { "name": "status", "type": "'ok' | 'error'", "default": null, "required": true, "description": "Health state of the scrape target." }
+      ],
+      "variants": [
+        {
+          "name": "ok",
+          "description": "Green pill for healthy targets. DOM: 'up', CSS renders: 'UP'.",
+          "mock_css_class": "mock-badge mock-badge-ok",
+          "mock_html": "<span class=\"mock-badge mock-badge-ok\">UP</span>",
+          "tokens_used": ["ok"]
+        },
+        {
+          "name": "error",
+          "description": "Red pill for unhealthy targets. DOM: 'down', CSS renders: 'DOWN'.",
+          "mock_css_class": "mock-badge mock-badge-err",
+          "mock_html": "<span class=\"mock-badge mock-badge-err\">DOWN</span>",
+          "tokens_used": ["error"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "padding", "value": "4px 8px", "token": "xs sm" },
+          { "property": "font-size", "value": "12px", "token": "label/badge" },
+          { "property": "text-transform", "value": "uppercase (CSS)" },
+          { "property": "ok-bg (light)", "value": "rgb(211,249,216)", "token": "ok" },
+          { "property": "ok-fg (light)", "value": "rgb(43,138,62)", "token": "ok" },
+          { "property": "ok-bg (dark)", "value": "rgb(43,138,62)", "token": "ok" },
+          { "property": "ok-fg (dark)", "value": "rgb(211,249,216)", "token": "ok" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Author the DOM text in uppercase ('UP', 'DOWN') to match visual output — removes reliance on textTransform (INC-007)." },
+        { "type": "do", "text": "Use the ok/error status tokens for background and text — never hard-code the hex values." },
+        { "type": "dont", "text": "Don't use textTransform to uppercase lowercase source text — it breaks copy-paste and screen-reader output (INC-007)." },
+        { "type": "dont", "text": "Don't add a third state (e.g. 'UNKNOWN') without also adding the corresponding token pair." }
+      ],
+      "accessibility": {
+        "aria_labels": "Consider aria-label='Health: UP' so status is explicit to screen readers.",
+        "keyboard": null,
+        "contrast": "Light: rgb(43,138,62) on rgb(211,249,216) ≈ 4.1:1 — marginally passes AA for large text. Dark: rgb(211,249,216) on rgb(43,138,62) — similar.",
+        "screen_reader": "Current lowercase DOM text 'up'/'down' may be announced differently than the visible 'UP'/'DOWN' — see INC-007."
+      },
+      "code_example": "// Recommended fix for INC-007: author uppercase text in DOM\n<Badge\n  color={status === 'up' ? 'green' : 'red'}\n  radius=\"xl\"\n  variant={colorScheme === 'dark' ? 'filled' : 'light'}\n>\n  {status.toUpperCase()}\n</Badge>",
+      "related_inconsistencies": ["INC-007"],
+      "origin": "derived"
+    },
+    {
+      "name": "Label Badge",
+      "slug": "label-badge",
+      "description": "Grey pill used to render scrape-target key=value labels. Preserves original case (textTransform: none). High density — up to 200 instances on the targets page. Shares visual appearance with Stats Badge but has different casing rules.",
+      "subtitle": "Key=value label chip",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "props": [
+        { "name": "label", "type": "string", "default": null, "required": true, "description": "Label key=value string, e.g. 'instance=localhost:9090'." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Grey pill preserving label case.",
+          "mock_css_class": "mock-badge mock-badge-label",
+          "mock_html": "<span class=\"mock-badge mock-badge-label\">instance=localhost:9090</span>",
+          "tokens_used": ["label-badge-bg", "label-badge"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "padding", "value": "2px 8px" },
+          { "property": "font-size", "value": "12px", "token": "label/badge" },
+          { "property": "text-transform", "value": "none (preserves case)" },
+          { "property": "bg (dark)", "value": "rgb(52,58,64)", "token": "label-badge-bg" },
+          { "property": "fg (dark)", "value": "rgb(173,181,189)", "token": "label-badge" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Always preserve label case exactly — label names and values are case-sensitive in Prometheus." },
+        { "type": "dont", "text": "Don't apply textTransform: uppercase to label badges — it conflicts with Prometheus label semantics (INC-003)." },
+        { "type": "dont", "text": "Don't confuse with Stats Badge — both look similar but have different casing rules." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": null,
+        "contrast": "Dark: rgb(173,181,189) on rgb(52,58,64) — check contrast for small text (12px).",
+        "screen_reader": null
+      },
+      "code_example": "<Badge variant=\"light\" color=\"gray\" radius=\"xl\" style={{ textTransform: 'none' }}>\n  {label}\n</Badge>",
+      "related_inconsistencies": ["INC-003"],
+      "origin": "derived"
+    },
+    {
+      "name": "Stats Badge",
+      "slug": "stats-badge",
+      "description": "Grey pill used for scrape-pool statistics (e.g. ENDPOINTS, HEALTHY). CSS uppercases text regardless of authored case. Visually identical to Label Badge, but the casing rule diverges — see INC-003.",
+      "subtitle": "Scrape-pool statistics chip",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "props": [
+        { "name": "stat", "type": "string", "default": null, "required": true, "description": "Statistic label, e.g. 'endpoints' (rendered as 'ENDPOINTS' by CSS)." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Grey pill with CSS-uppercased stat name.",
+          "mock_css_class": "mock-badge mock-badge-stats",
+          "mock_html": "<span class=\"mock-badge mock-badge-stats\">ENDPOINTS</span>",
+          "tokens_used": ["stats-badge-bg", "label-badge"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "padding", "value": "2px 8px" },
+          { "property": "font-size", "value": "12px", "token": "label/badge" },
+          { "property": "text-transform", "value": "uppercase" },
+          { "property": "bg (dark)", "value": "rgb(52,58,64)", "token": "stats-badge-bg" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Author stat names in uppercase directly in the DOM rather than relying on CSS textTransform (resolves INC-003 partially)." },
+        { "type": "dont", "text": "Don't use the same visual style as Label Badge without a clear visual differentiator — users cannot tell which rule applies to which badge type." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": null,
+        "contrast": null,
+        "screen_reader": "CSS textTransform: uppercase may cause screen readers to spell out individual letters. Author uppercase text in DOM."
+      },
+      "code_example": "<Badge variant=\"light\" color=\"gray\" radius=\"xl\" style={{ textTransform: 'uppercase' }}>\n  {stat}\n</Badge>",
+      "related_inconsistencies": ["INC-003"],
+      "origin": "derived"
+    },
+    {
+      "name": "Mantine Accordion",
+      "slug": "mantine-accordion",
+      "description": "Collapsible sections used on /targets to group scrape pools. Each accordion header shows the pool name plus Stats Badges summarizing endpoint counts. Body reveals the target table for that pool.",
+      "subtitle": "Collapsible scrape-pool group",
+      "complexity": "medium",
+      "category": "layout",
+      "pages": ["/targets"],
+      "props": [
+        { "name": "defaultValue", "type": "string | null", "default": null, "required": false, "description": "Initially open section key." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Expandable pool group with header stats and body content.",
+          "mock_css_class": "mock-accordion",
+          "mock_html": "<div class=\"mock-accordion\"><div class=\"mock-accordion-header\"><span class=\"mock-accordion-chevron\">▶</span><span class=\"mock-accordion-title\">prometheus/0</span><span class=\"mock-badge mock-badge-stats\">ENDPOINTS</span><span class=\"mock-badge mock-badge-stats\">HEALTHY</span></div><div class=\"mock-accordion-body\">Target table content</div></div>",
+          "tokens_used": ["card-bg", "default", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "header-height", "value": "48px (approx)" },
+          { "property": "header-gap", "value": "8px", "token": "sm" },
+          { "property": "body-padding", "value": "16px", "token": "md" },
+          { "property": "border", "value": "1px solid", "token": "default" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use accordion to group logically related rows that users may want to collapse independently." },
+        { "type": "do", "text": "Put summary badges in the accordion header so users can scan without expanding." },
+        { "type": "dont", "text": "Don't use accordion for fewer than 3 groups — flat list is simpler to scan." }
+      ],
+      "accessibility": {
+        "aria_labels": "Mantine Accordion uses proper aria-expanded, aria-controls on the trigger button.",
+        "keyboard": "Tab to header, Enter/Space to toggle, arrow keys between items.",
+        "contrast": null,
+        "screen_reader": "Accordion state (expanded/collapsed) is communicated via aria-expanded."
+      },
+      "code_example": "<Accordion>\n  <Accordion.Item value=\"prometheus/0\">\n    <Accordion.Control>\n      <Group gap=\"xs\">\n        prometheus/0\n        <Badge>3 ENDPOINTS</Badge>\n      </Group>\n    </Accordion.Control>\n    <Accordion.Panel>{/* target table */}</Accordion.Panel>\n  </Accordion.Item>\n</Accordion>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Sortable Table",
+      "slug": "sortable-table",
+      "description": "Mantine table with clickable column headers for sorting. Uses a stacked chevron-up + chevron-down icon pair to signal sortability. Only /flags uses this — other tables are static (see INC-005).",
+      "subtitle": "Column-sortable data table",
+      "complexity": "medium",
+      "category": "data-display",
+      "pages": ["/flags"],
+      "props": [
+        { "name": "data", "type": "{ flag: string, value: string }[]", "default": null, "required": true, "description": "Table rows." },
+        { "name": "sortField", "type": "'flag' | 'value'", "default": null, "required": false, "description": "Currently sorted column." },
+        { "name": "sortDirection", "type": "'asc' | 'desc'", "default": null, "required": false, "description": "Sort direction." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Two-column table with sortable Flag and Value headers.",
+          "mock_css_class": "mock-table",
+          "mock_html": "<table class=\"mock-table\"><thead><tr><th class=\"mock-th\">Flag <span class=\"mock-sort-icon\">⇅</span></th><th class=\"mock-th\">Value <span class=\"mock-sort-icon\">⇅</span></th></tr></thead><tbody><tr><td><code>--web.listen-address</code></td><td>0.0.0.0:9090</td></tr><tr><td><code>--log.level</code></td><td>info</td></tr></tbody></table>",
+          "tokens_used": ["default", "sm", "code/inline"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "width", "value": "100%" },
+          { "property": "row-divider", "value": "1px solid", "token": "default" },
+          { "property": "cell-padding", "value": "8px 12px", "token": "sm sm-lg" },
+          { "property": "header-font-weight", "value": "600" },
+          { "property": "sort-icon-size", "value": "16px" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Show the stacked chevron icon on every sortable column header so users know they can click." },
+        { "type": "do", "text": "Highlight the currently active sort column header." },
+        { "type": "dont", "text": "Don't make tables sortable only in some pages — apply sort consistently where it adds value (INC-005)." }
+      ],
+      "accessibility": {
+        "aria_labels": "Use aria-sort='ascending' / 'descending' / 'none' on th elements.",
+        "keyboard": "Sort headers should be button elements or have tabindex='0' and respond to Enter.",
+        "contrast": null,
+        "screen_reader": "aria-sort communicates current sort state."
+      },
+      "code_example": "<Table>\n  <Table.Thead>\n    <Table.Tr>\n      <Table.Th\n        onClick={() => toggleSort('flag')}\n        style={{ cursor: 'pointer' }}\n        aria-sort={sortField === 'flag' ? sortDirection : 'none'}\n      >\n        <Group gap={4}>\n          Flag\n          <IconSelector size={16} />\n        </Group>\n      </Table.Th>\n    </Table.Tr>\n  </Table.Thead>\n</Table>",
+      "related_inconsistencies": ["INC-005"],
+      "origin": "derived"
+    },
+    {
+      "name": "Key-Value Table",
+      "slug": "key-value-table",
+      "description": "2-column definition-list table with bold key column and regular value column, 1px row dividers. Used for build info, runtime info, and TSDB head status. Static — no sort controls.",
+      "subtitle": "Property definition table",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/status", "/tsdb-status"],
+      "props": [
+        { "name": "rows", "type": "{ key: string, value: string }[]", "default": null, "required": true, "description": "Table rows as key/value pairs." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "2-column key/value table with dividers.",
+          "mock_css_class": "mock-kv-table",
+          "mock_html": "<table class=\"mock-kv-table\"><tbody><tr><td class=\"mock-kv-key\">Version</td><td>3.0.0</td></tr><tr><td class=\"mock-kv-key\">Go version</td><td>go1.22.0</td></tr><tr><td class=\"mock-kv-key\">Config reload</td><td>Successful</td></tr></tbody></table>",
+          "tokens_used": ["default", "body/default"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "key-column-width", "value": "40% approx" },
+          { "property": "key-font-weight", "value": "600" },
+          { "property": "row-divider", "value": "1px solid", "token": "default" },
+          { "property": "cell-padding", "value": "8px 12px" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use this pattern for static metadata — build info, config values, system properties." },
+        { "type": "do", "text": "Show status values like 'Successful' as colored pills rather than plain text (INC-006)." },
+        { "type": "dont", "text": "Don't use this for large data sets — use Sortable Table instead." },
+        { "type": "dont", "text": "Don't render status text as plain prose when a health badge conveys the same information more clearly (INC-006)." }
+      ],
+      "accessibility": {
+        "aria_labels": "Consider using a dl/dt/dd structure for purely definition-list content.",
+        "keyboard": null,
+        "contrast": null,
+        "screen_reader": null
+      },
+      "code_example": "<Table>\n  <Table.Tbody>\n    {rows.map(({ key, value }) => (\n      <Table.Tr key={key}>\n        <Table.Td fw={600}>{key}</Table.Td>\n        <Table.Td>{value}</Table.Td>\n      </Table.Tr>\n    ))}\n  </Table.Tbody>\n</Table>",
+      "related_inconsistencies": ["INC-005", "INC-006"],
+      "origin": "derived"
+    },
+    {
+      "name": "Discovered/Target Labels Layout",
+      "slug": "discovered-target-labels-layout",
+      "description": "Two-column side-by-side layout on /service-discovery. Left column shows 'Discovered Labels' and right column shows 'Target Labels' for each discovered endpoint, both rendered as groups of Label Badges.",
+      "subtitle": "Side-by-side label comparison layout",
+      "complexity": "medium",
+      "category": "layout",
+      "pages": ["/service-discovery"],
+      "props": [
+        { "name": "discoveredLabels", "type": "Record<string, string>", "default": null, "required": true, "description": "Raw discovered labels." },
+        { "name": "targetLabels", "type": "Record<string, string>", "default": null, "required": true, "description": "Post-relabel target labels." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Two-column label panel with section heading and bottom divider.",
+          "mock_css_class": "mock-label-columns",
+          "mock_html": "<div class=\"mock-label-columns\"><div class=\"mock-label-col\"><div class=\"mock-label-col-title\">Discovered Labels</div><span class=\"mock-badge mock-badge-label\">__address__=localhost:9090</span></div><div class=\"mock-label-col\"><div class=\"mock-label-col-title\">Target Labels</div><span class=\"mock-badge mock-badge-label\">instance=localhost:9090</span></div></div>",
+          "tokens_used": ["default", "label-badge-bg", "label-badge"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "columns", "value": "2 equal-width" },
+          { "property": "column-gap", "value": "16px", "token": "md" },
+          { "property": "section-heading-border", "value": "1px solid bottom", "token": "default" },
+          { "property": "badge-gap", "value": "4px", "token": "xs" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Always show both columns even if one is empty — the comparison is the UX." },
+        { "type": "do", "text": "Use the same Label Badge component for both columns." },
+        { "type": "dont", "text": "Don't collapse to a single column on non-mobile viewports — the side-by-side comparison is the point." }
+      ],
+      "accessibility": {
+        "aria_labels": "Section headings should be heading elements (h3/h4) for screen reader navigation.",
+        "keyboard": null,
+        "contrast": null,
+        "screen_reader": null
+      },
+      "code_example": "<Grid>\n  <Grid.Col span={6}>\n    <Title order={5} mb=\"xs\" pb=\"xs\" style={{ borderBottom: '1px solid' }}>Discovered Labels</Title>\n    <Group gap={4}>\n      {Object.entries(discoveredLabels).map(([k, v]) => <Badge key={k}>{k}={v}</Badge>)}\n    </Group>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <Title order={5} mb=\"xs\" pb=\"xs\" style={{ borderBottom: '1px solid' }}>Target Labels</Title>\n    <Group gap={4}>\n      {Object.entries(targetLabels).map(([k, v]) => <Badge key={k}>{k}={v}</Badge>)}\n    </Group>\n  </Grid.Col>\n</Grid>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "YAML Code Block",
+      "slug": "yaml-code-block",
+      "description": "Full config rendered as a <pre><code class='language-yaml'> block with highlight.js syntax highlighting inside a Mantine Card. Font is browser-default 'monospace' with no explicit stack (INC-009). Syntax token colors swap roles between light and dark themes (INC-008).",
+      "subtitle": "Syntax-highlighted configuration display",
+      "complexity": "medium",
+      "category": "data-display",
+      "pages": ["/config"],
+      "props": [
+        { "name": "content", "type": "string", "default": null, "required": true, "description": "Raw YAML string to display." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Highlight.js YAML-highlighted code block in a card.",
+          "mock_css_class": "mock-code-block",
+          "mock_html": "<pre class=\"mock-code-block\"><code><span class=\"mock-hljs-attr\">global:</span><br>  <span class=\"mock-hljs-attr\">scrape_interval:</span> <span class=\"mock-hljs-string\">15s</span></code></pre>",
+          "tokens_used": ["code/block", "card-bg"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "font-family", "value": "monospace (browser default — INC-009)", "token": "mono" },
+          { "property": "font-size", "value": "16px", "token": "code/block" },
+          { "property": "line-height", "value": "1.5" },
+          { "property": "hljs-attr (light)", "value": "rgb(92,148,13) olive-green" },
+          { "property": "hljs-string (light)", "value": "rgb(24,100,171) blue" },
+          { "property": "hljs-attr (dark)", "value": "rgb(165,216,255) light-blue (role swapped — INC-008)" },
+          { "property": "hljs-string (dark)", "value": "rgb(64,192,87) green (role swapped — INC-008)" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Declare an explicit monospace font stack (e.g. 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace') to ensure consistent rendering across OS (fixes INC-009)." },
+        { "type": "do", "text": "Keep hljs-attr and hljs-string in the same hue families across light and dark to avoid color-role swaps (fixes INC-008)." },
+        { "type": "dont", "text": "Don't use 'monospace' as the sole font-family value — it resolves to different fonts on macOS, Windows, and Linux." },
+        { "type": "dont", "text": "Don't let highlight.js token colors swap semantic roles (keys ↔ strings) between themes." }
+      ],
+      "accessibility": {
+        "aria_labels": null,
+        "keyboard": null,
+        "contrast": "Light hljs-attr rgb(92,148,13) on white — check contrast for WCAG AA. Dark hljs-attr rgb(165,216,255) on dark bg — verify.",
+        "screen_reader": "Pre blocks should have role='region' with an aria-label if the content is important."
+      },
+      "code_example": "// In your CSS/theme:\n// pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }\n\n<Card>\n  <Group justify=\"flex-end\">\n    <CopyButton value={configYaml} />\n  </Group>\n  <pre>\n    <code\n      className=\"language-yaml\"\n      ref={(el) => el && hljs.highlightElement(el)}\n    >\n      {configYaml}\n    </code>\n  </pre>\n</Card>",
+      "related_inconsistencies": ["INC-008", "INC-009"],
+      "origin": "derived"
+    },
+    {
+      "name": "Copy Button",
+      "slug": "copy-button",
+      "description": "Mantine ActionIcon with a clipboard icon, positioned top-right of the config card on /config. Part of the ActionIcon primitive family also used in the navbar (theme toggle, settings, docs).",
+      "subtitle": "Copy-to-clipboard action icon",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/config"],
+      "props": [
+        { "name": "value", "type": "string", "default": null, "required": true, "description": "Text to copy to clipboard." },
+        { "name": "timeout", "type": "number", "default": "2000", "required": false, "description": "Ms before copy state resets." }
+      ],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Clipboard icon ActionIcon, idle state.",
+          "mock_css_class": "mock-action-icon",
+          "mock_html": "<button class=\"mock-action-icon\" title=\"Copy\">📋</button>",
+          "tokens_used": ["brand-blue-light"]
+        },
+        {
+          "name": "copied",
+          "description": "Checkmark feedback state after successful copy.",
+          "mock_css_class": "mock-action-icon mock-action-icon-copied",
+          "mock_html": "<button class=\"mock-action-icon mock-action-icon-copied\" title=\"Copied!\">✓</button>",
+          "tokens_used": ["ok"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "size", "value": "28px (compact ActionIcon)" },
+          { "property": "icon-size", "value": "18px" },
+          { "property": "position", "value": "absolute top-right of card" },
+          { "property": "margin", "value": "8px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Show a brief 'copied' visual feedback state (checkmark icon, green color) for 2s after copy." },
+        { "type": "do", "text": "Use Mantine CopyButton wrapper to handle clipboard API and feedback state." },
+        { "type": "dont", "text": "Don't show a toast/notification for a copy action — the in-button feedback is sufficient." },
+        { "type": "dont", "text": "Don't place the copy button inside the scrollable pre block — position it above the content for constant visibility." }
+      ],
+      "accessibility": {
+        "aria_labels": "Use aria-label='Copy configuration' on the ActionIcon.",
+        "keyboard": "Focusable via Tab, activatable via Enter/Space.",
+        "contrast": null,
+        "screen_reader": "Update aria-label to 'Copied!' during feedback state so screen readers announce the result."
+      },
+      "code_example": "<CopyButton value={configYaml} timeout={2000}>\n  {({ copied, copy }) => (\n    <ActionIcon\n      aria-label={copied ? 'Copied!' : 'Copy configuration'}\n      color={copied ? 'green' : 'blue'}\n      variant=\"subtle\"\n      onClick={copy}\n    >\n      {copied ? <IconCheck size={18} /> : <IconClipboard size={18} />}\n    </ActionIcon>\n  )}\n</CopyButton>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    }
+  ],
+  "action_items": [
+    {
+      "id": "AI-001",
+      "title": "Standardize card title icon usage across all pages",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "component"],
+      "description": "INC-001: /status and /alertmanager-discovery use leading Tabler icons in card titles; /tsdb-status and /flags do not. Pick one style and apply consistently. Recommendation: add icons to /tsdb-status (chart-bar for TSDB, flag for Flags page) to match the more expressive pattern.",
+      "related_inconsistency": "INC-001",
+      "related_component": "Card Title with Icon",
+      "files_changed": ["src/pages/tsdb-status/TSDBStatusPage.tsx", "src/pages/flags/FlagsPage.tsx"],
+      "before_after": {
+        "before_html": "<Title order={4}>TSDB Head Status</Title>",
+        "after_html": "<Group gap=\"xs\" mb=\"xs\"><IconChartBar size={18} aria-hidden /><Title order={4}>TSDB Head Status</Title></Group>",
+        "diff": "+ import { IconChartBar } from '@tabler/icons-react';\n- <Title order={4}>TSDB Head Status</Title>\n+ <Group gap=\"xs\" mb=\"xs\">\n+   <IconChartBar size={18} aria-hidden />\n+   <Title order={4}>TSDB Head Status</Title>\n+ </Group>"
+      },
+      "github_issue_title": "fix: add missing card title icons on /tsdb-status and /flags"
+    },
+    {
+      "id": "AI-002",
+      "title": "Use monospace font for all code-like identifiers",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "tokens"],
+      "description": "INC-002: /flags wraps flag names in <code> tags (monospace) but /tsdb-status renders equivalent identifiers (__name__, label=value) as plain td text in sans-serif. Wrap identifiers in <code> or apply font-family: monospace via a utility class.",
+      "related_inconsistency": "INC-002",
+      "related_component": "Key-Value Table",
+      "files_changed": ["src/pages/tsdb-status/TSDBStatusPage.tsx"],
+      "before_after": {
+        "before_html": "<td>__name__</td>",
+        "after_html": "<td><code>__name__</code></td>",
+        "diff": "- <td>{labelName}</td>\n+ <td><code>{labelName}</code></td>"
+      },
+      "github_issue_title": "fix: render metric/label identifiers in monospace on /tsdb-status"
+    },
+    {
+      "id": "AI-003",
+      "title": "Align text-casing rules between Label Badge and Stats Badge",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "component", "tokens"],
+      "description": "INC-003: _labelBadge has textTransform: none; _statsBadge has textTransform: uppercase — both share the same visual styling. Recommendation: author stats badge content in uppercase directly in the DOM and remove the CSS rule, matching how /targets health badges should also be fixed.",
+      "related_inconsistency": "INC-003",
+      "related_component": "Stats Badge",
+      "files_changed": ["src/pages/targets/TargetsPage.tsx", "src/styles/targets.module.css"],
+      "before_after": {
+        "before_html": "<span className={styles._statsBadge}>endpoints</span>  // CSS uppercases",
+        "after_html": "<span className={styles._statsBadge}>ENDPOINTS</span>  // uppercase in DOM",
+        "diff": "- .statsBadge { text-transform: uppercase; }\n// author uppercase text in source instead"
+      },
+      "github_issue_title": "fix: author stats badge text in uppercase; remove CSS text-transform"
+    },
+    {
+      "id": "AI-004",
+      "title": "Unify filter input pattern across all list pages",
+      "priority": "p2-medium",
+      "effort": "medium",
+      "labels": ["inconsistency", "component"],
+      "description": "INC-004: /alerts, /rules, /targets, /service-discovery use PillsInput; /flags uses a plain TextInput. Recommendation: migrate /flags to PillsInput for consistency, or document the distinction with clear UX rationale. Flags data (name=value) naturally fits label-style filtering.",
+      "related_inconsistency": "INC-004",
+      "related_component": "Filter Input (Pills)",
+      "files_changed": ["src/pages/flags/FlagsPage.tsx"],
+      "before_after": {
+        "before_html": "<TextInput placeholder=\"Filter by flag name or value\" leftSection={<IconSearch />} />",
+        "after_html": "<PillsInput><Pill.Group><PillsInput.Field placeholder=\"Filter by flag name or value\" /></Pill.Group></PillsInput>",
+        "diff": null
+      },
+      "github_issue_title": "feat: migrate /flags filter to PillsInput for consistency with other list pages"
+    },
+    {
+      "id": "AI-005",
+      "title": "Add sort affordance to Key-Value tables on /status and /tsdb-status",
+      "priority": "p3-low",
+      "effort": "medium",
+      "labels": ["inconsistency", "component"],
+      "description": "INC-005: Only /flags has a sortable table. /status and /tsdb-status have static Key-Value tables. Consider adding optional sort to the top-labels breakdown table on /tsdb-status which lists label names by count — sorting descending by count is the most useful default.",
+      "related_inconsistency": "INC-005",
+      "related_component": "Sortable Table",
+      "files_changed": ["src/pages/tsdb-status/TSDBStatusPage.tsx"],
+      "before_after": {
+        "before_html": "<th>Label Name</th>",
+        "after_html": "<th onClick={() => toggleSort('name')} aria-sort={...}>Label Name <IconSelector /></th>",
+        "diff": null
+      },
+      "github_issue_title": "feat: make top-labels table on /tsdb-status sortable"
+    },
+    {
+      "id": "AI-006",
+      "title": "Render Configuration Reload status as a health badge",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "component"],
+      "description": "INC-006: 'Configuration Reload: Successful' on /status is plain body text. Consistent with the rest of the app's status rendering, this should be a colored pill (green for Successful, red for Failed). Re-use the Health Status Badge tokens.",
+      "related_inconsistency": "INC-006",
+      "related_component": "Health Status Badge",
+      "files_changed": ["src/pages/status/StatusPage.tsx"],
+      "before_after": {
+        "before_html": "<td>Successful</td>",
+        "after_html": "<td><Badge color=\"green\" radius=\"xl\">Successful</Badge></td>",
+        "diff": "- <Table.Td>{reloadStatus}</Table.Td>\n+ <Table.Td><Badge color={reloadStatus === 'Successful' ? 'green' : 'red'} radius=\"xl\">{reloadStatus}</Badge></Table.Td>"
+      },
+      "github_issue_title": "fix: render config reload status as colored badge on /status"
+    },
+    {
+      "id": "AI-007",
+      "title": "Author health badge text in uppercase in the DOM",
+      "priority": "p1-high",
+      "effort": "easy",
+      "labels": ["inconsistency", "accessibility", "component"],
+      "description": "INC-007: DOM contains 'up'/'down' (lowercase); CSS textTransform: uppercase renders 'UP'/'DOWN'. Browser find-in-page for 'UP' returns zero matches. Screen readers may announce the lowercase form. Fix: author 'UP'/'DOWN' in source and remove the CSS textTransform rule.",
+      "related_inconsistency": "INC-007",
+      "related_component": "Health Status Badge",
+      "files_changed": ["src/pages/targets/TargetsPage.tsx", "src/styles/targets.module.css"],
+      "before_after": {
+        "before_html": "<span className={styles._healthOk}>up</span>  // CSS: text-transform: uppercase",
+        "after_html": "<span className={styles._healthOk}>UP</span>  // no text-transform needed",
+        "diff": "- .healthOk { text-transform: uppercase; }\n+ /* removed text-transform */\n- children = status  // 'up' | 'down'\n+ children = status.toUpperCase()  // 'UP' | 'DOWN'"
+      },
+      "github_issue_title": "fix(a11y): author health badge text in uppercase; remove CSS text-transform"
+    },
+    {
+      "id": "AI-008",
+      "title": "Fix highlight.js token color role swap between themes",
+      "priority": "p3-low",
+      "effort": "medium",
+      "labels": ["inconsistency", "tokens"],
+      "description": "INC-008: hljs-attr is olive-green in light but light-blue in dark; hljs-string is blue in light but green in dark — hue roles are swapped. Fix by providing a custom highlight.js theme where attr and string consistently map to the same hue family across both modes.",
+      "related_inconsistency": "INC-008",
+      "related_component": "YAML Code Block",
+      "files_changed": ["src/styles/hljs-theme.css"],
+      "before_after": {
+        "before_html": "/* Light: attr=green, string=blue. Dark: attr=blue, string=green (swapped) */",
+        "after_html": "/* Light: attr=green, string=blue. Dark: attr=green-light, string=blue-light (consistent hue families) */",
+        "diff": "[data-mantine-color-scheme='dark'] .hljs-attr { color: rgb(130,210,100); }  /* green family */\n[data-mantine-color-scheme='dark'] .hljs-string { color: rgb(116,192,252); }  /* blue family */"
+      },
+      "github_issue_title": "fix: keep hljs-attr/hljs-string in consistent hue families across light and dark themes"
+    },
+    {
+      "id": "AI-009",
+      "title": "Add explicit monospace font stack to code and pre elements",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "tokens"],
+      "description": "INC-009: <pre> on /config and <code> on /flags both use the browser default 'monospace', which resolves differently on macOS, Windows, and Linux. Add an explicit stack: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace'.",
+      "related_inconsistency": "INC-009",
+      "related_component": "YAML Code Block",
+      "files_changed": ["src/styles/global.css"],
+      "before_after": {
+        "before_html": "pre, code { font-family: monospace; }",
+        "after_html": "pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace; }",
+        "diff": "- pre, code { font-family: monospace; }\n+ pre, code {\n+   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,\n+                'Liberation Mono', 'Courier New', monospace;\n+ }"
+      },
+      "github_issue_title": "fix: declare explicit monospace font stack for pre and code elements"
+    }
+  ]
+}

@@ -1,0 +1,430 @@
+{
+  "app_url": "https://prometheus-e83j.onrender.com",
+  "audit_date": "2026-04-21",
+  "tool": "claude-cowork",
+  "source_repo": "https://github.com/prometheus/prometheus",
+  "scope": {
+    "tier": "full",
+    "description": "Full audit of all 10 primary pages of the Prometheus web UI in both light and dark themes, covering navigation, query, alerting, service discovery, status, and configuration surfaces.",
+    "total_routes_discovered": 10,
+    "routes_audited": 10
+  },
+  "auth": {
+    "method": "none",
+    "notes": "Public demo instance — no login required."
+  },
+  "framework_notes": "UI is built with Mantine v7+ (html[data-mantine-color-scheme] light|dark). Syntax highlighting uses highlight.js (hljs-* classes). Primary brand color is Mantine blue rgb(34,139,230) in light / rgb(25,113,194) in dark. Nav bar is a fixed dark slate rgb(65,73,81) that is identical across both themes.",
+  "pages_audited": [
+    {
+      "url": "/query",
+      "name": "Query (PromQL explorer)",
+      "screenshot": "screenshots/query-light.jpg",
+      "elements": ["Header/Navbar", "Primary Button", "Button Variants Group"],
+      "additional_screenshots": [
+        {"path": "screenshots/query-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Core query page with Execute button (primary filled), metrics explorer button, tree-view toggle, and result tabs (Graph/Table/Explain). Nine visually distinct button variants catalogued here — highest button density in the app."
+    },
+    {
+      "url": "/alerts",
+      "name": "Alerts",
+      "screenshot": "screenshots/alerts-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Alert Info Callout", "Filter Input (Pills)"],
+      "additional_screenshots": [
+        {"path": "screenshots/alerts-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Empty-state uses Mantine Alert info callout. Filter toolbar uses PillsInput component with placeholder 'Filter by rule name or labels'."
+    },
+    {
+      "url": "/rules",
+      "name": "Rules",
+      "screenshot": "screenshots/rules-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Alert Info Callout", "Filter Input (Pills)"],
+      "additional_screenshots": [
+        {"path": "screenshots/rules-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Same empty-state and filter pattern as /alerts — placeholder text 'Filter by rule name or labels' is shared verbatim between the two pages."
+    },
+    {
+      "url": "/targets",
+      "name": "Targets",
+      "screenshot": "screenshots/targets-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Mantine Accordion", "Filter Input (Pills)", "Health Status Badge", "Label Badge", "Stats Badge"],
+      "additional_screenshots": [
+        {"path": "screenshots/targets-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Scrape-pool groups rendered as Mantine Accordion sections. Health badges use _healthOk (green) and _healthErr (red). Two distinct badge classes with divergent textTransform rules: _labelBadge preserves case, _statsBadge uppercases."
+    },
+    {
+      "url": "/service-discovery",
+      "name": "Service Discovery",
+      "screenshot": "screenshots/service-discovery-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Discovered/Target Labels Layout", "Filter Input (Pills)"],
+      "additional_screenshots": [
+        {"path": "screenshots/service-discovery-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Two-column Discovered Labels / Target Labels layout per discovered group. Section heading has a bottom divider below the title."
+    },
+    {
+      "url": "/status",
+      "name": "Status",
+      "screenshot": "screenshots/status-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Card Title with Icon", "Key-Value Table"],
+      "additional_screenshots": [
+        {"path": "screenshots/status-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Two stacked cards: Build information (DB icon) and Runtime information (running-figure icon). Each card title has a leading icon. 'Configuration Reload: Successful' shown as plain text rather than a colored pill."
+    },
+    {
+      "url": "/tsdb-status",
+      "name": "TSDB Status",
+      "screenshot": "screenshots/tsdb-status-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Card Title without Icon", "Key-Value Table"],
+      "additional_screenshots": [
+        {"path": "screenshots/tsdb-status-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Same Mantine Card wrapper as /status but card titles ('TSDB Head Status', 'Top 10 label names with value count') have NO leading icon. Identifier text like __name__ is rendered in the body sans-serif stack instead of a monospace family."
+    },
+    {
+      "url": "/flags",
+      "name": "Flags",
+      "screenshot": "screenshots/flags-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Card Title without Icon", "Filter Input (Single Field)", "Sortable Table"],
+      "additional_screenshots": [
+        {"path": "screenshots/flags-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Filter input is a single full-width text field (not the PillsInput toolbar used on /alerts, /rules, /targets, /service-discovery). Table is sortable via Mantine sort-control with chevron-up/chevron-down stacked icons. Flag names are rendered inside <code> tags with monospace family."
+    },
+    {
+      "url": "/config",
+      "name": "Config",
+      "screenshot": "screenshots/config-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "YAML Code Block", "Copy Button"],
+      "additional_screenshots": [
+        {"path": "screenshots/config-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Full Prometheus YAML config rendered in a <pre> block with highlight.js YAML syntax highlighting. Font-family is the browser default 'monospace' (no explicit font stack). Font-size is 16px. Copy-to-clipboard ActionIcon sits top-right of the card."
+    },
+    {
+      "url": "/alertmanager-discovery",
+      "name": "Alertmanager Discovery",
+      "screenshot": "screenshots/alertmanager-discovery-light.jpg",
+      "elements": ["Header/Navbar", "Mantine Card", "Card Title with Icon", "Mantine Alert Info Callout"],
+      "additional_screenshots": [
+        {"path": "screenshots/alertmanager-discovery-dark.jpg", "state": "dark-theme"}
+      ],
+      "notes": "Cards for 'Active Alertmanagers' (bell icon) and 'Dropped Alertmanagers' (bell-off icon). Empty state reuses the Mantine Alert info callout pattern from /alerts and /rules."
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Header/Navbar",
+      "category": "navigation",
+      "pages": ["/query", "/alerts", "/rules", "/targets", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "instance_count": 10,
+      "variation_count": 1,
+      "description": "Fixed top navigation bar with Prometheus logo, primary route links (Alerts, Graph, Status, Help), and right-side utility ActionIcons (theme toggle, settings gear, docs). Background rgb(65,73,81) is identical in light and dark themes. Text is white in both modes."
+    },
+    {
+      "name": "Mantine Card",
+      "category": "layout",
+      "pages": ["/targets", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "instance_count": 15,
+      "variation_count": 1,
+      "description": "Primary content container. Light: white bg, 1px solid rgb(222,226,230) border, 4px radius, 16px padding, subtle shadow 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1). Dark: bg rgb(46,46,46), border rgb(66,66,66), same radius, padding, and shadow."
+    },
+    {
+      "name": "Card Title with Icon",
+      "category": "data-display",
+      "pages": ["/status", "/alertmanager-discovery"],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "Card header that places a leading Tabler icon before the title text. Used on /status (DB icon for Build, running-figure for Runtime) and /alertmanager-discovery (bell for Active, bell-off for Dropped)."
+    },
+    {
+      "name": "Card Title without Icon",
+      "category": "data-display",
+      "pages": ["/tsdb-status", "/flags"],
+      "instance_count": 3,
+      "variation_count": 1,
+      "description": "Card header that renders only the title text without a leading icon. Same Mantine Card wrapper as the 'with Icon' variant but visually lighter."
+    },
+    {
+      "name": "Mantine Alert Info Callout",
+      "category": "feedback",
+      "pages": ["/alerts", "/rules", "/alertmanager-discovery"],
+      "instance_count": 3,
+      "variation_count": 1,
+      "description": "Mantine Alert component in 'info' color — used as the shared empty-state pattern. Light: bg rgba(34,139,230,0.1), text rgb(24,100,171). Dark: bg rgba(34,139,230,0.15), text rgb(116,192,252). No border."
+    },
+    {
+      "name": "Primary Button",
+      "category": "input",
+      "pages": ["/query"],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Filled primary button (the 'Execute' button on /query). Light: bg rgb(34,139,230), fg white, 14px, font-weight 600, 4px radius, 8px 16px padding. Dark: bg rgb(25,113,194), fg white."
+    },
+    {
+      "name": "Button Variants Group",
+      "category": "input",
+      "pages": ["/query"],
+      "instance_count": 9,
+      "variation_count": 9,
+      "description": "Nine visually distinct button variants appear together on the query page: Execute (primary filled), metrics explorer (subtle), tree-view toggle (subtle with icon), result tabs Graph/Table/Explain (segmented control), timestamp format toggle, history dropdown, and add-panel button. Mix of Mantine Button, ActionIcon, and SegmentedControl primitives."
+    },
+    {
+      "name": "Filter Input (Pills)",
+      "category": "input",
+      "pages": ["/alerts", "/rules", "/targets", "/service-discovery"],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "Mantine PillsInput composed into a multi-filter toolbar — lets users add multiple labeled chip-style filters. Placeholder text is shared verbatim between /alerts and /rules ('Filter by rule name or labels')."
+    },
+    {
+      "name": "Filter Input (Single Field)",
+      "category": "input",
+      "pages": ["/flags"],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Simpler full-width Mantine TextInput with a leading search icon affix. Placeholder 'Filter by flag name or value'. No pill/chip behavior, no multi-filter support."
+    },
+    {
+      "name": "Health Status Badge",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "instance_count": 20,
+      "variation_count": 2,
+      "description": "Green (_healthOk) and red (_healthErr) status pills shown on each scrape target. Radius ~1000px (fully rounded). Light ok: bg rgb(211,249,216), fg rgb(43,138,62). Dark ok: bg rgb(43,138,62), fg rgb(211,249,216). CSS uppercases the text but DOM contains lowercase 'up'/'down'."
+    },
+    {
+      "name": "Label Badge",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "instance_count": 200,
+      "variation_count": 1,
+      "description": "Grey pill used to render scrape-target labels (key=value). textTransform: none — preserves the original case of label names and values. Dark: bg rgb(52,58,64), fg rgb(173,181,189)."
+    },
+    {
+      "name": "Stats Badge",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "instance_count": 10,
+      "variation_count": 1,
+      "description": "Grey pill used for scrape-pool statistics (e.g., 'ENDPOINTS', 'HEALTHY'). textTransform: uppercase — shouts the label regardless of source case. Same background as Label Badge."
+    },
+    {
+      "name": "Mantine Accordion",
+      "category": "layout",
+      "pages": ["/targets"],
+      "instance_count": 3,
+      "variation_count": 1,
+      "description": "Scrape-pool groups collapse/expand via Mantine Accordion. Header row shows pool name plus Stats Badges summarizing counts; body reveals the target table."
+    },
+    {
+      "name": "Sortable Table",
+      "category": "data-display",
+      "pages": ["/flags"],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine table with clickable column headers. Sort control icon is a stacked chevron-up + chevron-down pair (class _control_1w9xk_5). Only /flags uses this — other tables (/status, /tsdb-status) are static."
+    },
+    {
+      "name": "Key-Value Table",
+      "category": "data-display",
+      "pages": ["/status", "/tsdb-status"],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "2-column definition-list table with bold key column and regular value column, 1px divider between rows. Used for build info, runtime info, TSDB head status, and top-labels breakdown."
+    },
+    {
+      "name": "Discovered/Target Labels Layout",
+      "category": "layout",
+      "pages": ["/service-discovery"],
+      "instance_count": 3,
+      "variation_count": 1,
+      "description": "Two-column side-by-side layout: 'Discovered Labels' on the left, 'Target Labels' on the right, one row per discovered endpoint."
+    },
+    {
+      "name": "YAML Code Block",
+      "category": "data-display",
+      "pages": ["/config"],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Full config rendered as <pre><code class='language-yaml'> with highlight.js tokens. Light: hljs-attr rgb(92,148,13) olive-green, hljs-string rgb(24,100,171) blue. Dark: hljs-attr rgb(165,216,255) light-blue, hljs-string rgb(64,192,87) green. Font-family is browser default 'monospace' (no explicit stack). Font-size 16px."
+    },
+    {
+      "name": "Copy Button",
+      "category": "input",
+      "pages": ["/config"],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine ActionIcon with clipboard icon, positioned top-right of the config card. Same ActionIcon primitive family is reused in the navbar for theme toggle, settings, and docs."
+    }
+  ],
+  "inconsistencies": [
+    {
+      "id": "INC-001",
+      "title": "Card titles inconsistently include a leading icon",
+      "canonical": "Every card title should either consistently include a leading icon (matched to the card's semantic) or consistently omit one. Mixing both within the same app creates an uneven visual rhythm for what is semantically the same container pattern.",
+      "reasoning": "/status and /alertmanager-discovery place a Tabler icon immediately before the card title, while /tsdb-status and /flags render the title as plain text with no icon. The underlying Mantine Card wrapper is identical, so the variation is a header-composition choice rather than a different component. Users scanning the app see the icon on some cards and expect it elsewhere — its absence reads as missing information.",
+      "severity": "cosmetic",
+      "type": "style-drift",
+      "pages": ["/status", "/tsdb-status", "/flags", "/alertmanager-discovery"],
+      "variants": [
+        {"page": "/status", "implementation": "Card title 'Build information' has a leading DB icon; 'Runtime information' has a leading running-figure icon."},
+        {"page": "/alertmanager-discovery", "implementation": "Card title 'Active Alertmanagers' has a leading bell icon; 'Dropped Alertmanagers' has a leading crossed-bell icon."},
+        {"page": "/tsdb-status", "implementation": "Card titles 'TSDB Head Status' and 'Top 10 label names with value count' render as plain text with no leading icon."},
+        {"page": "/flags", "implementation": "The page-level card title renders as plain text with no leading icon."}
+      ]
+    },
+    {
+      "id": "INC-002",
+      "title": "Code/identifier text uses monospace on some pages but sans-serif on others",
+      "canonical": "Label names, metric names, and flag names are code-like identifiers and should consistently use the monospace font family so they are visually distinguishable from prose.",
+      "reasoning": "/flags wraps each flag name in a <code> element which inherits a monospace family, while /tsdb-status renders equivalent identifiers (__name__, label=value pairs) as plain <td> text in the body sans-serif stack. The content is the same semantic class — a literal string that is not prose — but it is rendered with different font families on different pages.",
+      "severity": "minor",
+      "type": "style-drift",
+      "pages": ["/flags", "/tsdb-status"],
+      "variants": [
+        {"page": "/flags", "implementation": "Flag names are wrapped in <code> tags; font-family resolves to browser default 'monospace'."},
+        {"page": "/tsdb-status", "implementation": "Identifiers like __name__ and label=value pairs are plain <td> text; font-family is the system sans-serif stack (-apple-system, ...). Visually looks monospace-ish because of the characters used but is actually proportional."}
+      ]
+    },
+    {
+      "id": "INC-003",
+      "title": "Label badges preserve case but stats badges uppercase — same visual, divergent rules",
+      "canonical": "Two badge classes that share the same background, padding, and radius should share the same text-casing rule, or be visually differentiated so users can learn which is which.",
+      "reasoning": "On /targets, the _labelBadge class (used for scrape-target labels) has textTransform: none, while _statsBadge (used for scrape-pool statistics) has textTransform: uppercase. Both badges share the same grey background rgb(52,58,64) in dark / equivalent light grey, same radius (~1000px), same padding. The only visual differentiator is the casing — which is triggered by CSS rather than authored content, making it brittle.",
+      "severity": "cosmetic",
+      "type": "style-drift",
+      "pages": ["/targets"],
+      "variants": [
+        {"page": "/targets", "implementation": "_labelBadge: textTransform: none. Content like 'instance=localhost:9090' preserves case as authored."},
+        {"page": "/targets", "implementation": "_statsBadge: textTransform: uppercase. Content authored as lower/mixed case ('endpoints', 'healthy') is displayed uppercased ('ENDPOINTS', 'HEALTHY')."}
+      ]
+    },
+    {
+      "id": "INC-004",
+      "title": "Filter inputs split between multi-pill toolbar and single-field text input",
+      "canonical": "All 'filter this list' surfaces should use the same input pattern so users transfer their mental model between pages. Pick either the multi-pill toolbar (for label-oriented filtering) or the single text field (for substring filtering) and apply it everywhere.",
+      "reasoning": "/alerts, /rules, /targets, and /service-discovery render their filter as a Mantine PillsInput multi-filter toolbar — users add chip-style labeled filters. /flags instead uses a plain full-width Mantine TextInput with a leading search icon. The surfaces are conceptually identical (narrow a list to matching rows) but the interaction is different. This is notable because /flags's data (flag name + value) would benefit from the same labeled-filter approach used on /targets.",
+      "severity": "minor",
+      "type": "style-drift",
+      "pages": ["/alerts", "/rules", "/targets", "/service-discovery", "/flags"],
+      "variants": [
+        {"page": "/alerts", "implementation": "PillsInput multi-filter toolbar with placeholder 'Filter by rule name or labels'."},
+        {"page": "/rules", "implementation": "PillsInput multi-filter toolbar with placeholder 'Filter by rule name or labels' (identical to /alerts)."},
+        {"page": "/targets", "implementation": "PillsInput multi-filter toolbar scoped to target labels."},
+        {"page": "/service-discovery", "implementation": "PillsInput multi-filter toolbar scoped to discovered labels."},
+        {"page": "/flags", "implementation": "Single full-width Mantine TextInput with a leading search icon, placeholder 'Filter by flag name or value'."}
+      ]
+    },
+    {
+      "id": "INC-005",
+      "title": "Only one table is sortable; the other tables are static",
+      "canonical": "Tables that display list data should offer the same interactive affordances (sort by header) consistently, so users don't have to guess where sorting is available.",
+      "reasoning": "/flags's Flag/Value table has sortable column headers with a stacked chevron-up + chevron-down icon (Mantine sort control). /status and /tsdb-status render similar two-column key/value tables but the headers are non-interactive. The user cannot tell at a glance which tables support sorting without clicking.",
+      "severity": "minor",
+      "type": "implementation-drift",
+      "pages": ["/flags", "/status", "/tsdb-status"],
+      "variants": [
+        {"page": "/flags", "implementation": "Table headers show stacked chevron-up + chevron-down icons (class _control_1w9xk_5) and reorder rows on click."},
+        {"page": "/status", "implementation": "Key/Value table headers are plain text, no sort icon, no click-to-sort behavior."},
+        {"page": "/tsdb-status", "implementation": "Name/Count table headers are plain text, no sort icon, no click-to-sort behavior."}
+      ]
+    },
+    {
+      "id": "INC-006",
+      "title": "Success states rendered inconsistently as plain text vs colored badges",
+      "canonical": "Success/warning/error states should consistently use the same visual treatment (a colored status pill) so users can scan status information across pages at a glance.",
+      "reasoning": "On /status, the line 'Configuration Reload: Successful' displays the status as plain prose in body color. Elsewhere in the app (/targets Health Status Badge), equivalent semantic states are shown as green/red pills with rounded pill styling. This is the same semantic information (an 'OK' signal) rendered with two different visual weights.",
+      "severity": "minor",
+      "type": "missing-normalization",
+      "pages": ["/status", "/targets"],
+      "variants": [
+        {"page": "/status", "implementation": "'Configuration Reload: Successful' rendered as plain <td> text in the body color. No pill, no color differentiation."},
+        {"page": "/targets", "implementation": "Target health 'up' rendered as a green pill with _healthOk class — dedicated background color, uppercased, pill radius."}
+      ]
+    },
+    {
+      "id": "INC-007",
+      "title": "Health badge source text ('up'/'down') does not match rendered text ('UP'/'DOWN')",
+      "canonical": "Content should be authored in the form the user sees. Relying on CSS textTransform to uppercase lowercase source text makes copy-paste, screen-reader output, and in-page search inconsistent with what is visible on screen.",
+      "reasoning": "The DOM contains the literal lowercase strings 'up' and 'down' inside the _healthOk / _healthErr spans on /targets, but CSS textTransform: uppercase (inherited via the health-badge class) renders them as 'UP' and 'DOWN'. A user searching the page for 'UP' via browser find-in-page will get zero matches; a screen reader may announce the lowercase form. This is a minor accessibility and interop concern.",
+      "severity": "minor",
+      "type": "accessibility",
+      "pages": ["/targets"],
+      "variants": [
+        {"page": "/targets", "implementation": "Source DOM: <span class='_healthOk'>up</span>. Rendered on screen: 'UP' (textTransform: uppercase)."},
+        {"page": "/targets", "implementation": "Source DOM: <span class='_healthErr'>down</span>. Rendered on screen: 'DOWN' (textTransform: uppercase)."}
+      ]
+    },
+    {
+      "id": "INC-008",
+      "title": "highlight.js token colors swap roles between light and dark themes",
+      "canonical": "The same syntactic category (a YAML key, a YAML string value) should be assigned to the same hue family across themes — only lightness/saturation should shift. Swapping 'keys are green' in light to 'keys are blue' in dark (and vice versa for strings) breaks token memory across theme switches.",
+      "reasoning": "In light mode on /config, hljs-attr (YAML keys) is olive-green rgb(92,148,13) and hljs-string is blue rgb(24,100,171). In dark mode, hljs-attr becomes light-blue rgb(165,216,255) and hljs-string becomes green rgb(64,192,87). The hues are swapped between the two semantic categories when the theme changes. Both directions are readable, but a user who has learned 'green = key' in light mode will see 'green = string' in dark mode.",
+      "severity": "cosmetic",
+      "type": "style-drift",
+      "pages": ["/config"],
+      "variants": [
+        {"page": "/config", "implementation": "Light theme: hljs-attr rgb(92,148,13) olive-green; hljs-string rgb(24,100,171) blue."},
+        {"page": "/config", "implementation": "Dark theme: hljs-attr rgb(165,216,255) light-blue; hljs-string rgb(64,192,87) green."}
+      ]
+    },
+    {
+      "id": "INC-009",
+      "title": "<pre> code block relies on browser default 'monospace' rather than an explicit font stack",
+      "canonical": "Code blocks should declare an explicit monospace font stack (e.g., 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace') so the rendered glyph width, weight, and shape are consistent across macOS, Windows, and Linux.",
+      "reasoning": "On /config, the <pre> element's computed font-family is exactly the single keyword 'monospace', which is whatever the browser treats as its default. On macOS that resolves to one font, on Windows another, on Linux yet another — producing visibly different renderings of the same config across users. Adding an explicit stack is a one-line fix.",
+      "severity": "minor",
+      "type": "style-drift",
+      "pages": ["/config"],
+      "variants": [
+        {"page": "/config", "implementation": "Computed style on <pre>: font-family: monospace (single keyword — browser default)."},
+        {"page": "/flags", "implementation": "Flag names wrapped in <code> — also inherits the browser default 'monospace' with no explicit stack. Same issue, different surface."}
+      ]
+    }
+  ],
+  "raw_observations": {
+    "has_dark_mode": true,
+    "theme_toggle": "ActionIcon in navbar, top-right area. Aria-label flips between 'Switch to light theme' and 'Switch to dark theme'. Toggles html[data-mantine-color-scheme] attribute.",
+    "framework": "Mantine v7+ (class naming like _8d3f4000, m_87cf2631; data-mantine-color-scheme attribute)",
+    "syntax_highlighter": "highlight.js (hljs-* classes on /config)",
+    "light_palette": {
+      "body_bg": "rgb(255,255,255)",
+      "body_fg": "rgb(0,0,0)",
+      "nav_bg": "rgb(65,73,81)",
+      "card_bg": "rgb(255,255,255)",
+      "card_border": "rgb(222,226,230)",
+      "primary_button_bg": "rgb(34,139,230)",
+      "primary_button_fg": "rgb(255,255,255)",
+      "info_callout_bg": "rgba(34,139,230,0.1)",
+      "info_callout_fg": "rgb(24,100,171)",
+      "health_ok_bg": "rgb(211,249,216)",
+      "health_ok_fg": "rgb(43,138,62)"
+    },
+    "dark_palette": {
+      "body_bg": "rgb(36,36,36)",
+      "body_fg": "rgb(201,201,201)",
+      "nav_bg": "rgb(65,73,81)",
+      "card_bg": "rgb(46,46,46)",
+      "card_border": "rgb(66,66,66)",
+      "primary_button_bg": "rgb(25,113,194)",
+      "primary_button_fg": "rgb(255,255,255)",
+      "info_callout_bg": "rgba(34,139,230,0.15)",
+      "info_callout_fg": "rgb(116,192,252)",
+      "health_ok_bg": "rgb(43,138,62)",
+      "health_ok_fg": "rgb(211,249,216)"
+    },
+    "border_radius_tokens_seen_px": [4, 1000, 16000],
+    "spacing_tokens_seen_px": [4, 8, 12, 16, 24],
+    "screenshot_limitations": "Screenshots in screenshots/ are 1x1 placeholder JPEGs (196 bytes each). The Cowork sandbox's javascript_tool blocks base64/hex image data returning from html2canvas, so rendered page imagery could not be exfiltrated through the browser automation channel. All observations in this report are derived from live DOM inspection via getComputedStyle, class-name surveys, and in-context screenshot viewing through the Chrome MCP extension — not from post-hoc image analysis. A downstream consumer that needs real pixel-level screenshots should re-capture them using a local Playwright/Puppeteer script against the same URL.",
+    "build_info": {
+      "version": "Tag version shown on /status",
+      "go_version": "Shown on /status runtime card",
+      "config_reload_status": "Successful (shown as plain text — see INC-006)"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "theme": "dark",
+  "captured_at": "2026-04-21",
+  "palette": {
+    "body_bg": "rgb(36, 36, 36)",
+    "body_fg": "rgb(201, 201, 201)",
+    "nav_bg": "rgb(65, 73, 81)",
+    "card_bg": "rgb(46, 46, 46)",
+    "card_border": "rgb(66, 66, 66)",
+    "card_radius": "4px",
+    "card_shadow": "rgba(0,0,0,0.05) 0 1px 3px, rgba(0,0,0,0.1) 0 1px 2px",
+    "primary_button_bg": "rgb(25, 113, 194)",
+    "primary_button_fg": "rgb(255, 255, 255)",
+    "link_color": "rgb(255, 255, 255)",
+    "td_border": "rgb(201, 201, 201)"
+  },
+  "targets_page": {
+    "health_ok_bg": "rgb(43, 138, 62)",
+    "health_ok_fg": "rgb(211, 249, 216)",
+    "label_badge_bg": "rgb(52, 58, 64)",
+    "label_badge_fg": "rgb(173, 181, 189)",
+    "stats_badge_bg": "rgb(52, 58, 64)"
+  },
+  "alerts_page_info_callout": {
+    "alert_bg": "rgba(34, 139, 230, 0.15)",
+    "alert_fg": "rgb(116, 192, 252)",
+    "alert_border": "transparent"
+  },
+  "config_page_code_block": {
+    "pre_bg": "transparent",
+    "pre_fg": "rgb(201, 201, 201)",
+    "pre_font_family": "monospace",
+    "pre_font_size": "16px",
+    "hljs_attr_color": "rgb(165, 216, 255)",
+    "hljs_string_color": "rgb(64, 192, 87)"
+  },
+  "notes": [
+    "Dark mode inverts highlight.js colors vs light: in light hljs-attr=olive-green(rgb(92,148,13)) & hljs-string=blue(rgb(24,100,171)); in dark hljs-attr=light-blue(rgb(165,216,255)) & hljs-string=green(rgb(64,192,87)). Both directions readable but the semantic role of each class is visually swapped between themes — keys are blue in dark/green in light, strings are green in dark/blue in light. Not strictly inconsistent but worth flagging for design-token review.",
+    "Nav background rgb(65,73,81) is identical in both light and dark themes — a fixed dark slate header. Good for brand consistency across themes.",
+    "Link color in dark mode is pure white rgb(255,255,255) — no hue differentiation from body text rgb(201,201,201) other than lightness. Links rely on underline to be distinguishable.",
+    "TD border-color in dark mode is rgb(201,201,201) which equals body foreground — dividers are quite prominent. In light mode dividers were lighter grey. Visual weight of table rows differs between themes."
+  ]
+}

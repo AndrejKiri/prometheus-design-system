@@ -1,0 +1,11 @@
+{
+  "url": "/status",
+  "theme": "light",
+  "elements": ["header/navbar", "card (white bg, 4px radius, 1px grey border) with section heading (icon + title)", "definition-list key/value table (key bold, value regular, 1px divider between rows)"],
+  "notes": [
+    "Two stacked cards: 'Build information' and 'Runtime information'. Each renders as a card with icon-title header and a dense 2-col key/value table.",
+    "Value column includes untypographed raw strings (revisions, hashes, go versions). No code/mono font used.",
+    "Date/time values shown as ISO 8601 ('2026-04-05T20:00:28Z') — consistency check against other pages.",
+    "'Configuration Reload: Successful' shown as plain text — other pages might show status pills for similar semantics. Potential normalization opportunity."
+  ]
+}

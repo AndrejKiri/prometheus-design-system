@@ -1,0 +1,10 @@
+{
+  "url": "/flags",
+  "theme": "light",
+  "elements": ["header/navbar", "Mantine Card wrapper (same as /status, /tsdb-status)", "Filter text input (full-width, with leading search icon) placeholder 'Filter by flag name or value'", "Sortable table (Flag | Value) — headers have chevron-up/chevron-down sort icons", "<code> element wrapping flag names (browser default monospace)"],
+  "notes": [
+    "TYPOGRAPHY INCONSISTENCY: /flags renders flag names inside <code> tag (monospace family). /tsdb-status renders label names like '__name__' as plain <td> text in sans-serif. Same semantic content type (code/identifier), different treatment.",
+    "Sortable header pattern uses Mantine sort control _control_1w9xk_5 with chevron-up + chevron-down icons stacked. Other pages don't use sortable tables consistently — /status and /tsdb-status tables are non-sortable.",
+    "Filter input on this page is FULL-WIDTH (spans the card) with just the search-icon leading affix. Other filter inputs on /targets, /service-discovery, /alerts are segmented (multi-filter toolbar). This page uses a simpler single-field filter."
+  ]
+}

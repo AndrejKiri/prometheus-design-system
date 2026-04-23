@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changelog — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Changelog</h1>
+<p class="doc-subtitle">Version history of the Prometheus Design System</p>
+
+<h2 id="v1-0-0">v1.0.0 — 2026-04-22</h2>
+<p>Initial extraction from <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p>
+<ul style="margin-left:16px;font-size:13px">
+<li>Phase 1 visual audit: 10 pages, 18 patterns, 9 inconsistencies (claude-cowork)</li>
+<li>Phase 2: token extraction — colors, spacing, typography, radius, elevation, icons</li>
+<li>Phase 3: component extraction — 18 components with variants, specs, a11y, code examples</li>
+<li>Phase 4: docs site — static HTML/CSS/JS, light + dark theme, mobile-responsive</li>
+<li>Phase 5: Figma plugin — bootstraps color variables and text styles</li>
+</ul>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

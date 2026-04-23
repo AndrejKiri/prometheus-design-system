@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Filter Input (Pills) — Prometheus Design System</title>
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="../index.html" class="doc-nav-link">Home</a>
+      <a href="../tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="../icons.html" class="doc-nav-link">Icons</a>
+      <a href="../patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="../components.html" class="doc-nav-link">All Components</a>
+      <a href="../components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="../components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="../components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="../components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="../components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="../components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="../components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="../components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="../components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="../components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="../components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="../components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="../components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="../components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="../components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="../components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="../components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="../components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="../action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="../inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="../audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="../figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="../changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Filter Input (Pills)</h1>
+<p class="doc-subtitle">Multi-chip filter toolbar</p>
+
+<div class="do-dont-grid"><div class="do-item"><strong>✓ Do</strong>Use this for list pages where users need to filter by multiple label dimensions simultaneously.</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use this where a simple text match is sufficient — consider the single-field filter instead (INC-004).</div><div class="do-item"><strong>✓ Do</strong>Keep placeholder text descriptive of what can be filtered (e.g. &#x27;Filter by rule name or labels&#x27;).</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use the same placeholder on different pages if the filterable fields differ.</div></div>
+
+<h2 id="description">Description</h2>
+<p>Multi-filter toolbar built with Mantine PillsInput that lets users add multiple chip-style labeled filters. Used across four pages for label-oriented filtering. Placeholder text is shared verbatim between /alerts and /rules.</p>
+<p><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span>&nbsp;<span class="doc-badge doc-badge-gray">/alerts</span>&nbsp;<span class="doc-badge doc-badge-gray">/rules</span>&nbsp;<span class="doc-badge doc-badge-gray">/targets</span>&nbsp;<span class="doc-badge doc-badge-gray">/service-discovery</span></p>
+<p style='font-size:13px'>Related inconsistencies: <a href="../inconsistencies.html#inc-004">INC-004</a></p>
+
+<h2 id="design">Design variants</h2>
+<h3>default</h3>
+<p style="font-size:13px;color:var(--doc-text-secondary)">Empty filter bar with placeholder.</p>
+<div class="mock-preview"><div class="mock-filter-pills"><span class="mock-pill">instance=localhost:9090 ✕</span><input class="mock-filter-input" placeholder="Add filter…" /></div></div>
+<p style='font-size:11px;color:var(--doc-text-secondary)'>Tokens: <code>default, sm, label-badge-bg</code></p>
+
+<details>
+<summary>Component Reference — screenshots &amp; live links</summary>
+<div class="details-body"><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/alerts — <a href="https://prometheus-e83j.onrender.com/alerts" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/alerts-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/alerts-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/rules — <a href="https://prometheus-e83j.onrender.com/rules" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/rules-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/rules-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/targets — <a href="https://prometheus-e83j.onrender.com/targets" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/targets-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/targets-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div></div>
+</details>
+
+<h2 id='implementation'>Implementation</h2><pre><code>&lt;PillsInput label=&quot;Filter&quot;&gt;
+  &lt;Pill.Group&gt;
+    {values.map(v =&gt; &lt;Pill key={v} withRemoveButton&gt;{v}&lt;/Pill&gt;)}
+    &lt;PillsInput.Field placeholder=&quot;Filter by rule name or labels&quot; /&gt;
+  &lt;/Pill.Group&gt;
+&lt;/PillsInput&gt;</code></pre>
+
+<h2 id="layout">Layout specifications</h2>
+<table class="spec-table"><tbody><tr><td>height</td><td><code>36px (min, grows with chips)</code></td></tr>
+<tr><td>border</td><td><code>1px solid</code><br><small>token: <code>default</code></small></td></tr>
+<tr><td>border-radius</td><td><code>4px</code><br><small>token: <code>sm</code></small></td></tr>
+<tr><td>chip-radius</td><td><code>1000px</code><br><small>token: <code>pill</code></small></td></tr>
+<tr><td>chip-padding</td><td><code>4px 8px</code><br><small>token: <code>xs sm</code></small></td></tr></tbody></table>
+
+<h2 id="accessibility">Accessibility</h2>
+<table><tbody><tr><td><b>ARIA</b></td><td>PillsInput should have an associated label element.</td></tr><tr><td><b>Keyboard</b></td><td>Tab to enter input, Enter/comma to commit chip, Backspace to remove last chip.</td></tr><tr><td><b>Screen reader</b></td><td>Each pill should be announced when added/removed.</td></tr></tbody></table>
+</main>
+</div>
+<script src="../main.js"></script>
+</body>
+</html>

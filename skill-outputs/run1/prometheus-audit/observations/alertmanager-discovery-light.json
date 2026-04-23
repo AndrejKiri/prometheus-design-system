@@ -1,0 +1,10 @@
+{
+  "url": "/alertmanager-discovery",
+  "theme": "light",
+  "elements": ["header/navbar", "Mantine Card (same wrapper) with icon + title header", "Mantine Alert info callout (empty state)"],
+  "notes": [
+    "Empty-state is again the Mantine Alert info callout — same pattern as /alerts and /rules.",
+    "Card titles DO have leading icons here (bell for Active, bell-off for Dropped) — matches /status icon-in-title pattern, differs from /tsdb-status and /flags which have no icons.",
+    "'Dropped Alertmanagers' uses a crossed-bell icon; 'Active Alertmanagers' uses a plain bell. Consistent with icon semantics, no issue."
+  ]
+}

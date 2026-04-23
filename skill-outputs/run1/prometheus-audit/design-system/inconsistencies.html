@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inconsistencies — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Inconsistencies</h1>
+<p class="doc-subtitle">9 inconsistencies identified during Phase 1 visual audit — INC-001 through INC-009</p>
+<div class="callout callout-info">Each entry includes the observed variation, canonical resolution, and a link to the corresponding action item.</div>
+<div class="inc-item severity-cosmetic" id="inc-001">
+  <div class="inc-id">INC-001 · cosmetic · style-drift</div>
+  <div class="inc-title">Card titles inconsistently include a leading icon</div>
+  <div class="inc-canonical">Every card title should either consistently include a leading icon (matched to the card&#x27;s semantic) or consistently omit one. Mixing both within the same app creates an uneven visual rhythm for what is semantically the same container pattern.</div>
+  <div class="inc-reasoning">/status and /alertmanager-discovery place a Tabler icon immediately before the card title, while /tsdb-status and /flags render the title as plain text with no icon. The underlying Mantine Card wrapper is identical, so the variation is a header-composition choice rather than a different component. Users scanning the app see the icon on some cards and expect it elsewhere — its absence reads as missing information.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/status</b> — Card title &#x27;Build information&#x27; has a leading DB icon; &#x27;Runtime information&#x27; has a leading running-figure icon.</li><li style="font-size:13px"><b>/alertmanager-discovery</b> — Card title &#x27;Active Alertmanagers&#x27; has a leading bell icon; &#x27;Dropped Alertmanagers&#x27; has a leading crossed-bell icon.</li><li style="font-size:13px"><b>/tsdb-status</b> — Card titles &#x27;TSDB Head Status&#x27; and &#x27;Top 10 label names with value count&#x27; render as plain text with no leading icon.</li><li style="font-size:13px"><b>/flags</b> — The page-level card title renders as plain text with no leading icon.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/status</code>, <code>/tsdb-status</code>, <code>/flags</code>, <code>/alertmanager-discovery</code></p>
+</div><div class="inc-item severity-minor" id="inc-002">
+  <div class="inc-id">INC-002 · minor · style-drift</div>
+  <div class="inc-title">Code/identifier text uses monospace on some pages but sans-serif on others</div>
+  <div class="inc-canonical">Label names, metric names, and flag names are code-like identifiers and should consistently use the monospace font family so they are visually distinguishable from prose.</div>
+  <div class="inc-reasoning">/flags wraps each flag name in a &lt;code&gt; element which inherits a monospace family, while /tsdb-status renders equivalent identifiers (__name__, label=value pairs) as plain &lt;td&gt; text in the body sans-serif stack. The content is the same semantic class — a literal string that is not prose — but it is rendered with different font families on different pages.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/flags</b> — Flag names are wrapped in &lt;code&gt; tags; font-family resolves to browser default &#x27;monospace&#x27;.</li><li style="font-size:13px"><b>/tsdb-status</b> — Identifiers like __name__ and label=value pairs are plain &lt;td&gt; text; font-family is the system sans-serif stack (-apple-system, ...). Visually looks monospace-ish because of the characters used but is actually proportional.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/flags</code>, <code>/tsdb-status</code></p>
+</div><div class="inc-item severity-cosmetic" id="inc-003">
+  <div class="inc-id">INC-003 · cosmetic · style-drift</div>
+  <div class="inc-title">Label badges preserve case but stats badges uppercase — same visual, divergent rules</div>
+  <div class="inc-canonical">Two badge classes that share the same background, padding, and radius should share the same text-casing rule, or be visually differentiated so users can learn which is which.</div>
+  <div class="inc-reasoning">On /targets, the _labelBadge class (used for scrape-target labels) has textTransform: none, while _statsBadge (used for scrape-pool statistics) has textTransform: uppercase. Both badges share the same grey background rgb(52,58,64) in dark / equivalent light grey, same radius (~1000px), same padding. The only visual differentiator is the casing — which is triggered by CSS rather than authored content, making it brittle.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/targets</b> — _labelBadge: textTransform: none. Content like &#x27;instance=localhost:9090&#x27; preserves case as authored.</li><li style="font-size:13px"><b>/targets</b> — _statsBadge: textTransform: uppercase. Content authored as lower/mixed case (&#x27;endpoints&#x27;, &#x27;healthy&#x27;) is displayed uppercased (&#x27;ENDPOINTS&#x27;, &#x27;HEALTHY&#x27;).</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/targets</code></p>
+</div><div class="inc-item severity-minor" id="inc-004">
+  <div class="inc-id">INC-004 · minor · style-drift</div>
+  <div class="inc-title">Filter inputs split between multi-pill toolbar and single-field text input</div>
+  <div class="inc-canonical">All &#x27;filter this list&#x27; surfaces should use the same input pattern so users transfer their mental model between pages. Pick either the multi-pill toolbar (for label-oriented filtering) or the single text field (for substring filtering) and apply it everywhere.</div>
+  <div class="inc-reasoning">/alerts, /rules, /targets, and /service-discovery render their filter as a Mantine PillsInput multi-filter toolbar — users add chip-style labeled filters. /flags instead uses a plain full-width Mantine TextInput with a leading search icon. The surfaces are conceptually identical (narrow a list to matching rows) but the interaction is different. This is notable because /flags&#x27;s data (flag name + value) would benefit from the same labeled-filter approach used on /targets.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/alerts</b> — PillsInput multi-filter toolbar with placeholder &#x27;Filter by rule name or labels&#x27;.</li><li style="font-size:13px"><b>/rules</b> — PillsInput multi-filter toolbar with placeholder &#x27;Filter by rule name or labels&#x27; (identical to /alerts).</li><li style="font-size:13px"><b>/targets</b> — PillsInput multi-filter toolbar scoped to target labels.</li><li style="font-size:13px"><b>/service-discovery</b> — PillsInput multi-filter toolbar scoped to discovered labels.</li><li style="font-size:13px"><b>/flags</b> — Single full-width Mantine TextInput with a leading search icon, placeholder &#x27;Filter by flag name or value&#x27;.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/alerts</code>, <code>/rules</code>, <code>/targets</code>, <code>/service-discovery</code>, <code>/flags</code></p>
+</div><div class="inc-item severity-minor" id="inc-005">
+  <div class="inc-id">INC-005 · minor · implementation-drift</div>
+  <div class="inc-title">Only one table is sortable; the other tables are static</div>
+  <div class="inc-canonical">Tables that display list data should offer the same interactive affordances (sort by header) consistently, so users don&#x27;t have to guess where sorting is available.</div>
+  <div class="inc-reasoning">/flags&#x27;s Flag/Value table has sortable column headers with a stacked chevron-up + chevron-down icon (Mantine sort control). /status and /tsdb-status render similar two-column key/value tables but the headers are non-interactive. The user cannot tell at a glance which tables support sorting without clicking.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/flags</b> — Table headers show stacked chevron-up + chevron-down icons (class _control_1w9xk_5) and reorder rows on click.</li><li style="font-size:13px"><b>/status</b> — Key/Value table headers are plain text, no sort icon, no click-to-sort behavior.</li><li style="font-size:13px"><b>/tsdb-status</b> — Name/Count table headers are plain text, no sort icon, no click-to-sort behavior.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/flags</code>, <code>/status</code>, <code>/tsdb-status</code></p>
+</div><div class="inc-item severity-minor" id="inc-006">
+  <div class="inc-id">INC-006 · minor · missing-normalization</div>
+  <div class="inc-title">Success states rendered inconsistently as plain text vs colored badges</div>
+  <div class="inc-canonical">Success/warning/error states should consistently use the same visual treatment (a colored status pill) so users can scan status information across pages at a glance.</div>
+  <div class="inc-reasoning">On /status, the line &#x27;Configuration Reload: Successful&#x27; displays the status as plain prose in body color. Elsewhere in the app (/targets Health Status Badge), equivalent semantic states are shown as green/red pills with rounded pill styling. This is the same semantic information (an &#x27;OK&#x27; signal) rendered with two different visual weights.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/status</b> — &#x27;Configuration Reload: Successful&#x27; rendered as plain &lt;td&gt; text in the body color. No pill, no color differentiation.</li><li style="font-size:13px"><b>/targets</b> — Target health &#x27;up&#x27; rendered as a green pill with _healthOk class — dedicated background color, uppercased, pill radius.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/status</code>, <code>/targets</code></p>
+</div><div class="inc-item severity-minor" id="inc-007">
+  <div class="inc-id">INC-007 · minor · accessibility</div>
+  <div class="inc-title">Health badge source text (&#x27;up&#x27;/&#x27;down&#x27;) does not match rendered text (&#x27;UP&#x27;/&#x27;DOWN&#x27;)</div>
+  <div class="inc-canonical">Content should be authored in the form the user sees. Relying on CSS textTransform to uppercase lowercase source text makes copy-paste, screen-reader output, and in-page search inconsistent with what is visible on screen.</div>
+  <div class="inc-reasoning">The DOM contains the literal lowercase strings &#x27;up&#x27; and &#x27;down&#x27; inside the _healthOk / _healthErr spans on /targets, but CSS textTransform: uppercase (inherited via the health-badge class) renders them as &#x27;UP&#x27; and &#x27;DOWN&#x27;. A user searching the page for &#x27;UP&#x27; via browser find-in-page will get zero matches; a screen reader may announce the lowercase form. This is a minor accessibility and interop concern.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/targets</b> — Source DOM: &lt;span class=&#x27;_healthOk&#x27;&gt;up&lt;/span&gt;. Rendered on screen: &#x27;UP&#x27; (textTransform: uppercase).</li><li style="font-size:13px"><b>/targets</b> — Source DOM: &lt;span class=&#x27;_healthErr&#x27;&gt;down&lt;/span&gt;. Rendered on screen: &#x27;DOWN&#x27; (textTransform: uppercase).</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/targets</code></p>
+</div><div class="inc-item severity-cosmetic" id="inc-008">
+  <div class="inc-id">INC-008 · cosmetic · style-drift</div>
+  <div class="inc-title">highlight.js token colors swap roles between light and dark themes</div>
+  <div class="inc-canonical">The same syntactic category (a YAML key, a YAML string value) should be assigned to the same hue family across themes — only lightness/saturation should shift. Swapping &#x27;keys are green&#x27; in light to &#x27;keys are blue&#x27; in dark (and vice versa for strings) breaks token memory across theme switches.</div>
+  <div class="inc-reasoning">In light mode on /config, hljs-attr (YAML keys) is olive-green rgb(92,148,13) and hljs-string is blue rgb(24,100,171). In dark mode, hljs-attr becomes light-blue rgb(165,216,255) and hljs-string becomes green rgb(64,192,87). The hues are swapped between the two semantic categories when the theme changes. Both directions are readable, but a user who has learned &#x27;green = key&#x27; in light mode will see &#x27;green = string&#x27; in dark mode.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/config</b> — Light theme: hljs-attr rgb(92,148,13) olive-green; hljs-string rgb(24,100,171) blue.</li><li style="font-size:13px"><b>/config</b> — Dark theme: hljs-attr rgb(165,216,255) light-blue; hljs-string rgb(64,192,87) green.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/config</code></p>
+</div><div class="inc-item severity-minor" id="inc-009">
+  <div class="inc-id">INC-009 · minor · style-drift</div>
+  <div class="inc-title">&lt;pre&gt; code block relies on browser default &#x27;monospace&#x27; rather than an explicit font stack</div>
+  <div class="inc-canonical">Code blocks should declare an explicit monospace font stack (e.g., &#x27;ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace&#x27;) so the rendered glyph width, weight, and shape are consistent across macOS, Windows, and Linux.</div>
+  <div class="inc-reasoning">On /config, the &lt;pre&gt; element&#x27;s computed font-family is exactly the single keyword &#x27;monospace&#x27;, which is whatever the browser treats as its default. On macOS that resolves to one font, on Windows another, on Linux yet another — producing visibly different renderings of the same config across users. Adding an explicit stack is a one-line fix.</div>
+  <ul style="margin:8px 0 0 16px"><li style="font-size:13px"><b>/config</b> — Computed style on &lt;pre&gt;: font-family: monospace (single keyword — browser default).</li><li style="font-size:13px"><b>/flags</b> — Flag names wrapped in &lt;code&gt; — also inherits the browser default &#x27;monospace&#x27; with no explicit stack. Same issue, different surface.</li></ul>
+  <p style="margin-top:8px;font-size:12px">Pages: <code>/config</code></p>
+</div>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

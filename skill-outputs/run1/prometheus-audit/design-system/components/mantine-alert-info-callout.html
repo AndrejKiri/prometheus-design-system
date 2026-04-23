@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mantine Alert Info Callout — Prometheus Design System</title>
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="../index.html" class="doc-nav-link">Home</a>
+      <a href="../tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="../icons.html" class="doc-nav-link">Icons</a>
+      <a href="../patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="../components.html" class="doc-nav-link">All Components</a>
+      <a href="../components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="../components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="../components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="../components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="../components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="../components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="../components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="../components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="../components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="../components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="../components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="../components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="../components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="../components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="../components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="../components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="../components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="../components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="../action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="../inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="../audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="../figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="../changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Mantine Alert Info Callout</h1>
+<p class="doc-subtitle">Empty-state info alert</p>
+
+<div class="do-dont-grid"><div class="do-item"><strong>✓ Do</strong>Use this pattern consistently for all empty states across the app.</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use this for error states — use the error badge/status pattern instead.</div><div class="do-item"><strong>✓ Do</strong>Include a meaningful message explaining why the list is empty (e.g. &#x27;No rules found&#x27; not just &#x27;Empty&#x27;).</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t add a border to the callout — it does not have one in the current implementation.</div></div>
+
+<h2 id="description">Description</h2>
+<p>Shared empty-state pattern rendered as a Mantine Alert in &#x27;info&#x27; color. Appears on /alerts, /rules, and /alertmanager-discovery when there is no data to display. Provides a subtle blue tint in both themes.</p>
+<p><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">feedback</span>&nbsp;<span class="doc-badge doc-badge-gray">/alerts</span>&nbsp;<span class="doc-badge doc-badge-gray">/rules</span>&nbsp;<span class="doc-badge doc-badge-gray">/alertmanager-discovery</span></p>
+
+
+<h2 id="design">Design variants</h2>
+<h3>info</h3>
+<p style="font-size:13px;color:var(--doc-text-secondary)">Blue-tinted informational callout used as empty state.</p>
+<div class="mock-preview"><div class="mock-alert-info"><span class="mock-alert-icon">ℹ</span><span>No alerting rules found.</span></div></div>
+<p style='font-size:11px;color:var(--doc-text-secondary)'>Tokens: <code>info, info-callout</code></p>
+
+<details>
+<summary>Component Reference — screenshots &amp; live links</summary>
+<div class="details-body"><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/alerts — <a href="https://prometheus-e83j.onrender.com/alerts" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/alerts-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/alerts-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/rules — <a href="https://prometheus-e83j.onrender.com/rules" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/rules-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/rules-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/alertmanager-discovery — <a href="https://prometheus-e83j.onrender.com/alertmanager-discovery" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/alertmanager-discovery-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/alertmanager-discovery-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div></div>
+</details>
+
+<h2 id='implementation'>Implementation</h2><pre><code>&lt;Alert color=&quot;blue&quot; icon={&lt;IconInfoCircle /&gt;}&gt;
+  No alerting rules found.
+&lt;/Alert&gt;</code></pre>
+
+<h2 id="layout">Layout specifications</h2>
+<table class="spec-table"><tbody><tr><td>background (light)</td><td><code>rgba(34,139,230,0.1)</code><br><small>token: <code>info</code></small></td></tr>
+<tr><td>background (dark)</td><td><code>rgba(34,139,230,0.15)</code><br><small>token: <code>info</code></small></td></tr>
+<tr><td>text-color (light)</td><td><code>rgb(24,100,171)</code><br><small>token: <code>info-callout</code></small></td></tr>
+<tr><td>text-color (dark)</td><td><code>rgb(116,192,252)</code><br><small>token: <code>info-callout</code></small></td></tr>
+<tr><td>border</td><td><code>none</code></td></tr>
+<tr><td>padding</td><td><code>12px 16px</code><br><small>token: <code>sm-lg</code></small></td></tr></tbody></table>
+
+<h2 id="accessibility">Accessibility</h2>
+<table><tbody><tr><td><b>ARIA</b></td><td>Mantine Alert renders with role=&#x27;alert&#x27; by default.</td></tr><tr><td><b>Contrast</b></td><td>Light: rgb(24,100,171) on rgba(34,139,230,0.1) ≈ 4.7:1 — passes AA. Dark: rgb(116,192,252) on rgba(34,139,230,0.15) — verify contrast.</td></tr><tr><td><b>Screen reader</b></td><td>role=&#x27;alert&#x27; causes screen readers to announce the content. Use only for genuinely important empty states.</td></tr></tbody></table>
+</main>
+</div>
+<script src="../main.js"></script>
+</body>
+</html>

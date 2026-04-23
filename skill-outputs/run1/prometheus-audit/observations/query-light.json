@@ -1,0 +1,45 @@
+{
+  "url": "/query",
+  "theme": "light",
+  "title": "Prometheus Time Series Collection and Processing Server",
+  "viewport": {"w": 1280, "h": 857, "docH": 857},
+  "html_attrs": {"data-mantine-color-scheme": "light", "lang": "en"},
+  "body": {"bg": "rgb(255, 255, 255)", "color": "rgb(0, 0, 0)", "font": "-apple-system, system-ui stack", "font_size": "16px"},
+  "nav": {"bg": "rgb(65, 73, 81)", "color": "rgb(255, 255, 255)", "padding": "16px 4px"},
+  "primary_button": {"text": "Execute", "bg": "rgb(34, 139, 230)", "color": "rgb(255, 255, 255)", "radius": "4px", "padding": "0px 18px", "fontSize": "14px", "fontWeight": "600"},
+  "unique_button_variants_count": 9,
+  "button_variants": [
+    "subtle-grey solid|rgb(134,142,150)|rgb(248,249,250)|r4|p8x16|14/500",
+    "dark-grey-with-white|rgb(134,142,150)|white|r4|p0|16/400",
+    "ghost-transparent-white|transparent|white|r0|p5|16/400",
+    "transparent-on-grey|transparent|rgb(248,249,250)|r4|p8x16|14/500",
+    "ghost-grey-text|transparent|rgb(134,142,150)|r4|p0|16/400",
+    "primary-blue|rgb(34,139,230)|white|r4|p0x18|14/600 (Execute)",
+    "tab-active|transparent|black|r4 4 0 0|p10x16|14/400",
+    "rounded-white|white|black|r4|p0x34|14/400",
+    "filled-blue-tint|rgba(34,139,230,0.1)|rgb(34,139,230)|r4|p0x18x0x12|14/600 (Add query)"
+  ],
+  "palette_bg": ["rgb(65,73,81) navbar slate", "rgb(34,139,230) primary blue", "rgb(134,142,150) neutral grey", "rgb(233,236,239) very-light-grey surface", "rgb(255,255,255) white surface", "rgba(34,139,230,0.1) blue-tint"],
+  "palette_text": ["rgb(0,0,0) black", "rgb(255,255,255) white", "rgb(248,249,250) off-white", "rgb(134,142,150) grey-500", "rgb(136,136,136) grey-dim (non-standard)", "rgb(173,181,189) grey-400", "rgb(34,139,230) blue-link"],
+  "radii": ["4px", "4px 0 0 4px", "0 4px 4px 0", "4px 4px 0 0"],
+  "font_sizes": ["14px", "16px", "20px"],
+  "font_weights": ["500", "600"],
+  "counts": {"buttons": 16, "inputs": 1, "links": 7, "headings": 0, "tables": 0, "forms": 0},
+  "elements_observed": [
+    "Header/navbar with logo, primary nav links (Query highlighted in blue subtle), Alerts, Status dropdown caret",
+    "Theme toggle button (top-right, dark-grey ghost icon)",
+    "Settings gear icon button (top-right)",
+    "Docs book-icon button (top-right)",
+    "Large query input with left caret prompt glyph (>_)",
+    "Three-dot kebab menu on right of query input",
+    "Execute button (primary, blue, radius 4px)",
+    "Tab row: Table (active with blue underline), Graph, Explain — icons + label",
+    "Evaluation time pagination (prev/next caret with placeholder text 'Evaluation time')",
+    "Empty state text: 'No data queried yet' (plain black sans)",
+    "Secondary 'Add query' button (filled-blue-tint variant with + icon)"
+  ],
+  "interactive_states_observed": [
+    "Status dropdown expanded with two sections: 'Monitoring status' (Target health, Rule health, Service discovery) and 'Server status' (Runtime & build information, TSDB status, Command-line flags, Configuration, Alertmanager discovery)",
+    "Every dropdown item has a leading icon; section headings rendered in small grey uppercase-ish sans"
+  ]
+}

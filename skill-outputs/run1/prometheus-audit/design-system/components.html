@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Components — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Components</h1>
+<p class="doc-subtitle">18 components extracted from the Prometheus web UI · all match patterns in <a href="audit-report.html">audit-results.json</a></p>
+<h2 id="data-display">Data Display</h2><div class="doc-card-grid"><a href="components/card-title-with-icon.html" class="doc-card-link"><h3>Card Title with Icon</h3><p>Titled card header with leading icon</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/card-title-without-icon.html" class="doc-card-link"><h3>Card Title without Icon</h3><p>Plain text card header</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/health-status-badge.html" class="doc-card-link"><h3>Health Status Badge</h3><p>Target health status indicator</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/label-badge.html" class="doc-card-link"><h3>Label Badge</h3><p>Key=value label chip</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/stats-badge.html" class="doc-card-link"><h3>Stats Badge</h3><p>Scrape-pool statistics chip</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/sortable-table.html" class="doc-card-link"><h3>Sortable Table</h3><p>Column-sortable data table</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/key-value-table.html" class="doc-card-link"><h3>Key-Value Table</h3><p>Property definition table</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a>
+<a href="components/yaml-code-block.html" class="doc-card-link"><h3>YAML Code Block</h3><p>Syntax-highlighted configuration display</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">data-display</span></p></a></div><h2 id="feedback">Feedback</h2><div class="doc-card-grid"><a href="components/mantine-alert-info-callout.html" class="doc-card-link"><h3>Mantine Alert Info Callout</h3><p>Empty-state info alert</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">feedback</span></p></a></div><h2 id="input">Input</h2><div class="doc-card-grid"><a href="components/primary-button.html" class="doc-card-link"><h3>Primary Button</h3><p>Primary filled action button</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span></p></a>
+<a href="components/button-variants-group.html" class="doc-card-link"><h3>Button Variants Group</h3><p>Multi-variant query toolbar</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">complex</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span></p></a>
+<a href="components/filter-input-pills.html" class="doc-card-link"><h3>Filter Input (Pills)</h3><p>Multi-chip filter toolbar</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span></p></a>
+<a href="components/filter-input-single-field.html" class="doc-card-link"><h3>Filter Input (Single Field)</h3><p>Single-field text filter</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span></p></a>
+<a href="components/copy-button.html" class="doc-card-link"><h3>Copy Button</h3><p>Copy-to-clipboard action icon</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span></p></a></div><h2 id="layout">Layout</h2><div class="doc-card-grid"><a href="components/mantine-card.html" class="doc-card-link"><h3>Mantine Card</h3><p>Content section container</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">layout</span></p></a>
+<a href="components/mantine-accordion.html" class="doc-card-link"><h3>Mantine Accordion</h3><p>Collapsible scrape-pool group</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">layout</span></p></a>
+<a href="components/discovered-target-labels-layout.html" class="doc-card-link"><h3>Discovered/Target Labels Layout</h3><p>Side-by-side label comparison layout</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">medium</span>&nbsp;<span class="doc-badge doc-badge-gray">layout</span></p></a></div><h2 id="navigation">Navigation</h2><div class="doc-card-grid"><a href="components/header-navbar.html" class="doc-card-link"><h3>Header/Navbar</h3><p>Global app shell navigation</p><p style="margin-top:8px"><span class="doc-badge doc-badge-gray">complex</span>&nbsp;<span class="doc-badge doc-badge-gray">navigation</span></p></a></div>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>

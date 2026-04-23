@@ -1,0 +1,9 @@
+{
+  "name": "Prometheus DS Bootstrap",
+  "id": "prometheus-design-system-bootstrap-2026",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "capabilities": [],
+  "permissions": []
+}

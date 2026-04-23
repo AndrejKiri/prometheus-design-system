@@ -1,0 +1,10 @@
+{
+  "url": "/service-discovery",
+  "theme": "light",
+  "elements": ["header/navbar", "filter toolbar (same 3-filter + icon button pattern as /targets)", "Mantine Accordion scrape-pool group (same as /targets)", "Section heading with bottom divider ('Discovered labels' / 'Target labels')", "Label Badge (same as /targets, rendered stacked instead of inline)", "'show relabeling' text link (blue, no chrome)"],
+  "notes": [
+    "Layout mirrors /targets (accordion groups with collapse caret, 1/1 status stat + green dot) — but inner content is 2-column label stack instead of table.",
+    "Same green status dot + 'N / M' count in header.",
+    "Section heading pattern: 14px/700 text with 1px solid divider underneath. Same styling used in /targets table headers? Need to verify — they may use slightly different implementations."
+  ]
+}

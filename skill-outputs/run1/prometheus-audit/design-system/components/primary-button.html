@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Primary Button — Prometheus Design System</title>
+<link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="../index.html" class="doc-nav-link">Home</a>
+      <a href="../tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="../icons.html" class="doc-nav-link">Icons</a>
+      <a href="../patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="../components.html" class="doc-nav-link">All Components</a>
+      <a href="../components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="../components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="../components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="../components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="../components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="../components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="../components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="../components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="../components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="../components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="../components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="../components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="../components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="../components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="../components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="../components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="../components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="../components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="../action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="../inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="../audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="../figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="../changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Primary Button</h1>
+<p class="doc-subtitle">Primary filled action button</p>
+
+<div class="do-dont-grid"><div class="do-item"><strong>✓ Do</strong>Use this variant only for the single primary action per page/form.</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use more than one primary button per surface — it dilutes the hierarchy.</div><div class="do-item"><strong>✓ Do</strong>Show a loading state during async operations (Mantine Button loading prop).</div><div class="dont-item"><strong>✗ Don't</strong>Don&#x27;t use a different blue — only rgb(34,139,230) light / rgb(25,113,194) dark.</div></div>
+
+<h2 id="description">Description</h2>
+<p>The single primary call-to-action button in the app — the &#x27;Execute&#x27; button on the PromQL query page. Filled blue background with white text, 14px semibold, 4px radius.</p>
+<p><span class="doc-badge doc-badge-gray">simple</span>&nbsp;<span class="doc-badge doc-badge-gray">input</span>&nbsp;<span class="doc-badge doc-badge-gray">/query</span></p>
+
+
+<h2 id="design">Design variants</h2>
+<h3>default</h3>
+<p style="font-size:13px;color:var(--doc-text-secondary)">Filled primary blue button.</p>
+<div class="mock-preview"><button class="mock-btn-primary">Execute</button></div>
+<p style='font-size:11px;color:var(--doc-text-secondary)'>Tokens: <code>brand-blue-light, brand-blue-dark, label/button, sm</code></p>
+
+<details>
+<summary>Component Reference — screenshots &amp; live links</summary>
+<div class="details-body"><div>
+  <p style="font-size:12px;color:var(--doc-text-secondary)">/query — <a href="https://prometheus-e83j.onrender.com/query" target="_blank">Live ↗</a></p>
+  <div style="display:flex;gap:8px">
+    <img src="../screenshots/query-light.jpg" alt="Light screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+    <img src="../screenshots/query-dark.jpg" alt="Dark screenshot" style="max-width:48%;border:1px solid var(--doc-border);border-radius:4px" onerror="this.style.display='none'">
+  </div>
+</div></div>
+</details>
+
+<h2 id='implementation'>Implementation</h2><pre><code>&lt;Button color=&quot;blue&quot; variant=&quot;filled&quot; radius=&quot;sm&quot;&gt;
+  Execute
+&lt;/Button&gt;</code></pre>
+
+<h2 id="layout">Layout specifications</h2>
+<table class="spec-table"><tbody><tr><td>background (light)</td><td><code>rgb(34,139,230)</code><br><small>token: <code>brand-blue-light</code></small></td></tr>
+<tr><td>background (dark)</td><td><code>rgb(25,113,194)</code><br><small>token: <code>brand-blue-dark</code></small></td></tr>
+<tr><td>color</td><td><code>rgb(255,255,255)</code><br><small>token: <code>inverted</code></small></td></tr>
+<tr><td>font-size</td><td><code>14px</code><br><small>token: <code>label/button</code></small></td></tr>
+<tr><td>font-weight</td><td><code>600</code></td></tr>
+<tr><td>border-radius</td><td><code>4px</code><br><small>token: <code>sm</code></small></td></tr>
+<tr><td>padding</td><td><code>8px 16px</code><br><small>token: <code>sm</code></small></td></tr></tbody></table>
+
+<h2 id="accessibility">Accessibility</h2>
+<table><tbody><tr><td><b>Keyboard</b></td><td>Focusable via Tab, activatable via Enter/Space.</td></tr><tr><td><b>Contrast</b></td><td>White on rgb(34,139,230) = ~4.5:1 — passes WCAG AA.</td></tr></tbody></table>
+</main>
+</div>
+<script src="../main.js"></script>
+</body>
+</html>

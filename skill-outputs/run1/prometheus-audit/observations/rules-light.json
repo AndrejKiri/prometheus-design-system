@@ -1,0 +1,10 @@
+{
+  "url": "/rules",
+  "theme": "light",
+  "viewport_context": "empty state (no rules configured in demo)",
+  "elements": ["header/navbar (with breadcrumb pill Status > Rule health)", "filter toolbar (2 filters — same pattern as /alerts)", "Mantine Alert info callout 'No rules found' (identical to /alerts empty state)"],
+  "notes": [
+    "Empty state is visually identical to /alerts — same 'No rules found / No rules found.' copy, same Alert styling.",
+    "Filter inputs: 'Filter by rule health' (select) + 'Filter by rule name or labels' (text search). NOTE: second filter placeholder 'Filter by rule name or labels' is IDENTICAL to the /alerts placeholder (which says 'Filter by rule name or labels'). This may be intentional shared component (Alerts actually lists alerting rules too) but worth noting as a doc/clarity item."
+  ]
+}

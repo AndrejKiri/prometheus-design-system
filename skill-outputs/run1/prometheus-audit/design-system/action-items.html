@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Action Items — Prometheus Design System</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<header class="doc-topbar">
+  <button class="doc-topbar-burger" id="burger" aria-label="Open menu">☰</button>
+  <span class="doc-topbar-title">🔥 Prometheus Design System</span>
+  <span class="doc-topbar-spacer"></span>
+  <button class="doc-topbar-theme" id="themeToggle" aria-label="Toggle theme">🌙</button>
+</header>
+<div class="doc-sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="doc-sidebar" id="sidebar">
+  <nav class="doc-sidebar-nav">
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Overview</div>
+      <a href="index.html" class="doc-nav-link">Home</a>
+      <a href="tokens.html" class="doc-nav-link">Tokens</a>
+      <a href="icons.html" class="doc-nav-link">Icons</a>
+      <a href="patterns.html" class="doc-nav-link">Patterns</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Components</div>
+      <a href="components.html" class="doc-nav-link">All Components</a>
+      <a href="components/header-navbar.html" class="doc-nav-link doc-nav-sub">Header/Navbar</a>
+      <a href="components/mantine-card.html" class="doc-nav-link doc-nav-sub">Mantine Card</a>
+      <a href="components/card-title-with-icon.html" class="doc-nav-link doc-nav-sub">Card Title with Icon</a>
+      <a href="components/card-title-without-icon.html" class="doc-nav-link doc-nav-sub">Card Title without Icon</a>
+      <a href="components/mantine-alert-info-callout.html" class="doc-nav-link doc-nav-sub">Mantine Alert Info Callout</a>
+      <a href="components/primary-button.html" class="doc-nav-link doc-nav-sub">Primary Button</a>
+      <a href="components/button-variants-group.html" class="doc-nav-link doc-nav-sub">Button Variants Group</a>
+      <a href="components/filter-input-pills.html" class="doc-nav-link doc-nav-sub">Filter Input (Pills)</a>
+      <a href="components/filter-input-single-field.html" class="doc-nav-link doc-nav-sub">Filter Input (Single Field)</a>
+      <a href="components/health-status-badge.html" class="doc-nav-link doc-nav-sub">Health Status Badge</a>
+      <a href="components/label-badge.html" class="doc-nav-link doc-nav-sub">Label Badge</a>
+      <a href="components/stats-badge.html" class="doc-nav-link doc-nav-sub">Stats Badge</a>
+      <a href="components/mantine-accordion.html" class="doc-nav-link doc-nav-sub">Mantine Accordion</a>
+      <a href="components/sortable-table.html" class="doc-nav-link doc-nav-sub">Sortable Table</a>
+      <a href="components/key-value-table.html" class="doc-nav-link doc-nav-sub">Key-Value Table</a>
+      <a href="components/discovered-target-labels-layout.html" class="doc-nav-link doc-nav-sub">Discovered/Target Labels Layout</a>
+      <a href="components/yaml-code-block.html" class="doc-nav-link doc-nav-sub">YAML Code Block</a>
+      <a href="components/copy-button.html" class="doc-nav-link doc-nav-sub">Copy Button</a>
+    </div>
+    <div class="doc-nav-section">
+      <div class="doc-nav-label">Reference</div>
+      <a href="action-items.html" class="doc-nav-link">Action Items</a>
+      <a href="inconsistencies.html" class="doc-nav-link">Inconsistencies</a>
+      <a href="audit-report.html" class="doc-nav-link">Audit Report</a>
+      <a href="figma.html" class="doc-nav-link">Figma Plugin</a>
+      <a href="changelog.html" class="doc-nav-link">Changelog</a>
+    </div>
+  </nav>
+</aside>
+<div class="doc-content">
+<main class="doc-main">
+<h1>Action Items</h1>
+<p class="doc-subtitle">9 PR-ready fix cards derived from inconsistency analysis · click "↗ Open GitHub Issue" to file in <a href="https://github.com/prometheus/prometheus" target="_blank">prometheus/prometheus</a></p>
+<div class="action-card" data-issue-title="fix: add missing card title icons on /tsdb-status and /flags">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-001</span>
+    <a href="inconsistencies.html#inc-001" style="font-size:12px">INC-001</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">component</span>
+    <span class="action-card-title">Standardize card title icon usage across all pages</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-001: /status and /alertmanager-discovery use leading Tabler icons in card titles; /tsdb-status and /flags do not. Pick one style and apply consistently. Recommendation: add icons to /tsdb-status (chart-bar for TSDB, flag for Flags page) to match the more expressive pattern.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/tsdb-status/TSDBStatusPage.tsx</code> <code>src/pages/flags/FlagsPage.tsx</code></p>
+    <h4>Diff</h4><pre><code>+ import { IconChartBar } from &#x27;@tabler/icons-react&#x27;;
+- &lt;Title order={4}&gt;TSDB Head Status&lt;/Title&gt;
++ &lt;Group gap=&quot;xs&quot; mb=&quot;xs&quot;&gt;
++   &lt;IconChartBar size={18} aria-hidden /&gt;
++   &lt;Title order={4}&gt;TSDB Head Status&lt;/Title&gt;
++ &lt;/Group&gt;</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="fix: render metric/label identifiers in monospace on /tsdb-status">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-002</span>
+    <a href="inconsistencies.html#inc-002" style="font-size:12px">INC-002</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">tokens</span>
+    <span class="action-card-title">Use monospace font for all code-like identifiers</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-002: /flags wraps flag names in &lt;code&gt; tags (monospace) but /tsdb-status renders equivalent identifiers (__name__, label=value) as plain td text in sans-serif. Wrap identifiers in &lt;code&gt; or apply font-family: monospace via a utility class.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/tsdb-status/TSDBStatusPage.tsx</code></p>
+    <h4>Diff</h4><pre><code>- &lt;td&gt;{labelName}&lt;/td&gt;
++ &lt;td&gt;&lt;code&gt;{labelName}&lt;/code&gt;&lt;/td&gt;</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="fix: author stats badge text in uppercase; remove CSS text-transform">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-003</span>
+    <a href="inconsistencies.html#inc-003" style="font-size:12px">INC-003</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">component</span> <span class="doc-badge doc-badge-gray">tokens</span>
+    <span class="action-card-title">Align text-casing rules between Label Badge and Stats Badge</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-003: _labelBadge has textTransform: none; _statsBadge has textTransform: uppercase — both share the same visual styling. Recommendation: author stats badge content in uppercase directly in the DOM and remove the CSS rule, matching how /targets health badges should also be fixed.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/targets/TargetsPage.tsx</code> <code>src/styles/targets.module.css</code></p>
+    <h4>Diff</h4><pre><code>- .statsBadge { text-transform: uppercase; }
+// author uppercase text in source instead</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="feat: migrate /flags filter to PillsInput for consistency with other list pages">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-004</span>
+    <a href="inconsistencies.html#inc-004" style="font-size:12px">INC-004</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">component</span>
+    <span class="action-card-title">Unify filter input pattern across all list pages</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-004: /alerts, /rules, /targets, /service-discovery use PillsInput; /flags uses a plain TextInput. Recommendation: migrate /flags to PillsInput for consistency, or document the distinction with clear UX rationale. Flags data (name=value) naturally fits label-style filtering.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/flags/FlagsPage.tsx</code></p>
+    <div class="action-card-before-after">
+  <div class="action-card-before"><h4>Before</h4><pre><code>&lt;TextInput placeholder=&quot;Filter by flag name or value&quot; leftSection={&lt;IconSearch /&gt;} /&gt;</code></pre></div>
+  <div class="action-card-after"><h4>After</h4><pre><code>&lt;PillsInput&gt;&lt;Pill.Group&gt;&lt;PillsInput.Field placeholder=&quot;Filter by flag name or value&quot; /&gt;&lt;/Pill.Group&gt;&lt;/PillsInput&gt;</code></pre></div>
+</div>
+  </div>
+</div><div class="action-card" data-issue-title="feat: make top-labels table on /tsdb-status sortable">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-005</span>
+    <a href="inconsistencies.html#inc-005" style="font-size:12px">INC-005</a>&nbsp;
+    <span class="doc-badge doc-badge-gray">LOW</span>
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">component</span>
+    <span class="action-card-title">Add sort affordance to Key-Value tables on /status and /tsdb-status</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-005: Only /flags has a sortable table. /status and /tsdb-status have static Key-Value tables. Consider adding optional sort to the top-labels breakdown table on /tsdb-status which lists label names by count — sorting descending by count is the most useful default.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/tsdb-status/TSDBStatusPage.tsx</code></p>
+    <div class="action-card-before-after">
+  <div class="action-card-before"><h4>Before</h4><pre><code>&lt;th&gt;Label Name&lt;/th&gt;</code></pre></div>
+  <div class="action-card-after"><h4>After</h4><pre><code>&lt;th onClick={() =&gt; toggleSort(&#x27;name&#x27;)} aria-sort={...}&gt;Label Name &lt;IconSelector /&gt;&lt;/th&gt;</code></pre></div>
+</div>
+  </div>
+</div><div class="action-card" data-issue-title="fix: render config reload status as colored badge on /status">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-006</span>
+    <a href="inconsistencies.html#inc-006" style="font-size:12px">INC-006</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">component</span>
+    <span class="action-card-title">Render Configuration Reload status as a health badge</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-006: &#x27;Configuration Reload: Successful&#x27; on /status is plain body text. Consistent with the rest of the app&#x27;s status rendering, this should be a colored pill (green for Successful, red for Failed). Re-use the Health Status Badge tokens.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/status/StatusPage.tsx</code></p>
+    <h4>Diff</h4><pre><code>- &lt;Table.Td&gt;{reloadStatus}&lt;/Table.Td&gt;
++ &lt;Table.Td&gt;&lt;Badge color={reloadStatus === &#x27;Successful&#x27; ? &#x27;green&#x27; : &#x27;red&#x27;} radius=&quot;xl&quot;&gt;{reloadStatus}&lt;/Badge&gt;&lt;/Table.Td&gt;</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="fix(a11y): author health badge text in uppercase; remove CSS text-transform">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-007</span>
+    <a href="inconsistencies.html#inc-007" style="font-size:12px">INC-007</a>&nbsp;
+    <span class="doc-badge doc-badge-red">HIGH</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">accessibility</span> <span class="doc-badge doc-badge-gray">component</span>
+    <span class="action-card-title">Author health badge text in uppercase in the DOM</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-007: DOM contains &#x27;up&#x27;/&#x27;down&#x27; (lowercase); CSS textTransform: uppercase renders &#x27;UP&#x27;/&#x27;DOWN&#x27;. Browser find-in-page for &#x27;UP&#x27; returns zero matches. Screen readers may announce the lowercase form. Fix: author &#x27;UP&#x27;/&#x27;DOWN&#x27; in source and remove the CSS textTransform rule.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/pages/targets/TargetsPage.tsx</code> <code>src/styles/targets.module.css</code></p>
+    <h4>Diff</h4><pre><code>- .healthOk { text-transform: uppercase; }
++ /* removed text-transform */
+- children = status  // &#x27;up&#x27; | &#x27;down&#x27;
++ children = status.toUpperCase()  // &#x27;UP&#x27; | &#x27;DOWN&#x27;</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="fix: keep hljs-attr/hljs-string in consistent hue families across light and dark themes">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-008</span>
+    <a href="inconsistencies.html#inc-008" style="font-size:12px">INC-008</a>&nbsp;
+    <span class="doc-badge doc-badge-gray">LOW</span>
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">tokens</span>
+    <span class="action-card-title">Fix highlight.js token color role swap between themes</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-008: hljs-attr is olive-green in light but light-blue in dark; hljs-string is blue in light but green in dark — hue roles are swapped. Fix by providing a custom highlight.js theme where attr and string consistently map to the same hue family across both modes.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/styles/hljs-theme.css</code></p>
+    <h4>Diff</h4><pre><code>[data-mantine-color-scheme=&#x27;dark&#x27;] .hljs-attr { color: rgb(130,210,100); }  /* green family */
+[data-mantine-color-scheme=&#x27;dark&#x27;] .hljs-string { color: rgb(116,192,252); }  /* blue family */</code></pre>
+  </div>
+</div><div class="action-card" data-issue-title="fix: declare explicit monospace font stack for pre and code elements">
+  <div class="action-card-header">
+    <span class="action-card-id">AI-009</span>
+    <a href="inconsistencies.html#inc-009" style="font-size:12px">INC-009</a>&nbsp;
+    <span class="doc-badge doc-badge-blue">MEDIUM</span>
+    <span class="doc-badge doc-badge-green">EASY</span>
+    <span class="doc-badge doc-badge-gray">inconsistency</span> <span class="doc-badge doc-badge-gray">tokens</span>
+    <span class="action-card-title">Add explicit monospace font stack to code and pre elements</span>
+  </div>
+  <div class="action-card-body">
+    <p>INC-009: &lt;pre&gt; on /config and &lt;code&gt; on /flags both use the browser default &#x27;monospace&#x27;, which resolves differently on macOS, Windows, and Linux. Add an explicit stack: &#x27;ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, monospace&#x27;.</p>
+    <p style='font-size:12px;color:var(--doc-text-secondary)'>Files: <code>src/styles/global.css</code></p>
+    <h4>Diff</h4><pre><code>- pre, code { font-family: monospace; }
++ pre, code {
++   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
++                &#x27;Liberation Mono&#x27;, &#x27;Courier New&#x27;, monospace;
++ }</code></pre>
+  </div>
+</div>
+</main>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
