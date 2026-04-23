@@ -164,6 +164,48 @@ Cowork cannot reliably trigger and capture interactive states (modals, accordion
 
 Claude Code's `capture-interactive.mjs` reads these keys, looks them up in `interaction-recipes.json`, executes the action sequence in Playwright, and saves the screenshot. State keys must use the controlled vocabulary defined in [Phase 1.4](#14-write-audit-resultsjson).
 
+### 1.3c Wait for stable DOM before observing
+
+A `setTimeout(600)` is not sufficient — data-heavy pages (accordion targets, tables) may still be populating after 600ms. Use a concrete signal instead:
+
+```js
+(async () => {
+  await window.__waitForStable([
+    '[class*="Accordion-root"]',
+    'table tbody tr',
+    '[class*="DataTable"]'
+  ]);
+  // now safe to read computed styles
+})()
+```
+
+Inject `__waitForStable` early in the session via `javascript_tool`:
+
+```js
+window.__waitForStable = async (selectors, quietMs = 500, timeoutMs = 8000) => {
+  const start = Date.now();
+  while (Date.now() - start < timeoutMs) {
+    const found = selectors.some(s => document.querySelector(s));
+    if (found) {
+      // wait for DOM to go quiet
+      await new Promise(resolve => {
+        let timer;
+        const mo = new MutationObserver(() => {
+          clearTimeout(timer);
+          timer = setTimeout(() => { mo.disconnect(); resolve(); }, quietMs);
+        });
+        mo.observe(document.body, { childList: true, subtree: true });
+        timer = setTimeout(() => { mo.disconnect(); resolve(); }, quietMs);
+      });
+      return;
+    }
+    await new Promise(r => setTimeout(r, 100));
+  }
+};
+```
+
+Also available as `scripts/browser-helpers.js` — inject the whole file contents at the start of a page survey session.
+
 ### 1.4 Write audit-results.json
 
 Write `audit-results.json` in the project folder, conforming to [`schemas/audit-results.schema.json`](schemas/audit-results.schema.json).
