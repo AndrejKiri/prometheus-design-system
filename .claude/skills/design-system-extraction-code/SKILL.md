@@ -359,6 +359,18 @@ Replace `{{PROJECT_NAME}}` and `{{UNIQUE_ID}}` in the manifest. In `code.js`, re
 
 The template already implements the three-level fallback (requested family+weight → requested family+Regular → Inter+weight → Inter+Regular).
 
+### Manual QA before distributing
+
+The Figma plugin cannot be tested headlessly. Before zipping, ask the user to run the plugin once manually in Figma and verify:
+
+1. Plugin runs without crashing (no red error toast).
+2. Variable collections appear: Brand, Spacing, Radius, Status Colors, Surface, Text.
+3. Text styles appear with correct names (`heading/page`, `body/default`, `code/default`, etc.).
+4. Status colors with a transparent border render as transparent (not black).
+5. Check the Figma Plugin console for `console.log` output — the template logs each collection as it's created so you can see where it stopped if it crashed.
+
+If the user cannot run the plugin, report the checklist and note it as unverified.
+
 ### Distributing
 
 Zip `design-system/figma-plugin/` into `figma-plugin.zip` and commit. Users import via **Figma → Plugins → Development → Import plugin from manifest**.

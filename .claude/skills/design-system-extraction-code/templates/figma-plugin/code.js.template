@@ -67,6 +67,7 @@ const SHADOW_STYLES = [
 
 async function createVariableCollections() {
   figma.notify("Creating variable collections...");
+  console.log("[plugin] Creating variable collections...");
 
   // Brand — single mode
   const brandColl = figma.variables.createVariableCollection("Brand");
@@ -75,6 +76,7 @@ async function createVariableCollections() {
     const v = figma.variables.createVariable(name, brandColl, "COLOR");
     v.setValueForMode(brandMode, rgb);
   }
+  console.log(`[plugin] Brand: ${Object.keys(BRAND_COLORS).length} variables`);
 
   // Spacing — single mode, FLOAT
   const spacingColl = figma.variables.createVariableCollection("Spacing");
@@ -83,6 +85,7 @@ async function createVariableCollections() {
     const v = figma.variables.createVariable(name, spacingColl, "FLOAT");
     v.setValueForMode(spacingMode, value);
   }
+  console.log(`[plugin] Spacing: ${Object.keys(SPACING).length} variables`);
 
   // Radius — single mode, FLOAT
   const radiusColl = figma.variables.createVariableCollection("Radius");
@@ -91,6 +94,7 @@ async function createVariableCollections() {
     const v = figma.variables.createVariable(name, radiusColl, "FLOAT");
     v.setValueForMode(radiusMode, value);
   }
+  console.log(`[plugin] Radius: ${Object.keys(RADIUS).length} variables`);
 
   // Status Colors — Light + Dark modes
   // Note: tokens.json uses "transparent" (CSS string) for invisible borders.
@@ -109,6 +113,7 @@ async function createVariableCollections() {
       v.setValueForMode(darkId,  resolveColor(modes.dark[suffix]));
     }
   }
+  console.log(`[plugin] Status: ${Object.keys(STATUS_COLORS).length} statuses × 3 = ${Object.keys(STATUS_COLORS).length * 3} variables`);
 
   // Surface / Text — Light + Dark modes
   for (const [collName, tokenMap] of [["Surface", SURFACE_COLORS], ["Text", TEXT_COLORS]]) {
@@ -121,6 +126,7 @@ async function createVariableCollections() {
       v.setValueForMode(lId, modes.light);
       v.setValueForMode(dId, modes.dark);
     }
+    console.log(`[plugin] ${collName}: ${Object.keys(tokenMap).length} variables`);
   }
 }
 
@@ -128,6 +134,7 @@ async function createVariableCollections() {
 
 async function createTextStyles() {
   figma.notify("Creating text styles...");
+  console.log(`[plugin] Creating ${TEXT_STYLES.length} text styles...`);
 
   for (const def of TEXT_STYLES) {
     const weightStyle = def.weight >= 700 ? "Bold"
@@ -168,6 +175,7 @@ async function createTextStyles() {
 
 async function createEffectStyles() {
   figma.notify("Creating elevation styles...");
+  console.log(`[plugin] Creating ${SHADOW_STYLES.length} effect styles...`);
   for (const def of SHADOW_STYLES) {
     const style = figma.createEffectStyle();
     style.name    = def.name;
