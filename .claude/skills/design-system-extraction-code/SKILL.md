@@ -264,6 +264,18 @@ When ≥ 3 action items share a theme (e.g. "replace hardcoded colors with token
 
 Read `tokens.json`, `components.json`, `audit-results.json`. Produce a static HTML/CSS/JS site — no frameworks, no build step. Write all files into a `design-system/` subdirectory of the project folder.
 
+### Homepage card grid — 5 category cards, not 9 emoji cards
+
+The homepage card grid has exactly **5 cards**, each tagged with a category label (no emojis):
+
+1. **Tokens** (Foundations) — summary of color/spacing/type coverage
+2. **Components** (Components) — count + link to catalog
+3. **Action Items** (Components) — count + link to tasks
+4. **Audit Report** (Audit) — pages audited + inconsistency count
+5. **Figma Plugin** (Audit) — link to figma docs page
+
+Each card has `<span class="card-tag">Foundations|Components|Audit</span>` to signal its nav group. Do not generate one card per HTML page — consolidate secondary pages (Patterns, Icons, Changelog, Inconsistencies, Migration) into the sidebar only.
+
 ### Homepage chrome — version chip + WIP callout
 
 The homepage (`index.html`) header should include two elements above the card grid:
