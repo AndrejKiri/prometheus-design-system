@@ -141,6 +141,20 @@ This is the primary deliverable. For each inconsistency:
 
 Look for: same concept implemented differently across pages, hardcoded values vs tokens, missing status normalization (`UP` vs `up` vs `active`), style drift, duplicated logic.
 
+### 1.3b Encode interactive states for Phase 1.5
+
+Cowork cannot reliably trigger and capture interactive states (modals, accordion expansions, hover). Instead of trying to screenshot these in Cowork, encode each desired state as a semantic key in `additional_screenshots[]` under the relevant page:
+
+```json
+"additional_screenshots": [
+  { "path": "screenshots/targets-settings-modal.jpg", "state": "modal-open-settings" },
+  { "path": "screenshots/targets-accordion-expanded.jpg", "state": "expanded-accordion" },
+  { "path": "screenshots/home-dark.jpg", "state": "dark-theme" }
+]
+```
+
+Claude Code's `capture-interactive.mjs` reads these keys, looks them up in `interaction-recipes.json`, executes the action sequence in Playwright, and saves the screenshot. State keys must use the controlled vocabulary defined in [Phase 1.4](#14-write-audit-resultsjson).
+
 ### 1.4 Write audit-results.json
 
 Write `audit-results.json` in the project folder, conforming to [`schemas/audit-results.schema.json`](schemas/audit-results.schema.json).
