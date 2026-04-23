@@ -287,7 +287,9 @@ Section order (all `<h2 id="...">` for deep-linking):
 
 ### Mock component CSS
 
-`.mock-*` classes render static previews on component pages. Examples: `.mock-badge` + `.mock-badge-{ok,err,warn,info,unknown}`, `.mock-panel` + variants, `.mock-app-shell`, `.mock-app-header`.
+`.mock-*` classes render static previews on component pages. Naming convention: `.mock-<component-slug>` for the base class, then `.mock-<slug>--<variant>` or `.mock-<slug>-<state>` for modifiers (e.g. `.mock-badge`, `.mock-badge-ok`, `.mock-badge-err`, `.mock-panel--dark`).
+
+When writing `mock_html` in `components.json`, reference these classes directly: `"mock_html": "<span class=\"mock-badge mock-badge-ok\">UP</span>"`. Never use inline styles in `mock_html` — all visual properties belong in `styles.css` under the `.mock-*` section.
 
 ### Syntax highlighting (inline spans)
 
