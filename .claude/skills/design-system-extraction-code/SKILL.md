@@ -195,6 +195,24 @@ Populate `action_items[]` with PR-style task cards — one per inconsistency plu
 
 Read `tokens.json`, `components.json`, `audit-results.json`. Produce a static HTML/CSS/JS site — no frameworks, no build step. Write all files into a `design-system/` subdirectory of the project folder.
 
+### Generator script
+
+**Always write a `gen.py` in the project folder** and generate HTML from it — do not write HTML files directly. This keeps regeneration fast, prevents stale content, and handles screenshots and sidebar sync correctly.
+
+Start from [`templates/gen.py.template`](../templates/gen.py.template). Copy it to the project folder and fill in the `{{POPULATE_FROM_*}}` sections. Then run:
+
+```bash
+python3 gen.py
+```
+
+On re-runs, `gen.py` overwrites all HTML files (preventing stale content) and copies `screenshots/` fresh. Watch mode:
+
+```bash
+python3 gen.py --watch
+```
+
+**Do not write HTML files by hand** if you can express the page as a Python function. Reserve direct HTML editing for one-off cosmetic fixes that are not worth parameterizing.
+
 ### File structure
 
 ```
@@ -212,7 +230,7 @@ design-system/
 ├── changelog.html                  # Version history
 ├── figma.html                      # Figma plugin docs
 ├── figma-plugin/                   # Built from templates/
-├── screenshots/                    # Symlink or copy from project root
+├── screenshots/                    # Copied (not symlinked) from project root — required for GitHub Pages
 ├── styles.css                      # Single global stylesheet
 ├── main.js                         # Vanilla JS IIFE
 └── README.md
