@@ -470,19 +470,30 @@ The zip contains:
 
 ## Quality Checklist
 
+### Automated (Claude Code verifies)
+
 - [ ] `audit-results.json` was the starting point — no values invented.
 - [ ] All inconsistencies documented with resolution reasoning.
 - [ ] Token values match the actual source (not approximated).
 - [ ] `validate-handoff.py` exits 0.
+- [ ] All expected HTML files exist in `design-system/`.
+- [ ] No bare `/components` hrefs (either `.html` or `components/<slug>.html`).
+- [ ] Navigation block is identical across all HTML files.
+- [ ] Figma plugin `manifest.json` is valid JSON.
+- [ ] `<img>` tags have `onerror` handlers where screenshots are referenced.
+- [ ] `CLAUDE.md` progress checklist fully checked off.
+
+### Manual (human browser required)
+
 - [ ] All component pages follow the template section order.
 - [ ] Light and dark mode render correctly on every page.
-- [ ] Navigation is identical across all HTML files.
 - [ ] Mobile responsive — burger menu works.
 - [ ] Screenshots load in collapsible references.
 - [ ] Figma plugin runs without crashing — font fallbacks tested.
 - [ ] Copy buttons work on all code blocks.
-- [ ] `CLAUDE.md` progress checklist fully checked off.
 - [ ] Docs site deployed to GitHub Pages and URL recorded in `CLAUDE.md`.
+
+If no browser is available, run the Automated checks yourself and report the Manual checks to the user as a spot-check list — do not claim them passed.
 
 ---
 
