@@ -29,6 +29,10 @@
               "name": { "type": "string" },
               "value": { "type": "string" },
               "usage": { "type": "string" },
+              "rationale": {
+                "type": ["string", "null"],
+                "description": "Optional — why this specific value was chosen (e.g. 'matches logo orange #F5A623', 'WCAG AAA contrast against page-bg'). Use when the choice is non-obvious."
+              },
               "figma_rgb": {
                 "type": "object",
                 "properties": {

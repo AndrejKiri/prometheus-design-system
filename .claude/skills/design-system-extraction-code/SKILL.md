@@ -204,6 +204,10 @@ A partial audit is a valid input. Produce the best output you can from what exis
 
 The validator will error if `font_family` doesn't match any `families[].name` and will list the available names in the error message.
 
+### Optional: rationale field
+
+When a brand token's value isn't obvious from name alone (e.g. a specific hex chosen for WCAG contrast, a size picked to match a library's default), add `"rationale": "<why>"` on the token entry. Reserve for non-obvious choices — if the reason is "matches the header color", don't bother.
+
 ### Pre-compute for Figma
 
 Fill `figma_rgb` (0–1 range) on brand colors and `figma_effects` on shadows. Saves Phase 5 conversion work.
