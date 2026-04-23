@@ -174,7 +174,10 @@
                 "type": "string",
                 "enum": ["heading", "body", "label", "code", "display"]
               },
-              "font_family": { "type": "string" },
+              "font_family": {
+                "type": "string",
+                "description": "Reference key — must exactly match a typography.families[].name value. This is NOT a CSS font-family string."
+              },
               "size_px": { "type": "number" },
               "size_rem": { "type": ["number", "null"] },
               "weight": {

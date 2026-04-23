@@ -415,7 +415,11 @@ def validate_tokens(data, audit_url, has_dark_mode, report):
 
                 check_required_field(entry, "font_family", str, report, ctx)
                 if "font_family" in entry and entry["font_family"] not in font_family_names:
-                    report.error(f"{ctx}.font_family '{entry['font_family']}' not found in typography.families")
+                    report.error(
+                        f"{ctx}.font_family '{entry['font_family']}' not found in typography.families[].name. "
+                        f"font_family is a reference key, not a CSS string — it must exactly match a "
+                        f"typography.families[].name value. Available: {sorted(font_family_names)}"
+                    )
 
                 check_required_field(entry, "size_px", (int, float), report, ctx)
 

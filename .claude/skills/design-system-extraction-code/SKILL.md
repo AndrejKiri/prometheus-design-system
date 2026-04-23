@@ -152,11 +152,22 @@ Read `audit-results.json` (and `source-audit.json` if available). Produce `token
 | `typography.styles` | ≥ 1 heading, 1 body, 1 code style |
 | `border_radius` | named scale |
 
+### `typography.styles[].font_family` is a reference key
+
+`font_family` must exactly match a `typography.families[].name` value — it is NOT a CSS font-family string. Example:
+
+```json
+"families": [{ "name": "body-sans", "family": "Inter, sans-serif", "usage": "body text" }],
+"styles":   [{ "name": "body/regular", "font_family": "body-sans", ... }]
+```
+
+The validator will error if `font_family` doesn't match any `families[].name` and will list the available names in the error message.
+
 ### Pre-compute for Figma
 
 Fill `figma_rgb` (0–1 range) on brand colors and `figma_effects` on shadows. Saves Phase 5 conversion work.
 
-**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+**Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 
 ---
 
