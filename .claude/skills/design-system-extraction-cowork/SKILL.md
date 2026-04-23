@@ -1,5 +1,5 @@
 ---
-name: ui-audit
+name: design-system-extraction-cowork
 description: >
   Visual audit of a web application UI. Scopes the audit, authenticates,
   browses every page interactively, catalogs UI patterns, identifies
@@ -9,12 +9,12 @@ metadata:
   author: AndrejKiri
   version: '0.1'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
-  paired-skill: extract-design-system (docs/skill-code/SKILL.md)
+  paired-skill: design-system-extraction-code (docs/skill-code/SKILL.md)
 ---
 
-# UI Audit — Claude Cowork Skill
+# Design System Extraction — Claude Cowork Skill
 
-**This skill produces the handoff package for the `extract-design-system` Claude Code skill.**
+**This skill produces the handoff package for the `design-system-extraction-code` Claude Code skill.**
 
 Run Phases 0 and 1 in order, then stop and hand off.
 
@@ -178,6 +178,6 @@ Name the zip after the app hostname (e.g. `prometheus.io-audit.zip`). This zip i
 
 Then tell the user:
 
-> **Audit complete.** The handoff zip `<app-hostname>-audit.zip` is ready. Pass it to Claude Code with the `extract-design-system` skill — point it at the zip or the extracted folder and it will pick up from Phase 2 automatically.
+> **Audit complete.** The handoff zip `<app-hostname>-audit.zip` is ready. Pass it to Claude Code with the `design-system-extraction-code` skill — point it at the zip or the extracted folder and it will pick up from Phase 2 automatically.
 >
 > If you also have the source repo, provide it to Claude Code — it can run a source audit (Phase 1-Source) to get exact token values before extracting.

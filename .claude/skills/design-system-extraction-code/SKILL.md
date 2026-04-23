@@ -1,19 +1,19 @@
 ---
-name: extract-design-system
+name: design-system-extraction-code
 description: >
   Extract design tokens and components from a visual audit package or source
   repo. Produces tokens.json, components.json, a static design system docs
   site, and a Figma bootstrap plugin. Picks up from audit-results.json
-  (produced by the ui-audit Cowork skill) or from a source repo alone.
+  (produced by the design-system-extraction-cowork skill) or from a source repo alone.
   Requires filesystem access. No browser needed.
 metadata:
   author: AndrejKiri
   version: '0.1'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
-  paired-skill: ui-audit (docs/skill-cowork/SKILL.md)
+  paired-skill: design-system-extraction-cowork (docs/skill-cowork/SKILL.md)
 ---
 
-# Extract Design System — Claude Code Skill
+# Design System Extraction — Claude Code Skill
 
 ---
 
@@ -49,10 +49,10 @@ Check how the skill was invoked:
 
 | Invocation | Project folder |
 |------------|---------------|
-| `/extract-design-system ~/path/to/folder` | Use that path |
-| `/extract-design-system ~/path/to/audit-results.json` | Use that file's parent directory |
-| `/extract-design-system ~/path/to/audit.zip` | Extract the zip first, then use the extracted folder |
-| No argument | Ask the user: *"Where is the project folder or handoff zip from the ui-audit skill?"* |
+| `/design-system-extraction-code ~/path/to/folder` | Use that path |
+| `/design-system-extraction-code ~/path/to/audit-results.json` | Use that file's parent directory |
+| `/design-system-extraction-code ~/path/to/audit.zip` | Extract the zip first, then use the extracted folder |
+| No argument | Ask the user: *"Where is the project folder or handoff zip from the design-system-extraction-cowork skill?"* |
 
 All output files (`source-audit.json`, `tokens.json`, `components.json`, `design-system/`) are written into this folder. Confirm the path with the user before writing anything.
 
@@ -63,7 +63,7 @@ All output files (`source-audit.json`, `tokens.json`, `components.json`, `design
 | `audit-results.json` exists and validates | → Start Phase 2 |
 | `audit-results.json` exists but has errors | → Fix errors, then Phase 2 |
 | No `audit-results.json`, but source repo provided | → Run Phase 1-Source, then Phase 2 |
-| Neither | → Stop. Tell the user to run the `ui-audit` Cowork skill first, or provide a source repo URL |
+| Neither | → Stop. Tell the user to run the `design-system-extraction-cowork` skill first, or provide a source repo URL |
 
 Run the validator immediately on any existing files:
 
@@ -296,13 +296,52 @@ Zip `design-system/figma-plugin/` into `figma-plugin.zip` and commit. Users impo
 
 ## Phase 6 — Deploy & QA
 
-Docs site is pure static HTML. Deploy via:
+### 6.1 Deploy to GitHub Pages
 
-- **GitHub Pages** — push to `main`, enable Pages.
-- **Any static host** — Netlify, Vercel, S3.
-- **Local** — `npx serve design-system -l 3000`.
+GitHub Pages is the required deployment target. Ask the user for:
 
-### Visual QA
+1. **GitHub repo URL** — if not already in `CLAUDE.md`.
+2. **Skill output path** — the subpath under the Pages site where the docs site
+   will live (e.g. `skill-output/`). This is the path segment appended to the
+   repo's Pages base URL. Default: `skill-output/`.
+
+Copy the `design-system/` contents into the repo at the skill output path and
+push to `main`:
+
+```bash
+# From the project folder
+REPO_ROOT=<path-to-git-repo>
+SKILL_OUTPUT_PATH=<skill-output-path>   # e.g. skill-output
+
+# Copy docs site into repo at the correct subpath
+cp -r design-system/. "$REPO_ROOT/$SKILL_OUTPUT_PATH/"
+
+# Stage, commit, push
+cd "$REPO_ROOT"
+git add "$SKILL_OUTPUT_PATH/"
+git commit -m "Deploy design system skill output from <run-id>"
+git push
+```
+
+If GitHub Pages is not yet enabled on the repo, tell the user to enable it
+at Settings → Pages → Source: Deploy from branch `main`, folder `/` (root).
+
+After pushing, confirm the deployed URL:
+
+```
+https://<github-username>.github.io/<repo-name>/<skill-output-path>/
+```
+
+Record this URL in `CLAUDE.md` under a `## Deployed skill output` entry:
+
+```markdown
+## Deployed skill output
+- URL: https://<github-username>.github.io/<repo-name>/<skill-output-path>/
+- Run: <run-id>
+- Deployed: <date>
+```
+
+### 6.2 Visual QA
 
 Open the deployed site and verify:
 
@@ -313,7 +352,15 @@ Open the deployed site and verify:
 - No broken links (`../` vs direct).
 - Component page section order matches the template.
 
-If no browser is available, report the checklist to the user and ask them to spot-check.
+If no browser is available, report the checklist to the user and ask them to
+spot-check. Split automated vs manual checks:
+
+**Automated (Claude Code can verify):** validator exits 0, all expected HTML
+files exist, no bare `/components` hrefs, `<img>` tags have `onerror` handlers,
+Figma plugin `manifest.json` is valid JSON.
+
+**Manual (human browser required):** light/dark per page, burger menu, copy
+buttons, no broken images, mobile layout.
 
 ### Create output zip
 
@@ -347,6 +394,7 @@ Name it after the app hostname (e.g. `prometheus.io-design-system.zip`).
 - [ ] Figma plugin runs without crashing — font fallbacks tested.
 - [ ] Copy buttons work on all code blocks.
 - [ ] `CLAUDE.md` progress checklist fully checked off.
+- [ ] Docs site deployed to GitHub Pages and URL recorded in `CLAUDE.md`.
 
 ---
 
