@@ -15,13 +15,13 @@ Runs are numbered sequentially. A run corresponds to one end-to-end execution of
 Five skills form a self-improving loop. Each run produces a design system artifact set and a set of feedback documents. The feedback is then applied back to the skills before the next run.
 
 ```mermaid
-flowchart TD
+flowchart LR
     WEB(["Web App UI"])
-    CW["cowork\nVisual audit"]
-    CC["code\nExtract · build · deploy"]
-    CWW["cowork-wrapup\nDocument friction"]
-    CCW["code-wrapup\nDocument friction"]
-    AF["apply-feedback\nPatch skills · bump version"]
+    CW["Visual Audit\ncowork"]
+    CC["Extract & Build\ncode"]
+    CWW["Review Audit\ncowork-wrapup"]
+    CCW["Review Build\ncode-wrapup"]
+    AF["Improve Skills\napply-feedback"]
 
     WEB --> CW
     CW -->|"handoff zip"| CC
@@ -29,10 +29,10 @@ flowchart TD
     CC --> CCW
     CWW --> AF
     CCW --> AF
-    AF -.->|"improved skills"| WEB
+    AF ==>|"next run"| WEB
 ```
 
-All skills are prefixed with `design-system-extraction-`. Dashed line = feedback loop back to next run.
+All skill names in the diagram are shortened — the full prefix is `design-system-extraction-` (e.g. `design-system-extraction-cowork`). The thick arrow marks the feedback loop back into the next run.
 
 ### Skill summary
 
