@@ -167,6 +167,8 @@ The validator will error if `font_family` doesn't match any `families[].name` an
 
 Fill `figma_rgb` (0–1 range) on brand colors and `figma_effects` on shadows. Saves Phase 5 conversion work.
 
+Formula: divide each 0–255 channel value by 255. Example — `#F5A623` → `r = 245/255 = 0.961`, `g = 166/255 = 0.651`, `b = 35/255 = 0.137`. The validator checks that all channels are in [0, 1].
+
 **Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 
 ---
