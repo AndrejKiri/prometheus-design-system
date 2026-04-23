@@ -212,7 +212,18 @@ Write `audit-results.json` in the project folder, conforming to [`schemas/audit-
 
 Required fields: `app_url`, `audit_date`, `tool` (`"claude-cowork"`), `scope`, `pages_audited`, `patterns`, `inconsistencies`, `raw_observations`.
 
-Every inconsistency needs a unique `id` (`INC-001`, `INC-002`, …) — Claude Code cross-references these IDs in tokens.json and components.json.
+**Inconsistency IDs:** Use format `INC-NNN` with zero-padded 3-digit sequence (`INC-001`, `INC-002`, …). Order severe → minor. Reserve `INC-900+` for deferred/won't-fix. Claude Code cross-references these IDs in tokens.json and components.json.
+
+**`audit_date`:** Use ISO 8601 format `YYYY-MM-DD` (e.g. `"2026-04-21"`). The validator enforces this.
+
+**`additional_screenshots[].state`:** Use the controlled vocabulary from [`vocab/state-vocabulary.md`](vocab/state-vocabulary.md):
+- `light-theme`, `dark-theme`
+- `modal-open-<name>` (e.g. `modal-open-settings`)
+- `tab-<name>` (e.g. `tab-graph`)
+- `hover-<selector>` (e.g. `hover-target-row`)
+- `expanded-<group>` (e.g. `expanded-node_exporter`)
+- `error-<code>` (e.g. `error-503`)
+- `empty-state`, `loading-state`
 
 **Validate before handing off:**
 

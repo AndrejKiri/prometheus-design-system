@@ -31,6 +31,13 @@ from pathlib import Path
 
 # ─── Enums ───────────────────────────────────────────────────────────────────
 
+# Fix: issue #13 from run1 — INC-NNN format
+INC_ID_PATTERN = re.compile(r'^INC-\d{3}$')
+# Fix: issue #14 from run1 — ISO 8601 date
+DATE_PATTERN = re.compile(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2})?')
+# Fix: issue #15 from run1 — controlled state vocabulary
+STATE_VOCAB_PREFIXES = ("light-theme", "dark-theme", "modal-open-", "tab-", "hover-", "expanded-", "error-", "empty-state", "loading-state")
+
 SCOPE_TIERS = {"core", "core-plus-data", "full", "custom"}
 TOOLS = {"perplexity-computer", "claude-code", "claude-cowork", "manual"}
 PATTERN_CATEGORIES = {"navigation", "data-display", "input", "feedback", "layout", "overlay", "media", "utility"}
@@ -175,6 +182,13 @@ def validate_audit(data, project_dir, report):
     for field, ftype in [("app_url", str), ("audit_date", str), ("tool", str)]:
         check_required_field(data, field, ftype, report)
 
+    # Fix: issue #14 from run1 — ISO 8601 date format
+    if "audit_date" in data and isinstance(data["audit_date"], str):
+        if not DATE_PATTERN.match(data["audit_date"]):
+            report.error(f"audit_date '{data['audit_date']}' is not ISO 8601 format (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS)")
+        else:
+            report.ok(f"audit_date '{data['audit_date']}' is valid ISO 8601")
+
     # Tool enum
     if "tool" in data:
         if check_enum(data["tool"], TOOLS, report, "tool"):
@@ -219,8 +233,16 @@ def validate_audit(data, project_dir, report):
             # Additional screenshots
             if "additional_screenshots" in page and isinstance(page["additional_screenshots"], list):
                 for j, ss in enumerate(page["additional_screenshots"]):
-                    check_required_field(ss, "path", str, report, f"{ctx}.additional_screenshots[{j}]")
-                    check_required_field(ss, "state", str, report, f"{ctx}.additional_screenshots[{j}]")
+                    ssctx = f"{ctx}.additional_screenshots[{j}]"
+                    check_required_field(ss, "path", str, report, ssctx)
+                    check_required_field(ss, "state", str, report, ssctx)
+                    # Fix: issue #15 from run1 — validate state against controlled vocabulary
+                    if "state" in ss and isinstance(ss["state"], str):
+                        state = ss["state"]
+                        if not any(state.startswith(p) for p in STATE_VOCAB_PREFIXES):
+                            report.warn(f"{ssctx}: state '{state}' does not match controlled vocabulary. "
+                                        f"Use: light-theme, dark-theme, modal-open-<name>, tab-<name>, "
+                                        f"hover-<selector>, expanded-<group>, error-<code>, empty-state, loading-state")
                     if "path" in ss:
                         screenshot_paths.append(ss["path"])
 
@@ -273,6 +295,9 @@ def validate_audit(data, project_dir, report):
                 inc_id = inc["id"]
                 if inc_id in inconsistency_ids:
                     report.error(f"{ctx}: Duplicate inconsistency ID '{inc_id}'")
+                # Fix: issue #13 from run1 — enforce INC-NNN format
+                if not INC_ID_PATTERN.match(inc_id):
+                    report.error(f"{ctx}: ID '{inc_id}' does not match required format INC-NNN (e.g. INC-001)")
                 inconsistency_ids.add(inc_id)
 
             check_required_field(inc, "title", str, report, ctx)
