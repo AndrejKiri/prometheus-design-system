@@ -68,7 +68,7 @@ All output files (`source-audit.json`, `tokens.json`, `components.json`, `design
 Run the validator immediately on any existing files:
 
 ```bash
-python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>
+python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>
 ```
 
 The validator is progressive — it checks whatever files exist. Exit 0 = pass, 1 = errors, 2 = missing required files.
@@ -131,7 +131,7 @@ git clone --depth 1 <repo-url> source-code
 
 Write `source-audit.json` in the project folder, conforming to [`schemas/source-audit.schema.json`](schemas/source-audit.schema.json).
 
-**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+**Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 
 ---
 
@@ -187,7 +187,7 @@ Per component, document: name (PascalCase), slug (lowercase-hyphenated), descrip
 
 Populate `action_items[]` with PR-style task cards — one per inconsistency plus any improvement opportunities. Each card: priority, effort, labels, before/after, files changed.
 
-**Validate:** `python <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
+**Validate:** `python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>`
 
 ---
 

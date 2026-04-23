@@ -9,7 +9,7 @@ Validates audit-results.json, tokens.json, and components.json for:
 - File existence (screenshots)
 
 Usage:
-    python validate-handoff.py <project-directory>
+    python3 validate-handoff.py <project-directory>
 
     The project directory should contain:
     - audit-results.json
