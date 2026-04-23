@@ -222,7 +222,9 @@ Formula: divide each 0–255 channel value by 255. Example — `#F5A623` → `r 
 
 Read `audit-results.json` and `tokens.json`. Produce `components.json` conforming to [`schemas/components.schema.json`](schemas/components.schema.json).
 
-Per component, document: name (PascalCase), slug (lowercase-hyphenated), description, complexity (`simple`/`medium`/`complex`), category, pages, props, variants (with `mock_css_class` + `mock_html` for Phase 4 rendering), layout specs, dos/donts, accessibility notes, code example, `related_inconsistencies`, `origin` (`derived` or `docs-meta`).
+Per component, document: name (PascalCase — `StatusBadge`, `HealthPanel`, `DataTable`, never `status-badge` or `Status Badge`), slug (lowercase-hyphenated — `status-badge`, matches name), description, complexity (`simple`/`medium`/`complex`), category, pages, props, variants (with `mock_css_class` + `mock_html` for Phase 4 rendering), layout specs, dos/donts, accessibility notes, code example, `related_inconsistencies`, `origin` (`derived` or `docs-meta`).
+
+**Naming rules (enforced):** `name` is PascalCase with no spaces or hyphens. `slug` is `name.lower().replace(" ", "-")` converted to kebab-case. The two must match each other unambiguously — e.g. `StatusBadge` ↔ `status-badge`, `DataTable` ↔ `data-table`.
 
 ### Complexity tiers
 
