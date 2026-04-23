@@ -9,7 +9,11 @@ Validates audit-results.json, tokens.json, and components.json for:
 - File existence (screenshots)
 
 Usage:
-    python validate-handoff.py <project-directory>
+    python validate-handoff.py <project-directory> [--partial]
+
+    --partial  Suppress warnings for missing optional files (tokens.json,
+               components.json). Use during Phase 1 when only audit-results.json
+               exists. Missing optional files are silently skipped.
 
     The project directory should contain:
     - audit-results.json
@@ -23,6 +27,7 @@ Exit codes:
     2 = missing required files or invalid JSON
 """
 
+import argparse
 import json
 import os
 import sys
@@ -650,12 +655,19 @@ def validate_components(data, audit_url, pattern_names, inconsistency_ids, token
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python validate-handoff.py <project-directory>")
-        print("       The directory should contain audit-results.json, tokens.json, components.json")
-        sys.exit(2)
+    parser = argparse.ArgumentParser(
+        description="Validate handoff files for the design system extraction pipeline."
+    )
+    parser.add_argument("project_dir", help="Path to the project directory containing handoff files")
+    parser.add_argument(
+        "--partial",
+        action="store_true",
+        help="Suppress warnings for missing optional files (tokens.json, components.json). "
+             "Use during Phase 1 when audit-results.json is the only output so far.",
+    )
+    args = parser.parse_args()
 
-    project_dir = Path(sys.argv[1]).resolve()
+    project_dir = Path(args.project_dir).resolve()
     if not project_dir.is_dir():
         print(f"Error: '{project_dir}' is not a directory")
         sys.exit(2)
@@ -690,7 +702,7 @@ def main():
     token_names = set()
     if tokens_data is not None:
         token_names = validate_tokens(tokens_data, audit_url, has_dark_mode, report)
-    else:
+    elif not args.partial:
         report.set_file("tokens.json")
         report.warn("File not found — skipping token validation and token cross-reference checks")
 
@@ -700,7 +712,7 @@ def main():
         validate_components(
             components_data, audit_url, pattern_names, inconsistency_ids, token_names, report
         )
-    else:
+    elif not args.partial:
         report.set_file("components.json")
         report.warn("File not found — skipping component validation")
 
