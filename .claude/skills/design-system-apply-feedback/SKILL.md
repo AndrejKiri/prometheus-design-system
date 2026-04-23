@@ -9,7 +9,7 @@ description: >
   loop: run → wrapup → apply-feedback → improved skill → next run.
 metadata:
   author: AndrejKiri
-  version: '0.1'
+  version: '0.2'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   depends-on:
     - design-system-extraction-cowork-wrapup
@@ -161,26 +161,33 @@ Where `<skill-short-name>` is `cowork` or `code`.
 
 ## Phase 3 — Bump version and rebuild zips
 
-After all fixes for a skill are applied:
+This phase is **mandatory** whenever Phase 2 touched at least one skill. Do not
+skip it, even if only a single file was edited.
 
-1. **Bump the version** in the skill's `SKILL.md` frontmatter.
-   - Patch bump (0.1 → 0.2) when fixes are all MEDIUM or LOW.
-   - Minor bump (0.1 → 0.2 → 1.0) when at least one CRITICAL or HIGH fix is
-     applied.
+For **every skill that had any fix applied** (including `KNOWN-LIMITATIONS.md`
+appends and template/script/schema additions), run these steps:
+
+1. **Bump the patch version** in the skill's `SKILL.md` frontmatter.
+   - Default: always **patch bump** (e.g. `0.1` → `0.2`, `0.2` → `0.3`).
    - Use semantic form `'<major>.<minor>'` in the YAML frontmatter.
+   - Only do a minor/major bump if the user explicitly requests it.
 
 2. **Rebuild the zip** at `.claude/skills/<skill-name>-v<new-version>.zip`.
    Remove the old version zip if the version number changed. The zip should
    contain the full skill directory:
    ```bash
    cd .claude/skills
-   zip -r <skill-name>-v<version>.zip <skill-name>/
+   rm -f <skill-name>-v<old-version>.zip
+   zip -r <skill-name>-v<new-version>.zip <skill-name>/
    ```
 
 3. **Commit** the version bump and new zip together:
    ```
-   chore(<skill-short-name>): bump to v<version> after <run-id> fixes
+   chore(<skill-short-name>): bump to v<new-version> after <run-id> fixes
    ```
+
+Apply steps 1–3 to each modified skill independently. If a run touched both
+the cowork and code skills, both get a version bump and a fresh zip.
 
 ---
 
