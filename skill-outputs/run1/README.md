@@ -20,8 +20,8 @@ Both skills ran to completion (validator exit 0, 25/25 PASS). Screenshots in the
 
 | File | Description |
 |------|-------------|
-| [`run1-feedback-skill-ui-audit.md`](run1-feedback-skill-ui-audit.md) | Post-run analysis of the ui-audit (Cowork) skill. 16 friction points documented — screenshot export failure, delete permissions, naming drift, async JS limitations, and more — each with a root-cause analysis and a concrete fix tagged by target (`[skill]`, `[validator]`, `[cowork]`, `[handoff-to-cc]`). |
-| [`run1-feedback-skill-design-system.md`](run1-feedback-skill-design-system.md) | Post-run analysis of the extract-design-system (Claude Code) skill. Schema ambiguities, validator edge cases, and gen.py/Figma issues, all with proposed fixes. |
+| [`run1-feedback-skill-design-system-extraction-cowork.md`](run1-feedback-skill-design-system-extraction-cowork.md) | Post-run analysis of the design-system-extraction-cowork skill. 16 friction points documented — screenshot export failure, delete permissions, naming drift, async JS limitations, and more — each with a root-cause analysis and a concrete fix tagged by target (`[skill]`, `[validator]`, `[cowork]`, `[handoff-to-cc]`). |
+| [`run1-feedback-skill-design-system-extraction-code.md`](run1-feedback-skill-design-system-extraction-code.md) | Post-run analysis of the design-system-extraction-code skill. Schema ambiguities, validator edge cases, and gen.py/Figma issues, all with proposed fixes. |
 | [`run1-feedback-baseline-vs-output-comparison.md`](run1-feedback-baseline-vs-output-comparison.md) | Side-by-side comparison of the skill-output documentation site against the hand-authored reference design system site. Covers visual structure, token coverage, component depth, and framing differences. |
 
 ### Visual diff

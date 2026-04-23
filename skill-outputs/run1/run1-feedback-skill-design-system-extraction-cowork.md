@@ -1,13 +1,13 @@
-# ui-audit skill — problems encountered & proposed fixes
+# design-system-extraction-cowork skill — problems encountered & proposed fixes
 
-Handoff to Claude Code. The ui-audit skill ran to completion against
+Handoff to Claude Code. The design-system-extraction-cowork skill ran to completion against
 https://prometheus-e83j.onrender.com but hit several friction points that either
 silently degraded the output (screenshots replaced with 1×1 placeholders) or
 cost meaningful conversation turns to work around. This document enumerates
 every issue, its root cause, and a concrete fix — with each fix tagged by who
 should implement it:
 
-- **[skill]** — change the ui-audit skill itself (prompt, scripts, README)
+- **[skill]** — change the design-system-extraction-cowork skill itself (prompt, scripts, README)
 - **[validator]** — change `scripts/validate-handoff.py`
 - **[cowork]** — change Cowork's sandbox plumbing (out of scope for a skill fix;
   noted so Claude Code knows what not to try to solve)
@@ -456,7 +456,7 @@ Don't let the skill promise these:
 ## Suggested SKILL.md structure after fixes
 
 ```
-ui-audit/
+design-system-extraction-cowork/
 ├── SKILL.md                       (rewritten per above)
 ├── README.md
 ├── scripts/
@@ -487,8 +487,8 @@ ui-audit/
    cross-referencing each pattern to its source component.
 5. Produce `tokens.json` from the authored Mantine theme + CSS custom props.
 6. Proceed to Phase 2 (token extraction) and Phase 3 (components) as the
-   current ui-audit skill directs.
+   current design-system-extraction-cowork skill directs.
 
-At the same time, open a PR against the ui-audit skill with the fixes above.
+At the same time, open a PR against the design-system-extraction-cowork skill with the fixes above.
 Prioritize #1 (screenshot export), #3 (delete perms), and #10 (naming
 convention) — these had the largest impact on this run.

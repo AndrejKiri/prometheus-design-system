@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prometheus Design System — Live Side-by-Side Comparison</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f1f3f5; color: #212529; }
+  header { padding: 12px 16px; background: rgb(65,73,81); color: #fff; display: flex; gap: 16px; align-items: center; }
+  header h1 { margin: 0; font-size: 16px; font-weight: 600; }
+  header .meta { color: #ced4da; font-size: 12px; margin-left: auto; }
+  header select, header input, header button {
+    background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+    padding: 6px 10px; border-radius: 4px; font-size: 12px;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #dee2e6; height: calc(100vh - 56px); }
+  .pane { display: flex; flex-direction: column; background: #fff; min-width: 0; }
+  .pane-header { padding: 6px 10px; background: #f8f9fa; border-bottom: 1px solid #dee2e6; font-size: 11px; display: flex; gap: 8px; align-items: center; }
+  .pane-header .label { font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #495057; }
+  .pane-header .url { color: #868e96; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pane-header a { margin-left: auto; font-size: 11px; color: #228be6; text-decoration: none; }
+  iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Prometheus Design System — Live Side-by-Side</h1>
+  <label style="font-size:12px">Page:
+    <select id="pageSelect">
+      <option value="index.html">Home</option>
+      <option value="tokens.html">Tokens</option>
+      <option value="icons.html">Icons</option>
+      <option value="components.html">Components</option>
+      <option value="patterns.html">Patterns</option>
+      <option value="action-items.html">Action Items</option>
+    </select>
+  </label>
+  <span class="meta">Both frames navigate together. Scroll each independently.</span>
+</header>
+<div class="grid">
+  <div class="pane">
+    <div class="pane-header">
+      <span class="label">Reference</span>
+      <span class="url" id="leftUrl"></span>
+      <a id="leftOpen" target="_blank" rel="noopener">open ↗</a>
+    </div>
+    <iframe id="leftFrame" title="Reference site"></iframe>
+  </div>
+  <div class="pane">
+    <div class="pane-header">
+      <span class="label">Skill Output</span>
+      <span class="url" id="rightUrl"></span>
+      <a id="rightOpen" target="_blank" rel="noopener">open ↗</a>
+    </div>
+    <iframe id="rightFrame" title="Skill-output site"></iframe>
+  </div>
+</div>
+<script>
+  const REF_BASE = "https://andrejkiri.github.io/prometheus-design-system/";
+  const SKILL_BASE = "https://andrejkiri.github.io/prometheus-design-system/skill-output/";
+  const sel = document.getElementById("pageSelect");
+  const leftFrame = document.getElementById("leftFrame");
+  const rightFrame = document.getElementById("rightFrame");
+  const leftUrl = document.getElementById("leftUrl");
+  const rightUrl = document.getElementById("rightUrl");
+  const leftOpen = document.getElementById("leftOpen");
+  const rightOpen = document.getElementById("rightOpen");
+  function update() {
+    const p = sel.value;
+    const l = REF_BASE + p;
+    const r = SKILL_BASE + p;
+    leftFrame.src = l; rightFrame.src = r;
+    leftUrl.textContent = l; rightUrl.textContent = r;
+    leftOpen.href = l; rightOpen.href = r;
+  }
+  sel.addEventListener("change", update);
+  update();
+</script>
+</body>
+</html>
