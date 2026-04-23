@@ -93,11 +93,14 @@ All output files (`source-audit.json`, `tokens.json`, `components.json`, `design
 | No `audit-results.json`, but source repo provided | → Run Phase 1-Source, then Phase 2 |
 | Neither | → Stop. Tell the user to run the `design-system-extraction-cowork` skill first, or provide a source repo URL |
 
-Run the validator immediately on any existing files:
+Run the validator immediately on any existing files. The skill directory is where the `design-system-extraction-code/` tree lives, **not** the project folder:
 
 ```bash
-python3 <path-to-this-skill>/scripts/validate-handoff.py <project-folder>
+SKILL_DIR="$(dirname "$(find ~/.claude ~/.config/claude -name design-system-extraction-code -type d 2>/dev/null | head -1)")"
+python3 "$SKILL_DIR/design-system-extraction-code/scripts/validate-handoff.py" --project "<project-folder>"
 ```
+
+Or if invoked via a slash command that already resolves the skill path, use the literal path from the arguments. The validator accepts either `--project <path>` or a positional `<path>` — prefer `--project` in scripts to avoid ambiguity.
 
 The validator is progressive — it checks whatever files exist. Exit 0 = pass, 1 = errors, 2 = missing required files.
 

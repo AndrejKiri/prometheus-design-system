@@ -10,6 +10,11 @@ Validates audit-results.json, tokens.json, and components.json for:
 
 Usage:
     python3 validate-handoff.py <project-directory>
+    python3 validate-handoff.py --project <project-directory>
+
+    Both forms accept an absolute or relative path. Use the --project flag
+    form inside shell scripts where the path is constructed dynamically and
+    might otherwise be misparsed as another option.
 
     The project directory should contain:
     - audit-results.json
@@ -23,6 +28,7 @@ Exit codes:
     2 = missing required files or invalid JSON
 """
 
+import argparse
 import json
 import os
 import sys
@@ -598,12 +604,29 @@ def validate_components(data, audit_url, pattern_names, inconsistency_ids, token
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main():
-    if len(sys.argv) < 2:
-        print("Usage: python validate-handoff.py <project-directory>")
-        print("       The directory should contain audit-results.json, tokens.json, components.json")
+    parser = argparse.ArgumentParser(
+        description="Validate audit-results.json, tokens.json, and components.json handoff files.",
+    )
+    parser.add_argument(
+        "project_dir",
+        nargs="?",
+        help="Path to the project directory containing handoff files. "
+             "Can also be passed via --project. Required.",
+    )
+    parser.add_argument(
+        "--project",
+        dest="project_flag",
+        help="Explicit project directory (alternative to positional arg).",
+    )
+    args = parser.parse_args()
+
+    project_arg = args.project_flag or args.project_dir
+    if not project_arg:
+        parser.print_help()
+        print("\nError: project directory is required (positional arg or --project).")
         sys.exit(2)
 
-    project_dir = Path(sys.argv[1]).resolve()
+    project_dir = Path(project_arg).resolve()
     if not project_dir.is_dir():
         print(f"Error: '{project_dir}' is not a directory")
         sys.exit(2)
