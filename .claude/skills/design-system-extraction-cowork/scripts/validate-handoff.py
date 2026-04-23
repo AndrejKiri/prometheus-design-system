@@ -47,6 +47,20 @@ TYPOGRAPHY_CATEGORIES = {"heading", "body", "label", "code", "display"}
 FONT_WEIGHTS = {100, 200, 300, 400, 500, 600, 700, 800, 900}
 SLUG_PATTERN = re.compile(r'^[a-z0-9-]+$')
 
+# ─── Helpers (pre-reporter) ──────────────────────────────────────────────────
+
+def _edit_distance(a, b):
+    """Simple Levenshtein distance for near-miss pattern name detection."""
+    if len(a) > len(b):
+        a, b = b, a
+    row = list(range(len(a) + 1))
+    for j, cb in enumerate(b, 1):
+        new_row = [j]
+        for i, ca in enumerate(a, 1):
+            new_row.append(min(row[i] + 1, new_row[-1] + 1, row[i - 1] + (ca != cb)))
+        row = new_row
+    return row[-1]
+
 # ─── Reporter ────────────────────────────────────────────────────────────────
 
 class Report:
@@ -236,6 +250,10 @@ def validate_audit(data, project_dir, report):
     if orphan_elements:
         for elem in sorted(orphan_elements):
             report.error(f"Element '{elem}' appears in pages_audited but has no matching entry in patterns[]")
+            # Fix: issue #10 from run1 — fuzzy near-miss hint
+            close = [p for p in pattern_names if _edit_distance(elem.lower(), p.lower()) <= 3]
+            if close:
+                report.warn(f"  Near-miss patterns for '{elem}': {close} — did you mean one of these?")
     else:
         report.ok(f"All {len(page_elements)} element names in pages match pattern entries")
 

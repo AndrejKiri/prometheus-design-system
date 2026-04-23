@@ -130,6 +130,15 @@ For each page, produce an inventory table:
 
 Be exhaustive within scope — scroll to the bottom, expand everything, miss nothing.
 
+**Pattern naming convention** — use the same name every time a pattern appears across pages. Name drift (`"Mantine Card (same wrapper)"` on page A vs `"Card Title with Icon"` on page B for the same element) causes validator cross-reference errors.
+
+Rules:
+- Title Case, noun-phrase form (`Primary Button`, not `Primary Buttons` or `Button: Primary`)
+- Parenthetical qualifiers for variants: `Filter Input (Pills)` vs `Filter Input (Single Field)`
+- Framework-prefix only when it disambiguates: `Mantine Alert Info Callout` ✓, `Mantine Card` ✓
+- Start from [`vocab/patterns-vocabulary.md`](vocab/patterns-vocabulary.md) — extend it, don't invent parallel vocabulary
+- Lock in names after the **first page** — reuse them exactly on all subsequent pages
+
 ### 1.3 Identify inconsistencies
 
 This is the primary deliverable. For each inconsistency:
