@@ -264,6 +264,16 @@ When ≥ 3 action items share a theme (e.g. "replace hardcoded colors with token
 
 Read `tokens.json`, `components.json`, `audit-results.json`. Produce a static HTML/CSS/JS site — no frameworks, no build step. Write all files into a `design-system/` subdirectory of the project folder.
 
+### Homepage acknowledgements
+
+Add a short **Acknowledgements** section below the card grid crediting:
+
+- The audited application (URL, short description).
+- The design-system-extraction pipeline (link to the skill repo if available).
+- Any upstream design systems the audited app inherited from (Material, Tailwind, Mantine, etc.) if detectable from `source-audit.json`.
+
+One `<section class="acknowledgements">` with 2–3 sentences is enough — not a full credits roll.
+
 ### Homepage card grid — 5 category cards, not 9 emoji cards
 
 The homepage card grid has exactly **5 cards**, each tagged with a category label (no emojis):
