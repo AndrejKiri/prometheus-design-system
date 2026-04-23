@@ -180,6 +180,16 @@ Read `audit-results.json` (and `source-audit.json` if available). Produce `token
 | `typography.styles` | ≥ 1 heading, 1 body, 1 code style |
 | `border_radius` | named scale |
 
+### Handling gaps in audit-results.json
+
+When `audit-results.json` is incomplete (missing pages, sparse elements, placeholder screenshots), do not stop. Document the gap and continue:
+
+1. Note missing pages in `tokens.json` under a `"gaps"` array: `{ "type": "missing-page", "page": "/alerts", "reason": "not in audit scope" }`.
+2. For tokens that can't be derived visually, mark them with `"source": "inferred"` and add a note.
+3. Set `tokens.json[].source = "visual-audit"` unless you have source-code confirmation — never upgrade to `"both"` speculatively.
+
+A partial audit is a valid input. Produce the best output you can from what exists, and flag the gaps explicitly.
+
 ### `typography.styles[].font_family` is a reference key
 
 `font_family` must exactly match a `typography.families[].name` value — it is NOT a CSS font-family string. Example:

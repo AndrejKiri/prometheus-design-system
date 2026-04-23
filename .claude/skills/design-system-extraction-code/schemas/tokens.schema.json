@@ -271,6 +271,23 @@
           }
         }
       }
+    },
+    "gaps": {
+      "type": "array",
+      "description": "Documented gaps where audit-results.json was incomplete. Allows partial inputs without failing validation.",
+      "items": {
+        "type": "object",
+        "required": ["type", "reason"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["missing-page", "placeholder-screenshot", "inferred-value", "incomplete-pattern"]
+          },
+          "page": { "type": "string" },
+          "token": { "type": "string" },
+          "reason": { "type": "string" }
+        }
+      }
     }
   }
 }
