@@ -19,20 +19,26 @@ flowchart LR
     WEB(["Web App UI"])
     CW["Visual Audit\ncowork"]
     CC["Extract & Build\ncode"]
+    DS(["Design System\ntokens • components • docs • Figma"])
     CWW["Review Audit\ncowork-wrapup"]
     CCW["Review Build\ncode-wrapup"]
     AF["Improve Skills\napply-feedback"]
 
-    WEB --> CW
-    CW -->|"handoff zip"| CC
-    CW --> CWW
-    CC --> CCW
-    CWW --> AF
-    CCW --> AF
-    AF ==>|"next run"| WEB
+    WEB ==> CW
+    CW ==>|"handoff zip"| CC
+    CC ==> DS
+
+    CW -.-> CWW
+    CC -.-> CCW
+    CWW -.-> AF
+    CCW -.-> AF
+    AF -.->|"next run"| WEB
+
+    classDef output fill:#d4edda,stroke:#28a745,stroke-width:2px,color:#155724
+    class DS output
 ```
 
-All skill names in the diagram are shortened — the full prefix is `design-system-extraction-` (e.g. `design-system-extraction-cowork`). The thick arrow marks the feedback loop back into the next run.
+All skill names in the diagram are shortened — the full prefix is `design-system-extraction-` (e.g. `design-system-extraction-cowork`). Thick solid arrows mark the main flow that produces the design system. Dashed arrows mark the secondary learning loop that feeds improvements back into the next run.
 
 ### Skill summary
 
