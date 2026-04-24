@@ -1,0 +1,19 @@
+{
+  "page": {"url": "/service-discovery", "scheme": "light"},
+  "layout": "Three filter row (Select scrape pool | PillsInput state | Search labels) + collapse-all icon. Accordion per scrape pool.",
+  "filters": {
+    "select_scrape_pool": {"placeholder": "Select scrape pool", "component": "Combobox/Select", "reused_from": "/targets"},
+    "filter_by_state": {"placeholder": "Filter by state", "component": "PillsInput multi-select"},
+    "search_input": {"placeholder": "Filter by labels", "note": "Different placeholder than /targets ('Filter by endpoint or labels') — subtle inconsistency; this one filters by labels only"}
+  },
+  "accordion_items": "Same style as /targets — white bg, borderRadius 4px, borderLeft 5px solid green (up) / red (down).",
+  "panel_layout": "Two-column: 'Discovered labels' (left) vs 'Target labels' (right). Each a stack of pill-badges like __address__=\"...\", job=\"demo\".",
+  "link_show_relabeling": {
+    "text": "show relabeling",
+    "color": "rgb(34, 139, 230)",
+    "fontWeight": "regular",
+    "note": "Displayed as a raw text link inside the panel. Other places use buttons for inline actions — this is a Mantine Anchor (text link) as a disclosure trigger. Inconsistency with other in-app action buttons."
+  },
+  "status_indicator": "Green circle next to 'N / M' counter; chevron to expand/collapse accordion.",
+  "page_similarity_to_targets": "Same accordion/filter/status-circle/borderLeft color system; shares patterns. Content columns differ."
+}

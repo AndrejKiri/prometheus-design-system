@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Title without Icon — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">Card Title without Icon</h1>
+    <p class="doc-subtitle">Plain-text card heading used on /tsdb-status — &#x27;TSDB Head Status&#x27;, &#x27;Top 10 label names…&#x27;. Non-canonical; should migrate to Card Title with Icon.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>Migrate each instance to Card Title with Icon and pick a tabler glyph that reflects the content.</p></div><div class="dont-item"><strong>DON'T</strong><p>Use new. Four stacked plain-text cards blur together — add an icon per card.</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>default</h3><div class="mock-preview"><div class="mock-card-title">TSDB Head Status</div></div><p class="variant-desc">heading/card-title text, no icon.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/tsdb-status</figcaption><img src="../screenshots/tsdb-status-light.jpg" alt="/tsdb-status light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;CardTitle&gt;TSDB Head Status&lt;/CardTitle&gt;  // deprecated — use CardTitle with icon</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>font-size</td><td><code>18px</code> <code>heading/card-title</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody></tbody></table>
+
+    <h2 id="inconsistencies">Related inconsistencies</h2><ul class="rel-inc"><li><a href="../inconsistencies.html#inc-005">INC-005</a></li></ul>
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "page": {"url": "/flags", "scheme": "light"},
+  "layout": "Single Card wrapping a search input + sortable 2-column table.",
+  "card": {"bg": "rgb(255, 255, 255)", "border": "1px solid rgb(222, 226, 230)", "borderRadius": "4px", "padding": "16px"},
+  "card_title_missing": {
+    "INCONSISTENCY": "This Card has NO title. /status has 'Build information' / 'Runtime information'. /tsdb-status has 'TSDB Head Status' etc. /flags drops straight into the search input without any card heading."
+  },
+  "search_input": {
+    "placeholder": "Filter by flag name or value",
+    "bg": "rgb(255, 255, 255)",
+    "borderColor": "rgb(206, 212, 218)",
+    "borderRadius": "4px",
+    "height": "~36px",
+    "padding_left_for_icon": "visible — search icon rendered inline"
+  },
+  "table": {
+    "columns": ["Flag", "Value"],
+    "both_sortable": true,
+    "sort_icon_presence": "Yes — up/down chevron stack at right of each TH (mantine-Table-th class + custom sort styling)",
+    "INCONSISTENCY": "/flags has sortable columns. /status, /tsdb-status, /config show similar tables with NO sort icons. Only /flags has sortability in tables."
+  },
+  "cell_content_wrapping": {
+    "both_cols_wrapped_in_code": true,
+    "example_rows": [
+      {"flag": "--agent", "value": "false"},
+      {"flag": "--alertmanager.notification-batch-size", "value": "256"},
+      {"flag": "--config.file", "value": "/etc/prometheus/prometheus.yml"},
+      {"flag": "--log.level", "value": "info"}
+    ],
+    "note": "Every td cell on this page renders as <code>value</code> — both the flag name AND the value. So everything is monospace."
+  },
+  "monospace_pattern": "<code> browser-default monospace font-family; fontSize 14px; no bg, no padding, no borderRadius — raw inline code."
+}

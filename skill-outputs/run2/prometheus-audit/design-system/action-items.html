@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Action Items — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link" href="components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link active" href="action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1>Action Items</h1>
+    <p class="doc-subtitle">18 PR-style tasks. Priority and effort are set during extraction; refine as needed when triaging.</p>
+<h2 id="p1-high">High priority <span class="count">2</span></h2>
+<article class="action-card" data-priority="p1-high" id="AI-002">
+  <header class="action-card-header">
+    <span class="tag tag-priority p1">p1-high</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-002</span>
+    <span class="action-card-title">Promote Health Status Badge to every boolean-state field</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span> <span class="tag">accessibility</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-002">INC-002</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=HealthBadge: unify success/failure affordance across /status&labels=inconsistency,component,accessibility">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Wrap every UP/DOWN/Successful/Failed/Ready field in &lt;HealthBadge&gt;. Today /status renders &#x27;Configuration Reload: Successful&#x27; as plain black text so failure and success look identical at a glance.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;td&gt;Successful&lt;/td&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;td&gt;&lt;HealthBadge value=&quot;Successful&quot; /&gt;&lt;/td&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/HealthBadge.tsx</code></li><li><code>web/ui/pages/Status.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p1-high" id="AI-003">
+  <header class="action-card-header">
+    <span class="tag tag-priority p1">p1-high</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-003</span>
+    <span class="action-card-title">Replace bare &lt;code&gt; with Label Badge on /tsdb-status and /flags</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-003">INC-003</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=LabelBadge: unify label/flag rendering across /tsdb-status and /flags&labels=inconsistency,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Label names on /tsdb-status and flag names on /flags render as bare &lt;code&gt;, while the same concept renders as a pill Label Badge on /targets. Unify on the pill form.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;code&gt;__name__&lt;/code&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;LabelBadge&gt;__name__&lt;/LabelBadge&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/pages/TSDBStatus.tsx</code></li><li><code>web/ui/pages/Flags.tsx</code></li></ul></details>
+  </div>
+</article>
+<h2 id="p2-medium">Medium priority <span class="count">7</span></h2>
+<article class="action-card" data-priority="p2-medium" id="AI-001">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-001</span>
+    <span class="action-card-title">Drop duplicate body on empty-state Alerts</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-001">INC-001</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Empty-state Alert: drop duplicate body or replace with setup guidance&labels=inconsistency,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Today the empty-state Alert on /alerts, /rules, and both /alertmanager-discovery cards renders the same string twice (title + body). Delete the body prop or replace it with actionable setup guidance.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;Alert title=&quot;No rules found&quot;&gt;No rules found.&lt;/Alert&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;Alert title=&quot;No alerting rules found&quot;&gt;Configure alert rules in prometheus.yml under the &lt;code&gt;rule_files&lt;/code&gt; key.&lt;/Alert&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/pages/Alerts.tsx</code></li><li><code>web/ui/pages/Rules.tsx</code></li><li><code>web/ui/pages/AlertmanagerDiscovery.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-004">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-004</span>
+    <span class="action-card-title">Make every Table sortable by default</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span> <span class="tag">accessibility</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-004">INC-004</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Table: default to sortable columns with aria-sort&labels=inconsistency,component,accessibility">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Flip the Table wrapper default to sortable. Keep an opt-out for cases where source-order matters (Build/Runtime KV tables).</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;Table&gt;…&lt;/Table&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;Table sortable&gt;…&lt;/Table&gt;   // now the default</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/Table.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-005">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-005</span>
+    <span class="action-card-title">Unify Card title treatment — always icon + text</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-005">INC-005</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Card titles: always lead with a Tabler icon + wrap /flags and /config&labels=inconsistency,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Four stacked TSDB cards plus the title-less Flags card and Card-less Config section break the page-chrome pattern established on /status and /alertmanager-discovery. Add &lt;CardTitle icon=… /&gt; to each and wrap Flags + Config in Card.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;Card&gt;&lt;h3&gt;TSDB Head Status&lt;/h3&gt;…&lt;/Card&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;Card&gt;&lt;CardTitle icon={IconDatabase}&gt;TSDB Head Status&lt;/CardTitle&gt;…&lt;/Card&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/pages/TSDBStatus.tsx</code></li><li><code>web/ui/pages/Flags.tsx</code></li><li><code>web/ui/pages/Config.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-008">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-008</span>
+    <span class="action-card-title">Define --font-family-mono and apply everywhere</span>
+    <span class="tag">inconsistency</span> <span class="tag">tokens</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-008">INC-008</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Define --font-family-mono and bind pre/code to it&labels=inconsistency,tokens">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>pre and code currently resolve to the bare &#x27;monospace&#x27; keyword — falls back to Courier on most OSes. Introduce a single CSS custom property with a modern stack and point every pre/code at it.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>pre, code { font-family: monospace; }</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>--font-family-mono: ui-monospace, SFMono-Regular, &#x27;SF Mono&#x27;, Menlo, Consolas, &#x27;Liberation Mono&#x27;, monospace;
+pre, code { font-family: var(--font-family-mono); }</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/styles/theme.css</code></li><li><code>web/ui/styles/global.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-011">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-011</span>
+    <span class="action-card-title">Add focus-visible outline to Icon Buttons in the header</span>
+    <span class="tag">accessibility</span> <span class="tag">component</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Icon Button: stronger focus-visible outline on dark header&labels=accessibility,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Header Icon Buttons inherit the default Mantine focus ring (faint on the slate header). Promote to a 2px brand-blue outline for keyboard users.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>.mantine-ActionIcon-root:focus-visible { outline: 1px solid rgba(34,139,230,0.5); }</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>.mantine-ActionIcon-root:focus-visible { outline: 2px solid rgb(34,139,230); outline-offset: 2px; }</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/styles/theme.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-013">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-013</span>
+    <span class="action-card-title">Responsive review — header collapses below 768px</span>
+    <span class="tag">responsive</span> <span class="tag">component</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Header: responsive burger + drawer below 768px&labels=responsive,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>The header nav buttons and utility icons crowd on tablet widths. Introduce a burger at &lt;768px that collapses the nav into a drawer; keep theme toggle visible.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;header&gt;&lt;nav&gt;…all buttons…&lt;/nav&gt;&lt;tools&gt;…&lt;/tools&gt;&lt;/header&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;header&gt;&lt;button class=&quot;burger&quot;&gt;☰&lt;/button&gt;&lt;tools&gt;…&lt;/tools&gt;&lt;/header&gt;  /* sidebar drawer at &lt;768px */</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/Header.tsx</code></li><li><code>web/ui/styles/responsive.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p2-medium" id="AI-015">
+  <header class="action-card-header">
+    <span class="tag tag-priority p2">p2-medium</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-015</span>
+    <span class="action-card-title">Add aria-sort to Sortable Table headers</span>
+    <span class="tag">accessibility</span> <span class="tag">component</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Sortable Table: emit aria-sort on th&labels=accessibility,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>/flags sortable headers currently lack aria-sort. Screen readers announce them as plain columns.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;th onClick={sort}&gt;Flag&lt;/th&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;th aria-sort={order} onClick={sort}&gt;Flag&lt;/th&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/Table.tsx</code></li></ul></details>
+  </div>
+</article>
+<h2 id="p3-low">Low priority <span class="count">9</span></h2>
+<article class="action-card" data-priority="p3-low" id="AI-006">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-006</span>
+    <span class="action-card-title">Stabilize highlight.js role-to-color across themes</span>
+    <span class="tag">inconsistency</span> <span class="tag">tokens</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-006">INC-006</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Syntax highlighting: stop swapping role→hue between themes&labels=inconsistency,tokens">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>YAML keys render green in light and blue in dark; strings do the opposite. Pick a stable hue per role (keys=green, strings=blue) and vary only luminance between themes.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>[data-theme=&quot;dark&quot;] .hljs-attr { color: rgb(165,216,255); } /* blue */</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>[data-theme=&quot;dark&quot;] .hljs-attr { color: var(--doc-syntax-key-dark); } /* green family */</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/styles/hljs-theme.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-007">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-007</span>
+    <span class="action-card-title">Parameterize empty-state copy per rule type</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span> <span class="tag">documentation</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-007">INC-007</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=EmptyState: qualify &#x27;No rules found&#x27; by rule type&labels=inconsistency,component,documentation">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>&#x27;No rules found&#x27; is ambiguous when two different rule types share the string. Say &#x27;No alerting rules found&#x27; on /alerts and &#x27;No recording rules found&#x27; on /rules.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;EmptyState title=&quot;No rules found&quot; /&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;EmptyState ruleType=&quot;alerting&quot; /&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/EmptyState.tsx</code></li><li><code>web/ui/pages/Alerts.tsx</code></li><li><code>web/ui/pages/Rules.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-009">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-009</span>
+    <span class="action-card-title">Fix Stats Badge uppercase mismatch</span>
+    <span class="tag">inconsistency</span> <span class="tag">component</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-009">INC-009</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=StatsBadge: set text-transform:none at the root&labels=inconsistency,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Root .mantine-Badge-root resolves to text-transform:uppercase but the inner .mantine-Badge-label overrides to none. Intent mismatches output — set text-transform:none at the root for the stats variant.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;Badge variant=&quot;default&quot;&gt;573ms&lt;/Badge&gt;  /* root: uppercase, label: none */</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;StatsBadge&gt;573ms&lt;/StatsBadge&gt;  /* root: none — matches intent */</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/StatsBadge.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-010">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-010</span>
+    <span class="action-card-title">Add Copy Button to the Flags table</span>
+    <span class="tag">component</span> <span class="tag">accessibility</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Flags: add Copy Button per row&labels=component,accessibility">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Flag names and values are among the most-copied strings in the UI but /flags has no Copy Button — users hand-select cells. Mirror the /config Copy Button on each row.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;td&gt;&lt;code&gt;--config.file&lt;/code&gt;&lt;/td&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;td&gt;&lt;code&gt;--config.file&lt;/code&gt; &lt;CopyButton value=&quot;--config.file&quot; /&gt;&lt;/td&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/pages/Flags.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-012">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-012</span>
+    <span class="action-card-title">Tokenize hardcoded spacing in page layouts</span>
+    <span class="tag">tokens</span> <span class="tag">refactor</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Replace inline px values with spacing tokens&labels=tokens,refactor">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Several page files use literal `16px`, `24px`, `8px 16px` in inline styles. Replace with the named scale (lg, xl, sm) or the layout semantics (card-padding, header-height).</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>&lt;div style={{ padding: &#x27;16px&#x27;, marginTop: &#x27;24px&#x27; }}&gt;</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>&lt;div style={{ padding: &#x27;var(--spacing-lg)&#x27;, marginTop: &#x27;var(--spacing-xl)&#x27; }}&gt;</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/pages/Query.tsx</code></li><li><code>web/ui/pages/Targets.tsx</code></li><li><code>web/ui/pages/Status.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-014">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-014</span>
+    <span class="action-card-title">Deprecate Card Title without Icon</span>
+    <span class="tag">component</span> <span class="tag">refactor</span>
+    <a class="rel-inc-link" href="inconsistencies.html#inc-005">INC-005</a>
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=CardTitle: deprecate the iconless variant&labels=component,refactor">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Mark the variant deprecated, route call-sites through Card Title with Icon. Covered by AI-005 for /tsdb-status; this issue tracks the component-level deprecation.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>export const CardTitle = ({children}) =&gt; …</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>export const CardTitle = ({icon, children}) =&gt; { if (!icon) console.warn(&#x27;CardTitle: icon is required&#x27;); … }</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/components/CardTitle.tsx</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-016">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-016</span>
+    <span class="action-card-title">Add :hover underline to Link component</span>
+    <span class="tag">accessibility</span> <span class="tag">component</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Link: underline on hover and keyboard focus&labels=accessibility,component">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Link renders without underline — fine for color-sighted users, fails for users who rely on non-color affordances. Underline on :hover and :focus.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>a { color: rgb(34,139,230); text-decoration: none; }</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>a { color: rgb(34,139,230); text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; }</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>web/ui/styles/theme.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-017">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">medium</span>
+    <span class="action-card-id">AI-017</span>
+    <span class="action-card-title">Document the tokens.json → CSS variable mapping</span>
+    <span class="tag">documentation</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Emit tokens.css from tokens.json&labels=documentation">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Tokens exist in Mantine theme but are not published as a single CSS custom-property file. Emit tokens.css from tokens.json and ship it on the docs site for copy-paste consumption.</p>
+    
+    <details class="files-changed"><summary>Files</summary><ul><li><code>scripts/tokens-to-css.py</code></li><li><code>web/ui/styles/tokens.css</code></li></ul></details>
+  </div>
+</article>
+
+<article class="action-card" data-priority="p3-low" id="AI-018">
+  <header class="action-card-header">
+    <span class="tag tag-priority p3">p3-low</span>
+    <span class="tag tag-effort">easy</span>
+    <span class="action-card-id">AI-018</span>
+    <span class="action-card-title">Introduce --doc-status-warn for pending states</span>
+    <span class="tag">tokens</span>
+    
+    <a class="issue-link" target="_blank" rel="noopener" href="https://github.com/AndrejKiri/prometheus-design-system/issues/new?title=Tokens: add status.warn&labels=tokens">Open issue</a>
+  </header>
+  <div class="action-card-body">
+    <p>Status scale covers ok/error/info but no &#x27;warn&#x27; — once Alertmanager &#x27;pending&#x27; state surfaces, there&#x27;s no token ready. Add yellow-family ok-adjacent.</p>
+    <div class="action-card-before-after"><div class="action-card-before"><h4>Before</h4><pre><code>status: [ok, error, info]</code></pre></div><div class="action-card-after"><h4>After</h4><pre><code>status: [ok, warn, error, info]</code></pre></div></div>
+    <details class="files-changed"><summary>Files</summary><ul><li><code>tokens.json</code></li><li><code>web/ui/styles/theme.css</code></li></ul></details>
+  </div>
+</article>
+
+
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

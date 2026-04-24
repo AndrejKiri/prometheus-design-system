@@ -1,0 +1,9 @@
+{
+  "name": "Prometheus Design System Bootstrap (run2)",
+  "id": "prometheus-design-system-run2",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "capabilities": [],
+  "permissions": []
+}

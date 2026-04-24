@@ -1,0 +1,23 @@
+{
+  "page": {"url": "/tsdb-status", "scheme": "light"},
+  "layout": "Stacked Cards with tables. Observed cards: 'TSDB Head Status', 'Top 10 label names with value count', 'Top 10 label names with highest memory usage' (below fold), 'Top 10 series label value counts' (below fold).",
+  "card_title": {
+    "icon_present": false,
+    "observed": "Titles like 'TSDB Head Status' are plain H-tag text with NO leading icon. Compare to /status where every card title has a leading Tabler icon.",
+    "INCONSISTENCY": "Card-title icon usage varies. /status: all titles have icons. /tsdb-status: no titles have icons. /flags: title has icon (per screenshot below)."
+  },
+  "table": {
+    "th_style": "same as /status — bold 14px system font, padding 7px 10px",
+    "td_style": "14px system font, padding 7px 10px",
+    "row_border": "Visible bottom border between rows (see screenshot) — Mantine Table default, not per-cell inline."
+  },
+  "label_name_cells": {
+    "rendered_as": "<code> tag inside <td>",
+    "fontFamily": "monospace",
+    "fontSize": "14px",
+    "observed_values": ["__name__", "le", "handler", "quantile", "type", "dialer_name", "role", "reason", "instance"],
+    "INCONSISTENCY": "Label names here use bare <code> (monospace, no bg, no border, no padding). On /targets and /service-discovery, the same concept (label name/value) is rendered as a FULL pill-badge with gray bg, 11px/700 font. On /flags and /config the label/flag names are rendered similarly to here (code-style) — but inconsistent ACROSS the app."
+  },
+  "count_cells": {"rendered_as": "plain system font <td> text", "observed": ["3333", "59984", "650", "368", "122", ...]},
+  "timestamp_cells": {"rendered_as": "plain system font <td> text", "observed": ["2026-04-24T08:00:01Z", "2026-04-24T10:52:27Z"]}
+}

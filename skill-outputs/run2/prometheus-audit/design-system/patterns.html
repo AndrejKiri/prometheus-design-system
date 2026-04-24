@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patterns — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link" href="components.html">Components</a></li>
+        <li><a class="doc-nav-link active" href="patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1>Patterns</h1>
+    <p class="doc-subtitle">31 UI patterns cataloged during the visual audit.</p>
+    <table class="patterns-table">
+      <thead><tr><th>Pattern</th><th>Category</th><th>Instances</th><th>Variations</th><th>Description</th><th>Pages</th></tr></thead>
+      <tbody><tr><td><strong>Header</strong></td><td><span class="tag">navigation</span></td><td>10</td><td>1</td><td>Top navigation bar — full-width, height 56px, fixed dark slate background rgb(65, 73, 81) in BOTH light and dark themes. Contains logo/brand, primary nav button…</td><td><code>/query, /alerts, /targets, /rules, /service-discovery, /status, /tsdb-status, /f…</code></td></tr>
+<tr><td><strong>Navbar</strong></td><td><span class="tag">navigation</span></td><td>10</td><td>2</td><td>Primary navigation buttons inside the header. Three top-level items (Query, Alerts, Status). Active button uses rgb(34,139,230) blue fill + white text. Inactive…</td><td><code>/query, /alerts, /targets, /rules, /service-discovery, /status, /tsdb-status, /f…</code></td></tr>
+<tr><td><strong>Dropdown Menu</strong></td><td><span class="tag">overlay</span></td><td>10</td><td>1</td><td>Status menu in the top nav — Mantine Menu with two section-labeled groups (&#x27;Monitoring status&#x27;, &#x27;Server status&#x27;) each containing icon+label menu items linking t…</td><td><code>/query, /alerts, /targets, /rules, /service-discovery, /status, /tsdb-status, /f…</code></td></tr>
+<tr><td><strong>Breadcrumb</strong></td><td><span class="tag">navigation</span></td><td>8</td><td>1</td><td>On Status sub-pages, the active nav button expands to &#x27;Status &gt; Target health&#x27; (or equivalent) to serve as a breadcrumb. Rendered inside the same Navbar slot as…</td><td><code>/targets, /rules, /service-discovery, /status, /tsdb-status, /flags, /config, /a…</code></td></tr>
+<tr><td><strong>Primary Button</strong></td><td><span class="tag">input</span></td><td>2</td><td>1</td><td>Solid blue fill. &#x27;Execute&#x27; on /query. bg rgb(34, 139, 230), color white, padding 0 18px, fontSize 14px, fontWeight 600, height 36px.</td><td><code>/query</code></td></tr>
+<tr><td><strong>Secondary Button</strong></td><td><span class="tag">input</span></td><td>1</td><td>1</td><td>Light/subtle variant. &#x27;Add query&#x27; on /query. Transparent-ish bg, blue text/icon, padding 8px 16px, fontSize 14px, fontWeight 500, height 36px.</td><td><code>/query</code></td></tr>
+<tr><td><strong>Icon Button</strong></td><td><span class="tag">input</span></td><td>30</td><td>2</td><td>Mantine ActionIcon. In header: rgb(134,142,150) bg, 32px × 32px. In content: transparent bg, colored icon. Used for theme toggle, settings, docs, collapse-all, …</td><td><code>/query, /alerts, /targets, /rules, /service-discovery, /status, /tsdb-status, /f…</code></td></tr>
+<tr><td><strong>Text Input</strong></td><td><span class="tag">input</span></td><td>1</td><td>1</td><td>Expression editor input (CodeMirror-backed). Full-width, borderRadius 4px, blue focus ring, padding-right for options menu + Execute action slot.</td><td><code>/query</code></td></tr>
+<tr><td><strong>Search Input</strong></td><td><span class="tag">input</span></td><td>5</td><td>1</td><td>Mantine Input with leading search icon. bg white (light) / rgb(46,46,46) (dark). borderRadius 4px, height 36px, padding 0px 12px 0px 34px. Placeholder wording v…</td><td><code>/alerts, /targets, /rules, /service-discovery, /flags</code></td></tr>
+<tr><td><strong>Filter Input (Pills)</strong></td><td><span class="tag">input</span></td><td>4</td><td>1</td><td>Mantine PillsInput + Combobox for multi-select state filter. Selected values render as Pills inside the field; placeholder otherwise. Shares borderRadius/height…</td><td><code>/alerts, /targets, /rules, /service-discovery</code></td></tr>
+<tr><td><strong>Select</strong></td><td><span class="tag">input</span></td><td>2</td><td>1</td><td>Mantine Combobox/Select for &#x27;Select scrape pool&#x27;. Single-value. bg white/dark, borderRadius 4px, height 36px, trailing chevron.</td><td><code>/targets, /service-discovery</code></td></tr>
+<tr><td><strong>Date Picker</strong></td><td><span class="tag">input</span></td><td>1</td><td>1</td><td>Mantine DateTimePicker labeled &#x27;Evaluation time&#x27; with prev/next ActionIcons flanking the picker.</td><td><code>/query</code></td></tr>
+<tr><td><strong>Tab Control</strong></td><td><span class="tag">navigation</span></td><td>1</td><td>1</td><td>Mantine Tabs for Table / Graph / Explain. Active tab: borderBottom 2px solid rgb(34, 139, 230). Inactive: transparent bottom border. Both fontSize 14px fontWeig…</td><td><code>/query</code></td></tr>
+<tr><td><strong>Card</strong></td><td><span class="tag">layout</span></td><td>8</td><td>3</td><td>Mantine Card (+ Paper). bg rgb(255,255,255) light / rgb(36,36,36) dark. border 1px solid rgb(222, 226, 230). borderRadius 4px. padding 16px. boxShadow: 2-layer …</td><td><code>/status, /tsdb-status, /flags, /alertmanager-discovery</code></td></tr>
+<tr><td><strong>Card Title with Icon</strong></td><td><span class="tag">layout</span></td><td>4</td><td>1</td><td>Card heading = leading Tabler icon (monochrome black/~20px) + heading text. Observed titles: &#x27;Build information&#x27;, &#x27;Runtime information&#x27;, &#x27;Active Alertmanagers&#x27;,…</td><td><code>/status, /alertmanager-discovery</code></td></tr>
+<tr><td><strong>Card Title without Icon</strong></td><td><span class="tag">layout</span></td><td>4</td><td>1</td><td>Card heading = plain text heading, NO leading icon. Observed: &#x27;TSDB Head Status&#x27;, &#x27;Top 10 label names with value count&#x27;, &#x27;Top 10 label names with highest memory…</td><td><code>/tsdb-status</code></td></tr>
+<tr><td><strong>Accordion</strong></td><td><span class="tag">layout</span></td><td>2</td><td>1</td><td>Mantine Accordion. Each item: bg surface-0, borderRadius 4px, borderLeft 5px solid — GREEN (rgb(140,233,154) light / rgb(47,158,68) dark) when all children UP, …</td><td><code>/targets, /service-discovery</code></td></tr>
+<tr><td><strong>Status Indicator</strong></td><td><span class="tag">data-display</span></td><td>2</td><td>2</td><td>Small ~16px SVG circle next to pool-level &#x27;N/M up&#x27; counter. Filled green when all UP, filled red when any DOWN. Purely visual — no text.</td><td><code>/targets, /service-discovery</code></td></tr>
+<tr><td><strong>Health Status Badge</strong></td><td><span class="tag">data-display</span></td><td>4</td><td>2</td><td>Pill-shaped badge for per-target state. UP: bg rgb(211,249,216) / color rgb(43,138,62) light; inverted in dark. DOWN: bg rgb(255,236,236) / color rgb(201,42,42)…</td><td><code>/targets</code></td></tr>
+<tr><td><strong>Label Badge</strong></td><td><span class="tag">data-display</span></td><td>24</td><td>1</td><td>Pill-shaped key=value badge for scrape/target/discovered labels. bg rgb(241,243,245) light / rgb(52,58,64) dark. color rgb(73,80,87) light / rgb(173,181,189) da…</td><td><code>/targets, /service-discovery</code></td></tr>
+<tr><td><strong>Stats Badge</strong></td><td><span class="tag">data-display</span></td><td>8</td><td>1</td><td>Pill-shaped gray badge with leading icon used for &#x27;last scrape&#x27; duration + &#x27;N ms ago&#x27; timestamp. Same bg/color tokens as Label Badge. textTransform at root is u…</td><td><code>/targets</code></td></tr>
+<tr><td><strong>Table</strong></td><td><span class="tag">data-display</span></td><td>6</td><td>1</td><td>Mantine Table. th fontSize 14px fontWeight 700 padding 7px 10px text-align left. td fontSize 14px padding 7px 10px. Visual bottom-border between rows (Mantine d…</td><td><code>/status, /tsdb-status</code></td></tr>
+<tr><td><strong>Sortable Table</strong></td><td><span class="tag">data-display</span></td><td>1</td><td>1</td><td>Same Mantine Table base but both th have a stacked up/down chevron icon indicating sortability. Only on /flags.</td><td><code>/flags</code></td></tr>
+<tr><td><strong>Key-Value Table</strong></td><td><span class="tag">data-display</span></td><td>6</td><td>1</td><td>Two-column table with a bold label column and a value column. Used for Build/Runtime info (system fields) and Top-N label stats (monospace fields).</td><td><code>/status, /tsdb-status</code></td></tr>
+<tr><td><strong>Inline Code</strong></td><td><span class="tag">data-display</span></td><td>100</td><td>1</td><td>Bare &lt;code&gt; tag used inside table cells. Browser-default monospace, no bg, no padding, no border. Used for label names, flag names, flag values.</td><td><code>/tsdb-status, /flags</code></td></tr>
+<tr><td><strong>YAML Code Block</strong></td><td><span class="tag">data-display</span></td><td>1</td><td>1</td><td>Mantine CodeHighlight rendering the YAML config. pre uses bare &#x27;monospace&#x27; font-family keyword — no explicit stack. fontSize 16px. In light: bg transparent; in …</td><td><code>/config</code></td></tr>
+<tr><td><strong>Syntax Highlighted Code</strong></td><td><span class="tag">data-display</span></td><td>1</td><td>2</td><td>highlight.js tokenization over the CodeHighlight pre. Light theme token colors: hljs-attr rgb(92,148,13) (green), hljs-string rgb(24,100,171) (blue), hljs-liter…</td><td><code>/config</code></td></tr>
+<tr><td><strong>Copy Button</strong></td><td><span class="tag">input</span></td><td>1</td><td>1</td><td>Mantine ActionIcon (mantine-CodeHighlight-control) floating at top-right of the code block. aria-label &#x27;Copy code&#x27;.</td><td><code>/config</code></td></tr>
+<tr><td><strong>Mantine Alert Info Callout</strong></td><td><span class="tag">feedback</span></td><td>5</td><td>1</td><td>Mantine Alert with color=&#x27;blue&#x27; (info). bg rgba(34,139,230,0.1), title color rgb(34,139,230) (blue bold), body color rgb(0,0,0) (black) regular. borderRadius 4p…</td><td><code>/query, /alerts, /rules, /alertmanager-discovery</code></td></tr>
+<tr><td><strong>Empty State</strong></td><td><span class="tag">feedback</span></td><td>5</td><td>1</td><td>Implemented as a Mantine Alert Info Callout with a title + body pair. Title + body often contain near-duplicate strings (see INC-001).</td><td><code>/query, /alerts, /rules, /alertmanager-discovery</code></td></tr>
+<tr><td><strong>Link</strong></td><td><span class="tag">data-display</span></td><td>5</td><td>1</td><td>Mantine Anchor / plain &lt;a&gt;. color rgb(34, 139, 230) (primary blue), textDecoration none. Used for endpoint URLs on /targets and &#x27;show relabeling&#x27; disclosure on …</td><td><code>/targets, /service-discovery</code></td></tr>
+</tbody>
+    </table>
+
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

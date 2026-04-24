@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inline Code — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">Inline Code</h1>
+    <p class="doc-subtitle">Bare &lt;code&gt; inside table cells on /tsdb-status and /flags. Currently browser-default monospace with no bg/padding/border. Should migrate to a Label Badge or adopt the canonical mono stack from INC-008.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>Bind to the canonical --font-family-mono stack — fixes INC-008 on every page at once.</p></div><div class="dont-item"><strong>DON'T</strong><p>Use bare &lt;code&gt; for label-like identifiers — use Label Badge instead (INC-003).</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>default</h3><div class="mock-preview"><code class="mock-inline-code">__name__</code></div><p class="variant-desc">Unstyled &lt;code&gt; — monospace text, no surrounding chrome.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/tsdb-status</figcaption><img src="../screenshots/tsdb-status-light.jpg" alt="/tsdb-status light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/flags</figcaption><img src="../screenshots/flags-light.jpg" alt="/flags light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;code className=&quot;inline-code&quot;&gt;{name}&lt;/code&gt;</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>font-family</td><td><code>var(--font-family-mono)</code> <code>mono</code></td></tr>
+<tr><td>font-size</td><td><code>14px</code> <code>code/inline</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody></tbody></table>
+
+    <h2 id="inconsistencies">Related inconsistencies</h2><ul class="rel-inc"><li><a href="../inconsistencies.html#inc-003">INC-003</a></li><li><a href="../inconsistencies.html#inc-008">INC-008</a></li></ul>
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

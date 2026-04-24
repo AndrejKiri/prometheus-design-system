@@ -1,0 +1,51 @@
+{
+  "note": "Dark-theme color/treatment deltas. Sampled on /targets (richest page).",
+  "body": {"bg_dark": "rgb(36, 36, 36)", "color_dark": "rgb(201, 201, 201)", "bg_light": "rgb(255, 255, 255)", "color_light": "rgb(0, 0, 0)"},
+  "header": {"bg": "rgb(65, 73, 81)", "invariant": "Header color is the SAME in both themes — a fixed dark slate. This is by design but worth noting."},
+  "accordion_item": {
+    "bg_dark": "rgb(36, 36, 36)", "bg_light": "rgb(255, 255, 255)",
+    "borderLeft_up_dark": "5px solid rgb(47, 158, 68)", "borderLeft_up_light": "5px solid rgb(140, 233, 154)",
+    "borderLeft_down_dark": "5px solid rgb(201, 42, 42)", "borderLeft_down_light": "5px solid rgb(255, 168, 168)",
+    "note": "Left-border uses Mantine's green.7 / red.8 in dark, and green.4 / red.4 in light. Dark mode uses more saturated/darker shades for contrast against the dark panel bg."
+  },
+  "badges": {
+    "up_badge": {
+      "dark": {"bg": "rgb(43, 138, 62)", "color": "rgb(211, 249, 216)"},
+      "light": {"bg": "rgb(211, 249, 216)", "color": "rgb(43, 138, 62)"},
+      "note": "Fg/bg are SWAPPED between themes — good inversion. bg uses green.8 dark, green.1 light. color is the opposite."
+    },
+    "down_badge": {
+      "dark": {"bg_approx": "rgb(201, 42, 42)", "color_approx": "rgb(255, 236, 236)"},
+      "light": {"bg_approx": "rgb(255, 236, 236)", "color_approx": "rgb(201, 42, 42)"},
+      "note": "Mirror of UP badge — red.8/red.1 inverted between themes"
+    },
+    "metadata_gray_badge": {
+      "dark": {"bg": "rgb(52, 58, 64)", "color": "rgb(173, 181, 189)"},
+      "light": {"bg": "rgb(241, 243, 245)", "color": "rgb(73, 80, 87)"},
+      "note": "Gray.7/gray.5 dark; gray.1/gray.7 light. Same pill shape/padding."
+    }
+  },
+  "inputs": {
+    "dark": {"bg": "rgb(46, 46, 46)", "borderColor": "rgb(66, 66, 66)", "color": "rgb(201, 201, 201)"},
+    "light": {"bg": "rgb(255, 255, 255)", "borderColor": "rgb(206, 212, 218)", "color": "rgb(0, 0, 0)"}
+  },
+  "primary_blue_link": {
+    "dark_and_light": "rgb(34, 139, 230)",
+    "note": "Primary blue appears invariant between themes. Text is rgb(34,139,230) in both modes. Contrast against dark bg (rgb(36,36,36)) is acceptable."
+  },
+  "syntax_highlighting_verified": {
+    "code_bg_dark": "rgb(31, 31, 31)",
+    "code_base_color_dark": "rgb(184, 184, 184)",
+    "hljs_tokens_dark": {
+      "hljs-attr": "rgb(165, 216, 255)",
+      "hljs-string": "rgb(64, 192, 87)",
+      "hljs-literal": "rgb(34, 139, 230) (observed unchanged) or theme-specific"
+    },
+    "hljs_tokens_light": {
+      "hljs-attr": "rgb(92, 148, 13)",
+      "hljs-string": "rgb(24, 100, 171)",
+      "hljs-literal": "rgb(34, 139, 230)"
+    },
+    "INCONSISTENCY": "The SEMANTIC meaning of token colors inverts between themes. Light: YAML keys (hljs-attr) are GREEN, string values (hljs-string) are BLUE. Dark: YAML keys are BLUE, string values are GREEN. The role-to-color mapping is not stable across themes."
+  }
+}

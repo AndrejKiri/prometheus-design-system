@@ -1,0 +1,44 @@
+{
+  "page": {
+    "url": "/query",
+    "title": "Prometheus Time Series Collection and Processing Server",
+    "scheme": "light",
+    "bodyBg": "rgb(255, 255, 255)",
+    "bodyColor": "rgb(0, 0, 0)"
+  },
+  "header": {
+    "background-color": "rgb(65, 73, 81)",
+    "border-bottom": "1px solid rgb(222, 226, 230)",
+    "box-shadow": "none",
+    "height": "56px",
+    "padding": "0px",
+    "note": "Header is always dark (rgb(65,73,81)) in both light and dark themes — it is not themed."
+  },
+  "buttons": {
+    "primary_execute": {"bg": "rgb(34, 139, 230)", "color": "rgb(255, 255, 255)", "borderRadius": "4px", "padding": "0px 18px", "fontSize": "14px", "fontWeight": "600", "height": "36px"},
+    "secondary_add_query": {"variant": "light/outline", "fontSize": "14px", "fontWeight": "500", "height": "36px", "borderRadius": "4px"},
+    "nav_status_header": {"bg": "rgb(134, 142, 150)", "color": "rgb(248, 249, 250)", "fontSize": "14px", "fontWeight": "500", "height": "36px", "note": "Active nav button has gray bg in dark header"}
+  },
+  "tabs": {
+    "active": {"borderBottom": "2px solid rgb(34, 139, 230)", "color": "rgb(0, 0, 0)", "fontSize": "14px", "fontWeight": "400", "padding": "10px 16px"},
+    "inactive": {"borderBottom": "2px solid transparent", "color": "rgb(0, 0, 0)", "fontSize": "14px", "fontWeight": "400", "padding": "10px 16px"}
+  },
+  "alerts": {
+    "info_alert": {"variant": "light/transparent", "color": "rgb(34, 139, 230)", "borderRadius": "4px", "padding": "16px", "note": "No data queried yet empty-state uses Mantine Alert component"}
+  },
+  "topClasses": [
+    "mantine-UnstyledButton-root:21", "mantine-Group-root:10", "mantine-Button-section:9",
+    "mantine-ActionIcon-root:9", "mantine-Button-root:8", "mantine-Text-root:3", "mantine-Stack-root:3",
+    "mantine-Tabs-tab:3", "mantine-InputWrapper-root:2", "mantine-DateTimePicker-section:2", "mantine-AppShell-root:1"
+  ],
+  "components_present": ["AppShell", "Header/nav", "Button (filled primary blue)", "Button (subtle gray)", "ActionIcon", "Tabs", "DateTimePicker", "Expression input (CodeMirror presumed)", "Alert (info)", "Burger (hidden-from-sm)"],
+  "observed_theme_colors": {
+    "body_bg_light": "rgb(255, 255, 255)",
+    "body_color_light": "rgb(0, 0, 0)",
+    "header_bg_always": "rgb(65, 73, 81)",
+    "primary_blue": "rgb(34, 139, 230)",
+    "gray_subtle": "rgb(134, 142, 150)",
+    "border_gray": "rgb(222, 226, 230)"
+  },
+  "interactive_state_noted": "Status dropdown menu opens on click. Contains 2 sections: 'Monitoring status' (Target health, Rule health, Service discovery), 'Server status' (Runtime & build information, TSDB status, Command-line flags, Configuration, Alertmanager discovery)."
+}

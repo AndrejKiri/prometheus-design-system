@@ -1,0 +1,1397 @@
+{
+  "app_url": "https://prometheus-e83j.onrender.com",
+  "extraction_date": "2026-04-24",
+  "component_count": 31,
+  "components": [
+    {
+      "name": "Header",
+      "slug": "header",
+      "description": "Fixed global top bar. Hosts the brand mark, primary nav buttons, and utility ActionIcons (theme toggle, settings, docs).",
+      "complexity": "medium",
+      "category": "navigation",
+      "pages": ["/query", "/alerts", "/targets", "/rules", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Slate fill in both themes. 56px tall, full viewport width.",
+          "mock_css_class": "mock-header",
+          "mock_html": "<div class=\"mock-header\"><div class=\"mock-header-brand\">Prometheus</div><nav class=\"mock-header-nav\"><span class=\"mock-header-link is-active\">Query</span><span class=\"mock-header-link\">Alerts</span><span class=\"mock-header-link\">Status</span></nav><div class=\"mock-header-tools\"><span class=\"mock-icon-btn\">●</span><span class=\"mock-icon-btn\">●</span></div></div>",
+          "tokens_used": ["header-bg", "nav-slate", "inverted"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "56px", "token": "header-height" },
+          { "property": "background", "value": "rgb(65,73,81)", "token": "nav-slate" },
+          { "property": "padding", "value": "0", "token": null },
+          { "property": "position", "value": "sticky top", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Keep the header background constant across themes — it is a brand anchor." },
+        { "type": "dont", "text": "Add additional nav buttons to the header; route secondary navigation through the Dropdown Menu." }
+      ],
+      "accessibility": {
+        "aria_labels": "Wrap in <header role='banner'>. Each utility ActionIcon has aria-label.",
+        "keyboard": "Tab cycles brand → nav buttons → utility icons. No custom keyboard trap.",
+        "contrast": "Inverted text on slate passes WCAG AA at 14px."
+      },
+      "code_example": "<header class=\"prom-header\">\n  <a class=\"brand\" href=\"/\">Prometheus</a>\n  <nav class=\"primary-nav\">…</nav>\n  <div class=\"tools\"><ActionIcon aria-label=\"Theme\" /></div>\n</header>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Navbar",
+      "slug": "navbar",
+      "description": "The three top-level nav buttons inside the header — Query, Alerts, Status. Active state uses solid brand-blue fill; inactive is transparent with light-gray text.",
+      "complexity": "simple",
+      "category": "navigation",
+      "pages": ["/query", "/alerts", "/targets", "/rules", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "active",
+          "description": "Current route — solid brand-blue fill, white label.",
+          "mock_css_class": "mock-navbtn mock-navbtn--active",
+          "mock_html": "<span class=\"mock-navbtn mock-navbtn--active\">Query</span>",
+          "tokens_used": ["brand-blue", "inverted"]
+        },
+        {
+          "name": "inactive",
+          "description": "Transparent background, light-gray label. Hover lightens label.",
+          "mock_css_class": "mock-navbtn",
+          "mock_html": "<span class=\"mock-navbtn\">Alerts</span>",
+          "tokens_used": ["muted"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "padding", "value": "8px 16px", "token": null },
+          { "property": "font-size", "value": "14px", "token": null },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Render exactly one active button at a time, matching the current top-level route." },
+        { "type": "dont", "text": "Use Navbar styling outside the header — in-page section nav should use Tab Control instead." }
+      ],
+      "accessibility": {
+        "aria_labels": "Use <a> with aria-current='page' on the active route, not a visual-only class.",
+        "keyboard": "Standard link semantics; focus ring inherits brand-blue."
+      },
+      "code_example": "<a class=\"nav-btn\" aria-current={isActive ? 'page' : undefined}>{label}</a>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Dropdown Menu",
+      "slug": "dropdown-menu",
+      "description": "Mantine Menu that opens from the Status nav button. Two section-labeled groups: 'Monitoring status' and 'Server status', each with icon+label menu items.",
+      "complexity": "medium",
+      "category": "overlay",
+      "pages": ["/query", "/alerts", "/targets", "/rules", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Floating panel with two <menu> groups separated by a section label.",
+          "mock_css_class": "mock-dropdown",
+          "mock_html": "<div class=\"mock-dropdown\"><div class=\"mock-dropdown-section\">Monitoring status</div><div class=\"mock-dropdown-item\">Target health</div><div class=\"mock-dropdown-item\">Rule health</div><div class=\"mock-dropdown-section\">Server status</div><div class=\"mock-dropdown-item\">Runtime &amp; Build</div><div class=\"mock-dropdown-item\">TSDB status</div></div>",
+          "tokens_used": ["card-bg", "primary", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "padding", "value": "8px 0", "token": null },
+          { "property": "box-shadow", "value": "card elevation", "token": "card" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Group related items under a labeled section when a menu exceeds 4 items." },
+        { "type": "dont", "text": "Nest dropdowns — flatten the route tree instead." }
+      ],
+      "accessibility": {
+        "aria_labels": "Menu items use role='menuitem'. Section label uses role='presentation'.",
+        "keyboard": "Arrow keys navigate items, Escape closes, Enter activates."
+      },
+      "code_example": "<Menu>\n  <Menu.Label>Monitoring status</Menu.Label>\n  <Menu.Item icon={IconTarget}>Target health</Menu.Item>\n  …\n</Menu>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Breadcrumb",
+      "slug": "breadcrumb",
+      "description": "On Status sub-pages, the active Navbar button expands to 'Status › Target health' style trail. Rendered inside the same header slot as the Status button, not as a dedicated breadcrumb region.",
+      "complexity": "simple",
+      "category": "navigation",
+      "pages": ["/targets", "/rules", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Two-segment trail. Parent segment is the Status nav button; child segment is the current page name.",
+          "mock_css_class": "mock-breadcrumb",
+          "mock_html": "<span class=\"mock-breadcrumb\"><span class=\"mock-breadcrumb-parent\">Status</span><span class=\"mock-breadcrumb-sep\">›</span><span class=\"mock-breadcrumb-child\">Target health</span></span>",
+          "tokens_used": ["brand-blue", "inverted"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "separator", "value": "›", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use only on level-2 routes under Status. Level-1 routes render the plain Navbar active state." },
+        { "type": "dont", "text": "Exceed two trail segments — Prometheus routes are not deep." }
+      ],
+      "accessibility": {
+        "aria_labels": "Wrap trail in <nav aria-label='breadcrumb'>; separators are aria-hidden."
+      },
+      "code_example": "<nav aria-label=\"breadcrumb\">\n  <a href=\"/status\">Status</a> › <span aria-current=\"page\">Target health</span>\n</nav>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Primary Button",
+      "slug": "primary-button",
+      "description": "Solid brand-blue button for the single most important action on a page. 'Execute' on /query is the canonical instance.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/query"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Brand-blue fill, white label, 14px semi-bold.",
+          "mock_css_class": "mock-btn mock-btn--primary",
+          "mock_html": "<button class=\"mock-btn mock-btn--primary\">Execute</button>",
+          "tokens_used": ["brand-blue", "inverted", "label/button-primary", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "padding", "value": "0 18px", "token": "primary-button-padding-x" },
+          { "property": "font-weight", "value": "600", "token": null },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "One primary button per view — the single action the page is designed around." },
+        { "type": "dont", "text": "Use primary styling for destructive actions. Destructive actions need their own red variant (not yet defined)." }
+      ],
+      "accessibility": {
+        "contrast": "White on brand-blue passes AA for 14px bold body.",
+        "keyboard": "Enter/Space activate; focus ring inherits brand-blue."
+      },
+      "code_example": "<Button size=\"sm\" variant=\"filled\">Execute</Button>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Secondary Button",
+      "slug": "secondary-button",
+      "description": "Lower-emphasis variant. Transparent background with brand-blue label. 'Add query' on /query is the canonical instance.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/query"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Transparent-ish bg, blue label, 14px medium.",
+          "mock_css_class": "mock-btn mock-btn--secondary",
+          "mock_html": "<button class=\"mock-btn mock-btn--secondary\">+ Add query</button>",
+          "tokens_used": ["brand-blue", "label/button-secondary", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "padding", "value": "8px 16px", "token": null },
+          { "property": "font-weight", "value": "500", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Pair with Primary Button for a +1 add-another affordance." },
+        { "type": "dont", "text": "Mix more than two secondary buttons inline — the row loses a reading order." }
+      ],
+      "accessibility": {
+        "contrast": "Brand-blue text on white passes AA.",
+        "keyboard": "Standard button semantics."
+      },
+      "code_example": "<Button size=\"sm\" variant=\"subtle\">Add query</Button>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Icon Button",
+      "slug": "icon-button",
+      "description": "Mantine ActionIcon. In the header uses a gray fill; in content areas uses a transparent fill with a colored glyph. Used for theme toggle, settings, docs, burger, collapse-all, copy-code, time-scrub arrows, and query options.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/query", "/alerts", "/targets", "/rules", "/service-discovery", "/status", "/tsdb-status", "/flags", "/config", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "header",
+          "description": "Solid gray fill on header slate.",
+          "mock_css_class": "mock-icon-btn mock-icon-btn--header",
+          "mock_html": "<button class=\"mock-icon-btn mock-icon-btn--header\" aria-label=\"Settings\">⚙</button>",
+          "tokens_used": ["icon-button-bg", "inverted"]
+        },
+        {
+          "name": "content",
+          "description": "Transparent background, inherits icon color.",
+          "mock_css_class": "mock-icon-btn",
+          "mock_html": "<button class=\"mock-icon-btn\" aria-label=\"Copy code\">⧉</button>",
+          "tokens_used": ["sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "size", "value": "32×32 px", "token": "icon-button-size" },
+          { "property": "icon-size", "value": "16px", "token": null },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Always provide aria-label — icon-only buttons are invisible to screen readers without one." },
+        { "type": "dont", "text": "Pack more than 3 Icon Buttons in a row without spacing; they blur into a toolbar strip." }
+      ],
+      "accessibility": {
+        "aria_labels": "Required. Describe the action, not the icon.",
+        "keyboard": "Standard button semantics."
+      },
+      "code_example": "<ActionIcon aria-label=\"Copy code\" variant=\"subtle\"><IconClipboard /></ActionIcon>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Text Input",
+      "slug": "text-input",
+      "description": "Expression editor input on /query — CodeMirror-backed single-line field with leading options menu and trailing Execute slot.",
+      "complexity": "complex",
+      "category": "input",
+      "pages": ["/query"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Full-width, brand-blue focus ring, monospaced expression text.",
+          "mock_css_class": "mock-input mock-input--expression",
+          "mock_html": "<div class=\"mock-input mock-input--expression\"><span class=\"mock-input-prefix\">⋮</span><span class=\"mock-input-value\">up{job=\"demo\"}</span><span class=\"mock-input-suffix\">Execute</span></div>",
+          "tokens_used": ["input-bg", "brand-blue", "mono", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "focus-ring", "value": "brand-blue", "token": "brand-blue" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use monospace for expression-like content so autocomplete and suggestions align to character columns." },
+        { "type": "dont", "text": "Hide the Execute action behind Enter only — keep the visible suffix button for discoverability." }
+      ],
+      "accessibility": {
+        "aria_labels": "Associate with <label>Expression</label> or aria-label.",
+        "keyboard": "Enter executes; Cmd/Ctrl+Enter also supported in CodeMirror."
+      },
+      "code_example": "<ExpressionInput value={expr} onExecute={run} />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Search Input",
+      "slug": "search-input",
+      "description": "Leading-icon text input used for client-side filtering. 'Filter by rule name or labels', 'Filter by endpoint or labels', 'Filter by flag name or value'.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/alerts", "/targets", "/rules", "/service-discovery", "/flags"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Search-icon affix, placeholder text.",
+          "mock_css_class": "mock-input mock-input--search",
+          "mock_html": "<div class=\"mock-input mock-input--search\"><span class=\"mock-input-prefix\">⌕</span><span class=\"mock-input-placeholder\">Filter by labels</span></div>",
+          "tokens_used": ["input-bg", "input", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "padding", "value": "0 12px 0 34px", "token": null },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Write the placeholder as an instruction: 'Filter by <entity> or labels'." },
+        { "type": "dont", "text": "Ship two unlabeled search inputs on the same page — a user cannot tell which one filters what." }
+      ],
+      "accessibility": {
+        "aria_labels": "Mirror the placeholder as aria-label or use a visible <label>."
+      },
+      "code_example": "<Input leftSection={<IconSearch />} placeholder=\"Filter by labels\" />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Filter Input (Pills)",
+      "slug": "filter-input-pills",
+      "description": "Multi-select filter built on Mantine PillsInput + Combobox. Selected values render as pills inside the field; placeholder shows when empty. Used for 'Filter by rule group state' and 'Filter by rule health'.",
+      "complexity": "medium",
+      "category": "input",
+      "pages": ["/alerts", "/targets", "/rules", "/service-discovery"],
+      "variants": [
+        {
+          "name": "empty",
+          "description": "Placeholder visible, no pills.",
+          "mock_css_class": "mock-input mock-input--pills",
+          "mock_html": "<div class=\"mock-input mock-input--pills\"><span class=\"mock-input-placeholder\">Filter by rule group state</span></div>",
+          "tokens_used": ["input-bg", "input", "sm"]
+        },
+        {
+          "name": "with-pills",
+          "description": "Selected values shown as removable pills.",
+          "mock_css_class": "mock-input mock-input--pills",
+          "mock_html": "<div class=\"mock-input mock-input--pills\"><span class=\"mock-pill\">firing ✕</span><span class=\"mock-pill\">pending ✕</span></div>",
+          "tokens_used": ["badge-bg", "secondary", "pill", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px (min)", "token": "control-height" },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use pills for multi-select enumerations where the count is bounded (state, health, color)." },
+        { "type": "dont", "text": "Use pills for free-text — free-text should use Search Input." }
+      ],
+      "accessibility": {
+        "keyboard": "Backspace removes last pill; Tab exits field."
+      },
+      "code_example": "<PillsInput>\n  {selected.map(v => <Pill onRemove={() => remove(v)}>{v}</Pill>)}\n  <PillsInput.Field />\n</PillsInput>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Select",
+      "slug": "select",
+      "description": "Mantine Combobox/Select — single-value picker with trailing chevron. Used for 'Select scrape pool' on /targets and /service-discovery.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/targets", "/service-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Single-value select with trailing chevron.",
+          "mock_css_class": "mock-input mock-input--select",
+          "mock_html": "<div class=\"mock-input mock-input--select\"><span class=\"mock-input-value\">All pools</span><span class=\"mock-input-chevron\">▾</span></div>",
+          "tokens_used": ["input-bg", "input", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use for fixed enumerations of 5–50 items." },
+        { "type": "dont", "text": "Use for 3 items or fewer — Tab Control reads better." }
+      ],
+      "accessibility": {
+        "aria_labels": "Associate with <label> or aria-label; support native keyboard selection."
+      },
+      "code_example": "<Select label=\"Scrape pool\" data={pools} />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Date Picker",
+      "slug": "date-picker",
+      "description": "Mantine DateTimePicker for /query evaluation time, flanked by previous/next ActionIcons for fast stepping.",
+      "complexity": "complex",
+      "category": "input",
+      "pages": ["/query"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Field with calendar popover + time picker; arrow icons on either side.",
+          "mock_css_class": "mock-input mock-input--date",
+          "mock_html": "<div class=\"mock-input-row\"><button class=\"mock-icon-btn\">◀</button><div class=\"mock-input mock-input--date\">2026-04-24 15:06</div><button class=\"mock-icon-btn\">▶</button></div>",
+          "tokens_used": ["input-bg", "input", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "height", "value": "36px", "token": "control-height" },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Expose previous/next Icon Buttons for temporal fields — scrubbing is more common than arbitrary date entry." },
+        { "type": "dont", "text": "Bury the time picker behind a second click on /query — evaluation time is the primary control." }
+      ],
+      "accessibility": {
+        "keyboard": "Arrow keys move the focused date; Enter commits."
+      },
+      "code_example": "<DateTimePicker label=\"Evaluation time\" value={ts} onChange={setTs} />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Tab Control",
+      "slug": "tab-control",
+      "description": "Mantine Tabs — flat, underline-style. /query's Table / Graph / Explain. Active tab has a 2px brand-blue underline; inactive tabs are underline-transparent.",
+      "complexity": "simple",
+      "category": "navigation",
+      "pages": ["/query"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Inline tab bar. Underline indicates the active pane.",
+          "mock_css_class": "mock-tabs",
+          "mock_html": "<div class=\"mock-tabs\"><span class=\"mock-tab is-active\">Table</span><span class=\"mock-tab\">Graph</span><span class=\"mock-tab\">Explain</span></div>",
+          "tokens_used": ["brand-blue", "primary"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "10px 16px", "token": null },
+          { "property": "active-underline", "value": "2px solid brand-blue", "token": "brand-blue" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use for 2–5 parallel views of the same data." },
+        { "type": "dont", "text": "Use for navigation between routes — that's Navbar." }
+      ],
+      "accessibility": {
+        "aria_labels": "Use role='tab' / role='tabpanel' / aria-selected.",
+        "keyboard": "Arrow keys move focus; Enter/Space activate."
+      },
+      "code_example": "<Tabs defaultValue=\"table\">\n  <Tabs.List><Tabs.Tab value=\"table\">Table</Tabs.Tab>…</Tabs.List>\n  <Tabs.Panel value=\"table\">…</Tabs.Panel>\n</Tabs>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Card",
+      "slug": "card",
+      "description": "Mantine Card surface. 1px gray border, 4px radius, 16px padding, subtle 2-layer drop-shadow. Container for Build/Runtime info, Alertmanager lists, TSDB stats, and the Flags table.",
+      "complexity": "simple",
+      "category": "layout",
+      "pages": ["/status", "/tsdb-status", "/flags", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "White surface, light gray border, elevation/card shadow.",
+          "mock_css_class": "mock-card",
+          "mock_html": "<div class=\"mock-card\"><div class=\"mock-card-title\">Build information</div><div class=\"mock-card-body\">…</div></div>",
+          "tokens_used": ["card-bg", "card", "card", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border", "value": "1px solid rgb(222,226,230)", "token": "card" },
+          { "property": "border-radius", "value": "4px", "token": "sm" },
+          { "property": "padding", "value": "16px", "token": "card-padding" },
+          { "property": "box-shadow", "value": "card elevation", "token": "card" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Wrap every page-level data block in a Card so pages share an outer shape." },
+        { "type": "dont", "text": "Ship title-less Cards on /flags and Card-less content on /config — see INC-005." }
+      ],
+      "accessibility": {},
+      "code_example": "<Card withBorder>\n  <CardTitle icon={IconDatabase}>Build information</CardTitle>\n  <KeyValueTable rows={…} />\n</Card>",
+      "related_inconsistencies": ["INC-005"],
+      "origin": "derived"
+    },
+    {
+      "name": "Card Title with Icon",
+      "slug": "card-title-with-icon",
+      "description": "Card heading with a leading Tabler icon. Used on /status ('Build information', 'Runtime information') and /alertmanager-discovery ('Active Alertmanagers', 'Dropped Alertmanagers'). Canonical treatment.",
+      "complexity": "simple",
+      "category": "layout",
+      "pages": ["/status", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "20px tabler icon + heading/card-title text.",
+          "mock_css_class": "mock-card-title mock-card-title--icon",
+          "mock_html": "<div class=\"mock-card-title mock-card-title--icon\"><span class=\"mock-card-icon\">▣</span> Build information</div>",
+          "tokens_used": ["heading/card-title", "primary"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "icon-size", "value": "20px", "token": null },
+          { "property": "icon-text-gap", "value": "8px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use as the default. Icons act as per-card scan anchors on pages with multiple stacked cards." },
+        { "type": "dont", "text": "Pair two different icons for the same concept across pages." }
+      ],
+      "accessibility": {
+        "aria_labels": "Icon is decorative (aria-hidden); the heading text carries the meaning."
+      },
+      "code_example": "<CardTitle icon={IconDatabase}>Build information</CardTitle>",
+      "related_inconsistencies": ["INC-005"],
+      "origin": "derived"
+    },
+    {
+      "name": "Card Title without Icon",
+      "slug": "card-title-without-icon",
+      "description": "Plain-text card heading used on /tsdb-status — 'TSDB Head Status', 'Top 10 label names…'. Non-canonical; should migrate to Card Title with Icon.",
+      "complexity": "simple",
+      "category": "layout",
+      "pages": ["/tsdb-status"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "heading/card-title text, no icon.",
+          "mock_css_class": "mock-card-title",
+          "mock_html": "<div class=\"mock-card-title\">TSDB Head Status</div>",
+          "tokens_used": ["heading/card-title", "primary"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "font-size", "value": "18px", "token": "heading/card-title" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "dont", "text": "Use new. Four stacked plain-text cards blur together — add an icon per card." },
+        { "type": "do", "text": "Migrate each instance to Card Title with Icon and pick a tabler glyph that reflects the content." }
+      ],
+      "accessibility": {},
+      "code_example": "<CardTitle>TSDB Head Status</CardTitle>  // deprecated — use CardTitle with icon",
+      "related_inconsistencies": ["INC-005"],
+      "origin": "derived"
+    },
+    {
+      "name": "Accordion",
+      "slug": "accordion",
+      "description": "Mantine Accordion per scrape pool. Each item has a 5px-solid colored left border — green when all children are UP, red when any child is DOWN. Control row shows pool name, 'N/M up' counter, Status Indicator dot, chevron.",
+      "complexity": "complex",
+      "category": "layout",
+      "pages": ["/targets", "/service-discovery"],
+      "variants": [
+        {
+          "name": "ok",
+          "description": "All targets UP — green left border.",
+          "mock_css_class": "mock-accordion mock-accordion--ok",
+          "mock_html": "<div class=\"mock-accordion mock-accordion--ok\"><div class=\"mock-accordion-header\"><span class=\"mock-accordion-title\">demo</span><span class=\"mock-accordion-counter\">3/3 up</span><span class=\"mock-status-dot mock-status-dot--ok\"></span><span class=\"mock-accordion-chevron\">▾</span></div></div>",
+          "tokens_used": ["card-bg", "accordion-ok-left", "sm"]
+        },
+        {
+          "name": "error",
+          "description": "Any target DOWN — red left border.",
+          "mock_css_class": "mock-accordion mock-accordion--error",
+          "mock_html": "<div class=\"mock-accordion mock-accordion--error\"><div class=\"mock-accordion-header\"><span class=\"mock-accordion-title\">prometheus</span><span class=\"mock-accordion-counter\">1/2 up</span><span class=\"mock-status-dot mock-status-dot--error\"></span><span class=\"mock-accordion-chevron\">▾</span></div></div>",
+          "tokens_used": ["card-bg", "accordion-error-left", "sm"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "border-left-width", "value": "5px", "token": "accordion-left-border-width" },
+          { "property": "padding", "value": "0 16px", "token": null },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Surface aggregate health in two places: colored border AND the 'N/M up' counter." },
+        { "type": "dont", "text": "Rely on color alone — the Status Indicator dot and counter make the state readable without color." }
+      ],
+      "accessibility": {
+        "aria_labels": "Each Accordion.Control has aria-expanded; header label conveys state in text.",
+        "keyboard": "Enter/Space toggle; arrow keys move between panels."
+      },
+      "code_example": "<Accordion>\n  {pools.map(p => <Accordion.Item value={p.name} data-state={p.allUp ? 'ok' : 'error'}>…</Accordion.Item>)}\n</Accordion>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Status Indicator",
+      "slug": "status-indicator",
+      "description": "Small ~16px SVG circle next to a pool-level 'N/M up' counter. Filled green (ok) or red (error). Pure visual — no text.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets", "/service-discovery"],
+      "variants": [
+        {
+          "name": "ok",
+          "description": "Green solid circle.",
+          "mock_css_class": "mock-status-dot mock-status-dot--ok",
+          "mock_html": "<span class=\"mock-status-dot mock-status-dot--ok\"></span>",
+          "tokens_used": ["ok"]
+        },
+        {
+          "name": "error",
+          "description": "Red solid circle.",
+          "mock_css_class": "mock-status-dot mock-status-dot--error",
+          "mock_html": "<span class=\"mock-status-dot mock-status-dot--error\"></span>",
+          "tokens_used": ["error"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "size", "value": "16px", "token": null },
+          { "property": "border-radius", "value": "50%", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Always pair with a text counter or label — color alone is inaccessible." },
+        { "type": "dont", "text": "Use as the only state affordance; pair with Health Status Badge or counter text." }
+      ],
+      "accessibility": {
+        "aria_labels": "aria-hidden on the dot. State is announced via adjacent text."
+      },
+      "code_example": "<span className=\"status-dot\" data-state={state} aria-hidden=\"true\" />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Health Status Badge",
+      "slug": "health-status-badge",
+      "description": "Pill-shaped UP / DOWN badge. UP = green.1 bg / green.8 text (light); swapped in dark. DOWN = red family. Uppercase, bold.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "variants": [
+        {
+          "name": "ok",
+          "description": "Green pill, 'UP' text.",
+          "mock_css_class": "mock-badge mock-badge--ok",
+          "mock_html": "<span class=\"mock-badge mock-badge--ok\">UP</span>",
+          "tokens_used": ["ok", "label/badge", "pill"]
+        },
+        {
+          "name": "error",
+          "description": "Red pill, 'DOWN' text.",
+          "mock_css_class": "mock-badge mock-badge--error",
+          "mock_html": "<span class=\"mock-badge mock-badge--error\">DOWN</span>",
+          "tokens_used": ["error", "label/badge", "pill"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "0 10px", "token": "badge-padding-x" },
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "font-size", "value": "11px", "token": "label/badge" },
+          { "property": "text-transform", "value": "uppercase", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use for every boolean/enum state field app-wide — UP/DOWN, Successful/Failed, Ready/Unhealthy." },
+        { "type": "dont", "text": "Render 'Successful' / 'Failed' as plain black text — see INC-002." }
+      ],
+      "accessibility": {
+        "contrast": "Green.8 on green.1 passes AA for bold 11px; swapped dark pairs also pass.",
+        "screen_reader": "Text content reads correctly — no extra ARIA needed."
+      },
+      "code_example": "<HealthBadge value={target.state} />",
+      "related_inconsistencies": ["INC-002"],
+      "origin": "derived"
+    },
+    {
+      "name": "Label Badge",
+      "slug": "label-badge",
+      "description": "Pill-shaped key=value badge for labels. Gray bg / dark text (light theme); inverted in dark. Not uppercased. Used on /targets, /service-discovery for label display.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets", "/service-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Gray pill; renders full label text including quotes.",
+          "mock_css_class": "mock-badge mock-badge--neutral",
+          "mock_html": "<span class=\"mock-badge mock-badge--neutral\">job=\"demo\"</span>",
+          "tokens_used": ["badge-bg", "secondary", "label/badge", "pill"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "0 10px", "token": "badge-padding-x" },
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "font-size", "value": "11px", "token": "label/badge" },
+          { "property": "font-weight", "value": "700", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use for every label, flag, and identifier site-wide — replace bare <code> on /tsdb-status and /flags." },
+        { "type": "dont", "text": "Mix Label Badge with bare <code> for the same concept on different pages — see INC-003." }
+      ],
+      "accessibility": {},
+      "code_example": "<LabelBadge>{name}={value ? `\"${value}\"` : ''}</LabelBadge>",
+      "related_inconsistencies": ["INC-003"],
+      "origin": "derived"
+    },
+    {
+      "name": "Stats Badge",
+      "slug": "stats-badge",
+      "description": "Gray pill with a leading icon used for 'last scrape' duration and 'N ms ago' timestamps. Same palette as Label Badge.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Gray pill with icon + mixed-case numeric content.",
+          "mock_css_class": "mock-badge mock-badge--neutral mock-badge--stats",
+          "mock_html": "<span class=\"mock-badge mock-badge--neutral mock-badge--stats\"><span class=\"mock-badge-icon\">⧖</span> 573ms</span>",
+          "tokens_used": ["badge-bg", "secondary", "pill"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "0 10px", "token": "badge-padding-x" },
+          { "property": "border-radius", "value": "1000px", "token": "pill" },
+          { "property": "text-transform", "value": "none (root) — fixes INC-009", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Set text-transform: none at the root so intent matches output — see INC-009." },
+        { "type": "dont", "text": "Inherit uppercase from the generic Badge default; the inner label overrides it anyway." }
+      ],
+      "accessibility": {
+        "aria_labels": "Leading icon is decorative; the numeric text carries the meaning."
+      },
+      "code_example": "<StatsBadge icon={IconClock}>573ms</StatsBadge>",
+      "related_inconsistencies": ["INC-009"],
+      "origin": "derived"
+    },
+    {
+      "name": "Table",
+      "slug": "table",
+      "description": "Mantine Table used on /status and /tsdb-status. 14px th (bold) + 14px td, 7px 10px cell padding, visible bottom border between rows.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/status", "/tsdb-status"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Two+-column table with bold header row.",
+          "mock_css_class": "mock-table",
+          "mock_html": "<table class=\"mock-table\"><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody><tr><td>Version</td><td>3.0.0</td></tr><tr><td>Revision</td><td>abcdef1</td></tr></tbody></table>",
+          "tokens_used": ["card", "primary", "body/default"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "th-padding", "value": "7px 10px", "token": null },
+          { "property": "th-font-weight", "value": "700", "token": null },
+          { "property": "td-padding", "value": "7px 10px", "token": null },
+          { "property": "row-separator", "value": "1px bottom border on tr", "token": "card" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Default to sortable — match the /flags treatment (see INC-004)." },
+        { "type": "dont", "text": "Ship two tables with identical shape but different interaction affordances." }
+      ],
+      "accessibility": {
+        "screen_reader": "Use <thead>/<tbody> correctly. Provide <caption> or aria-label for the purpose."
+      },
+      "code_example": "<Table>\n  <Table.Thead><Table.Tr><Table.Th>Key</Table.Th>…</Table.Tr></Table.Thead>\n  …\n</Table>",
+      "related_inconsistencies": ["INC-004"],
+      "origin": "derived"
+    },
+    {
+      "name": "Sortable Table",
+      "slug": "sortable-table",
+      "description": "Variant of Table with up/down chevron icons stacked in each <th>. Clicking the header sorts. Currently only on /flags.",
+      "complexity": "medium",
+      "category": "data-display",
+      "pages": ["/flags"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Each header cell has stacked sort chevrons.",
+          "mock_css_class": "mock-table mock-table--sortable",
+          "mock_html": "<table class=\"mock-table mock-table--sortable\"><thead><tr><th>Flag <span class=\"mock-sort-icon\">⇅</span></th><th>Value <span class=\"mock-sort-icon\">⇅</span></th></tr></thead><tbody><tr><td><code>--config.file</code></td><td><code>prometheus.yml</code></td></tr></tbody></table>",
+          "tokens_used": ["card", "primary", "body/default"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "sort-icon", "value": "stacked chevron-up/chevron-down", "token": null },
+          { "property": "sort-icon-size", "value": "12px", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Promote Sortable Table to the default so /tsdb-status Top-N tables gain sort too." },
+        { "type": "dont", "text": "Hide sortability behind a prop users have to opt into per column." }
+      ],
+      "accessibility": {
+        "aria_labels": "th gains aria-sort='ascending'|'descending'|'none'.",
+        "keyboard": "Enter/Space on a focused th toggles the sort."
+      },
+      "code_example": "<Table sortable>…</Table>",
+      "related_inconsistencies": ["INC-004"],
+      "origin": "derived"
+    },
+    {
+      "name": "Key-Value Table",
+      "slug": "key-value-table",
+      "description": "Two-column table with a bold label column and a value column. Used for Build/Runtime info (system fields) and Top-N label stats (monospace fields).",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/status", "/tsdb-status"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Bold label column, regular value column.",
+          "mock_css_class": "mock-kv-table",
+          "mock_html": "<table class=\"mock-kv-table\"><tbody><tr><td class=\"mock-kv-key\">Version</td><td>3.0.0</td></tr><tr><td class=\"mock-kv-key\">Go version</td><td>go1.22</td></tr></tbody></table>",
+          "tokens_used": ["primary", "body/default", "body/strong"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "key-font-weight", "value": "700", "token": null },
+          { "property": "cell-padding", "value": "7px 10px", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Right-align numeric values for readability in Top-N tables." },
+        { "type": "dont", "text": "Sort key-value tables alphabetically — the source order carries meaning (build → runtime)." }
+      ],
+      "accessibility": {
+        "screen_reader": "Use <th scope='row'> on the key cells so screen readers announce 'Version: 3.0.0'."
+      },
+      "code_example": "<KeyValueTable rows={[['Version','3.0.0'], ['Go version','go1.22']]} />",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Inline Code",
+      "slug": "inline-code",
+      "description": "Bare <code> inside table cells on /tsdb-status and /flags. Currently browser-default monospace with no bg/padding/border. Should migrate to a Label Badge or adopt the canonical mono stack from INC-008.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/tsdb-status", "/flags"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Unstyled <code> — monospace text, no surrounding chrome.",
+          "mock_css_class": "mock-inline-code",
+          "mock_html": "<code class=\"mock-inline-code\">__name__</code>",
+          "tokens_used": ["mono", "code/inline"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "font-family", "value": "var(--font-family-mono)", "token": "mono" },
+          { "property": "font-size", "value": "14px", "token": "code/inline" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Bind to the canonical --font-family-mono stack — fixes INC-008 on every page at once." },
+        { "type": "dont", "text": "Use bare <code> for label-like identifiers — use Label Badge instead (INC-003)." }
+      ],
+      "accessibility": {},
+      "code_example": "<code className=\"inline-code\">{name}</code>",
+      "related_inconsistencies": ["INC-003", "INC-008"],
+      "origin": "derived"
+    },
+    {
+      "name": "YAML Code Block",
+      "slug": "yaml-code-block",
+      "description": "Mantine CodeHighlight rendering the Prometheus YAML config on /config. 16px mono, transparent bg in light / dark bg in dark.",
+      "complexity": "medium",
+      "category": "data-display",
+      "pages": ["/config"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Syntax-highlighted YAML with a floating copy button.",
+          "mock_css_class": "mock-code-block",
+          "mock_html": "<pre class=\"mock-code-block\"><button class=\"mock-icon-btn mock-code-block-copy\">⧉</button><code>global:\n  scrape_interval: <span class=\"mock-hljs-str\">15s</span>\nscrape_configs:\n  - job_name: <span class=\"mock-hljs-str\">'demo'</span></code></pre>",
+          "tokens_used": ["code-block-bg", "primary", "code/block", "mono", "lg"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "font-size", "value": "16px", "token": "code/block" },
+          { "property": "font-family", "value": "var(--font-family-mono)", "token": "mono" },
+          { "property": "padding", "value": "16px", "token": "lg" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Wrap in a Card for consistent page-chrome — see INC-005." },
+        { "type": "dont", "text": "Rely on the bare 'monospace' CSS keyword — see INC-008." }
+      ],
+      "accessibility": {
+        "aria_labels": "Copy Button carries aria-label; the pre is readable via Tab navigation.",
+        "keyboard": "Copy Button is a regular <button>."
+      },
+      "code_example": "<CodeHighlight code={yaml} language=\"yaml\" />",
+      "related_inconsistencies": ["INC-005", "INC-008"],
+      "origin": "derived"
+    },
+    {
+      "name": "Syntax Highlighted Code",
+      "slug": "syntax-highlighted-code",
+      "description": "highlight.js tokenization over YAML. Keys (hljs-attr) and string literals (hljs-string) — today these colors swap semantic meaning between light and dark themes (INC-006).",
+      "complexity": "medium",
+      "category": "data-display",
+      "pages": ["/config"],
+      "variants": [
+        {
+          "name": "light",
+          "description": "hljs-attr = green, hljs-string = blue, hljs-literal = blue.",
+          "mock_css_class": "mock-hljs mock-hljs--light",
+          "mock_html": "<pre class=\"mock-hljs mock-hljs--light\"><span class=\"mock-hljs-attr\">scrape_interval</span>: <span class=\"mock-hljs-str\">15s</span></pre>",
+          "tokens_used": []
+        },
+        {
+          "name": "dark",
+          "description": "hljs-attr = blue, hljs-string = green — swap must be eliminated.",
+          "mock_css_class": "mock-hljs mock-hljs--dark",
+          "mock_html": "<pre class=\"mock-hljs mock-hljs--dark\"><span class=\"mock-hljs-attr\">scrape_interval</span>: <span class=\"mock-hljs-str\">15s</span></pre>",
+          "tokens_used": []
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "canonical-mapping", "value": "attr = green family, string = blue family, literal = brand-blue", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Keep role-to-hue stable across themes — vary luminance, not hue (INC-006)." },
+        { "type": "dont", "text": "Ship the default highlight.js dark stylesheet unchanged — audit each token role." }
+      ],
+      "accessibility": {
+        "contrast": "All four token colors pass AA on their respective backgrounds after INC-006 remediation."
+      },
+      "code_example": "/* styles.css */\n.hljs-attr { color: var(--doc-syntax-key); }\n.hljs-string { color: var(--doc-syntax-string); }\n[data-theme=\"dark\"] .hljs-attr { color: var(--doc-syntax-key-dark); }",
+      "related_inconsistencies": ["INC-006"],
+      "origin": "derived"
+    },
+    {
+      "name": "Copy Button",
+      "slug": "copy-button",
+      "description": "Mantine ActionIcon pinned top-right of a code block. aria-label='Copy code'. Inherits Icon Button chrome.",
+      "complexity": "simple",
+      "category": "input",
+      "pages": ["/config"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Transparent ActionIcon with clipboard glyph.",
+          "mock_css_class": "mock-icon-btn mock-icon-btn--overlay",
+          "mock_html": "<button class=\"mock-icon-btn mock-icon-btn--overlay\" aria-label=\"Copy code\">⧉</button>",
+          "tokens_used": ["sm", "primary"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "position", "value": "absolute top-right", "token": null },
+          { "property": "size", "value": "32×32 px", "token": "icon-button-size" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Give immediate visual feedback on click (icon swap or toast) so users trust the copy happened." },
+        { "type": "dont", "text": "Ship a Copy Button on /config without one on /flags — flag values are the most-copied strings in the app." }
+      ],
+      "accessibility": {
+        "aria_labels": "Required: 'Copy code'. Announce success via aria-live after copy."
+      },
+      "code_example": "<ActionIcon aria-label=\"Copy code\" onClick={copy}><IconClipboard /></ActionIcon>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    },
+    {
+      "name": "Mantine Alert Info Callout",
+      "slug": "mantine-alert-info-callout",
+      "description": "Mantine Alert with color='blue'. Translucent brand-blue background, brand-blue icon and title, body in primary text color. Used for info callouts and as the visual shell of Empty States.",
+      "complexity": "simple",
+      "category": "feedback",
+      "pages": ["/query", "/alerts", "/rules", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Info Alert with leading circle-info icon.",
+          "mock_css_class": "mock-alert mock-alert--info",
+          "mock_html": "<div class=\"mock-alert mock-alert--info\"><span class=\"mock-alert-icon\">ℹ</span><div class=\"mock-alert-body\"><div class=\"mock-alert-title\">No data queried yet</div><div class=\"mock-alert-desc\">Enter a PromQL expression to begin.</div></div></div>",
+          "tokens_used": ["info", "sm", "lg"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "16px", "token": "alert-padding" },
+          { "property": "border-radius", "value": "4px", "token": "sm" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Use body copy to add new information beyond the title — don't restate the title (INC-001)." },
+        { "type": "dont", "text": "Ship identical empty-state copy on /alerts and /rules — specify the rule type (INC-007)." }
+      ],
+      "accessibility": {
+        "aria_labels": "role='alert' or role='status' depending on interruptiveness."
+      },
+      "code_example": "<Alert color=\"blue\" icon={<IconInfoCircle />} title=\"No data queried yet\">\n  Enter a PromQL expression to begin.\n</Alert>",
+      "related_inconsistencies": ["INC-001", "INC-007"],
+      "origin": "derived"
+    },
+    {
+      "name": "Empty State",
+      "slug": "empty-state",
+      "description": "Empty-state messaging implemented as a Mantine Alert Info Callout. Title + body pair — today the body often restates the title, which is the issue tracked by INC-001.",
+      "complexity": "simple",
+      "category": "feedback",
+      "pages": ["/query", "/alerts", "/rules", "/alertmanager-discovery"],
+      "variants": [
+        {
+          "name": "title-only",
+          "description": "Recommended: single-line title, no body.",
+          "mock_css_class": "mock-alert mock-alert--info",
+          "mock_html": "<div class=\"mock-alert mock-alert--info\"><span class=\"mock-alert-icon\">ℹ</span><div class=\"mock-alert-body\"><div class=\"mock-alert-title\">No alerting rules found</div></div></div>",
+          "tokens_used": ["info", "sm"]
+        },
+        {
+          "name": "title-plus-action",
+          "description": "Title + body that adds setup guidance or a docs link.",
+          "mock_css_class": "mock-alert mock-alert--info",
+          "mock_html": "<div class=\"mock-alert mock-alert--info\"><span class=\"mock-alert-icon\">ℹ</span><div class=\"mock-alert-body\"><div class=\"mock-alert-title\">No alerting rules found</div><div class=\"mock-alert-desc\">Configure alert rules in prometheus.yml under the <code>rule_files</code> key.</div></div></div>",
+          "tokens_used": ["info", "sm", "code/inline"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "padding", "value": "16px", "token": "alert-padding" }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Always qualify 'No X found' with the specific rule type: 'No alerting rules found' vs 'No recording rules found' (INC-007)." },
+        { "type": "dont", "text": "Duplicate the title as the body (INC-001)." }
+      ],
+      "accessibility": {
+        "screen_reader": "role='status' so screen readers announce the empty state after the page loads."
+      },
+      "code_example": "<EmptyState ruleType=\"alerting\" />  // parameterize per page",
+      "related_inconsistencies": ["INC-001", "INC-007"],
+      "origin": "derived"
+    },
+    {
+      "name": "Link",
+      "slug": "link",
+      "description": "Mantine Anchor / plain <a>. Brand-blue color, no underline by default. Used for endpoint URLs on /targets and 'show relabeling' disclosure on /service-discovery.",
+      "complexity": "simple",
+      "category": "data-display",
+      "pages": ["/targets", "/service-discovery"],
+      "variants": [
+        {
+          "name": "default",
+          "description": "Brand-blue text, no underline.",
+          "mock_css_class": "mock-link",
+          "mock_html": "<a class=\"mock-link\" href=\"#\">http://demo:9100/metrics</a>",
+          "tokens_used": ["link"]
+        }
+      ],
+      "layout": {
+        "specs": [
+          { "property": "color", "value": "rgb(34,139,230)", "token": "link" },
+          { "property": "text-decoration", "value": "none", "token": null }
+        ]
+      },
+      "dos_and_donts": [
+        { "type": "do", "text": "Add underline on :hover/:focus so the affordance is visible for users who tab through the page." },
+        { "type": "dont", "text": "Style non-links (e.g. disclosure toggles) as links — use a <button> and Icon Button chrome instead." }
+      ],
+      "accessibility": {
+        "aria_labels": "Use descriptive link text; avoid 'click here'."
+      },
+      "code_example": "<a className=\"link\" href={url}>{label}</a>",
+      "related_inconsistencies": [],
+      "origin": "derived"
+    }
+  ],
+  "action_items": [
+    {
+      "id": "AI-001",
+      "title": "Drop duplicate body on empty-state Alerts",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "component"],
+      "description": "Today the empty-state Alert on /alerts, /rules, and both /alertmanager-discovery cards renders the same string twice (title + body). Delete the body prop or replace it with actionable setup guidance.",
+      "related_inconsistency": "INC-001",
+      "related_component": "empty-state",
+      "files_changed": ["web/ui/pages/Alerts.tsx", "web/ui/pages/Rules.tsx", "web/ui/pages/AlertmanagerDiscovery.tsx"],
+      "before_after": {
+        "before_html": "<Alert title=\"No rules found\">No rules found.</Alert>",
+        "after_html": "<Alert title=\"No alerting rules found\">Configure alert rules in prometheus.yml under the <code>rule_files</code> key.</Alert>"
+      },
+      "github_issue_title": "Empty-state Alert: drop duplicate body or replace with setup guidance"
+    },
+    {
+      "id": "AI-002",
+      "title": "Promote Health Status Badge to every boolean-state field",
+      "priority": "p1-high",
+      "effort": "medium",
+      "labels": ["inconsistency", "component", "accessibility"],
+      "description": "Wrap every UP/DOWN/Successful/Failed/Ready field in <HealthBadge>. Today /status renders 'Configuration Reload: Successful' as plain black text so failure and success look identical at a glance.",
+      "related_inconsistency": "INC-002",
+      "related_component": "health-status-badge",
+      "files_changed": ["web/ui/components/HealthBadge.tsx", "web/ui/pages/Status.tsx"],
+      "before_after": {
+        "before_html": "<td>Successful</td>",
+        "after_html": "<td><HealthBadge value=\"Successful\" /></td>"
+      },
+      "github_issue_title": "HealthBadge: unify success/failure affordance across /status"
+    },
+    {
+      "id": "AI-003",
+      "title": "Replace bare <code> with Label Badge on /tsdb-status and /flags",
+      "priority": "p1-high",
+      "effort": "medium",
+      "labels": ["inconsistency", "component"],
+      "description": "Label names on /tsdb-status and flag names on /flags render as bare <code>, while the same concept renders as a pill Label Badge on /targets. Unify on the pill form.",
+      "related_inconsistency": "INC-003",
+      "related_component": "label-badge",
+      "files_changed": ["web/ui/pages/TSDBStatus.tsx", "web/ui/pages/Flags.tsx"],
+      "before_after": {
+        "before_html": "<code>__name__</code>",
+        "after_html": "<LabelBadge>__name__</LabelBadge>"
+      },
+      "github_issue_title": "LabelBadge: unify label/flag rendering across /tsdb-status and /flags"
+    },
+    {
+      "id": "AI-004",
+      "title": "Make every Table sortable by default",
+      "priority": "p2-medium",
+      "effort": "medium",
+      "labels": ["inconsistency", "component", "accessibility"],
+      "description": "Flip the Table wrapper default to sortable. Keep an opt-out for cases where source-order matters (Build/Runtime KV tables).",
+      "related_inconsistency": "INC-004",
+      "related_component": "sortable-table",
+      "files_changed": ["web/ui/components/Table.tsx"],
+      "before_after": {
+        "before_html": "<Table>…</Table>",
+        "after_html": "<Table sortable>…</Table>   // now the default"
+      },
+      "github_issue_title": "Table: default to sortable columns with aria-sort"
+    },
+    {
+      "id": "AI-005",
+      "title": "Unify Card title treatment — always icon + text",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "component"],
+      "description": "Four stacked TSDB cards plus the title-less Flags card and Card-less Config section break the page-chrome pattern established on /status and /alertmanager-discovery. Add <CardTitle icon=… /> to each and wrap Flags + Config in Card.",
+      "related_inconsistency": "INC-005",
+      "related_component": "card-title-with-icon",
+      "files_changed": ["web/ui/pages/TSDBStatus.tsx", "web/ui/pages/Flags.tsx", "web/ui/pages/Config.tsx"],
+      "before_after": {
+        "before_html": "<Card><h3>TSDB Head Status</h3>…</Card>",
+        "after_html": "<Card><CardTitle icon={IconDatabase}>TSDB Head Status</CardTitle>…</Card>"
+      },
+      "github_issue_title": "Card titles: always lead with a Tabler icon + wrap /flags and /config"
+    },
+    {
+      "id": "AI-006",
+      "title": "Stabilize highlight.js role-to-color across themes",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["inconsistency", "tokens"],
+      "description": "YAML keys render green in light and blue in dark; strings do the opposite. Pick a stable hue per role (keys=green, strings=blue) and vary only luminance between themes.",
+      "related_inconsistency": "INC-006",
+      "related_component": "syntax-highlighted-code",
+      "files_changed": ["web/ui/styles/hljs-theme.css"],
+      "before_after": {
+        "before_html": "[data-theme=\"dark\"] .hljs-attr { color: rgb(165,216,255); } /* blue */",
+        "after_html": "[data-theme=\"dark\"] .hljs-attr { color: var(--doc-syntax-key-dark); } /* green family */"
+      },
+      "github_issue_title": "Syntax highlighting: stop swapping role→hue between themes"
+    },
+    {
+      "id": "AI-007",
+      "title": "Parameterize empty-state copy per rule type",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["inconsistency", "component", "documentation"],
+      "description": "'No rules found' is ambiguous when two different rule types share the string. Say 'No alerting rules found' on /alerts and 'No recording rules found' on /rules.",
+      "related_inconsistency": "INC-007",
+      "related_component": "empty-state",
+      "files_changed": ["web/ui/components/EmptyState.tsx", "web/ui/pages/Alerts.tsx", "web/ui/pages/Rules.tsx"],
+      "before_after": {
+        "before_html": "<EmptyState title=\"No rules found\" />",
+        "after_html": "<EmptyState ruleType=\"alerting\" />"
+      },
+      "github_issue_title": "EmptyState: qualify 'No rules found' by rule type"
+    },
+    {
+      "id": "AI-008",
+      "title": "Define --font-family-mono and apply everywhere",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["inconsistency", "tokens"],
+      "description": "pre and code currently resolve to the bare 'monospace' keyword — falls back to Courier on most OSes. Introduce a single CSS custom property with a modern stack and point every pre/code at it.",
+      "related_inconsistency": "INC-008",
+      "related_component": "yaml-code-block",
+      "files_changed": ["web/ui/styles/theme.css", "web/ui/styles/global.css"],
+      "before_after": {
+        "before_html": "pre, code { font-family: monospace; }",
+        "after_html": "--font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;\npre, code { font-family: var(--font-family-mono); }"
+      },
+      "github_issue_title": "Define --font-family-mono and bind pre/code to it"
+    },
+    {
+      "id": "AI-009",
+      "title": "Fix Stats Badge uppercase mismatch",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["inconsistency", "component"],
+      "description": "Root .mantine-Badge-root resolves to text-transform:uppercase but the inner .mantine-Badge-label overrides to none. Intent mismatches output — set text-transform:none at the root for the stats variant.",
+      "related_inconsistency": "INC-009",
+      "related_component": "stats-badge",
+      "files_changed": ["web/ui/components/StatsBadge.tsx"],
+      "before_after": {
+        "before_html": "<Badge variant=\"default\">573ms</Badge>  /* root: uppercase, label: none */",
+        "after_html": "<StatsBadge>573ms</StatsBadge>  /* root: none — matches intent */"
+      },
+      "github_issue_title": "StatsBadge: set text-transform:none at the root"
+    },
+    {
+      "id": "AI-010",
+      "title": "Add Copy Button to the Flags table",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["component", "accessibility"],
+      "description": "Flag names and values are among the most-copied strings in the UI but /flags has no Copy Button — users hand-select cells. Mirror the /config Copy Button on each row.",
+      "related_inconsistency": null,
+      "related_component": "copy-button",
+      "files_changed": ["web/ui/pages/Flags.tsx"],
+      "before_after": {
+        "before_html": "<td><code>--config.file</code></td>",
+        "after_html": "<td><code>--config.file</code> <CopyButton value=\"--config.file\" /></td>"
+      },
+      "github_issue_title": "Flags: add Copy Button per row"
+    },
+    {
+      "id": "AI-011",
+      "title": "Add focus-visible outline to Icon Buttons in the header",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["accessibility", "component"],
+      "description": "Header Icon Buttons inherit the default Mantine focus ring (faint on the slate header). Promote to a 2px brand-blue outline for keyboard users.",
+      "related_inconsistency": null,
+      "related_component": "icon-button",
+      "files_changed": ["web/ui/styles/theme.css"],
+      "before_after": {
+        "before_html": ".mantine-ActionIcon-root:focus-visible { outline: 1px solid rgba(34,139,230,0.5); }",
+        "after_html": ".mantine-ActionIcon-root:focus-visible { outline: 2px solid rgb(34,139,230); outline-offset: 2px; }"
+      },
+      "github_issue_title": "Icon Button: stronger focus-visible outline on dark header"
+    },
+    {
+      "id": "AI-012",
+      "title": "Tokenize hardcoded spacing in page layouts",
+      "priority": "p3-low",
+      "effort": "medium",
+      "labels": ["tokens", "refactor"],
+      "description": "Several page files use literal `16px`, `24px`, `8px 16px` in inline styles. Replace with the named scale (lg, xl, sm) or the layout semantics (card-padding, header-height).",
+      "related_inconsistency": null,
+      "related_component": null,
+      "files_changed": ["web/ui/pages/Query.tsx", "web/ui/pages/Targets.tsx", "web/ui/pages/Status.tsx"],
+      "before_after": {
+        "before_html": "<div style={{ padding: '16px', marginTop: '24px' }}>",
+        "after_html": "<div style={{ padding: 'var(--spacing-lg)', marginTop: 'var(--spacing-xl)' }}>"
+      },
+      "github_issue_title": "Replace inline px values with spacing tokens"
+    },
+    {
+      "id": "AI-013",
+      "title": "Responsive review — header collapses below 768px",
+      "priority": "p2-medium",
+      "effort": "medium",
+      "labels": ["responsive", "component"],
+      "description": "The header nav buttons and utility icons crowd on tablet widths. Introduce a burger at <768px that collapses the nav into a drawer; keep theme toggle visible.",
+      "related_inconsistency": null,
+      "related_component": "header",
+      "files_changed": ["web/ui/components/Header.tsx", "web/ui/styles/responsive.css"],
+      "before_after": {
+        "before_html": "<header><nav>…all buttons…</nav><tools>…</tools></header>",
+        "after_html": "<header><button class=\"burger\">☰</button><tools>…</tools></header>  /* sidebar drawer at <768px */"
+      },
+      "github_issue_title": "Header: responsive burger + drawer below 768px"
+    },
+    {
+      "id": "AI-014",
+      "title": "Deprecate Card Title without Icon",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["component", "refactor"],
+      "description": "Mark the variant deprecated, route call-sites through Card Title with Icon. Covered by AI-005 for /tsdb-status; this issue tracks the component-level deprecation.",
+      "related_inconsistency": "INC-005",
+      "related_component": "card-title-without-icon",
+      "files_changed": ["web/ui/components/CardTitle.tsx"],
+      "before_after": {
+        "before_html": "export const CardTitle = ({children}) => …",
+        "after_html": "export const CardTitle = ({icon, children}) => { if (!icon) console.warn('CardTitle: icon is required'); … }"
+      },
+      "github_issue_title": "CardTitle: deprecate the iconless variant"
+    },
+    {
+      "id": "AI-015",
+      "title": "Add aria-sort to Sortable Table headers",
+      "priority": "p2-medium",
+      "effort": "easy",
+      "labels": ["accessibility", "component"],
+      "description": "/flags sortable headers currently lack aria-sort. Screen readers announce them as plain columns.",
+      "related_inconsistency": null,
+      "related_component": "sortable-table",
+      "files_changed": ["web/ui/components/Table.tsx"],
+      "before_after": {
+        "before_html": "<th onClick={sort}>Flag</th>",
+        "after_html": "<th aria-sort={order} onClick={sort}>Flag</th>"
+      },
+      "github_issue_title": "Sortable Table: emit aria-sort on th"
+    },
+    {
+      "id": "AI-016",
+      "title": "Add :hover underline to Link component",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["accessibility", "component"],
+      "description": "Link renders without underline — fine for color-sighted users, fails for users who rely on non-color affordances. Underline on :hover and :focus.",
+      "related_inconsistency": null,
+      "related_component": "link",
+      "files_changed": ["web/ui/styles/theme.css"],
+      "before_after": {
+        "before_html": "a { color: rgb(34,139,230); text-decoration: none; }",
+        "after_html": "a { color: rgb(34,139,230); text-decoration: none; }\na:hover, a:focus-visible { text-decoration: underline; }"
+      },
+      "github_issue_title": "Link: underline on hover and keyboard focus"
+    },
+    {
+      "id": "AI-017",
+      "title": "Document the tokens.json → CSS variable mapping",
+      "priority": "p3-low",
+      "effort": "medium",
+      "labels": ["documentation"],
+      "description": "Tokens exist in Mantine theme but are not published as a single CSS custom-property file. Emit tokens.css from tokens.json and ship it on the docs site for copy-paste consumption.",
+      "related_inconsistency": null,
+      "related_component": null,
+      "files_changed": ["scripts/tokens-to-css.py", "web/ui/styles/tokens.css"],
+      "before_after": {},
+      "github_issue_title": "Emit tokens.css from tokens.json"
+    },
+    {
+      "id": "AI-018",
+      "title": "Introduce --doc-status-warn for pending states",
+      "priority": "p3-low",
+      "effort": "easy",
+      "labels": ["tokens"],
+      "description": "Status scale covers ok/error/info but no 'warn' — once Alertmanager 'pending' state surfaces, there's no token ready. Add yellow-family ok-adjacent.",
+      "related_inconsistency": null,
+      "related_component": null,
+      "files_changed": ["tokens.json", "web/ui/styles/theme.css"],
+      "before_after": {
+        "before_html": "status: [ok, error, info]",
+        "after_html": "status: [ok, warn, error, info]"
+      },
+      "github_issue_title": "Tokens: add status.warn"
+    }
+  ]
+}

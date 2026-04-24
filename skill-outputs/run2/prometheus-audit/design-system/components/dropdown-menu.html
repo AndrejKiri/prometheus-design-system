@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Menu — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">Dropdown Menu</h1>
+    <p class="doc-subtitle">Mantine Menu that opens from the Status nav button. Two section-labeled groups: &#x27;Monitoring status&#x27; and &#x27;Server status&#x27;, each with icon+label menu items.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>Group related items under a labeled section when a menu exceeds 4 items.</p></div><div class="dont-item"><strong>DON'T</strong><p>Nest dropdowns — flatten the route tree instead.</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>default</h3><div class="mock-preview"><div class="mock-dropdown"><div class="mock-dropdown-section">Monitoring status</div><div class="mock-dropdown-item">Target health</div><div class="mock-dropdown-item">Rule health</div><div class="mock-dropdown-section">Server status</div><div class="mock-dropdown-item">Runtime &amp; Build</div><div class="mock-dropdown-item">TSDB status</div></div></div><p class="variant-desc">Floating panel with two &lt;menu&gt; groups separated by a section label.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/query</figcaption><img src="../screenshots/query-light.jpg" alt="/query light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/alerts</figcaption><img src="../screenshots/alerts-light.jpg" alt="/alerts light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/targets</figcaption><img src="../screenshots/targets-light.jpg" alt="/targets light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/rules</figcaption><img src="../screenshots/rules-light.jpg" alt="/rules light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/service-discovery</figcaption><img src="../screenshots/service-discovery-light.jpg" alt="/service-discovery light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/status</figcaption><img src="../screenshots/status-light.jpg" alt="/status light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/tsdb-status</figcaption><img src="../screenshots/tsdb-status-light.jpg" alt="/tsdb-status light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/flags</figcaption><img src="../screenshots/flags-light.jpg" alt="/flags light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/config</figcaption><img src="../screenshots/config-light.jpg" alt="/config light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/alertmanager-discovery</figcaption><img src="../screenshots/alertmanager-discovery-light.jpg" alt="/alertmanager-discovery light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;Menu&gt;
+  &lt;Menu.Label&gt;Monitoring status&lt;/Menu.Label&gt;
+  &lt;Menu.Item icon={IconTarget}&gt;Target health&lt;/Menu.Item&gt;
+  …
+&lt;/Menu&gt;</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>border-radius</td><td><code>4px</code> <code>sm</code></td></tr>
+<tr><td>padding</td><td><code>8px 0</code></td></tr>
+<tr><td>box-shadow</td><td><code>card elevation</code> <code>card</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody><tr><td>ARIA</td><td>Menu items use role=&#x27;menuitem&#x27;. Section label uses role=&#x27;presentation&#x27;.</td></tr><tr><td>Keyboard</td><td>Arrow keys navigate items, Escape closes, Enter activates.</td></tr></tbody></table>
+
+    
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

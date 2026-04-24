@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accordion — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">Accordion</h1>
+    <p class="doc-subtitle">Mantine Accordion per scrape pool. Each item has a 5px-solid colored left border — green when all children are UP, red when any child is DOWN. Control row shows pool name, &#x27;N/M up&#x27; counter, Status Indicator dot, chevron.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>Surface aggregate health in two places: colored border AND the &#x27;N/M up&#x27; counter.</p></div><div class="dont-item"><strong>DON'T</strong><p>Rely on color alone — the Status Indicator dot and counter make the state readable without color.</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>ok</h3><div class="mock-preview"><div class="mock-accordion mock-accordion--ok"><div class="mock-accordion-header"><span class="mock-accordion-title">demo</span><span class="mock-accordion-counter">3/3 up</span><span class="mock-status-dot mock-status-dot--ok"></span><span class="mock-accordion-chevron">▾</span></div></div></div><p class="variant-desc">All targets UP — green left border.</p></div>
+<div class="variant-block"><h3>error</h3><div class="mock-preview"><div class="mock-accordion mock-accordion--error"><div class="mock-accordion-header"><span class="mock-accordion-title">prometheus</span><span class="mock-accordion-counter">1/2 up</span><span class="mock-status-dot mock-status-dot--error"></span><span class="mock-accordion-chevron">▾</span></div></div></div><p class="variant-desc">Any target DOWN — red left border.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/targets</figcaption><img src="../screenshots/targets-light.jpg" alt="/targets light" loading="lazy" onerror="this.style.display='none'"></div><div class="ref-img"><figcaption>/service-discovery</figcaption><img src="../screenshots/service-discovery-light.jpg" alt="/service-discovery light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;Accordion&gt;
+  {pools.map(p =&gt; &lt;Accordion.Item value={p.name} data-state={p.allUp ? &#x27;ok&#x27; : &#x27;error&#x27;}&gt;…&lt;/Accordion.Item&gt;)}
+&lt;/Accordion&gt;</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>border-left-width</td><td><code>5px</code> <code>accordion-left-border-width</code></td></tr>
+<tr><td>padding</td><td><code>0 16px</code></td></tr>
+<tr><td>border-radius</td><td><code>4px</code> <code>sm</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody><tr><td>ARIA</td><td>Each Accordion.Control has aria-expanded; header label conveys state in text.</td></tr><tr><td>Keyboard</td><td>Enter/Space toggle; arrow keys move between panels.</td></tr></tbody></table>
+
+    
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "page": {"url": "/alerts", "scheme": "light", "bodyBg": "rgb(255, 255, 255)"},
+  "header": {"bg": "rgb(65, 73, 81)", "height": "56px", "always_dark": true},
+  "content_visible": "Empty state — no rules configured",
+  "inputs": {
+    "filter_by_rule_group_state": {"component": "PillsInput + Combobox", "placeholder": "Filter by rule group state", "width_approx": "225px", "pill_root_count_in_dom": 4, "note": "Multi-select dropdown; pills render inside field when values chosen"},
+    "search_input": {"placeholder": "Filter by rule name or labels", "bg": "rgb(255, 255, 255)", "borderColor": "rgb(206, 212, 218)", "borderRadius": "4px", "height": "36px", "padding": "0px 12px 0px 34px", "fontSize": "14px", "has_leading_icon": true}
+  },
+  "alerts": {
+    "empty_state_info_alert": {
+      "bg": "rgba(34, 139, 230, 0.1)",
+      "color": "rgb(34, 139, 230)",
+      "borderRadius": "4px",
+      "padding": "16px",
+      "title": "No rules found",
+      "body": "No rules found.",
+      "has_icon": true,
+      "note": "Info/primary alert style. Title color blue rgb(34,139,230), body text rgb(0,0,0). Title and body duplicate the 'No rules found' string."
+    }
+  },
+  "topClasses": ["mantine-UnstyledButton-root:13", "mantine-Group-root:12", "mantine-Combobox-option:4", "mantine-Pill-root:4", "mantine-PillsInput-section:2"]
+}

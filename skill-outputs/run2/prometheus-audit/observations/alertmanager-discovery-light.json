@@ -1,0 +1,14 @@
+{
+  "page": {"url": "/alertmanager-discovery", "scheme": "light"},
+  "layout": "Two stacked Cards with titles + leading icons, each containing an info-style empty-state Alert.",
+  "card_style": "Same as /status — white bg, 1px border, 4px radius, padding 16px, subtle shadow.",
+  "card_titles_with_icons": {
+    "active": {"icon": "bell", "title": "Active Alertmanagers"},
+    "dropped": {"icon": "bell-off/strike-through", "title": "Dropped Alertmanagers"}
+  },
+  "empty_state_alerts": [
+    {"title": "No active alertmanagers", "body": "No active alertmanagers found.", "note": "Duplicate/near-duplicate text (pattern seen on /alerts and /rules too)."},
+    {"title": "No dropped alertmanagers", "body": "No dropped alertmanagers found.", "note": "Duplicate/near-duplicate text"}
+  ],
+  "inconsistency_card_title_icon_usage": "This page: titles HAVE icons. /status: titles HAVE icons. /tsdb-status: titles have NO icons. /flags, /config: no titles at all. This is inconsistent across pages."
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Report — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link" href="components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1>Audit Report</h1>
+    <p class="doc-subtitle">Full visual audit conducted 2026-04-24 via the <code>design-system-extraction-cowork</code> skill.</p>
+
+    <section class="audit-meta">
+      <h2>Scope</h2>
+      <table>
+        <tr><td>App URL</td><td><a href="https://prometheus-e83j.onrender.com">https://prometheus-e83j.onrender.com</a></td></tr>
+        <tr><td>Source repo</td><td><a href="https://github.com/prometheus/prometheus">https://github.com/prometheus/prometheus</a></td></tr>
+        <tr><td>Tool</td><td><code>claude-cowork</code></td></tr>
+        <tr><td>Tier</td><td><code>full</code></td></tr>
+        <tr><td>Routes discovered</td><td>10</td></tr>
+        <tr><td>Routes audited</td><td>10</td></tr>
+        <tr><td>Dark mode</td><td>yes</td></tr>
+      </table>
+
+      <h2>Tech stack</h2>
+      <table>
+        <tr><td>Framework</td><td>React</td></tr>
+        <tr><td>UI library</td><td>Mantine v7+ (mantine-* class prefix observed; AppShell + Accordion + Combobox + PillsInput + CodeHighlight components)</td></tr>
+        <tr><td>CSS approach</td><td>Mantine emotion-style generated class names with CSS variables for theming (data-mantine-color-scheme attribute)</td></tr>
+        <tr><td>Theming</td><td>Mantine v7 CSS-variable theming. Theme toggle sets data-mantine-color-scheme=&#x27;light|dark&#x27; on &lt;html&gt; and persists to localStorage key &#x27;mantine-color-scheme-value&#x27;. Mantine auto-maps palette tokens (gray.1..gray.9, green.1..green.9, etc.) across themes. Header is NOT themed — always rgb(65,73,81). Syntax highlighting tokens partially theme (hljs stylesheet is theme-aware) but semantic color role assignment drifts — see INC-006.</td></tr>
+      </table>
+    </section>
+
+    <h2>Pages audited</h2>
+    <table class="audit-pages-table">
+      <thead><tr><th>Page</th><th>Has data</th><th>Elements</th><th>Notes</th></tr></thead>
+      <tbody>
+<tr><td><strong>Query (PromQL Expression Evaluator)</strong><br><code>/query</code></td><td>empty state</td><td>11 <span class="count">+3</span></td><td>Main PromQL expression editor. Expression input (CodeMirror-backed) with Execute primary button. Three tabs: Table / Graph / Explain. DateTimePicker for evaluation time (prev/next arrows). Empty-state alert: &#x27;No data queried yet&#x27;.</td></tr>
+<tr><td><strong>Alerts (Alerting Rules)</strong><br><code>/alerts</code></td><td>empty state</td><td>6 <span class="count">+1</span></td><td>Empty state — no alerting rules configured. Two filters: PillsInput &#x27;Filter by rule group state&#x27; + Search &#x27;Filter by rule name or labels&#x27;. Empty-state Alert with duplicate title+body &#x27;No rules found / No rules found.&#x27;</td></tr>
+<tr><td><strong>Target Health</strong><br><code>/targets</code></td><td>yes</td><td>13 <span class="count">+2</span></td><td>Richest page. Three-filter row + collapse-all button. Accordion per scrape pool (demo, node, prometheus, pushgateway, …). Each accordion has a 5px-solid colored left-border — green when all UP, red when any DOWN. Panel is a 4-col grid: Endpoint link | Labels (pill-badges) | Last scrape (icon badge + duration badge) | State (UP/DOWN pill-badge).</td></tr>
+<tr><td><strong>Rule Health (Recording Rules)</strong><br><code>/rules</code></td><td>empty state</td><td>7 <span class="count">+1</span></td><td>Empty state — same shape as /alerts. PillsInput filter &#x27;Filter by rule health&#x27; + Search &#x27;Filter by rule name or labels&#x27;. Duplicate &#x27;No rules found&#x27; empty-state alert — same copy as /alerts though this page shows recording rules.</td></tr>
+<tr><td><strong>Service Discovery</strong><br><code>/service-discovery</code></td><td>yes</td><td>11 <span class="count">+2</span></td><td>Accordion per scrape pool — same style as /targets. Two-column panel: Discovered labels vs Target labels, each a stack of pill label badges. &#x27;show relabeling&#x27; is rendered as a text-only blue anchor inside the panel.</td></tr>
+<tr><td><strong>Runtime &amp; Build Information</strong><br><code>/status</code></td><td>yes</td><td>6 <span class="count">+1</span></td><td>Two stacked Cards: &#x27;Build information&#x27; (with tabler icon) and &#x27;Runtime information&#x27; (with runner icon). Each Card contains a 2-column key-value table. &#x27;Configuration Reload: Successful&#x27; is rendered as plain black text — not a status badge.</td></tr>
+<tr><td><strong>TSDB Status</strong><br><code>/tsdb-status</code></td><td>yes</td><td>8 <span class="count">+1</span></td><td>Four stacked Cards: &#x27;TSDB Head Status&#x27;, &#x27;Top 10 label names with value count&#x27;, &#x27;Top 10 label names with highest memory usage&#x27;, &#x27;Top 10 series label value counts&#x27;. Titles are plain text WITHOUT leading icons — diverges from /status and /alertmanager-discovery. Label-name cells use bare &lt;code&gt; (monospace, no background).</td></tr>
+<tr><td><strong>Command-line Flags</strong><br><code>/flags</code></td><td>yes</td><td>7 <span class="count">+1</span></td><td>Card with NO title — jumps straight into a search &#x27;Filter by flag name or value&#x27; then a sortable 2-col table (Flag | Value). Both columns have sort chevrons — the only page with sortable columns. Every cell wraps content in &lt;code&gt; (browser-default monospace).</td></tr>
+<tr><td><strong>Configuration (YAML)</strong><br><code>/config</code></td><td>yes</td><td>6 <span class="count">+1</span></td><td>Centered Mantine CodeHighlight of the Prometheus YAML config, syntax-highlighted with highlight.js yaml grammar. Copy icon button top-right. No Card wrapper, no page title inside content. pre uses bare &#x27;monospace&#x27; font-family — no explicit stack.</td></tr>
+<tr><td><strong>Alertmanager Discovery</strong><br><code>/alertmanager-discovery</code></td><td>empty state</td><td>7 <span class="count">+1</span></td><td>Two Cards — &#x27;Active Alertmanagers&#x27; (bell icon) and &#x27;Dropped Alertmanagers&#x27; (bell-off icon). Each contains an info-style empty-state Alert with duplicate title+body.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Limitations</h2>
+    <div class="callout callout-warn">
+      <p>Cowork sandbox blocks screenshot export — save_to_disk returns opaque ss_&lt;hash&gt; IDs rather than writable paths, and base64 payloads exceed the runtime.evaluate return limit. Fell back to Degraded Screenshot Mode: 1×1 placeholder JPEGs will be written under screenshots/ via init-placeholders.sh. Claude Code Phase 1.5 is expected to backfill real JPEGs with Playwright.</p>
+    </div>
+
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

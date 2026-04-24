@@ -1,0 +1,33 @@
+{
+  "page": {"url": "/status", "scheme": "light"},
+  "layout": "Two stacked Cards: 'Build information' and 'Runtime information'. Each contains a 2-column table (label | value).",
+  "card": {
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(222, 226, 230)",
+    "borderRadius": "4px",
+    "padding": "16px",
+    "boxShadow": "rgba(0, 0, 0, 0.05) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px 0px",
+    "cls": "mantine-Card-root mantine-Paper-root"
+  },
+  "card_title": {"has_icon_leading": true, "icon_type": "Tabler icon (monochrome, black)", "text_side": "Title in H-tag next to icon", "observed_titles": ["Build information", "Runtime information"]},
+  "table": {
+    "th_style": {"color": "rgb(0, 0, 0)", "fontSize": "14px", "fontWeight": "700", "padding": "7px 10px", "textAlign": "left"},
+    "td_style": {"color": "rgb(0, 0, 0)", "fontSize": "14px", "padding": "7px 10px"},
+    "row_border": "Visual row-divider visible in screenshot but getComputedStyle shows border-bottom 0px none — likely applied via :not(:last-child) or row striping at Mantine Table layer; not a per-cell border.",
+    "has_sortable_icons": false,
+    "note": "Labels (Version, Revision, etc.) rendered as bold <th> in first column; values as <td> in second. Same table style used across Build/Runtime/Agent info cards."
+  },
+  "state_text": {
+    "Configuration_Reload": {
+      "rendered_as": "plain <td> text",
+      "value_observed": "Successful",
+      "color": "rgb(0, 0, 0)",
+      "fontWeight": "400",
+      "note": "INCONSISTENCY: State 'Successful' is shown as plain black text. Compare to /targets where UP/DOWN states are styled as pill badges (green/red). The success state here has no visual affordance — if it said 'Failed' it would look the same. Candidate normalization: use an outlined/soft green badge 'Successful' matching the 'UP' badge style."
+    },
+    "WAL_Corruptions": {
+      "value_observed": "0",
+      "note": "Numeric value rendered as plain text — fine. But consider that 0 is a 'good' value — no visual indicator."
+    }
+  }
+}

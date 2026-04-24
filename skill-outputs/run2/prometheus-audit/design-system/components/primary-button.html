@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primary Button — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">Primary Button</h1>
+    <p class="doc-subtitle">Solid brand-blue button for the single most important action on a page. &#x27;Execute&#x27; on /query is the canonical instance.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>One primary button per view — the single action the page is designed around.</p></div><div class="dont-item"><strong>DON'T</strong><p>Use primary styling for destructive actions. Destructive actions need their own red variant (not yet defined).</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>default</h3><div class="mock-preview"><button class="mock-btn mock-btn--primary">Execute</button></div><p class="variant-desc">Brand-blue fill, white label, 14px semi-bold.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/query</figcaption><img src="../screenshots/query-light.jpg" alt="/query light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;Button size=&quot;sm&quot; variant=&quot;filled&quot;&gt;Execute&lt;/Button&gt;</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>height</td><td><code>36px</code> <code>control-height</code></td></tr>
+<tr><td>padding</td><td><code>0 18px</code> <code>primary-button-padding-x</code></td></tr>
+<tr><td>font-weight</td><td><code>600</code></td></tr>
+<tr><td>border-radius</td><td><code>4px</code> <code>sm</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody><tr><td>Keyboard</td><td>Enter/Space activate; focus ring inherits brand-blue.</td></tr><tr><td>Contrast</td><td>White on brand-blue passes AA for 14px bold body.</td></tr></tbody></table>
+
+    
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

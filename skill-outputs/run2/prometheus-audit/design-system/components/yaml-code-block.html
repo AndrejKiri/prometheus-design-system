@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAML Code Block — Prometheus Design System</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="../index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="../tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="../icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link active" href="../components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="../patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="../action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="../audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="../inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="../migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="../figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="../changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1 id="top">YAML Code Block</h1>
+    <p class="doc-subtitle">Mantine CodeHighlight rendering the Prometheus YAML config on /config. 16px mono, transparent bg in light / dark bg in dark.</p>
+    <div class="do-dont-grid"><div class="do-item"><strong>DO</strong><p>Wrap in a Card for consistent page-chrome — see INC-005.</p></div><div class="dont-item"><strong>DON'T</strong><p>Rely on the bare &#x27;monospace&#x27; CSS keyword — see INC-008.</p></div></div>
+
+    <h2 id="design">Design</h2>
+<div class="variant-block"><h3>default</h3><div class="mock-preview"><pre class="mock-code-block"><button class="mock-icon-btn mock-code-block-copy">⧉</button><code>global:
+  scrape_interval: <span class="mock-hljs-str">15s</span>
+scrape_configs:
+  - job_name: <span class="mock-hljs-str">'demo'</span></code></pre></div><p class="variant-desc">Syntax-highlighted YAML with a floating copy button.</p></div>
+
+
+    <details class="ref-details"><summary>Component reference (screenshots)</summary><div class="ref-grid"><div class="ref-img"><figcaption>/config</figcaption><img src="../screenshots/config-light.jpg" alt="/config light" loading="lazy" onerror="this.style.display='none'"></div></div><p class="ref-note">Placeholder screenshots — the audited app is live at <a href="https://prometheus-e83j.onrender.com" target="_blank">prometheus-e83j.onrender.com</a>.</p></details>
+
+    <h2 id="implementation">Implementation</h2>
+    <pre><code>&lt;CodeHighlight code={yaml} language=&quot;yaml&quot; /&gt;</code></pre>
+
+    <h2 id="layout">Layout</h2>
+    <table class="spec-table"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>
+<tr><td>font-size</td><td><code>16px</code> <code>code/block</code></td></tr>
+<tr><td>font-family</td><td><code>var(--font-family-mono)</code> <code>mono</code></td></tr>
+<tr><td>padding</td><td><code>16px</code> <code>lg</code></td></tr>
+    </tbody></table>
+
+    <h2 id="accessibility">Accessibility</h2>
+    <table class="a11y-table"><tbody><tr><td>ARIA</td><td>Copy Button carries aria-label; the pre is readable via Tab navigation.</td></tr><tr><td>Keyboard</td><td>Copy Button is a regular &lt;button&gt;.</td></tr></tbody></table>
+
+    <h2 id="inconsistencies">Related inconsistencies</h2><ul class="rel-inc"><li><a href="../inconsistencies.html#inc-005">INC-005</a></li><li><a href="../inconsistencies.html#inc-008">INC-008</a></li></ul>
+
+  </main>
+  <script src="../main.js"></script>
+</body>
+</html>

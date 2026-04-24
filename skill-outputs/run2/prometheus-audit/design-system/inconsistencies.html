@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inconsistencies — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="index.html">Home</a></li>
+        <li><a class="doc-nav-link" href="tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link" href="components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link active" href="inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1>Inconsistencies</h1>
+    <p class="doc-subtitle">9 inconsistencies identified during the visual audit. Each carries a canonical decision and a concrete fix.</p>
+
+<article class="inc-item severity-minor" id="inc-001">
+  <div class="inc-header">
+    <span class="inc-id">INC-001</span>
+    <span class="tag tag-severity-minor">minor</span>
+    <span class="tag">duplicated-logic</span>
+    <h3 class="inc-title">Empty-state Alert duplicates title and body with near-identical text</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Keep either a single-line title-only alert OR a distinct title+body pair where the body adds new information. Do not restate the title as the body.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Duplicating the same message at two visual prominences adds noise and gives users nothing to read. Screen readers will announce it twice. Either drop the body to get a one-line alert, or put actionable info in the body (e.g. &#x27;Configure alert rules in prometheus.yml under the `rule_files` key&#x27;).</p>
+    <p class="inc-fix"><strong>Fix:</strong> Delete the body prop on all four call-sites, or replace the body with a link to the relevant docs page.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/alerts</code></td><td>title=&#x27;No rules found&#x27; / body=&#x27;No rules found.&#x27;</td></tr><tr><td><code>/rules</code></td><td>title=&#x27;No rules found&#x27; / body=&#x27;No rules found.&#x27;</td></tr><tr><td><code>/alertmanager-discovery (Active)</code></td><td>title=&#x27;No active alertmanagers&#x27; / body=&#x27;No active alertmanagers found.&#x27;</td></tr><tr><td><code>/alertmanager-discovery (Dropped)</code></td><td>title=&#x27;No dropped alertmanagers&#x27; / body=&#x27;No dropped alertmanagers found.&#x27;</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-major" id="inc-002">
+  <div class="inc-header">
+    <span class="inc-id">INC-002</span>
+    <span class="tag tag-severity-major">major</span>
+    <span class="tag">missing-normalization</span>
+    <h3 class="inc-title">Success/health state is pill-badge in some places and plain text in others</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Route every boolean/enum state field through a single `HealthStatusBadge` component. Map &#x27;Successful&#x27;, &#x27;UP&#x27;, &#x27;Ready&#x27;, etc. → green variant; &#x27;Failed&#x27;, &#x27;DOWN&#x27;, &#x27;Unhealthy&#x27; → red variant; &#x27;Pending&#x27;, &#x27;Warning&#x27; → yellow variant.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Users skim status pages for problems. Plain black &#x27;Successful&#x27; looks identical to plain black &#x27;Failed&#x27; — the UI fails the glanceable-status bar. Meanwhile /targets correctly uses a green pill that pops visually.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Introduce a `&lt;HealthBadge value={...}/&gt;` wrapper in the UI package. Replace the raw &#x27;Successful&#x27;/&#x27;Failed&#x27; &lt;td&gt; content on /status (and any other /runtime field representing state) with the badge.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/targets</code></td><td>Per-target state &#x27;UP&#x27; and &#x27;DOWN&#x27; rendered as pill badges (green.1 bg + green.8 text for UP; red.1/red.8 for DOWN).</td></tr><tr><td><code>/status</code></td><td>&#x27;Configuration Reload: Successful&#x27; rendered as plain black &lt;td&gt; text (rgb(0,0,0), fontWeight 400). No visual affordance — would look identical to &#x27;Failed&#x27;.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-major" id="inc-003">
+  <div class="inc-header">
+    <span class="inc-id">INC-003</span>
+    <span class="tag tag-severity-major">major</span>
+    <span class="tag">implementation-drift</span>
+    <h3 class="inc-title">Label name/value pairs rendered three different ways across pages</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Use Label Badge for every label-name or label-name=value display. A flag like `--config.file` is a label name and should render in the same pill-style as `job=&quot;demo&quot;`. Drop bare &lt;code&gt;.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> The same underlying concept (a label or identifier) wearing three different visual uniforms teaches users to re-parse each page. Unifying on the pill form also makes these elements trivially clickable/filterable later.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Replace `&lt;code&gt;{name}&lt;/code&gt;` in Flags.tsx and TSDBStatus.tsx with `&lt;LabelBadge&gt;{name}&lt;/LabelBadge&gt;`. Keep the pill shape; accept a monospace variant prop if the design team prefers that typographic treatment inside the pill.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/targets</code></td><td>Full Label Badge component: pill shape, bg rgb(241,243,245), padding 0 10px, fontSize 11px / fontWeight 700. Renders &#x27;instance=&quot;...&quot;&#x27; and &#x27;job=&quot;demo&quot;&#x27;.</td></tr><tr><td><code>/service-discovery</code></td><td>Same Label Badge as /targets.</td></tr><tr><td><code>/tsdb-status</code></td><td>Label names rendered as bare &lt;code&gt; (browser-default monospace, no bg, no padding, no border). Example: &#x27;__name__&#x27;, &#x27;le&#x27;, &#x27;handler&#x27;.</td></tr><tr><td><code>/flags</code></td><td>Flag names (which are effectively label names) rendered as bare &lt;code&gt; — same as /tsdb-status.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-minor" id="inc-004">
+  <div class="inc-header">
+    <span class="inc-id">INC-004</span>
+    <span class="tag tag-severity-minor">minor</span>
+    <span class="tag">implementation-drift</span>
+    <h3 class="inc-title">Sortable columns exist only on /flags — other same-shape tables are not sortable</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Default every Mantine Table to sortable columns with up/down chevrons, regardless of row count.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Users see sort icons on /flags and then expect them on /tsdb-status (where rows have numeric &#x27;Count&#x27; values). Because the Top-N tables are already ordered by count, sortability is virtually free to add and aligns the behavior.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Flip the `sortable` default to true in the Table wrapper component. Opt-out case-by-case if a specific column genuinely must keep insertion order.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/flags</code></td><td>Both th have stacked up/down chevron icon; clicking sorts the table.</td></tr><tr><td><code>/status</code></td><td>Same Mantine Table but no sort icons — Build/Runtime tables cannot be sorted.</td></tr><tr><td><code>/tsdb-status</code></td><td>Same Mantine Table but no sort icons. The &#x27;Top 10 label names&#x27; tables would benefit from sort-by-count.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-minor" id="inc-005">
+  <div class="inc-header">
+    <span class="inc-id">INC-005</span>
+    <span class="tag tag-severity-minor">minor</span>
+    <span class="tag">style-drift</span>
+    <h3 class="inc-title">Card title treatment drifts: with-icon vs without-icon vs no-title</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Every Card must have a &#x27;Card Title with Icon&#x27;. The icon comes from the same Tabler mapping used on /status (database for &#x27;TSDB&#x27;, flag for &#x27;Command-line flags&#x27;, file-text for &#x27;Configuration&#x27;, etc.). Wrap /config and /flags content in Card too so the page-template is uniform.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Icons act as scannable anchors when a page has multiple cards. /tsdb-status has four stacked plain-text cards that blur together; a single tabler-icon prefix makes each card individually identifiable. /flags and /config breaking the Card pattern makes them visually lighter than they should be — the page-chrome is inconsistent.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Add `&lt;CardTitle icon={Icon}&gt;{title}&lt;/CardTitle&gt;` to every card section. Wrap the Flags table and Config codeblock in the same Card component used on /status so every Status sub-page has the same outer shape.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/status</code></td><td>Card title uses &#x27;Card Title with Icon&#x27; — Tabler icon + heading text. Both cards on this page follow this pattern.</td></tr><tr><td><code>/alertmanager-discovery</code></td><td>Same &#x27;Card Title with Icon&#x27; as /status.</td></tr><tr><td><code>/tsdb-status</code></td><td>Card titles use &#x27;Card Title without Icon&#x27; — all four cards are plain text headings with no leading icon.</td></tr><tr><td><code>/flags</code></td><td>Card has NO title at all. It opens with a Search Input and dumps into the Sortable Table.</td></tr><tr><td><code>/config</code></td><td>No Card wrapper and no title — the YAML CodeHighlight pre sits raw in the page body.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-cosmetic" id="inc-006">
+  <div class="inc-header">
+    <span class="inc-id">INC-006</span>
+    <span class="tag tag-severity-cosmetic">cosmetic</span>
+    <span class="tag">style-drift</span>
+    <h3 class="inc-title">Syntax-highlighted code: semantic color roles invert between light and dark themes</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Pick a semantic role for each color and keep it stable across themes. E.g. keys are always green, strings are always blue (or vice versa). Use luminance variants (green.4 / green.9) rather than swapping the hue entirely.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> A user toggling theme should keep their learned associations. Today, a reader who learned &#x27;green = YAML key&#x27; in light theme has to relearn &#x27;blue = YAML key&#x27; in dark theme. Role-to-color should be the invariant; luminance is the variant.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Replace the default highlight.js dark stylesheet with a custom one that mirrors the light role-to-color mapping: .hljs-attr stays green family across themes, .hljs-string stays blue family across themes, etc.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/config (light)</code></td><td>hljs-attr (YAML keys): rgb(92, 148, 13) — GREEN. hljs-string (string values): rgb(24, 100, 171) — BLUE. hljs-literal (true/false): rgb(34, 139, 230) — BLUE.</td></tr><tr><td><code>/config (dark)</code></td><td>hljs-attr (YAML keys): rgb(165, 216, 255) — BLUE. hljs-string (string values): rgb(64, 192, 87) — GREEN. hljs-literal: rgb(34, 139, 230) — BLUE.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-minor" id="inc-007">
+  <div class="inc-header">
+    <span class="inc-id">INC-007</span>
+    <span class="tag tag-severity-minor">minor</span>
+    <span class="tag">missing-normalization</span>
+    <h3 class="inc-title">/alerts and /rules share identical &#x27;No rules found&#x27; empty-state copy for different rule types</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> &#x27;No alerting rules found&#x27; on /alerts and &#x27;No recording rules found&#x27; on /rules, with a link to the respective docs section in the body.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> A user who toggles between /alerts and /rules and sees identical copy cannot tell whether their alerting rules and their recording rules are both missing, or whether they are on the same page twice.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Parameterize the empty-state Alert component with a `ruleType` prop and emit the specific wording.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/alerts</code></td><td>&#x27;No rules found&#x27; — but this page shows ALERTING rules; the word &#x27;rules&#x27; here refers to alerting rules.</td></tr><tr><td><code>/rules</code></td><td>&#x27;No rules found&#x27; — but this page shows RECORDING rules; the same wording overlaps with /alerts.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-cosmetic" id="inc-008">
+  <div class="inc-header">
+    <span class="inc-id">INC-008</span>
+    <span class="tag tag-severity-cosmetic">cosmetic</span>
+    <span class="tag">hardcoded-values</span>
+    <h3 class="inc-title">&lt;pre&gt; uses bare &#x27;monospace&#x27; keyword — no explicit font-family stack</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Define a single CSS variable `--font-family-mono` and apply it to pre, code, and inline code everywhere. Value: `ui-monospace, SFMono-Regular, &#x27;SF Mono&#x27;, Menlo, Consolas, &#x27;Liberation Mono&#x27;, monospace`.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Bare `monospace` falls back to Courier New on Windows and Courier on macOS — neither matches modern code-editor defaults. A proper stack gives SF Mono / Cascadia / Consolas on users who have them.</p>
+    <p class="inc-fix"><strong>Fix:</strong> Add `--font-family-mono` to the Mantine theme override and reference it in `pre, code { font-family: var(--font-family-mono); }`.</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/config</code></td><td>getComputedStyle(pre).fontFamily === &#x27;monospace&#x27; — the literal CSS keyword. Browsers resolve this to Courier-family on most OSes, giving poor rendering.</td></tr><tr><td><code>/tsdb-status and /flags (&lt;code&gt;)</code></td><td>Inline &lt;code&gt; also inherits bare monospace — same concern.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+<article class="inc-item severity-cosmetic" id="inc-009">
+  <div class="inc-header">
+    <span class="inc-id">INC-009</span>
+    <span class="tag tag-severity-cosmetic">cosmetic</span>
+    <span class="tag">style-drift</span>
+    <h3 class="inc-title">Stats Badge has conflicting textTransform at root vs inner label element</h3>
+  </div>
+  <div class="inc-body">
+    <div class="inc-canonical"><strong>Canonical:</strong> Decide per variant whether uppercase is desired: Health Status Badge uses uppercase (UP/DOWN); Stats Badge shows mixed-case content so it should set textTransform: &#x27;none&#x27; at the root, not fight itself by overriding at label level.</div>
+    <p class="inc-reasoning"><strong>Why:</strong> Today the CSS specificity accidentally produces the correct visual by overriding at the inner element, but a reader of the source sees a badge that claims to be uppercase and isn&#x27;t — the intent is ambiguous.</p>
+    <p class="inc-fix"><strong>Fix:</strong> In the Stats Badge variant, set `text-transform: none` at the root (or use a distinct Mantine variant name &#x27;stats&#x27; that sets it explicitly).</p>
+    <details><summary>Variants across pages</summary>
+      <table><thead><tr><th>Page</th><th>Implementation</th></tr></thead><tbody><tr><td><code>/targets (root .mantine-Badge-root)</code></td><td>getComputedStyle gives textTransform: &#x27;uppercase&#x27;. Inherited from the Mantine Badge default.</td></tr><tr><td><code>/targets (inner .mantine-Badge-label)</code></td><td>getComputedStyle gives textTransform: &#x27;none&#x27;. So the visible content (&#x27;991ms ago&#x27;, &#x27;573ms&#x27;) is NOT uppercased even though the root says it should be.</td></tr></tbody></table>
+    </details>
+  </div>
+</article>
+
+
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

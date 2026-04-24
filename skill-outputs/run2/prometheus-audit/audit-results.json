@@ -1,0 +1,1429 @@
+{
+  "app_url": "https://prometheus-e83j.onrender.com",
+  "source_repo": "https://github.com/prometheus/prometheus",
+  "audit_date": "2026-04-24",
+  "tool": "claude-cowork",
+  "scope": {
+    "tier": "full",
+    "description": "All 10 routes discovered from the authenticated-but-open Prometheus UI \u2014 under the 15-page threshold so full audit, both light and dark themes.",
+    "total_routes_discovered": 10,
+    "routes_audited": 10
+  },
+  "auth": {
+    "required": false,
+    "method": "none"
+  },
+  "tech_stack": {
+    "framework": "React",
+    "ui_library": "Mantine v7+ (mantine-* class prefix observed; AppShell + Accordion + Combobox + PillsInput + CodeHighlight components)",
+    "css_approach": "Mantine emotion-style generated class names with CSS variables for theming (data-mantine-color-scheme attribute)",
+    "language": "TypeScript (presumed from Prometheus web/ui repo convention)",
+    "build_tool": "unknown from UI audit; presumed Vite per Prometheus v3 web UI repo"
+  },
+  "pages_audited": [
+    {
+      "url": "/query",
+      "name": "Query (PromQL Expression Evaluator)",
+      "screenshot": "screenshots/query-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/query-dark.jpg",
+          "state": "dark-theme"
+        },
+        {
+          "path": "screenshots/query-graph-tab.jpg",
+          "state": "tab-graph"
+        },
+        {
+          "path": "screenshots/query-explain-tab.jpg",
+          "state": "tab-explain"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Dropdown Menu",
+        "Icon Button",
+        "Text Input",
+        "Primary Button",
+        "Secondary Button",
+        "Tab Control",
+        "Date Picker",
+        "Mantine Alert Info Callout",
+        "Empty State"
+      ],
+      "has_data": false,
+      "notes": "Main PromQL expression editor. Expression input (CodeMirror-backed) with Execute primary button. Three tabs: Table / Graph / Explain. DateTimePicker for evaluation time (prev/next arrows). Empty-state alert: 'No data queried yet'."
+    },
+    {
+      "url": "/alerts",
+      "name": "Alerts (Alerting Rules)",
+      "screenshot": "screenshots/alerts-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/alerts-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Filter Input (Pills)",
+        "Search Input",
+        "Mantine Alert Info Callout",
+        "Empty State"
+      ],
+      "has_data": false,
+      "notes": "Empty state \u2014 no alerting rules configured. Two filters: PillsInput 'Filter by rule group state' + Search 'Filter by rule name or labels'. Empty-state Alert with duplicate title+body 'No rules found / No rules found.'"
+    },
+    {
+      "url": "/targets",
+      "name": "Target Health",
+      "screenshot": "screenshots/targets-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/targets-dark.jpg",
+          "state": "dark-theme"
+        },
+        {
+          "path": "screenshots/targets-expanded-labels.jpg",
+          "state": "expanded-target-labels"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Select",
+        "Filter Input (Pills)",
+        "Search Input",
+        "Icon Button",
+        "Accordion",
+        "Status Indicator",
+        "Health Status Badge",
+        "Label Badge",
+        "Stats Badge",
+        "Link"
+      ],
+      "has_data": true,
+      "notes": "Richest page. Three-filter row + collapse-all button. Accordion per scrape pool (demo, node, prometheus, pushgateway, \u2026). Each accordion has a 5px-solid colored left-border \u2014 green when all UP, red when any DOWN. Panel is a 4-col grid: Endpoint link | Labels (pill-badges) | Last scrape (icon badge + duration badge) | State (UP/DOWN pill-badge)."
+    },
+    {
+      "url": "/rules",
+      "name": "Rule Health (Recording Rules)",
+      "screenshot": "screenshots/rules-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/rules-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Filter Input (Pills)",
+        "Search Input",
+        "Mantine Alert Info Callout",
+        "Empty State"
+      ],
+      "has_data": false,
+      "notes": "Empty state \u2014 same shape as /alerts. PillsInput filter 'Filter by rule health' + Search 'Filter by rule name or labels'. Duplicate 'No rules found' empty-state alert \u2014 same copy as /alerts though this page shows recording rules."
+    },
+    {
+      "url": "/service-discovery",
+      "name": "Service Discovery",
+      "screenshot": "screenshots/service-discovery-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/service-discovery-dark.jpg",
+          "state": "dark-theme"
+        },
+        {
+          "path": "screenshots/service-discovery-relabeling.jpg",
+          "state": "expanded-relabeling"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Select",
+        "Filter Input (Pills)",
+        "Search Input",
+        "Icon Button",
+        "Accordion",
+        "Status Indicator",
+        "Label Badge",
+        "Link"
+      ],
+      "has_data": true,
+      "notes": "Accordion per scrape pool \u2014 same style as /targets. Two-column panel: Discovered labels vs Target labels, each a stack of pill label badges. 'show relabeling' is rendered as a text-only blue anchor inside the panel."
+    },
+    {
+      "url": "/status",
+      "name": "Runtime & Build Information",
+      "screenshot": "screenshots/status-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/status-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Card",
+        "Card Title with Icon",
+        "Key-Value Table"
+      ],
+      "has_data": true,
+      "notes": "Two stacked Cards: 'Build information' (with tabler icon) and 'Runtime information' (with runner icon). Each Card contains a 2-column key-value table. 'Configuration Reload: Successful' is rendered as plain black text \u2014 not a status badge."
+    },
+    {
+      "url": "/tsdb-status",
+      "name": "TSDB Status",
+      "screenshot": "screenshots/tsdb-status-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/tsdb-status-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Card",
+        "Card Title without Icon",
+        "Key-Value Table",
+        "Table",
+        "Inline Code"
+      ],
+      "has_data": true,
+      "notes": "Four stacked Cards: 'TSDB Head Status', 'Top 10 label names with value count', 'Top 10 label names with highest memory usage', 'Top 10 series label value counts'. Titles are plain text WITHOUT leading icons \u2014 diverges from /status and /alertmanager-discovery. Label-name cells use bare <code> (monospace, no background)."
+    },
+    {
+      "url": "/flags",
+      "name": "Command-line Flags",
+      "screenshot": "screenshots/flags-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/flags-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Card",
+        "Search Input",
+        "Sortable Table",
+        "Inline Code"
+      ],
+      "has_data": true,
+      "notes": "Card with NO title \u2014 jumps straight into a search 'Filter by flag name or value' then a sortable 2-col table (Flag | Value). Both columns have sort chevrons \u2014 the only page with sortable columns. Every cell wraps content in <code> (browser-default monospace)."
+    },
+    {
+      "url": "/config",
+      "name": "Configuration (YAML)",
+      "screenshot": "screenshots/config-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/config-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Syntax Highlighted Code",
+        "YAML Code Block",
+        "Copy Button"
+      ],
+      "has_data": true,
+      "notes": "Centered Mantine CodeHighlight of the Prometheus YAML config, syntax-highlighted with highlight.js yaml grammar. Copy icon button top-right. No Card wrapper, no page title inside content. pre uses bare 'monospace' font-family \u2014 no explicit stack."
+    },
+    {
+      "url": "/alertmanager-discovery",
+      "name": "Alertmanager Discovery",
+      "screenshot": "screenshots/alertmanager-discovery-light.jpg",
+      "additional_screenshots": [
+        {
+          "path": "screenshots/alertmanager-discovery-dark.jpg",
+          "state": "dark-theme"
+        }
+      ],
+      "elements": [
+        "Header",
+        "Navbar",
+        "Breadcrumb",
+        "Card",
+        "Card Title with Icon",
+        "Mantine Alert Info Callout",
+        "Empty State"
+      ],
+      "has_data": false,
+      "notes": "Two Cards \u2014 'Active Alertmanagers' (bell icon) and 'Dropped Alertmanagers' (bell-off icon). Each contains an info-style empty-state Alert with duplicate title+body."
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Header",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 10,
+      "variation_count": 1,
+      "description": "Top navigation bar \u2014 full-width, height 56px, fixed dark slate background rgb(65, 73, 81) in BOTH light and dark themes. Contains logo/brand, primary nav buttons (Query / Alerts / Status), right-side utility icons (theme toggle, settings, docs book link).",
+      "category": "navigation",
+      "observed_styles": {
+        "colors": [
+          "rgb(65, 73, 81)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 0",
+          "height: 56px"
+        ],
+        "border_radius": null
+      }
+    },
+    {
+      "name": "Navbar",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 10,
+      "variation_count": 2,
+      "description": "Primary navigation buttons inside the header. Three top-level items (Query, Alerts, Status). Active button uses rgb(34,139,230) blue fill + white text. Inactive is subtle on dark header \u2014 transparent bg with light-gray text; hover lightens.",
+      "category": "navigation",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)",
+          "rgb(134, 142, 150)",
+          "rgb(248, 249, 250)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 8px 16px",
+          "height: 36px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Dropdown Menu",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 10,
+      "variation_count": 1,
+      "description": "Status menu in the top nav \u2014 Mantine Menu with two section-labeled groups ('Monitoring status', 'Server status') each containing icon+label menu items linking to sub-routes.",
+      "category": "overlay",
+      "observed_styles": {
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Breadcrumb",
+      "pages": [
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 8,
+      "variation_count": 1,
+      "description": "On Status sub-pages, the active nav button expands to 'Status > Target health' (or equivalent) to serve as a breadcrumb. Rendered inside the same Navbar slot as the Status button.",
+      "category": "navigation",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)",
+          "rgb(255, 255, 255)"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Primary Button",
+      "pages": [
+        "/query"
+      ],
+      "instance_count": 2,
+      "variation_count": 1,
+      "description": "Solid blue fill. 'Execute' on /query. bg rgb(34, 139, 230), color white, padding 0 18px, fontSize 14px, fontWeight 600, height 36px.",
+      "category": "input",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)",
+          "rgb(255, 255, 255)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 0 18px",
+          "height: 36px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Secondary Button",
+      "pages": [
+        "/query"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Light/subtle variant. 'Add query' on /query. Transparent-ish bg, blue text/icon, padding 8px 16px, fontSize 14px, fontWeight 500, height 36px.",
+      "category": "input",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 8px 16px",
+          "height: 36px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Icon Button",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 30,
+      "variation_count": 2,
+      "description": "Mantine ActionIcon. In header: rgb(134,142,150) bg, 32px \u00d7 32px. In content: transparent bg, colored icon. Used for theme toggle, settings, docs, collapse-all, burger, decrease/increase time, query options, copy code.",
+      "category": "input",
+      "observed_styles": {
+        "colors": [
+          "rgb(134, 142, 150)",
+          "rgb(255, 255, 255)"
+        ],
+        "font_sizes": [
+          "16px"
+        ],
+        "spacing": [
+          "width/height: 32px or 34px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Text Input",
+      "pages": [
+        "/query"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Expression editor input (CodeMirror-backed). Full-width, borderRadius 4px, blue focus ring, padding-right for options menu + Execute action slot.",
+      "category": "input",
+      "observed_styles": {
+        "border_radius": "4px",
+        "colors": [
+          "rgb(34, 139, 230)"
+        ]
+      }
+    },
+    {
+      "name": "Search Input",
+      "pages": [
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery",
+        "/flags"
+      ],
+      "instance_count": 5,
+      "variation_count": 1,
+      "description": "Mantine Input with leading search icon. bg white (light) / rgb(46,46,46) (dark). borderRadius 4px, height 36px, padding 0px 12px 0px 34px. Placeholder wording varies per page ('Filter by rule name or labels', 'Filter by endpoint or labels', 'Filter by labels', 'Filter by flag name or value').",
+      "category": "input",
+      "observed_styles": {
+        "colors": [
+          "rgb(255, 255, 255)",
+          "rgb(206, 212, 218)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 0 12px 0 34px",
+          "height: 36px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Filter Input (Pills)",
+      "pages": [
+        "/alerts",
+        "/targets",
+        "/rules",
+        "/service-discovery"
+      ],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "Mantine PillsInput + Combobox for multi-select state filter. Selected values render as Pills inside the field; placeholder otherwise. Shares borderRadius/height with Search Input.",
+      "category": "input",
+      "observed_styles": {
+        "border_radius": "4px",
+        "spacing": [
+          "height: 36px"
+        ]
+      }
+    },
+    {
+      "name": "Select",
+      "pages": [
+        "/targets",
+        "/service-discovery"
+      ],
+      "instance_count": 2,
+      "variation_count": 1,
+      "description": "Mantine Combobox/Select for 'Select scrape pool'. Single-value. bg white/dark, borderRadius 4px, height 36px, trailing chevron.",
+      "category": "input",
+      "observed_styles": {
+        "border_radius": "4px",
+        "spacing": [
+          "height: 36px"
+        ]
+      }
+    },
+    {
+      "name": "Date Picker",
+      "pages": [
+        "/query"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine DateTimePicker labeled 'Evaluation time' with prev/next ActionIcons flanking the picker.",
+      "category": "input"
+    },
+    {
+      "name": "Tab Control",
+      "pages": [
+        "/query"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine Tabs for Table / Graph / Explain. Active tab: borderBottom 2px solid rgb(34, 139, 230). Inactive: transparent bottom border. Both fontSize 14px fontWeight 400, padding 10px 16px.",
+      "category": "navigation",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)",
+          "rgb(0, 0, 0)"
+        ],
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 10px 16px"
+        ],
+        "border_radius": null
+      }
+    },
+    {
+      "name": "Card",
+      "pages": [
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 8,
+      "variation_count": 3,
+      "description": "Mantine Card (+ Paper). bg rgb(255,255,255) light / rgb(36,36,36) dark. border 1px solid rgb(222, 226, 230). borderRadius 4px. padding 16px. boxShadow: 2-layer subtle (rgba(0,0,0,0.05) 0 1px 3px, rgba(0,0,0,0.1) 0 1px 2px). Variation comes from title treatment (with icon / without icon / no title).",
+      "category": "layout",
+      "observed_styles": {
+        "colors": [
+          "rgb(255, 255, 255)",
+          "rgb(36, 36, 36)",
+          "rgb(222, 226, 230)"
+        ],
+        "spacing": [
+          "padding: 16px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Card Title with Icon",
+      "pages": [
+        "/status",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "Card heading = leading Tabler icon (monochrome black/~20px) + heading text. Observed titles: 'Build information', 'Runtime information', 'Active Alertmanagers', 'Dropped Alertmanagers'.",
+      "category": "layout"
+    },
+    {
+      "name": "Card Title without Icon",
+      "pages": [
+        "/tsdb-status"
+      ],
+      "instance_count": 4,
+      "variation_count": 1,
+      "description": "Card heading = plain text heading, NO leading icon. Observed: 'TSDB Head Status', 'Top 10 label names with value count', 'Top 10 label names with highest memory usage', 'Top 10 series label value counts'.",
+      "category": "layout"
+    },
+    {
+      "name": "Accordion",
+      "pages": [
+        "/targets",
+        "/service-discovery"
+      ],
+      "instance_count": 2,
+      "variation_count": 1,
+      "description": "Mantine Accordion. Each item: bg surface-0, borderRadius 4px, borderLeft 5px solid \u2014 GREEN (rgb(140,233,154) light / rgb(47,158,68) dark) when all children UP, RED (rgb(255,168,168) light / rgb(201,42,42) dark) when any child DOWN. Control header shows name + 'N/M up' counter + status dot + chevron.",
+      "category": "layout",
+      "observed_styles": {
+        "colors": [
+          "rgb(140, 233, 154)",
+          "rgb(255, 168, 168)",
+          "rgb(47, 158, 68)",
+          "rgb(201, 42, 42)"
+        ],
+        "spacing": [
+          "padding: 0 16px",
+          "border-left-width: 5px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Status Indicator",
+      "pages": [
+        "/targets",
+        "/service-discovery"
+      ],
+      "instance_count": 2,
+      "variation_count": 2,
+      "description": "Small ~16px SVG circle next to pool-level 'N/M up' counter. Filled green when all UP, filled red when any DOWN. Purely visual \u2014 no text.",
+      "category": "data-display",
+      "observed_styles": {
+        "colors": [
+          "rgb(64, 192, 87)",
+          "rgb(250, 82, 82)"
+        ]
+      }
+    },
+    {
+      "name": "Health Status Badge",
+      "pages": [
+        "/targets"
+      ],
+      "instance_count": 4,
+      "variation_count": 2,
+      "description": "Pill-shaped badge for per-target state. UP: bg rgb(211,249,216) / color rgb(43,138,62) light; inverted in dark. DOWN: bg rgb(255,236,236) / color rgb(201,42,42) light; inverted in dark. borderRadius 1000px (pill), padding 0 10px, fontSize 11px, fontWeight 700, textTransform uppercase.",
+      "category": "data-display",
+      "observed_styles": {
+        "colors": [
+          "rgb(211, 249, 216)",
+          "rgb(43, 138, 62)",
+          "rgb(201, 42, 42)"
+        ],
+        "font_sizes": [
+          "11px"
+        ],
+        "spacing": [
+          "padding: 0 10px"
+        ],
+        "border_radius": "1000px"
+      }
+    },
+    {
+      "name": "Label Badge",
+      "pages": [
+        "/targets",
+        "/service-discovery"
+      ],
+      "instance_count": 24,
+      "variation_count": 1,
+      "description": "Pill-shaped key=value badge for scrape/target/discovered labels. bg rgb(241,243,245) light / rgb(52,58,64) dark. color rgb(73,80,87) light / rgb(173,181,189) dark. borderRadius 1000px, padding 0 10px, fontSize 11px, fontWeight 700, textTransform none.",
+      "category": "data-display",
+      "observed_styles": {
+        "colors": [
+          "rgb(241, 243, 245)",
+          "rgb(73, 80, 87)"
+        ],
+        "font_sizes": [
+          "11px"
+        ],
+        "spacing": [
+          "padding: 0 10px"
+        ],
+        "border_radius": "1000px"
+      }
+    },
+    {
+      "name": "Stats Badge",
+      "pages": [
+        "/targets"
+      ],
+      "instance_count": 8,
+      "variation_count": 1,
+      "description": "Pill-shaped gray badge with leading icon used for 'last scrape' duration + 'N ms ago' timestamp. Same bg/color tokens as Label Badge. textTransform at root is uppercase but inner .mantine-Badge-label is none \u2014 so content renders mixed-case visually.",
+      "category": "data-display",
+      "observed_styles": {
+        "colors": [
+          "rgb(241, 243, 245)",
+          "rgb(73, 80, 87)"
+        ],
+        "font_sizes": [
+          "11px"
+        ],
+        "border_radius": "1000px"
+      }
+    },
+    {
+      "name": "Table",
+      "pages": [
+        "/status",
+        "/tsdb-status"
+      ],
+      "instance_count": 6,
+      "variation_count": 1,
+      "description": "Mantine Table. th fontSize 14px fontWeight 700 padding 7px 10px text-align left. td fontSize 14px padding 7px 10px. Visual bottom-border between rows (Mantine default tr:not(:last-child)).",
+      "category": "data-display",
+      "observed_styles": {
+        "font_sizes": [
+          "14px"
+        ],
+        "spacing": [
+          "padding: 7px 10px"
+        ]
+      }
+    },
+    {
+      "name": "Sortable Table",
+      "pages": [
+        "/flags"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Same Mantine Table base but both th have a stacked up/down chevron icon indicating sortability. Only on /flags.",
+      "category": "data-display"
+    },
+    {
+      "name": "Key-Value Table",
+      "pages": [
+        "/status",
+        "/tsdb-status"
+      ],
+      "instance_count": 6,
+      "variation_count": 1,
+      "description": "Two-column table with a bold label column and a value column. Used for Build/Runtime info (system fields) and Top-N label stats (monospace fields).",
+      "category": "data-display"
+    },
+    {
+      "name": "Inline Code",
+      "pages": [
+        "/tsdb-status",
+        "/flags"
+      ],
+      "instance_count": 100,
+      "variation_count": 1,
+      "description": "Bare <code> tag used inside table cells. Browser-default monospace, no bg, no padding, no border. Used for label names, flag names, flag values.",
+      "category": "data-display",
+      "observed_styles": {
+        "font_sizes": [
+          "14px"
+        ]
+      }
+    },
+    {
+      "name": "YAML Code Block",
+      "pages": [
+        "/config"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine CodeHighlight rendering the YAML config. pre uses bare 'monospace' font-family keyword \u2014 no explicit stack. fontSize 16px. In light: bg transparent; in dark: code bg rgb(31,31,31).",
+      "category": "data-display",
+      "observed_styles": {
+        "font_sizes": [
+          "16px"
+        ]
+      }
+    },
+    {
+      "name": "Syntax Highlighted Code",
+      "pages": [
+        "/config"
+      ],
+      "instance_count": 1,
+      "variation_count": 2,
+      "description": "highlight.js tokenization over the CodeHighlight pre. Light theme token colors: hljs-attr rgb(92,148,13) (green), hljs-string rgb(24,100,171) (blue), hljs-literal rgb(34,139,230). Dark theme: hljs-attr rgb(165,216,255) (blue), hljs-string rgb(64,192,87) (green) \u2014 the semantic color roles swap between themes.",
+      "category": "data-display"
+    },
+    {
+      "name": "Copy Button",
+      "pages": [
+        "/config"
+      ],
+      "instance_count": 1,
+      "variation_count": 1,
+      "description": "Mantine ActionIcon (mantine-CodeHighlight-control) floating at top-right of the code block. aria-label 'Copy code'.",
+      "category": "input"
+    },
+    {
+      "name": "Mantine Alert Info Callout",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/rules",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 5,
+      "variation_count": 1,
+      "description": "Mantine Alert with color='blue' (info). bg rgba(34,139,230,0.1), title color rgb(34,139,230) (blue bold), body color rgb(0,0,0) (black) regular. borderRadius 4px, padding 16px. Leading circle-info icon.",
+      "category": "feedback",
+      "observed_styles": {
+        "colors": [
+          "rgba(34, 139, 230, 0.1)",
+          "rgb(34, 139, 230)",
+          "rgb(0, 0, 0)"
+        ],
+        "spacing": [
+          "padding: 16px"
+        ],
+        "border_radius": "4px"
+      }
+    },
+    {
+      "name": "Empty State",
+      "pages": [
+        "/query",
+        "/alerts",
+        "/rules",
+        "/alertmanager-discovery"
+      ],
+      "instance_count": 5,
+      "variation_count": 1,
+      "description": "Implemented as a Mantine Alert Info Callout with a title + body pair. Title + body often contain near-duplicate strings (see INC-001).",
+      "category": "feedback"
+    },
+    {
+      "name": "Link",
+      "pages": [
+        "/targets",
+        "/service-discovery"
+      ],
+      "instance_count": 5,
+      "variation_count": 1,
+      "description": "Mantine Anchor / plain <a>. color rgb(34, 139, 230) (primary blue), textDecoration none. Used for endpoint URLs on /targets and 'show relabeling' disclosure on /service-discovery.",
+      "category": "data-display",
+      "observed_styles": {
+        "colors": [
+          "rgb(34, 139, 230)"
+        ]
+      }
+    }
+  ],
+  "inconsistencies": [
+    {
+      "id": "INC-001",
+      "title": "Empty-state Alert duplicates title and body with near-identical text",
+      "severity": "minor",
+      "type": "duplicated-logic",
+      "pages": [
+        "/alerts",
+        "/rules",
+        "/alertmanager-discovery"
+      ],
+      "pattern": "Mantine Alert Info Callout",
+      "variants": [
+        {
+          "page": "/alerts",
+          "implementation": "title='No rules found' / body='No rules found.'",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/rules",
+          "implementation": "title='No rules found' / body='No rules found.'",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/alertmanager-discovery (Active)",
+          "implementation": "title='No active alertmanagers' / body='No active alertmanagers found.'",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/alertmanager-discovery (Dropped)",
+          "implementation": "title='No dropped alertmanagers' / body='No dropped alertmanagers found.'",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Keep either a single-line title-only alert OR a distinct title+body pair where the body adds new information. Do not restate the title as the body.",
+      "reasoning": "Duplicating the same message at two visual prominences adds noise and gives users nothing to read. Screen readers will announce it twice. Either drop the body to get a one-line alert, or put actionable info in the body (e.g. 'Configure alert rules in prometheus.yml under the `rule_files` key').",
+      "fix": "Delete the body prop on all four call-sites, or replace the body with a link to the relevant docs page."
+    },
+    {
+      "id": "INC-002",
+      "title": "Success/health state is pill-badge in some places and plain text in others",
+      "severity": "major",
+      "type": "missing-normalization",
+      "pages": [
+        "/targets",
+        "/status"
+      ],
+      "pattern": "Health Status Badge",
+      "variants": [
+        {
+          "page": "/targets",
+          "implementation": "Per-target state 'UP' and 'DOWN' rendered as pill badges (green.1 bg + green.8 text for UP; red.1/red.8 for DOWN).",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/status",
+          "implementation": "'Configuration Reload: Successful' rendered as plain black <td> text (rgb(0,0,0), fontWeight 400). No visual affordance \u2014 would look identical to 'Failed'.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Route every boolean/enum state field through a single `HealthStatusBadge` component. Map 'Successful', 'UP', 'Ready', etc. \u2192 green variant; 'Failed', 'DOWN', 'Unhealthy' \u2192 red variant; 'Pending', 'Warning' \u2192 yellow variant.",
+      "reasoning": "Users skim status pages for problems. Plain black 'Successful' looks identical to plain black 'Failed' \u2014 the UI fails the glanceable-status bar. Meanwhile /targets correctly uses a green pill that pops visually.",
+      "fix": "Introduce a `<HealthBadge value={...}/>` wrapper in the UI package. Replace the raw 'Successful'/'Failed' <td> content on /status (and any other /runtime field representing state) with the badge."
+    },
+    {
+      "id": "INC-003",
+      "title": "Label name/value pairs rendered three different ways across pages",
+      "severity": "major",
+      "type": "implementation-drift",
+      "pages": [
+        "/targets",
+        "/service-discovery",
+        "/tsdb-status",
+        "/flags"
+      ],
+      "pattern": "Label Badge",
+      "variants": [
+        {
+          "page": "/targets",
+          "implementation": "Full Label Badge component: pill shape, bg rgb(241,243,245), padding 0 10px, fontSize 11px / fontWeight 700. Renders 'instance=\"...\"' and 'job=\"demo\"'.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/service-discovery",
+          "implementation": "Same Label Badge as /targets.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/tsdb-status",
+          "implementation": "Label names rendered as bare <code> (browser-default monospace, no bg, no padding, no border). Example: '__name__', 'le', 'handler'.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/flags",
+          "implementation": "Flag names (which are effectively label names) rendered as bare <code> \u2014 same as /tsdb-status.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Use Label Badge for every label-name or label-name=value display. A flag like `--config.file` is a label name and should render in the same pill-style as `job=\"demo\"`. Drop bare <code>.",
+      "reasoning": "The same underlying concept (a label or identifier) wearing three different visual uniforms teaches users to re-parse each page. Unifying on the pill form also makes these elements trivially clickable/filterable later.",
+      "fix": "Replace `<code>{name}</code>` in Flags.tsx and TSDBStatus.tsx with `<LabelBadge>{name}</LabelBadge>`. Keep the pill shape; accept a monospace variant prop if the design team prefers that typographic treatment inside the pill."
+    },
+    {
+      "id": "INC-004",
+      "title": "Sortable columns exist only on /flags \u2014 other same-shape tables are not sortable",
+      "severity": "minor",
+      "type": "implementation-drift",
+      "pages": [
+        "/flags",
+        "/status",
+        "/tsdb-status"
+      ],
+      "pattern": "Table",
+      "variants": [
+        {
+          "page": "/flags",
+          "implementation": "Both th have stacked up/down chevron icon; clicking sorts the table.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/status",
+          "implementation": "Same Mantine Table but no sort icons \u2014 Build/Runtime tables cannot be sorted.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/tsdb-status",
+          "implementation": "Same Mantine Table but no sort icons. The 'Top 10 label names' tables would benefit from sort-by-count.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Default every Mantine Table to sortable columns with up/down chevrons, regardless of row count.",
+      "reasoning": "Users see sort icons on /flags and then expect them on /tsdb-status (where rows have numeric 'Count' values). Because the Top-N tables are already ordered by count, sortability is virtually free to add and aligns the behavior.",
+      "fix": "Flip the `sortable` default to true in the Table wrapper component. Opt-out case-by-case if a specific column genuinely must keep insertion order."
+    },
+    {
+      "id": "INC-005",
+      "title": "Card title treatment drifts: with-icon vs without-icon vs no-title",
+      "severity": "minor",
+      "type": "style-drift",
+      "pages": [
+        "/status",
+        "/tsdb-status",
+        "/flags",
+        "/config",
+        "/alertmanager-discovery"
+      ],
+      "pattern": "Card",
+      "variants": [
+        {
+          "page": "/status",
+          "implementation": "Card title uses 'Card Title with Icon' \u2014 Tabler icon + heading text. Both cards on this page follow this pattern.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/alertmanager-discovery",
+          "implementation": "Same 'Card Title with Icon' as /status.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/tsdb-status",
+          "implementation": "Card titles use 'Card Title without Icon' \u2014 all four cards are plain text headings with no leading icon.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/flags",
+          "implementation": "Card has NO title at all. It opens with a Search Input and dumps into the Sortable Table.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/config",
+          "implementation": "No Card wrapper and no title \u2014 the YAML CodeHighlight pre sits raw in the page body.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Every Card must have a 'Card Title with Icon'. The icon comes from the same Tabler mapping used on /status (database for 'TSDB', flag for 'Command-line flags', file-text for 'Configuration', etc.). Wrap /config and /flags content in Card too so the page-template is uniform.",
+      "reasoning": "Icons act as scannable anchors when a page has multiple cards. /tsdb-status has four stacked plain-text cards that blur together; a single tabler-icon prefix makes each card individually identifiable. /flags and /config breaking the Card pattern makes them visually lighter than they should be \u2014 the page-chrome is inconsistent.",
+      "fix": "Add `<CardTitle icon={Icon}>{title}</CardTitle>` to every card section. Wrap the Flags table and Config codeblock in the same Card component used on /status so every Status sub-page has the same outer shape."
+    },
+    {
+      "id": "INC-006",
+      "title": "Syntax-highlighted code: semantic color roles invert between light and dark themes",
+      "severity": "cosmetic",
+      "type": "style-drift",
+      "pages": [
+        "/config"
+      ],
+      "pattern": "Syntax Highlighted Code",
+      "variants": [
+        {
+          "page": "/config (light)",
+          "implementation": "hljs-attr (YAML keys): rgb(92, 148, 13) \u2014 GREEN. hljs-string (string values): rgb(24, 100, 171) \u2014 BLUE. hljs-literal (true/false): rgb(34, 139, 230) \u2014 BLUE.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/config (dark)",
+          "implementation": "hljs-attr (YAML keys): rgb(165, 216, 255) \u2014 BLUE. hljs-string (string values): rgb(64, 192, 87) \u2014 GREEN. hljs-literal: rgb(34, 139, 230) \u2014 BLUE.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Pick a semantic role for each color and keep it stable across themes. E.g. keys are always green, strings are always blue (or vice versa). Use luminance variants (green.4 / green.9) rather than swapping the hue entirely.",
+      "reasoning": "A user toggling theme should keep their learned associations. Today, a reader who learned 'green = YAML key' in light theme has to relearn 'blue = YAML key' in dark theme. Role-to-color should be the invariant; luminance is the variant.",
+      "fix": "Replace the default highlight.js dark stylesheet with a custom one that mirrors the light role-to-color mapping: .hljs-attr stays green family across themes, .hljs-string stays blue family across themes, etc."
+    },
+    {
+      "id": "INC-007",
+      "title": "/alerts and /rules share identical 'No rules found' empty-state copy for different rule types",
+      "severity": "minor",
+      "type": "missing-normalization",
+      "pages": [
+        "/alerts",
+        "/rules"
+      ],
+      "pattern": "Empty State",
+      "variants": [
+        {
+          "page": "/alerts",
+          "implementation": "'No rules found' \u2014 but this page shows ALERTING rules; the word 'rules' here refers to alerting rules.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/rules",
+          "implementation": "'No rules found' \u2014 but this page shows RECORDING rules; the same wording overlaps with /alerts.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "'No alerting rules found' on /alerts and 'No recording rules found' on /rules, with a link to the respective docs section in the body.",
+      "reasoning": "A user who toggles between /alerts and /rules and sees identical copy cannot tell whether their alerting rules and their recording rules are both missing, or whether they are on the same page twice.",
+      "fix": "Parameterize the empty-state Alert component with a `ruleType` prop and emit the specific wording."
+    },
+    {
+      "id": "INC-008",
+      "title": "<pre> uses bare 'monospace' keyword \u2014 no explicit font-family stack",
+      "severity": "cosmetic",
+      "type": "hardcoded-values",
+      "pages": [
+        "/config"
+      ],
+      "pattern": "YAML Code Block",
+      "variants": [
+        {
+          "page": "/config",
+          "implementation": "getComputedStyle(pre).fontFamily === 'monospace' \u2014 the literal CSS keyword. Browsers resolve this to Courier-family on most OSes, giving poor rendering.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/tsdb-status and /flags (<code>)",
+          "implementation": "Inline <code> also inherits bare monospace \u2014 same concern.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Define a single CSS variable `--font-family-mono` and apply it to pre, code, and inline code everywhere. Value: `ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace`.",
+      "reasoning": "Bare `monospace` falls back to Courier New on Windows and Courier on macOS \u2014 neither matches modern code-editor defaults. A proper stack gives SF Mono / Cascadia / Consolas on users who have them.",
+      "fix": "Add `--font-family-mono` to the Mantine theme override and reference it in `pre, code { font-family: var(--font-family-mono); }`."
+    },
+    {
+      "id": "INC-009",
+      "title": "Stats Badge has conflicting textTransform at root vs inner label element",
+      "severity": "cosmetic",
+      "type": "style-drift",
+      "pages": [
+        "/targets"
+      ],
+      "pattern": "Stats Badge",
+      "variants": [
+        {
+          "page": "/targets (root .mantine-Badge-root)",
+          "implementation": "getComputedStyle gives textTransform: 'uppercase'. Inherited from the Mantine Badge default.",
+          "source_file": null,
+          "source_line": null
+        },
+        {
+          "page": "/targets (inner .mantine-Badge-label)",
+          "implementation": "getComputedStyle gives textTransform: 'none'. So the visible content ('991ms ago', '573ms') is NOT uppercased even though the root says it should be.",
+          "source_file": null,
+          "source_line": null
+        }
+      ],
+      "canonical": "Decide per variant whether uppercase is desired: Health Status Badge uses uppercase (UP/DOWN); Stats Badge shows mixed-case content so it should set textTransform: 'none' at the root, not fight itself by overriding at label level.",
+      "reasoning": "Today the CSS specificity accidentally produces the correct visual by overriding at the inner element, but a reader of the source sees a badge that claims to be uppercase and isn't \u2014 the intent is ambiguous.",
+      "fix": "In the Stats Badge variant, set `text-transform: none` at the root (or use a distinct Mantine variant name 'stats' that sets it explicitly)."
+    }
+  ],
+  "raw_observations": {
+    "colors_observed": [
+      {
+        "value": "rgb(34, 139, 230)",
+        "usage": "Primary blue \u2014 Execute button fill, active nav pill, text links, Alert icon/title (info), hljs-literal token, focus ring",
+        "pages": [
+          "/query",
+          "/alerts",
+          "/targets",
+          "/rules",
+          "/service-discovery",
+          "/status",
+          "/tsdb-status",
+          "/flags",
+          "/config",
+          "/alertmanager-discovery"
+        ]
+      },
+      {
+        "value": "rgb(65, 73, 81)",
+        "usage": "Header background \u2014 fixed dark slate, same in both themes",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(255, 255, 255)",
+        "usage": "Body/card/input background in LIGHT theme",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(36, 36, 36)",
+        "usage": "Body/card background in DARK theme",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(31, 31, 31)",
+        "usage": "CodeHighlight code background in DARK theme",
+        "pages": [
+          "/config"
+        ]
+      },
+      {
+        "value": "rgb(0, 0, 0)",
+        "usage": "Primary body text in LIGHT theme",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(201, 201, 201)",
+        "usage": "Primary body text in DARK theme",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(222, 226, 230)",
+        "usage": "Card border in light theme (Mantine gray.3)",
+        "pages": [
+          "/status",
+          "/tsdb-status",
+          "/flags",
+          "/alertmanager-discovery"
+        ]
+      },
+      {
+        "value": "rgb(206, 212, 218)",
+        "usage": "Input border in light theme (Mantine gray.4)",
+        "pages": [
+          "/alerts",
+          "/targets",
+          "/rules",
+          "/service-discovery",
+          "/flags"
+        ]
+      },
+      {
+        "value": "rgb(241, 243, 245)",
+        "usage": "Label/Stats Badge background in LIGHT theme (Mantine gray.1)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(52, 58, 64)",
+        "usage": "Label/Stats Badge background in DARK theme (Mantine gray.8)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(73, 80, 87)",
+        "usage": "Label/Stats Badge text color in LIGHT theme (Mantine gray.7)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(173, 181, 189)",
+        "usage": "Label/Stats Badge text color in DARK theme (Mantine gray.5)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(134, 142, 150)",
+        "usage": "Inactive nav button bg in header, ActionIcon gray bg (Mantine gray.6)",
+        "pages": [
+          "all"
+        ]
+      },
+      {
+        "value": "rgb(140, 233, 154)",
+        "usage": "Accordion borderLeft UP state in LIGHT theme (Mantine green.4)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(47, 158, 68)",
+        "usage": "Accordion borderLeft UP state in DARK theme (Mantine green.7)",
+        "pages": [
+          "/targets",
+          "/service-discovery"
+        ]
+      },
+      {
+        "value": "rgb(211, 249, 216)",
+        "usage": "UP Health Status Badge bg in LIGHT theme (green.1) \u2014 also text color in DARK (swapped)",
+        "pages": [
+          "/targets"
+        ]
+      },
+      {
+        "value": "rgb(43, 138, 62)",
+        "usage": "UP Health Status Badge text in LIGHT theme (green.8) \u2014 also bg in DARK (swapped)",
+        "pages": [
+          "/targets"
+        ]
+      },
+      {
+        "value": "rgb(255, 168, 168)",
+        "usage": "Accordion borderLeft DOWN in LIGHT theme (Mantine red.4)",
+        "pages": [
+          "/targets"
+        ]
+      },
+      {
+        "value": "rgb(201, 42, 42)",
+        "usage": "Accordion borderLeft DOWN in DARK theme (Mantine red.8) + DOWN badge bg/text depending on theme",
+        "pages": [
+          "/targets"
+        ]
+      },
+      {
+        "value": "rgb(92, 148, 13)",
+        "usage": "hljs-attr (YAML keys) in LIGHT theme \u2014 green",
+        "pages": [
+          "/config"
+        ]
+      },
+      {
+        "value": "rgb(24, 100, 171)",
+        "usage": "hljs-string in LIGHT theme \u2014 blue",
+        "pages": [
+          "/config"
+        ]
+      },
+      {
+        "value": "rgb(165, 216, 255)",
+        "usage": "hljs-attr in DARK theme \u2014 blue (semantic drift, see INC-006)",
+        "pages": [
+          "/config"
+        ]
+      },
+      {
+        "value": "rgb(64, 192, 87)",
+        "usage": "hljs-string in DARK theme \u2014 green (semantic drift, see INC-006)",
+        "pages": [
+          "/config"
+        ]
+      }
+    ],
+    "fonts_observed": [
+      {
+        "family": "-apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
+        "usage": "Body / all Mantine UI chrome \u2014 system font stack"
+      },
+      {
+        "family": "monospace",
+        "usage": "pre and inline code \u2014 bare CSS keyword, NO explicit stack (see INC-008)"
+      }
+    ],
+    "spacing_observed": [
+      {
+        "value": "4px",
+        "usage": "Standard border-radius on buttons, inputs, alerts, cards, accordion items"
+      },
+      {
+        "value": "1000px",
+        "usage": "Pill-shape border-radius on badges (Label / Stats / Health Status)"
+      },
+      {
+        "value": "16px",
+        "usage": "Card padding and Alert padding"
+      },
+      {
+        "value": "8px 16px",
+        "usage": "Nav button padding (height 36px)"
+      },
+      {
+        "value": "0 18px",
+        "usage": "Primary Button (Execute) horizontal padding"
+      },
+      {
+        "value": "10px 16px",
+        "usage": "Tab padding"
+      },
+      {
+        "value": "7px 10px",
+        "usage": "Table cell padding (both th and td)"
+      },
+      {
+        "value": "0 10px",
+        "usage": "Badge horizontal padding"
+      },
+      {
+        "value": "5px",
+        "usage": "Accordion item left-border width"
+      }
+    ],
+    "has_dark_mode": true,
+    "theming_approach": "Mantine v7 CSS-variable theming. Theme toggle sets data-mantine-color-scheme='light|dark' on <html> and persists to localStorage key 'mantine-color-scheme-value'. Mantine auto-maps palette tokens (gray.1..gray.9, green.1..green.9, etc.) across themes. Header is NOT themed \u2014 always rgb(65,73,81). Syntax highlighting tokens partially theme (hljs stylesheet is theme-aware) but semantic color role assignment drifts \u2014 see INC-006.",
+    "screenshot_limitations": "Cowork sandbox blocks screenshot export \u2014 save_to_disk returns opaque ss_<hash> IDs rather than writable paths, and base64 payloads exceed the runtime.evaluate return limit. Fell back to Degraded Screenshot Mode: 1\u00d71 placeholder JPEGs will be written under screenshots/ via init-placeholders.sh. Claude Code Phase 1.5 is expected to backfill real JPEGs with Playwright."
+  },
+  "screenshots_are_placeholders": true
+}

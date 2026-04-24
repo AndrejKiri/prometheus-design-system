@@ -1,0 +1,33 @@
+{
+  "page": {"url": "/config", "scheme": "light"},
+  "layout": "Centered code block containing the YAML configuration, with a copy button overlaid top-right. No Card wrapper; no title; no filter.",
+  "component": "Mantine CodeHighlight — mantine-CodeHighlight-pre / mantine-CodeHighlight-code",
+  "syntax_highlighting": {
+    "library": "highlight.js",
+    "language": "yaml",
+    "base_color": "rgb(73, 80, 87)",
+    "tokens": {
+      "hljs-attr": {"color": "rgb(92, 148, 13)", "note": "YAML key — green"},
+      "hljs-string": {"color": "rgb(24, 100, 171)", "note": "String value — dark blue"},
+      "hljs-literal": {"color": "rgb(34, 139, 230)", "note": "true/false/null — Mantine primary blue"}
+    }
+  },
+  "pre_style": {
+    "fontFamily": "monospace",
+    "fontFamily_concern": "INCONSISTENCY: pre uses bare 'monospace' keyword — no explicit stack (e.g., 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'). Browsers render different fonts; not a design-system-grade stack.",
+    "fontSize": "16px",
+    "bg": "transparent",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "width": "640px (centered)"
+  },
+  "copy_button": {
+    "component": "Mantine ActionIcon with CodeHighlight-control class",
+    "aria_label": "Copy code",
+    "position": "top-right overlay on the pre"
+  },
+  "missing_wrappers": {
+    "no_card": "Unlike /status, /tsdb-status, /flags — /config does NOT wrap its content in a Card. The pre block sits directly in the page body.",
+    "no_title": "No 'Configuration' title rendered inside the content — the page title comes only from the header breadcrumb."
+  }
+}

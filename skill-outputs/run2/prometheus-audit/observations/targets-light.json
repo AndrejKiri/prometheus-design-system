@@ -1,0 +1,50 @@
+{
+  "page": {"url": "/targets", "scheme": "light"},
+  "layout": "Three filter row (Select scrape pool | PillsInput target health | Search) + collapse-all icon button, then a list of Mantine Accordion items (one per scrape pool).",
+  "filters": {
+    "select_scrape_pool": {"component": "Combobox/Select", "bg": "rgb(255, 255, 255)", "borderColor": "rgb(206, 212, 218)", "borderRadius": "4px", "height": "36px", "width_approx": "225px"},
+    "filter_by_target_health": {"component": "PillsInput + Combobox (multi)", "placeholder": "Filter by target health", "note": "Different input variant than search — no visible border when empty, floats inside a wrapper"},
+    "search_endpoint_or_labels": {"component": "Input w/ leading icon", "bg": "rgb(255, 255, 255)", "borderColor": "rgb(206, 212, 218)", "borderRadius": "4px", "height": "36px", "padding": "0px 12px 0px 34px"}
+  },
+  "accordion": {
+    "item_style": {"bg": "rgb(255, 255, 255)", "borderRadius": "4px", "borderLeft_up": "5px solid rgb(140, 233, 154)", "borderLeft_down": "5px solid rgb(255, 168, 168)", "note": "Green left-border when all targets UP; red when any DOWN. Rest of box has no border."},
+    "control_header": {"bg": "transparent", "color": "rgb(0, 0, 0)", "padding": "0px 16px", "fontSize": "16px", "fontWeight": "400", "content": "<pool-name>  <N/M up counter>  <status circle>  <chevron>"},
+    "panel_table": "Four columns: Endpoint (link) | Labels (row of pill-badges + chevron) | Last scrape (icon badge + duration badge) | State (UP/DOWN pill-badge)"
+  },
+  "badges": {
+    "label_key_value": {
+      "borderRadius": "1000px", "padding": "0px 10px", "fontSize": "11px", "fontWeight": "700",
+      "bg": "rgb(241, 243, 245)", "color": "rgb(73, 80, 87)",
+      "textTransform_at_root": "none",
+      "note": "Renders content like instance=\"...\" job=\"demo\" — with actual content in mixed case. NOTE: Some pill elements have no mantine-Badge class (cls: '') — possibly styled divs with identical visual tokens but different component; flag for inconsistency."
+    },
+    "metadata_duration_badge": {
+      "borderRadius": "1000px", "padding": "0px 10px", "fontSize": "11px", "fontWeight": "700",
+      "bg": "rgb(241, 243, 245)", "color": "rgb(73, 80, 87)",
+      "textTransform_at_root": "uppercase",
+      "textTransform_at_label": "none",
+      "observed_content": "991ms ago, 573ms, 61ms",
+      "note": "Root has textTransform:uppercase but inner Badge-label has textTransform:none — so visually the content is not uppercased. The inconsistency is between root-level and label-level textTransform on the SAME component."
+    },
+    "state_up": {
+      "bg": "rgb(211, 249, 216)", "color": "rgb(43, 138, 62)",
+      "borderRadius": "1000px", "padding": "0px 10px", "fontSize": "11px", "fontWeight": "700",
+      "textTransform": "uppercase",
+      "content": "UP"
+    },
+    "state_down": {
+      "note": "Red palette; bg ~rgb(255,201,201), color ~rgb(201,42,42) (visible in screenshot, pushgateway row). Same 1000px pill shape, 11px/700.",
+      "content": "DOWN"
+    }
+  },
+  "links": {
+    "color": "rgb(34, 139, 230)",
+    "textDecoration": "none",
+    "hover_behavior": "presumed underline on hover (not tested)"
+  },
+  "status_indicator_circle": "Green filled circle next to 'N / M up' when all up; red when any down. Visually a small ~16px circle SVG in the accordion header summary.",
+  "interactive_states_to_capture_in_phase_1_5": [
+    {"state": "expanded-target-row", "desc": "Click chevron next to Labels to expand and show label name/value key-value pairs"},
+    {"state": "modal-open-targets-filter", "desc": "Click PillsInput (Filter by target health) to open combobox dropdown"}
+  ]
+}

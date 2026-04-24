@@ -1,0 +1,18 @@
+{
+  "page": {"url": "/rules", "scheme": "light"},
+  "content_visible": "Empty state — no rules configured",
+  "filters": {
+    "filter_by_rule_health": {"component": "PillsInput + Combobox", "placeholder": "Filter by rule health", "note": "Same shape/styling as /alerts 'Filter by rule group state' filter — but different filter semantics (health vs group state)"},
+    "search_input": {"placeholder": "Filter by rule name or labels", "borderColor": "rgb(206, 212, 218)", "borderRadius": "4px", "height": "36px", "padding": "0px 12px 0px 34px"}
+  },
+  "alerts": {
+    "empty_state": {
+      "title": "No rules found",
+      "body": "No rules found.",
+      "bg": "rgba(34, 139, 230, 0.1)",
+      "color": "rgb(34, 139, 230)",
+      "note": "Identical copy to /alerts empty state, though /alerts shows alerting rules and /rules shows recording rules. Title and body are duplicate strings."
+    }
+  },
+  "inconsistency_note_vs_alerts": "Both /alerts and /rules show identical empty-state text 'No rules found' — but they serve different rule types. /alerts should distinguish alerting rules; /rules should distinguish recording rules. Also duplicative title+body with same string."
+}

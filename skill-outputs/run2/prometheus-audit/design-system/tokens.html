@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokens — Prometheus Design System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="doc-topbar">
+  <button class="doc-topbar-burger" id="doc-burger" aria-label="Toggle sidebar">☰</button>
+  <a class="doc-topbar-title" href="index.html">Prometheus Design System</a>
+  <div class="doc-topbar-spacer"></div>
+  <button class="doc-topbar-theme" id="doc-theme-toggle" aria-label="Toggle theme">◐</button>
+</header>
+  <div class="doc-sidebar-overlay" id="doc-sidebar-overlay"></div>
+  <aside class="doc-sidebar" id="doc-sidebar">
+  <nav class="doc-sidebar-nav" aria-label="Docs navigation">
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Foundations</div>
+        <ul>
+        <li><a class="doc-nav-link" href="index.html">Home</a></li>
+        <li><a class="doc-nav-link active" href="tokens.html">Tokens</a></li>
+        <li><a class="doc-nav-link" href="icons.html">Icons</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Components</div>
+        <ul>
+        <li><a class="doc-nav-link" href="components.html">Components</a></li>
+        <li><a class="doc-nav-link" href="patterns.html">Patterns</a></li>
+        <li><a class="doc-nav-link" href="action-items.html">Action Items</a></li>
+        </ul>
+      </div>
+      <div class="doc-nav-section">
+        <div class="doc-nav-label">Audit</div>
+        <ul>
+        <li><a class="doc-nav-link" href="audit-report.html">Audit Report</a></li>
+        <li><a class="doc-nav-link" href="inconsistencies.html">Inconsistencies</a></li>
+        <li><a class="doc-nav-link" href="migration.html">Migration</a></li>
+        <li><a class="doc-nav-link" href="figma.html">Figma Plugin</a></li>
+        <li><a class="doc-nav-link" href="changelog.html">Changelog</a></li>
+        </ul>
+      </div>
+  </nav>
+</aside>
+  <main class="doc-content">
+    <h1>Tokens</h1>
+    <p class="doc-subtitle">All design tokens extracted from the Prometheus v3 web UI.</p>
+
+    <h2 id="brand">Brand</h2>
+    <div class="swatch-grid">
+<div class="swatch"><div class="swatch-color" style="background:rgb(34,139,230)"></div><div class="swatch-info"><div class="swatch-name">brand-blue</div><div class="swatch-value">rgb(34,139,230)</div><div class="swatch-usage">Primary action — Execute button fill, active nav button, tab underline, link color, focus ring, info-Alert icon/title. Mantine blue.6.</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(65,73,81)"></div><div class="swatch-info"><div class="swatch-name">nav-slate</div><div class="swatch-value">rgb(65,73,81)</div><div class="swatch-usage">Top header background — fixed across both themes. The product-brand anchor that keeps the global chrome visually stable when toggling theme.</div></div></div>
+
+    </div>
+
+    <h2 id="status">Status</h2>
+    <div class="status-grid">
+<div class="status-card"><div class="status-title">ok</div><div class="status-swatches"><div class="status-swatch" style="background:rgb(211,249,216);color:rgb(43,138,62);border:1px solid transparent">ok · light</div><div class="status-swatch" style="background:rgb(43,138,62);color:rgb(211,249,216);border:1px solid transparent">ok · dark</div></div></div>
+<div class="status-card"><div class="status-title">error</div><div class="status-swatches"><div class="status-swatch" style="background:rgb(255,236,236);color:rgb(201,42,42);border:1px solid transparent">error · light</div><div class="status-swatch" style="background:rgb(201,42,42);color:rgb(255,236,236);border:1px solid transparent">error · dark</div></div></div>
+<div class="status-card"><div class="status-title">info</div><div class="status-swatches"><div class="status-swatch" style="background:rgba(34,139,230,0.10);color:rgb(34,139,230);border:1px solid transparent">info · light</div><div class="status-swatch" style="background:rgba(34,139,230,0.15);color:rgb(116,192,252);border:1px solid transparent">info · dark</div></div></div>
+
+    </div>
+
+    <h2 id="surface">Surface</h2>
+    <div class="swatch-grid">
+<div class="swatch"><div class="swatch-color" style="background:rgb(255,255,255)"></div><div class="swatch-info"><div class="swatch-name">page-bg</div><div class="swatch-value">rgb(255,255,255)</div><div class="swatch-usage">dark: rgb(36,36,36)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(255,255,255)"></div><div class="swatch-info"><div class="swatch-name">card-bg</div><div class="swatch-value">rgb(255,255,255)</div><div class="swatch-usage">dark: rgb(36,36,36)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(255,255,255)"></div><div class="swatch-info"><div class="swatch-name">input-bg</div><div class="swatch-value">rgb(255,255,255)</div><div class="swatch-usage">dark: rgb(46,46,46)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:transparent"></div><div class="swatch-info"><div class="swatch-name">code-block-bg</div><div class="swatch-value">transparent</div><div class="swatch-usage">dark: rgb(31,31,31)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(241,243,245)"></div><div class="swatch-info"><div class="swatch-name">badge-bg</div><div class="swatch-value">rgb(241,243,245)</div><div class="swatch-usage">dark: rgb(52,58,64)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(65,73,81)"></div><div class="swatch-info"><div class="swatch-name">header-bg</div><div class="swatch-value">rgb(65,73,81)</div><div class="swatch-usage">dark: rgb(65,73,81)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(134,142,150)"></div><div class="swatch-info"><div class="swatch-name">icon-button-bg</div><div class="swatch-value">rgb(134,142,150)</div><div class="swatch-usage">dark: rgb(134,142,150)</div></div></div>
+
+    </div>
+
+    <h2 id="text">Text</h2>
+    <div class="swatch-grid">
+<div class="swatch"><div class="swatch-color" style="background:rgb(0,0,0)"></div><div class="swatch-info"><div class="swatch-name">primary</div><div class="swatch-value">rgb(0,0,0)</div><div class="swatch-usage">dark: rgb(201,201,201)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(73,80,87)"></div><div class="swatch-info"><div class="swatch-name">secondary</div><div class="swatch-value">rgb(73,80,87)</div><div class="swatch-usage">dark: rgb(173,181,189)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(134,142,150)"></div><div class="swatch-info"><div class="swatch-name">muted</div><div class="swatch-value">rgb(134,142,150)</div><div class="swatch-usage">dark: rgb(134,142,150)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(255,255,255)"></div><div class="swatch-info"><div class="swatch-name">inverted</div><div class="swatch-value">rgb(255,255,255)</div><div class="swatch-usage">dark: rgb(255,255,255)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(34,139,230)"></div><div class="swatch-info"><div class="swatch-name">link</div><div class="swatch-value">rgb(34,139,230)</div><div class="swatch-usage">dark: rgb(34,139,230)</div></div></div>
+
+    </div>
+
+    <h2 id="border">Border</h2>
+    <div class="swatch-grid">
+<div class="swatch"><div class="swatch-color" style="background:rgb(222,226,230)"></div><div class="swatch-info"><div class="swatch-name">card</div><div class="swatch-value">rgb(222,226,230)</div><div class="swatch-usage">dark: rgb(66,66,66)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(206,212,218)"></div><div class="swatch-info"><div class="swatch-name">input</div><div class="swatch-value">rgb(206,212,218)</div><div class="swatch-usage">dark: rgb(66,66,66)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(140,233,154)"></div><div class="swatch-info"><div class="swatch-name">accordion-ok-left</div><div class="swatch-value">rgb(140,233,154)</div><div class="swatch-usage">dark: rgb(47,158,68)</div></div></div>
+<div class="swatch"><div class="swatch-color" style="background:rgb(255,168,168)"></div><div class="swatch-info"><div class="swatch-name">accordion-error-left</div><div class="swatch-value">rgb(255,168,168)</div><div class="swatch-usage">dark: rgb(201,42,42)</div></div></div>
+
+    </div>
+
+    <h2 id="spacing">Spacing</h2>
+    <div class="spacing-grid">
+<div class="spacing-row"><div class="spacing-preview" style="width:4px"></div><div class="spacing-name">xs</div><div class="spacing-value">4px</div></div>
+<div class="spacing-row"><div class="spacing-preview" style="width:8px"></div><div class="spacing-name">sm</div><div class="spacing-value">8px</div></div>
+<div class="spacing-row"><div class="spacing-preview" style="width:12px"></div><div class="spacing-name">md</div><div class="spacing-value">12px</div></div>
+<div class="spacing-row"><div class="spacing-preview" style="width:16px"></div><div class="spacing-name">lg</div><div class="spacing-value">16px</div></div>
+<div class="spacing-row"><div class="spacing-preview" style="width:24px"></div><div class="spacing-name">xl</div><div class="spacing-value">24px</div></div>
+<div class="spacing-row"><div class="spacing-preview" style="width:32px"></div><div class="spacing-name">2xl</div><div class="spacing-value">32px</div></div>
+
+    </div>
+    <h3>Layout semantics</h3>
+    <table><thead><tr><th>Token</th><th>Value</th></tr></thead><tbody><tr><td><code>header-height</code></td><td>56px</td></tr>
+<tr><td><code>control-height</code></td><td>36px</td></tr>
+<tr><td><code>icon-button-size</code></td><td>32px</td></tr>
+<tr><td><code>card-padding</code></td><td>16px</td></tr>
+<tr><td><code>alert-padding</code></td><td>16px</td></tr>
+<tr><td><code>table-cell-padding-y</code></td><td>7px</td></tr>
+<tr><td><code>table-cell-padding-x</code></td><td>10px</td></tr>
+<tr><td><code>badge-padding-x</code></td><td>10px</td></tr>
+<tr><td><code>tab-padding-y</code></td><td>10px</td></tr>
+<tr><td><code>tab-padding-x</code></td><td>16px</td></tr>
+<tr><td><code>primary-button-padding-x</code></td><td>18px</td></tr>
+<tr><td><code>accordion-left-border-width</code></td><td>5px</td></tr>
+</tbody></table>
+
+    <h2 id="typography">Typography</h2>
+    <h3>Families</h3>
+    <div class="family-row"><strong>body-sans</strong> — <code>-apple-system, system-ui, &#x27;Segoe UI&#x27;, Roboto, Helvetica, Arial, sans-serif, &#x27;Apple Color Emoji&#x27;, &#x27;Segoe UI Emoji&#x27;</code><br><span class="family-usage">All UI chrome — body text, buttons, labels, table cells, badge text. The Mantine default system stack.</span></div>
+<div class="family-row"><strong>mono</strong> — <code>ui-monospace, SFMono-Regular, &#x27;SF Mono&#x27;, Menlo, Consolas, &#x27;Liberation Mono&#x27;, monospace</code><br><span class="family-usage">Code blocks, inline code, label/flag identifiers. Canonical stack — replaces the bare &#x27;monospace&#x27; keyword found on /config and /flags (INC-008).</span></div>
+
+    <h3>Styles</h3>
+    <div class="type-grid">
+<div class="type-row"><div class="type-preview" style="font-size:24px;font-weight:700;line-height:1.3">The quick brown fox</div><div class="type-meta"><div class="type-name">heading/page</div><div class="type-specs">24px · 700 · lh 1.3</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:18px;font-weight:600;line-height:1.4">The quick brown fox</div><div class="type-meta"><div class="type-name">heading/card-title</div><div class="type-specs">18px · 600 · lh 1.4</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:16px;font-weight:600;line-height:1.4">The quick brown fox</div><div class="type-meta"><div class="type-name">heading/section</div><div class="type-specs">16px · 600 · lh 1.4</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:14px;font-weight:400;line-height:1.55">The quick brown fox</div><div class="type-meta"><div class="type-name">body/default</div><div class="type-specs">14px · 400 · lh 1.55</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:14px;font-weight:700;line-height:1.55">The quick brown fox</div><div class="type-meta"><div class="type-name">body/strong</div><div class="type-specs">14px · 700 · lh 1.55</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:14px;font-weight:600;line-height:1.0">The quick brown fox</div><div class="type-meta"><div class="type-name">label/button-primary</div><div class="type-specs">14px · 600 · lh 1.0</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:14px;font-weight:500;line-height:1.0">The quick brown fox</div><div class="type-meta"><div class="type-name">label/button-secondary</div><div class="type-specs">14px · 500 · lh 1.0</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:11px;font-weight:700;line-height:1.0">The quick brown fox</div><div class="type-meta"><div class="type-name">label/badge</div><div class="type-specs">11px · 700 · lh 1.0</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:16px;font-weight:400;line-height:1.5">The quick brown fox</div><div class="type-meta"><div class="type-name">code/block</div><div class="type-specs">16px · 400 · lh 1.5</div></div></div>
+<div class="type-row"><div class="type-preview" style="font-size:14px;font-weight:400;line-height:1.4">The quick brown fox</div><div class="type-meta"><div class="type-name">code/inline</div><div class="type-specs">14px · 400 · lh 1.4</div></div></div>
+
+    </div>
+
+    <h2 id="radius">Border radius</h2>
+    <div class="radius-grid">
+<div class="radius-row"><div class="radius-preview" style="border-radius:0px"></div><div class="radius-name">none</div><div class="radius-value">0px</div></div>
+<div class="radius-row"><div class="radius-preview" style="border-radius:4px"></div><div class="radius-name">sm</div><div class="radius-value">4px</div></div>
+<div class="radius-row"><div class="radius-preview" style="border-radius:1000px"></div><div class="radius-name">pill</div><div class="radius-value">1000px</div></div>
+
+    </div>
+
+    <h2 id="elevation">Elevation</h2>
+    <div class="elev-grid">
+<div class="elev-row"><div class="elev-preview" style="box-shadow:0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.10)"></div><div class="elev-meta"><strong>card</strong><br><code>0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.10)</code></div></div>
+
+    </div>
+
+    <h2 id="breakpoints">Breakpoints</h2>
+    <table><thead><tr><th>Token</th><th>Min width</th></tr></thead><tbody><tr><td><code>mobile</code></td><td>480px</td></tr>
+<tr><td><code>tablet</code></td><td>768px</td></tr>
+<tr><td><code>desktop</code></td><td>1200px</td></tr>
+<tr><td><code>wide</code></td><td>1600px</td></tr>
+</tbody></table>
+
+    <h2 id="motion">Motion</h2>
+    <h3>Durations</h3><table><thead><tr><th>Token</th><th>Value</th></tr></thead><tbody><tr><td><code>fast</code></td><td>100ms</td></tr>
+<tr><td><code>base</code></td><td>200ms</td></tr>
+<tr><td><code>slow</code></td><td>300ms</td></tr>
+</tbody></table><h3>Easings</h3><table><thead><tr><th>Token</th><th>Curve</th></tr></thead><tbody><tr><td><code>ease-in-out</code></td><td><code>cubic-bezier(0.4, 0, 0.2, 1)</code></td></tr>
+<tr><td><code>ease-out</code></td><td><code>cubic-bezier(0, 0, 0.2, 1)</code></td></tr>
+</tbody></table>
+
+    <h2 id="css-vars">CSS custom properties</h2>
+    <p>Copy these into your stylesheet. All tokens are prefixed with <code>--doc-</code>.</p>
+    <table class="css-var-table">
+      <thead><tr><th>Variable</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+<tr><td><code>--doc-brand-blue</code></td><td><code>rgb(34,139,230)</code></td><td>Primary action — Execute button fill, active nav button, tab underline, link color, focus ring, info-Alert icon/title. Mantine blue.6.</td></tr>
+<tr><td><code>--doc-nav-slate</code></td><td><code>rgb(65,73,81)</code></td><td>Top header background — fixed across both themes. The product-brand anchor that keeps the global chrome visually stable when toggling theme.</td></tr>
+<tr><td><code>--doc-status-ok-bg</code></td><td><code>rgb(211,249,216)</code></td><td>status bg (light)</td></tr>
+<tr><td><code>--doc-status-ok-text</code></td><td><code>rgb(43,138,62)</code></td><td>status text (light)</td></tr>
+<tr><td><code>--doc-status-error-bg</code></td><td><code>rgb(255,236,236)</code></td><td>status bg (light)</td></tr>
+<tr><td><code>--doc-status-error-text</code></td><td><code>rgb(201,42,42)</code></td><td>status text (light)</td></tr>
+<tr><td><code>--doc-status-info-bg</code></td><td><code>rgba(34,139,230,0.10)</code></td><td>status bg (light)</td></tr>
+<tr><td><code>--doc-status-info-text</code></td><td><code>rgb(34,139,230)</code></td><td>status text (light)</td></tr>
+<tr><td><code>--doc-surface-page-bg</code></td><td><code>rgb(255,255,255)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-card-bg</code></td><td><code>rgb(255,255,255)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-input-bg</code></td><td><code>rgb(255,255,255)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-code-block-bg</code></td><td><code>transparent</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-badge-bg</code></td><td><code>rgb(241,243,245)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-header-bg</code></td><td><code>rgb(65,73,81)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-surface-icon-button-bg</code></td><td><code>rgb(134,142,150)</code></td><td>surface (light)</td></tr>
+<tr><td><code>--doc-text-primary</code></td><td><code>rgb(0,0,0)</code></td><td>text (light)</td></tr>
+<tr><td><code>--doc-text-secondary</code></td><td><code>rgb(73,80,87)</code></td><td>text (light)</td></tr>
+<tr><td><code>--doc-text-muted</code></td><td><code>rgb(134,142,150)</code></td><td>text (light)</td></tr>
+<tr><td><code>--doc-text-inverted</code></td><td><code>rgb(255,255,255)</code></td><td>text (light)</td></tr>
+<tr><td><code>--doc-text-link</code></td><td><code>rgb(34,139,230)</code></td><td>text (light)</td></tr>
+<tr><td><code>--doc-border-card</code></td><td><code>rgb(222,226,230)</code></td><td>border (light)</td></tr>
+<tr><td><code>--doc-border-input</code></td><td><code>rgb(206,212,218)</code></td><td>border (light)</td></tr>
+<tr><td><code>--doc-border-accordion-ok-left</code></td><td><code>rgb(140,233,154)</code></td><td>border (light)</td></tr>
+<tr><td><code>--doc-border-accordion-error-left</code></td><td><code>rgb(255,168,168)</code></td><td>border (light)</td></tr>
+<tr><td><code>--doc-spacing-xs</code></td><td><code>4px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-spacing-sm</code></td><td><code>8px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-spacing-md</code></td><td><code>12px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-spacing-lg</code></td><td><code>16px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-spacing-xl</code></td><td><code>24px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-spacing-2xl</code></td><td><code>32px</code></td><td>spacing scale</td></tr>
+<tr><td><code>--doc-layout-header-height</code></td><td><code>56px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-control-height</code></td><td><code>36px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-icon-button-size</code></td><td><code>32px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-card-padding</code></td><td><code>16px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-alert-padding</code></td><td><code>16px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-table-cell-padding-y</code></td><td><code>7px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-table-cell-padding-x</code></td><td><code>10px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-badge-padding-x</code></td><td><code>10px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-tab-padding-y</code></td><td><code>10px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-tab-padding-x</code></td><td><code>16px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-primary-button-padding-x</code></td><td><code>18px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-layout-accordion-left-border-width</code></td><td><code>5px</code></td><td>layout</td></tr>
+<tr><td><code>--doc-radius-none</code></td><td><code>0px</code></td><td>border radius</td></tr>
+<tr><td><code>--doc-radius-sm</code></td><td><code>4px</code></td><td>border radius</td></tr>
+<tr><td><code>--doc-radius-pill</code></td><td><code>1000px</code></td><td>border radius</td></tr>
+<tr><td><code>--doc-shadow-card</code></td><td><code>0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.10)</code></td><td>elevation</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="lexicon">Domain lexicon</h2>
+    <table>
+      <thead><tr><th>Term</th><th>Definition</th><th>UI surface</th></tr></thead>
+      <tbody>
+<tr><td><strong>PromQL</strong></td><td>Prometheus Query Language — the expression language entered in the /query editor.</td><td><code>/query expression input</code></td></tr>
+<tr><td><strong>Scrape pool</strong></td><td>A logical grouping of scrape targets sharing the same job/discovery configuration. Drives the accordion grouping on /targets and /service-discovery.</td><td><code>/targets, /service-discovery (accordion items)</code></td></tr>
+<tr><td><strong>Target</strong></td><td>A single endpoint Prometheus scrapes for metrics. Each renders one row inside its scrape-pool accordion.</td><td><code>/targets accordion rows</code></td></tr>
+<tr><td><strong>UP / DOWN</strong></td><td>Boolean health of a target&#x27;s last scrape. UP renders as the ok status pill, DOWN renders as the error status pill.</td><td><code>/targets Health Status Badge</code></td></tr>
+<tr><td><strong>Alerting rule</strong></td><td>A rule that emits an alert when its PromQL expression matches. Listed on /alerts.</td><td><code>/alerts</code></td></tr>
+<tr><td><strong>Recording rule</strong></td><td>A rule that pre-computes a PromQL expression and stores the result as a new series. Listed on /rules.</td><td><code>/rules</code></td></tr>
+<tr><td><strong>Label</strong></td><td>Key=value pair attached to a metric or target. Should always render in the Label Badge component.</td><td><code>/targets, /service-discovery, /tsdb-status</code></td></tr>
+<tr><td><strong>Relabeling</strong></td><td>Server-side label rewriting at scrape time. Disclosed via the &#x27;show relabeling&#x27; link inside a /service-discovery panel.</td><td><code>/service-discovery</code></td></tr>
+<tr><td><strong>TSDB</strong></td><td>Time-series database — the storage layer. /tsdb-status surfaces head-block health and Top-N label statistics.</td><td><code>/tsdb-status</code></td></tr>
+<tr><td><strong>Alertmanager</strong></td><td>External component that receives alerts from Prometheus. Discovery state shown on /alertmanager-discovery.</td><td><code>/alertmanager-discovery</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Known gaps</h2><ul class="gap-list"><li><strong>placeholder-screenshot</strong> — Cowork sandbox blocked screenshot export — all 24 files in screenshots/ are 1×1 placeholder JPEGs. Live URLs in component pages compensate.</li>
+<li><strong>inferred-value</strong> — <code>breakpoints</code> — No responsive breakpoints observed in audit-results.json — values are Mantine v7 defaults (theme.breakpoints) and inferred to keep the design system complete.</li>
+<li><strong>inferred-value</strong> — <code>motion</code> — No transition durations observed during the static audit. Values are Mantine v7 defaults — use as guidance, not contract.</li>
+<li><strong>inferred-value</strong> — <code>elevation.card.dark</code> — audit-results.json reports the light boxShadow only. Dark variant darkens the alpha to remain visible against rgb(36,36,36) — derived, not measured.</li>
+</ul>
+
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>
