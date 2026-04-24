@@ -33,9 +33,14 @@
 - design-system/figma-plugin.zip — distributable plugin archive
 
 ## Deployed skill output
-- URL: https://andrejkiri.github.io/prometheus-design-system/skill-outputs/run2/prometheus-audit/design-system/
+- URL: https://andrejkiri.github.io/prometheus-design-system/skill-output/
 - Run: run2
 - Deployed: 2026-04-24
+
+The `.github/workflows/pages.yml` workflow copies the latest `skill-outputs/run*/`
+directory's `design-system/` into `/skill-output/` on every push to `skill-outputs/**`.
+Do NOT link to the nested `skill-outputs/run2/...` path — the site is only served
+at the flat `/skill-output/` URL.
 
 ## QA — automated (passed)
 - validate-handoff.py: PASS, 24 checks, 0 warnings, 0 errors
