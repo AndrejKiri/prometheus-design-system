@@ -22,8 +22,31 @@
 
 ## Handoff Files
 - audit-results.json   — Phase 1 output (this session)
-- screenshots/         — one JPEG per page × theme (may be placeholders if sandbox blocks export)
+- screenshots/         — one JPEG per page × theme (placeholder-sized — sandbox blocked export)
 - observations/        — raw per-page DOM/CSS notes captured during live inspection
-- source-audit.json    — Phase 1-Source output (optional, Claude Code)
-- tokens.json          — Phase 2 output (Claude Code)
-- components.json      — Phase 3 output (Claude Code)
+- source-audit.json    — Phase 1-Source output (skipped this run)
+- tokens.json          — Phase 2 output
+- components.json      — Phase 3 output (31 components, 18 action items)
+- gen.py               — Phase 4 generator (regenerate site with `python3 gen.py`)
+- design-system/       — Phase 4 generated docs site
+- design-system/figma-plugin/ — Phase 5 Figma bootstrap plugin
+- design-system/figma-plugin.zip — distributable plugin archive
+
+## Deployed skill output
+- URL: https://andrejkiri.github.io/prometheus-design-system/skill-outputs/run2/prometheus-audit/design-system/
+- Run: run2
+- Deployed: 2026-04-24
+
+## QA — automated (passed)
+- validate-handoff.py: PASS, 24 checks, 0 warnings, 0 errors
+- All 11 top-level + 31 component HTML files generated
+- No bare `/components` hrefs anywhere
+- 31/31 component pages emit `<img onerror="…">` handlers for screenshots
+- figma-plugin/manifest.json is valid JSON
+- code.js parses as valid JavaScript
+
+## QA — manual (not yet verified)
+- [ ] Light + dark theme on every page
+- [ ] Mobile responsive — burger menu works
+- [ ] Component reference screenshots load (currently placeholders)
+- [ ] Figma plugin runs in Figma without crashing — font fallbacks tested
