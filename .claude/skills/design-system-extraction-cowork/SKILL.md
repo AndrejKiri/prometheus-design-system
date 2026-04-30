@@ -252,7 +252,25 @@ window.__waitForStable = async (selectors, quietMs = 500, timeoutMs = 8000) => {
 };
 ```
 
-Also available as `scripts/browser-helpers.js` — inject the whole file contents at the start of a page survey session.
+### Helper lifecycle — re-inject in every `javascript_tool` call
+
+`window.*` state does **not** survive `mcp__Claude_in_Chrome__navigate` or any cross-route navigation in an SPA (Mantine, React, Vue, Next, etc.). The `navigate` tool performs a full document replace; the SPA's own routing replaces the document tree. Either way, helpers attached to `window` are gone on the next call and any reference throws `ReferenceError`.
+
+**Correct pattern.** Every `javascript_tool` payload concatenates `scripts/browser-helpers.js` (the prelude) and your specific observation/action code (the body). Treat the helpers as inline boilerplate, not as a durable installation.
+
+```bash
+HELPERS=$(cat .claude/skills/design-system-extraction-cowork/scripts/browser-helpers.js)
+cat <<JS
+$HELPERS
+
+window.__runAsync(async () => {
+  await window.__waitForStable(['table tbody tr', '[class*="DataTable"]']);
+  return Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim());
+})
+JS
+```
+
+Send the resulting string as a single `javascript_tool` call. Do this on every page survey — not once at session start.
 
 ### 1.4 Write audit-results.json
 
