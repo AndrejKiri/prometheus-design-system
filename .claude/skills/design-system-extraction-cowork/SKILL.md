@@ -106,17 +106,25 @@ Create a `CLAUDE.md` in the shared project folder (the folder where all handoff 
 
 ## Phase 1 — Visual Audit
 
-> **Screenshot export note.** Cowork's sandbox blocks reliable screenshot export (base64 filtered, `save_to_disk` returns an opaque ID like `ss_<hash>` — **not a filesystem path**). **Do not spend more than 3 attempts on screenshot export.** On failure, enter [Degraded Screenshot Mode](#fallback--degraded-screenshot-mode) and continue. Claude Code's Phase 1.5 will backfill real screenshots locally via Playwright. See [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md) for full details.
+> **Screenshot capture is delegated to Phase 1.5 by default.** Cowork's sandbox cannot exfiltrate screenshot bytes (base64 is filtered; `save_to_disk` returns an opaque `ss_<hash>` ID with no filesystem path). **Phase 1 in Cowork produces 1×1 placeholder JPEGs and rich DOM observations.** Claude Code's Phase 1.5 backfills real screenshots locally via Playwright using the page list and `additional_screenshots[].state` keys you record here. Do not spend turns trying to export real images — that path is closed. See [KNOWN-LIMITATIONS.md](KNOWN-LIMITATIONS.md).
+
+**Initialize placeholders before browsing.** Run this once at the start of Phase 1:
+
+```bash
+bash <path-to-this-skill>/scripts/init-placeholders.sh <project-folder>
+```
+
+This seeds `screenshots/` with the 1×1 placeholder file (`placeholder.jpg`) and creates the directory if missing. Set `"screenshots_are_placeholders": true` at the top level of `audit-results.json` and document the limitation in `raw_observations.screenshot_limitations`.
 
 ### 1.1 Browse every page in scope
 
 Navigate to each URL in scope using the browser. For each page:
 
 1. Navigate to the URL and wait for the page to fully load.
-2. Attempt a full-page screenshot. Save to `screenshots/<page-name>.jpg` in the project folder. If export fails after 3 attempts, skip and proceed — see [Fallback](#fallback--degraded-screenshot-mode).
+2. Copy the placeholder file to `screenshots/<page-name>.jpg` in the project folder. The real image is captured in Phase 1.5 — your job here is to record the path so Phase 1.5 knows where to write.
 3. Scroll through the full page — do not miss content below the fold.
 4. Expand accordions, click tabs, open dropdowns, hover interactive elements.
-5. Screenshot each notable interactive state (expanded accordion, open dropdown, hover button, filled form, error state).
+5. Record each notable interactive state as an entry in `additional_screenshots[]` with a controlled `state` key (see [Phase 1.4](#14-write-audit-resultsjson)) — Phase 1.5 will replay and capture.
 
 Document for each page: URL, name, every visible UI element type, observed colors / font sizes / spacing / border radii / shadows.
 
@@ -346,14 +354,16 @@ python3 "$(pwd)/.claude/skills/design-system-extraction-cowork/scripts/validate-
 
 ---
 
-## Fallback — Degraded Screenshot Mode
+## Degraded Screenshot Mode (now the default)
 
-If screenshot export is blocked after 3 attempts:
+Phase 1 in Cowork operates in placeholder mode end-to-end. The steps are baked into Phase 1.1 above; this section is reference for what happens under the hood:
 
-1. Run `bash .claude/skills/design-system-extraction-cowork/scripts/init-placeholders.sh <project-folder>` to create 1×1 placeholder files at every referenced screenshot path.
-2. Set `"screenshots_are_placeholders": true` at the top level of `audit-results.json`.
-3. Document the failure in `raw_observations.screenshot_limitations`.
-4. Continue — the validator prints `[WARN]` not `[FAIL]` for placeholder files when `screenshots_are_placeholders: true`.
+1. `scripts/init-placeholders.sh <project-folder>` seeds 1×1 placeholders.
+2. Each page's `screenshot` path and every `additional_screenshots[].path` references the placeholder.
+3. `"screenshots_are_placeholders": true` is set at the top of `audit-results.json`.
+4. `raw_observations.screenshot_limitations` documents that Cowork cannot export bytes.
+5. The validator prints `[WARN]` not `[FAIL]` for placeholder files when the flag is true.
+6. Claude Code's [Phase 1.5](#phase-15--screenshot-capture-claude-code-local) backfills real JPEGs via Playwright and flips the flag to `false`.
 
 ---
 
