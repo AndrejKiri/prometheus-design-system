@@ -7,7 +7,7 @@ description: >
   to Claude Code. Requires browser access (Computer Use / Chrome extension).
 metadata:
   author: AndrejKiri
-  version: '0.2'
+  version: '0.3'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   paired-skill: design-system-extraction-code (docs/skill-code/SKILL.md)
 ---
