@@ -8,7 +8,7 @@ description: >
   Requires filesystem access. No browser needed.
 metadata:
   author: AndrejKiri
-  version: '0.2'
+  version: '0.3'
   reference-implementation: https://github.com/AndrejKiri/prometheus-design-system
   paired-skill: design-system-extraction-cowork (docs/skill-cowork/SKILL.md)
 ---
