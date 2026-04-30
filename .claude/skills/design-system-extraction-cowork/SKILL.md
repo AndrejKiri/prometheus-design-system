@@ -35,9 +35,49 @@ Run Phases 0 and 1 in order, then stop and hand off.
 
 ---
 
+## Phase 0.0 — Pre-flight (browser ready check)
+
+**Run this before anything else. Without a connected browser the skill cannot proceed past Phase 0.**
+
+### 0.0.1 Detect the browser substrate
+
+This skill supports two browser substrates. Check which is active and adopt that vocabulary for the rest of the run:
+
+| Substrate | How you can tell | Tool prefix |
+|---|---|---|
+| Claude-in-Chrome MCP extension | `mcp__Claude_in_Chrome__*` tools available | `mcp__Claude_in_Chrome__` |
+| Computer Use | `mcp__Claude_in_Chrome__*` tools absent; `computer` tool present | `computer` (mouse/keyboard primitives) |
+
+If neither is available, stop and ask the user to enable one.
+
+### 0.0.2 Verify the browser is connected
+
+For Chrome MCP, call a cheap no-op like `mcp__Claude_in_Chrome__tabs_context_mcp` (or `read_page` on `about:blank`). If it errors with "extension not connected" or similar, show this message and block:
+
+> I need the Claude-in-Chrome extension attached. Please open Chrome, click the extension icon, and confirm connection. Say "ready" when done.
+
+Wait for the user before retrying. Do not proceed until the no-op call returns successfully.
+
+### 0.0.3 Navigate away from chrome://newtab/ before any batch call
+
+Chrome blocks extensions from scripting `chrome://` URLs (including the default new-tab page). The first `mcp__Claude_in_Chrome__browser_batch` will fail with "Can't interact with browser internal pages" if the active tab is still on `chrome://newtab/` or `chrome://...`.
+
+**Always issue an explicit `navigate` to the target URL before the first `browser_batch` call.** When constructing a batch yourself, lead with the navigate as operation 0:
+
+```js
+mcp__Claude_in_Chrome__browser_batch({
+  operations: [
+    { type: "navigate", url: TARGET_URL },
+    // ...rest of the batch
+  ]
+})
+```
+
+---
+
 ## Phase 0 — Scope & Auth
 
-**Must run first. Do not skip.**
+**Run after Phase 0.0 passes. Do not skip.**
 
 ### 0.1 Gather info
 
