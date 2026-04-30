@@ -469,13 +469,38 @@ GitHub Pages is the required deployment target. Ask the user for:
    will live (e.g. `skill-output/`). This is the path segment appended to the
    repo's Pages base URL. Default: `skill-output/`.
 
-Copy the `design-system/` contents into the repo at the skill output path and
-push to `main`:
+#### 6.1.0 Check for an existing Pages workflow first
+
+**Before copying any files**, check whether a custom GitHub Actions workflow
+already controls the deploy. The workflow may flatten, rename, or filter your
+output path — the deployed URL is whatever the workflow publishes to, **not**
+the literal repo path you wrote to.
+
+```bash
+ls .github/workflows/
+gh api repos/<owner>/<repo>/pages 2>/dev/null | jq '.build_type, .source'
+```
+
+Interpret the result:
+
+| `build_type` | What it means | Action |
+|---|---|---|
+| `legacy` | Pages serves a branch directly ("Deploy from branch") | Continue with the `cp -r` steps below |
+| `workflow` | A custom workflow controls the deploy | **Read the matching `*pages*.yml` first.** Note where it copies files from (`skill-outputs/run*/...` is common) and what URL prefix Pages serves (`/skill-output/`, `/`, etc.). Adjust your `SKILL_OUTPUT_PATH` to match what the workflow expects |
+
+If `gh` is unavailable, fall back to inspecting `ls .github/workflows/`. If a
+file matching `*pages*.yml` exists, read it before you write anything — assume
+the deployed URL will not match your filesystem layout.
+
+#### 6.1.1 Copy and push
+
+Once you know the workflow contract, copy the `design-system/` contents into
+the repo at the path the workflow expects:
 
 ```bash
 # From the project folder
 REPO_ROOT=<path-to-git-repo>
-SKILL_OUTPUT_PATH=<skill-output-path>   # e.g. skill-output
+SKILL_OUTPUT_PATH=<path-the-workflow-expects>   # confirmed from 6.1.0
 
 # Copy docs site into repo at the correct subpath
 cp -r design-system/. "$REPO_ROOT/$SKILL_OUTPUT_PATH/"
@@ -488,19 +513,28 @@ git push
 ```
 
 If GitHub Pages is not yet enabled on the repo, tell the user to enable it
-at Settings → Pages → Source: Deploy from branch `main`, folder `/` (root).
+at Settings → Pages → Source: Deploy from branch `main`, folder `/` (root) —
+or, if a workflow exists, set Source to GitHub Actions.
 
-After pushing, confirm the deployed URL:
+#### 6.1.2 Confirm the deployed URL
 
-```
-https://<github-username>.github.io/<repo-name>/<skill-output-path>/
+Do **not** guess the URL from your filesystem layout. Confirm it from the
+authoritative sources:
+
+```bash
+# After the deploy workflow finishes, the Pages API reports the live URL:
+gh api repos/<owner>/<repo>/pages | jq -r '.html_url'
+
+# Or watch the most recent deploy run for the published URL:
+gh run list --workflow=pages.yml --limit 1
+gh run view <run-id> --log | grep -E 'page_url|html_url'
 ```
 
 Record this URL in `CLAUDE.md` under a `## Deployed skill output` entry:
 
 ```markdown
 ## Deployed skill output
-- URL: https://<github-username>.github.io/<repo-name>/<skill-output-path>/
+- URL: <copy-paste from `gh api .../pages` — do NOT guess from filesystem layout>
 - Run: <run-id>
 - Deployed: <date>
 ```
