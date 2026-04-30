@@ -394,6 +394,20 @@ def validate_tokens(data, audit_url, has_dark_mode, report):
                     token_names.add(entry["name"])
             report.ok(f"spacing.scale has {len(data['spacing']['scale'])} entries")
 
+        # Fix: issue #3 from run2 — spacing.layout names were silently dropped,
+        # causing components.json to fail when it referenced layout tokens like
+        # 'header-height' or 'card-padding'. Same shape as scale; collect names.
+        layout_entries = data["spacing"].get("layout", [])
+        if isinstance(layout_entries, list):
+            for i, entry in enumerate(layout_entries):
+                ctx = f"spacing.layout[{i}]"
+                check_required_field(entry, "name", str, report, ctx)
+                check_required_field(entry, "value_px", (int, float), report, ctx)
+                if isinstance(entry, dict) and "name" in entry:
+                    token_names.add(entry["name"])
+            if layout_entries:
+                report.ok(f"spacing.layout has {len(layout_entries)} entries")
+
     # Typography
     font_family_names = set()
     if check_required_field(data, "typography", dict, report):
@@ -496,7 +510,12 @@ def validate_components(data, audit_url, pattern_names, inconsistency_ids, token
             if check_required_field(comp, "name", str, report, ctx):
                 name = comp["name"]
                 component_names.add(name)
-                if pattern_names and name not in pattern_names:
+                # Fix: issue #4 from run2 — origin: "docs-meta" components are
+                # docs-site chrome (theme toggle, sidebar nav button), not
+                # extracted from the audited app. They legitimately have no
+                # corresponding pattern in audit-results.json.
+                is_docs_meta = comp.get("origin") == "docs-meta"
+                if pattern_names and name not in pattern_names and not is_docs_meta:
                     report.error(f"{ctx}: name '{name}' not found in audit-results.json patterns")
 
             # Slug
